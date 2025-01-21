@@ -1,10 +1,18 @@
 const { Client, Events, GatewayIntentBits } = require('discord.js');
-const { token } = require('./config.json');
+const config = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once(Events.ClientReady, readyClient => {
-    console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+client.on(Events.ClientReady, readyClient => {
+    console.log('Client ready');
 });
 
-client.login(token);
+client.on(Events.InteractionCreate, async interaction => {
+    if (!interaction.isChatInputCommand()) return;
+
+    if (interaction.commandName === 'ping') {
+        await interaction.reply('Pongie!');
+    }
+});
+
+client.login(config.token);
