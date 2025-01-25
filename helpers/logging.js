@@ -1,4 +1,4 @@
-// logging.js
+// helpers/logging.js
 
 export class Logging {
     static info(message) {
