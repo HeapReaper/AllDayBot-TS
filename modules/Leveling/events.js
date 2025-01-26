@@ -1,8 +1,8 @@
-// events/leveling.js
+// modules/Leveling/events/leveling.js
 
-import {Logging} from '../helpers/logging.js';
+import {Logging} from '../../helpers/logging.js';
 
-export class Leveling {
+export class LevelingEvents {
     constructor(client) {
         this.client = client;
         this.setupEventListener();
@@ -17,4 +17,8 @@ export class Leveling {
             Logging.debug('New message received');
         });
     }
+}
+
+export default function (client) {
+    new LevelingEvents(client);
 }

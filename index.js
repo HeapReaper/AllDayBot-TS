@@ -4,25 +4,13 @@ config();
 import { Client, Events, GatewayIntentBits } from 'discord.js';
 import {Logging} from './helpers/logging.js';
 import Database from './helpers/database.js';
-import {Leveling} from './events/leveling.js';
+import loadModules from './helpers/module_loader.js';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
-new Leveling(client);
-
-client.on(Events.ClientReady, readyClient => {
+client.on(Events.ClientReady, async client => {
     Logging.info(`Logged in as ${client.user.tag}!`);
-
-    // Testing
-    // Database.connect();
-    // Database.query('SELECT * FROM Users')
-    //     .then(results => {
-    //         Logging.info(JSON.stringify(results));
-    //     })
-    //     .catch(err => {
-    //         Logging.error(JSON.stringify(err.message));
-    //     });
-    //     Database.close();
-})
+    await loadModules(client);
+});
 
 client.login(process.env.DISCORD_TOKEN);
