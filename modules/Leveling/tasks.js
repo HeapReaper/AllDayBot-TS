@@ -1,17 +1,61 @@
-// modules/Leveling/tasks.js
+import { Logging } from '../../helpers/logging.js';
+import { LevelingEvents } from './events.js';
+import Database from "../../helpers/database.js";
 
-import { Logging } from "../../helpers/logging.js";
-
-class LevelingTasks {
+export class LevelingTasks {
     constructor(client) {
         this.client = client;
-        this.startTestTask();
+        this.addXpToMembersTask(10000); // change to 60 in prod
     }
 
-    startTestTask() {
-        setInterval(() => {
-            //console.log('test');
-        }, 10000);
+    async addXpToMembersTask(time) {
+        setInterval(async () => {
+            try {
+                await Database.connect();
+
+                for (const userId of LevelingEvents.getUserXpAddedFromMessages()) {
+                    try {
+                        const result = await this.getUserFromDatabase(userId);
+
+                        if (result.length < 1) {
+                            await this.insertUserIntoDatabase(userId, 15);
+                            continue;
+                        }
+                        const newXp = result[0].xp + 15;
+
+                        if (newXp < Math.floor(8.196 * Math.pow(result[0].level + 1, 2.65) + 200)) {
+                            await this.GainedXp(userId, newXp);
+                            continue;
+                        }
+
+                        await this.gainedXpAndLevel(userId, newXp, result[0].level + 1);
+                    } catch (err) {
+                        console.error(`Error processing user ${userId}:`, err);
+                    }
+                }
+
+                LevelingEvents.purgeUserXpAddedFromMessages();
+
+                Logging.debug('Adding XP to members');
+            } catch (err) {
+                Logging.error('Database error:', err);
+            }
+        }, time);
+    }
+    async getUserFromDatabase(userId) {
+        return await Database.query(`SELECT * FROM leveling WHERE user_id = ${userId}`);
+    }
+
+    async GainedXp(userId, xp) {
+        await Database.query(`UPDATE leveling SET xp = ${xp}, last_updated = NOW() WHERE user_id = ${userId}`);
+    }
+
+    async gainedXpAndLevel(userId, xp, level) {
+        await Database.query(`UPDATE leveling SET xp = ${xp}, last_updated = NOW(), level = ${level} WHERE user_id = ${userId}`);
+    }
+
+    async insertUserIntoDatabase(userId, xp) {
+        await Database.query(`INSERT into leveling (user_id, xp, last_updated) VALUES (${userId}, 15, NOW())`);
     }
 }
 
