@@ -1,6 +1,6 @@
 // helpers/database.js
 
-import {Logging} from './logging.js';
+import {Logging} from './logging.ts';
 import { config } from 'dotenv';
 config();
 
