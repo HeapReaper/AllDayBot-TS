@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { pathToFileURL } from 'url';
-import { Logging } from './logging.js';
+import { Logging } from './logging.ts';
 
 async function loadModules(client) {
     const modulesPath = path.join('./', 'modules');
@@ -12,7 +12,7 @@ async function loadModules(client) {
             const modulePath = path.join(modulesPath, moduleFolder);
 
             // Loading commands file
-            const commandsFile = path.join(modulePath, 'commands.js');
+            const commandsFile = path.join(modulePath, 'commands.ts');
 
             try {
                 await fs.access(commandsFile);
@@ -29,7 +29,7 @@ async function loadModules(client) {
             }
 
             // Loading events file
-            const eventsFile = path.join(modulePath, 'events.js');
+            const eventsFile = path.join(modulePath, 'events.ts');
 
             try {
                 await fs.access(eventsFile);
@@ -46,7 +46,7 @@ async function loadModules(client) {
             }
 
             // Loading tasks file
-            const tasksFile = path.join(modulePath, 'tasks.js');
+            const tasksFile = path.join(modulePath, 'tasks.ts');
 
             try {
                 await fs.access(tasksFile);
