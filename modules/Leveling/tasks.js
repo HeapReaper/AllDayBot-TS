@@ -10,7 +10,7 @@ class LevelingTasks {
 
     startTestTask() {
         setInterval(() => {
-            console.log('test');
+            //console.log('test');
         }, 10000);
     }
 }
