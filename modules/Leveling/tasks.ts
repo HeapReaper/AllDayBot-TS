@@ -1,6 +1,6 @@
-import { Logging } from '../../helpers/logging.js';
-import { LevelingEvents } from './events.js';
-import Database from "../../helpers/database.js";
+import { Logging } from '../../helpers/logging';
+import { LevelingEvents } from './events.ts';
+import Database from "../../helpers/database";
 
 export class LevelingTasks {
     constructor(client) {
