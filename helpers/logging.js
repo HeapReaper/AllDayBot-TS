@@ -1,5 +1,8 @@
 // helpers/logging.js
 
+import { config } from 'dotenv';
+config();
+
 export class Logging {
     static info(message) {
         console.log(`INFO: ${message}`);
@@ -14,6 +17,9 @@ export class Logging {
     }
 
     static debug(message) {
+        if (process.env.ENVIRONMENT !== 'debug') {
+            return;
+        }
         console.debug(`DEBUG: ${message}`);
     }
 }
