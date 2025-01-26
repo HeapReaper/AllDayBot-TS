@@ -1,6 +1,6 @@
 // modules/Leveling/events/leveling.js
 
-import {Logging} from '../../helpers/logging.js';
+import {Logging} from '../../helpers/logging';
 
 export class LevelingEvents {
     static usersXpAddedFromMessage = [];
