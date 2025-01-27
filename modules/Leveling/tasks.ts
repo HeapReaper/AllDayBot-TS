@@ -3,12 +3,12 @@ import { LevelingEvents } from './events.ts';
 import Database from "../../helpers/database";
 
 export class LevelingTasks {
-    constructor(client) {
+    constructor(client: client) {
         this.client = client;
         this.addXpToMembersTask(10000); // change to 60 in prod
     }
 
-    async addXpToMembersTask(time) {
+    async addXpToMembersTask(time: number) {
         setInterval(async () => {
             try {
                 await Database.connect();
@@ -42,23 +42,23 @@ export class LevelingTasks {
             }
         }, time);
     }
-    async getUserFromDatabase(userId) {
+    async getUserFromDatabase(userId: string) {
         return await Database.query(`SELECT * FROM leveling WHERE user_id = ${userId}`);
     }
 
-    async GainedXp(userId, xp) {
+    async GainedXp(userId:string, xp: number) {
         await Database.query(`UPDATE leveling SET xp = ${xp}, last_updated = NOW() WHERE user_id = ${userId}`);
     }
 
-    async gainedXpAndLevel(userId, xp, level) {
+    async gainedXpAndLevel(userId: string, xp: number, level: number) {
         await Database.query(`UPDATE leveling SET xp = ${xp}, last_updated = NOW(), level = ${level} WHERE user_id = ${userId}`);
     }
 
-    async insertUserIntoDatabase(userId, xp) {
+    async insertUserIntoDatabase(userId: string, xp: number) {
         await Database.query(`INSERT into leveling (user_id, xp, last_updated) VALUES (${userId}, 15, NOW())`);
     }
 }
 
-export default function (client) {
+export default function (client: client) {
     new LevelingTasks(client);
 }

@@ -1,23 +1,24 @@
 // modules/Leveling/events/leveling.js
 
 import {Logging} from '../../helpers/logging';
+import {Client} from "discord.js";
 
 export class LevelingEvents {
-    static usersXpAddedFromMessage = [];
-    static usersXpAddedFromVc = [];
+    static usersXpAddedFromMessage: array = [];
+    static usersXpAddedFromVc: array = [];
 
-    constructor(client) {
+    constructor(client: Client) {
         this.client = client;
         this.setupOnMessageCreateEvent();
         this.setupOnMemberLeaveEvent();
     }
 
-    setupOnMemberLeaveEvent() {
+    setupOnMemberLeaveEvent(): void {
         //
     }
 
-    setupOnMessageCreateEvent() {
-        this.client.on('messageCreate', async (message) => {
+    setupOnMessageCreateEvent(): void {
+        this.client.on('messageCreate', async (message: Message) => {
             if (message.author.bot) return;
 
             Logging.debug('New message received');
@@ -28,16 +29,15 @@ export class LevelingEvents {
         });
     }
 
-    // Static methods to access the static array
-    static getUserXpAddedFromMessages() {
+    static getUserXpAddedFromMessages(): array {
         return LevelingEvents.usersXpAddedFromMessage;
     }
 
-    static purgeUserXpAddedFromMessages() {
+    static purgeUserXpAddedFromMessages(): void {
         LevelingEvents.usersXpAddedFromMessage = [];
     }
 }
 
-export default function (client) {
+export default function (client: Client) {
     new LevelingEvents(client);
 }
