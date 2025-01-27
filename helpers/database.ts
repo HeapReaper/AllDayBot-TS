@@ -5,12 +5,14 @@ import { config } from 'dotenv';
 config();
 
 import mysql from 'mysql2';
+import { Connection } from 'mysql2/typings/mysql/lib/Connection';
 
 class Database {
-    static connection;
+    static connection: Connection;
 
     static init() {
         if (!Database.connection) {
+            // @ts-ignore
             Database.connection = mysql.createConnection({
                 host: process.env.DATABASE_HOST,
                 user: process.env.DATABASE_USER,
@@ -36,7 +38,7 @@ class Database {
         })
     }
 
-    static query(sql, params = []) {
+    static query(sql: string, params = []) {
         return new Promise((resolve, reject) => {
             if (!Database.connection) {
                 Database.init();
