@@ -1,0 +1,117 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-10-22T07:43:48-04:00",
+    "name": "discord.js generic (Bun)",
+    "author": "parker@parkervcp.com",
+    "description": "A generic Discord bot egg adapted for Bun. This will clone a git repo for a bot, defaulting to master if no branch is specified. Installs dependencies using Bun.",
+    "features": null,
+    "images": [
+        "ghcr.io/parkervcp/yolks:nodejs_17",
+        "ghcr.io/parkervcp/yolks:nodejs_16",
+        "ghcr.io/parkervcp/yolks:nodejs_15",
+        "ghcr.io/parkervcp/yolks:nodejs_14",
+        "ghcr.io/parkervcp/yolks:nodejs_12"
+    ],
+    "file_denylist": [],
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then /usr/local/bin/bun add ${NODE_PACKAGES}; fi; if [[ ! -z ${UNNODE_PACKAGES} ]]; then /usr/local/bin/bun remove ${UNNODE_PACKAGES}; fi; if [ -f /home/container/package.json ]; then /usr/local/bin/bun install; fi; /usr/local/bin/bun /home/container/{{BOT_JS_FILE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!/bin/bash\n# Bun-based Bot Installation Script\n#\n# Server Files: /mnt/server\napt update\napt install -y git curl jq file unzip make gcc g++ python python-dev libtool\n\nmkdir -p /mnt/server\ncd /mnt/server\n\n# Install Bun\ncurl -fsSL https://bun.sh/install | bash\nexport PATH=\"/root/.bun/bin:$PATH\"\n\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\n    echo -e \"Assuming user knows what they are doing. Have a good day.\"\n    exit 0\nfi\n\n# Add .git ending if missing\nif [[ ${GIT_ADDRESS} != *.git ]]; then\n    GIT_ADDRESS=${GIT_ADDRESS}.git\nfi\n\n# Use authentication if credentials are provided\nif [ -z \"${USERNAME}\" ] && [ -z \"${ACCESS_TOKEN}\" ]; then\n    echo -e \"Using anonymous API call\"\nelse\n    GIT_ADDRESS=\"https://${USERNAME}:${ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)\"\nfi\n\n# Clone or update the repository\nif [ \"$(ls -A /mnt/server)\" ]; then\n    echo -e \"/mnt/server directory is not empty.\"\n    if [ -d .git ]; then\n        echo -e \".git directory exists\"\n        if [ -f .git/config ]; then\n            echo -e \"Loading info from git config\"\n            ORIGIN=$(git config --get remote.origin.url)\n        else\n            echo -e \"Files found with no git config.\"\n            echo -e \"Exiting without changes to avoid issues.\"\n            exit 10\n        fi\n    fi\n\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\n        echo \"Pulling latest changes from GitHub.\"\n        git pull\n    fi\nelse\n    echo -e \"/mnt/server is empty.\\nCloning files into repo\"\n    if [ -z ${BRANCH} ]; then\n        echo -e \"Cloning default branch.\"\n        git clone ${GIT_ADDRESS} .\n    else\n        echo -e \"Cloning branch ${BRANCH}.\"\n        git clone --single-branch --branch ${BRANCH} ${GIT_ADDRESS} .\n    fi\nfi\n\n# Install dependencies using Bun\necho \"Installing dependencies with Bun.\"\nif [[ ! -z ${NODE_PACKAGES} ]]; then\n    /root/.bun/bin/bun add ${NODE_PACKAGES}\nfi\n\nif [ -f /mnt/server/package.json ]; then\n    /root/.bun/bin/bun install\nfi\n\necho -e \"Install complete.\"\nexit 0",
+            "container": "node:14-buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Git Repo Address",
+            "description": "GitHub Repo to clone. Example: https://github.com/parkervcp/repo_name",
+            "env_variable": "GIT_ADDRESS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Install Branch",
+            "description": "The branch of the bot to install.",
+            "env_variable": "BRANCH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "User Uploaded Files",
+            "description": "Skip all the install stuff if you are letting a user upload files.\n\n0 = false (default)\n1 = true",
+            "env_variable": "USER_UPLOAD",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Pull the latest files on startup when using a GitHub repo.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean"
+        },
+        {
+            "name": "Bot File",
+            "description": "The file that starts the bot. Can be index.js or index.ts.",
+            "env_variable": "BOT_JS_FILE",
+            "default_value": "index.ts",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "Additional Node Packages",
+            "description": "Install additional node packages. Use spaces to separate.",
+            "env_variable": "NODE_PACKAGES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Git Username",
+            "description": "Username to authenticate with Git.",
+            "env_variable": "USERNAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Git Access Token",
+            "description": "Token to authenticate with Git. Use a Personal Access Token.",
+            "env_variable": "ACCESS_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Uninstall Node Packages",
+            "description": "Uninstall node packages. Use spaces to separate.",
+            "env_variable": "UNNODE_PACKAGES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        }
+    ]
+}

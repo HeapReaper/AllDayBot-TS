@@ -9,9 +9,10 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 import { Routes } from 'discord-api-types/v9';
 import { createCanvas, loadImage} from 'canvas';
 import Database from "../../helpers/database";
+import {Client} from "discord.js";
 
 class LevelingCommands {
-    constructor(client) {
+    constructor(client: Client) {
         this.client = client;
         this.setupScoreBoardCommand();
         this.setupLevelCommand();
