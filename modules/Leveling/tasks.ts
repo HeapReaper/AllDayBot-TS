@@ -1,8 +1,8 @@
 // modules/Leveling/tasks
 
-import { Logging } from '../../helpers/logging';
+import { Logging } from '@helpers/logging.ts';
 import { LevelingEvents } from './events.ts';
-import Database from "../../helpers/database";
+import Database from "@helpers/database";
 import { Client } from "discord.js";
 
 export class LevelingTasks {
