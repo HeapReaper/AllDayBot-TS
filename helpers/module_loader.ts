@@ -3,7 +3,7 @@ import path from 'path';
 import { pathToFileURL } from 'url';
 import { Logging } from './logging.ts';
 
-async function loadModules(client) {
+async function loadModules(client: any) {
     const modulesPath = path.join('./', 'modules');
 
     try {
@@ -26,6 +26,23 @@ async function loadModules(client) {
                 }
             } catch (error) {
                 Logging.error(`Error loading commands for module '${moduleFolder}', ${error}`);
+            }
+
+            // Loading commandsListener file
+            const commandsListenerFile = path.join(modulePath, 'commandsListener.ts');
+
+            try {
+                await fs.access(commandsListenerFile);
+
+                const commandsListenerURL = pathToFileURL(commandsListenerFile).href;
+                const commandsListeners = await import(commandsListenerURL);
+
+                if (commandsListeners.default) {
+                    await commandsListeners.default(client);
+                    Logging.debug(`Loaded commandsListener for module: ${moduleFolder}`);
+                }
+            } catch (error) {
+                Logging.error(`Error loading commandsListener for module '${moduleFolder}', ${error}`);
             }
 
             // Loading events file
@@ -66,7 +83,7 @@ async function loadModules(client) {
 
 
 
-    } catch (error) {
+    } catch (error: any) {
         Logging.error(
             `Error reading modules directory: ${modulesPath}: ${error.message}`
         );

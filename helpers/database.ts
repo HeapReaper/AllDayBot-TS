@@ -38,7 +38,7 @@ class Database {
         })
     }
 
-    static query(sql: string, params = []) {
+    static query(sql: string, params = []): any {
         return new Promise((resolve, reject) => {
             if (!Database.connection) {
                 Database.init();
@@ -53,14 +53,15 @@ class Database {
         })
     }
 
-    static close() {
+    // @ts-nocheck
+    static close(): void {
         if (Database.connection) {
-            Database.connection.end((err) => {
+            Database.connection.end((error: any) => {
                 if (!err) {
                     Logging.debug('Database connection closed');
                     return;
                 }
-                Logging.error('Error closing the connection: ', err)
+                Logging.error(`Error closing the database connection: ${error}`)
             });
         }
     }
