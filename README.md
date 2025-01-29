@@ -1,1 +1,0 @@
-# AllDayBot, version TS
