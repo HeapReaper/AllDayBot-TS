@@ -1,11 +1,10 @@
 // modules/Leveling/commandsListener
 
 import { Client, Interaction } from 'discord.js';
-// @ts-ignore
-import { Logging } from '../../helpers/logging';
-import Database from '../../helpers/database';
-import CanvasBuilder from '../../helpers/canvasBuilder';
-import { Color } from '../../enums/colorEnum';
+import { Logging } from '@helpers/logging.ts';
+import Database from '@helpers/database';
+import CanvasBuilder from '@helpers/canvasBuilder';
+import { Color } from '@enums/colorEnum.ts';
 
 class CommandsListener {
     private client: Client;
