@@ -22,5 +22,5 @@
     "dev": "nodemon src/index.ts"
   },
   "name": "alldaybot-js",
-  "module": "index.ts"
+  "module": "src/index.ts"
 }
