@@ -42,7 +42,7 @@ class CommandsListener {
         const canvasScorebord = new CanvasBuilder(250, 400);
 
         await canvasScorebord.setBackground('https://img.freepik.com/free-vector/dark-hexagonal-background-with-gradient-color_79603-1409.jpg');
-        canvasScorebord.drawRect(0, 0, 250, 50, 'rgba(0, 0, 0, 0.5)');
+        canvasScorebord.drawRect(0, 0, 250, 50, Color.Opacity50);
         canvasScorebord.drawText('Scorebord', 22, 30, 'bold 24px Arial', Color.White)
         Database.connect();
         const LeaderBoardData = await Database.query('SELECT user_id, xp, level FROM leveling');
@@ -71,7 +71,7 @@ class CommandsListener {
         const canvasLevel = new CanvasBuilder(400, 250);
         await canvasLevel.setBackground('https://img.freepik.com/free-vector/dark-hexagonal-background-with-gradient-color_79603-1409.jpg');
 
-        canvasLevel.drawRect(0, 0, 400, 50, 'rgba(0, 0, 0, 0.5)');
+        canvasLevel.drawRect(0, 0, 400, 50, Color.Opacity50);
         canvasLevel.drawText(`🔥 Level van ${interaction.user.displayName} 🔥`, 46, 33, 'bold 24px Arial', Color.White);
 
         const attachment = canvasLevel.getBuffer();
