@@ -1,6 +1,6 @@
 // modules/Leveling/events/leveling.js
 
-import {Logging} from '../../helpers/logging';
+import {Logging} from '@helpers/logging.ts';
 import { Client, Message } from "discord.js";
 
 export class LevelingEvents {

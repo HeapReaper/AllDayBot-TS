@@ -3,9 +3,9 @@
 import { config } from 'dotenv';
 config();
 
-import { Logging } from '../../helpers/logging';
+import { Logging } from '@helpers/logging';
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { RefreshSlashCommands } from '../../helpers/refreshSlashCommands';
+import { RefreshSlashCommands } from "@helpers/refreshSlashCommands";
 
 class LevelingCommands {
     constructor() {
