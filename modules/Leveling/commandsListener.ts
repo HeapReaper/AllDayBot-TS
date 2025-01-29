@@ -1,10 +1,11 @@
 // modules/Leveling/commandsListener
 
-import { Client, Interaction } from "discord.js";
+import { Client, Interaction } from 'discord.js';
 // @ts-ignore
-import { Logging } from "../../helpers/logging";
-import Database from "../../helpers/database";
+import { Logging } from '../../helpers/logging';
+import Database from '../../helpers/database';
 import CanvasBuilder from '../../helpers/canvasBuilder';
+import { Color } from '../../enums/colorEnum';
 
 class CommandsListener {
     private client: Client;
@@ -42,22 +43,22 @@ class CommandsListener {
 
         await canvasScorebord.setBackground('https://img.freepik.com/free-vector/dark-hexagonal-background-with-gradient-color_79603-1409.jpg');
         canvasScorebord.drawRect(0, 0, 250, 50, 'rgba(0, 0, 0, 0.5)');
-        canvasScorebord.drawText('Scorebord', 22, 30, 'bold 24px Arial', '#ECF0F1')
+        canvasScorebord.drawText('Scorebord', 22, 30, 'bold 24px Arial', Color.White)
         Database.connect();
         const LeaderBoardData = await Database.query('SELECT user_id, xp, level FROM leveling');
         for (const [index, entry] of LeaderBoardData.entries()) {
             try {
                 const user = await this.client.users.fetch(entry.user_id);
-                canvasScorebord.drawText(`${index + 1}.  ${user.displayName}`, 20, 80 + index * 33, 'bold 16px Arial', '#ECF0F1');
-                canvasScorebord.drawText(`Level: ${entry.level}, XP: ${entry.xp}`, 40, 80 + index * 33, 'bold 14px Arial', '#ECF0F1');
+                canvasScorebord.drawText(`${index + 1}.  ${user.displayName}`, 20, 80 + index * 33, 'bold 16px Arial', Color.White);
+                canvasScorebord.drawText(`Level: ${entry.level}, XP: ${entry.xp}`, 40, 80 + index * 33, 'bold 14px Arial', Color.White);
             } catch (error: any) {
                 Logging.error(`Error fetching user: ${entry.user_id} - ${error.message}`);
-                canvasScorebord.drawText(`${index + 1}.  Onbekend`, 20, 80 + index * 33, 'bold 16px Arial', '#ECF0F1');
-                canvasScorebord.drawText(`Level: ${entry.level}, XP: ${entry.xp}`, 40, 80 + index * 33, 'bold 14px Arial', '#ECF0F1');
+                canvasScorebord.drawText(`${index + 1}.  Onbekend`, 20, 80 + index * 33, 'bold 16px Arial', Color.White);
+                canvasScorebord.drawText(`Level: ${entry.level}, XP: ${entry.xp}`, 40, 80 + index * 33, 'bold 14px Arial', Color.White);
             }
         }
 
-        canvasScorebord.drawText('Pagina: 1', 20, 390, '10px Arial', '#ECF0F1');
+        canvasScorebord.drawText('Pagina: 1', 20, 390, '10px Arial', Color.White);
 
         const attachment = canvasScorebord.getBuffer();
         // @ts-ignore
@@ -71,7 +72,7 @@ class CommandsListener {
         await canvasLevel.setBackground('https://img.freepik.com/free-vector/dark-hexagonal-background-with-gradient-color_79603-1409.jpg');
 
         canvasLevel.drawRect(0, 0, 400, 50, 'rgba(0, 0, 0, 0.5)');
-        canvasLevel.drawText(`🔥 Level van ${interaction.user.displayName} 🔥`, 46, 33, 'bold 24px Arial', '#ECF0F1');
+        canvasLevel.drawText(`🔥 Level van ${interaction.user.displayName} 🔥`, 46, 33, 'bold 24px Arial', Color.White);
 
         const attachment = canvasLevel.getBuffer();
         // @ts-ignore
