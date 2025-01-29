@@ -1,4 +1,4 @@
-// modules/Leveling/commands.js
+// modules/Minecraft/commands.js
 
 import { config } from 'dotenv';
 config();
