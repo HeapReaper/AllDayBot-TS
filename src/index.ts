@@ -1,8 +1,10 @@
 import { config } from 'dotenv';
+import * as process from 'node:process';
 config();
 
 import { Client, Events, GatewayIntentBits } from 'discord.js';
 import { Logging } from '../helpers/logging.ts';
+import * as Sentry from '@sentry/bun';
 import loadModules from '../helpers/module_loader.ts';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
@@ -10,6 +12,12 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 client.on(Events.ClientReady, async client   => {
     Logging.info(`Logged in as ${client.user.tag}!`);
     await loadModules(client);
+
+    if (process.env.ENVIRONMENT !== 'prod') return;
+    Sentry.init({
+        dsn: process.env.SENTRY_DSN,
+        tracesSampleRate: 1.0,
+    });
 });
 
 client.login(process.env.DISCORD_TOKEN);
