@@ -3,7 +3,7 @@
 import { Logging } from '../../helpers/logging';
 import { LevelingEvents } from './events.ts';
 import Database from "../../helpers/database";
-import {Client} from "discord.js";
+import { Client } from "discord.js";
 
 export class LevelingTasks {
     private client: Client;

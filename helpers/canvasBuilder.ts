@@ -15,7 +15,7 @@ export class CanvasBuilder {
         const backgroundImage = await loadImage(imageUrl);
         this.ctx.drawImage(backgroundImage, 0, 0, this.canvas.width, this.canvas.height);
     }
-
+    
     drawRect(x: number, y: number, width: number, height: number, color: string): void {
         this.ctx.fillStyle = color;
         this.ctx.fillRect(x, y, width, height);

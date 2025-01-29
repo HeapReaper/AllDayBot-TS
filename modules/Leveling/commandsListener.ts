@@ -42,7 +42,7 @@ class CommandsListener {
 
         await canvasScorebord.setBackground('https://img.freepik.com/free-vector/dark-hexagonal-background-with-gradient-color_79603-1409.jpg');
         canvasScorebord.drawRect(0, 0, 250, 50, 'rgba(0, 0, 0, 0.5)');
-
+        canvasScorebord.drawText('Scorebord', 22, 30, 'bold 24px Arial', '#ECF0F1')
         Database.connect();
         const LeaderBoardData = await Database.query('SELECT user_id, xp, level FROM leveling');
         for (const [index, entry] of LeaderBoardData.entries()) {
