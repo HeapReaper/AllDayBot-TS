@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@helpers/*": ["./helpers/*"],
+      "@enums/*": ["./enums/*"],
+      "@src/*": ["./src/*"],
+    },
     "module": "commonjs",
     "target": "es2020",
     "moduleResolution": "node",
@@ -9,5 +15,6 @@
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
     "noEmit": true,
+
   }
 }

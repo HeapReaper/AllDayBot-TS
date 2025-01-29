@@ -3,10 +3,9 @@
 import { config } from 'dotenv';
 config();
 
-import { Logging } from '../../helpers/logging';
-import { REST } from '@discordjs/rest';
+import { Logging } from '@helpers/logging';
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { Routes } from 'discord-api-types/v9';
+import { RefreshSlashCommands } from "@helpers/refreshSlashCommands";
 
 class LevelingCommands {
     constructor() {
@@ -26,13 +25,10 @@ class LevelingCommands {
                 .setDescription('Bekijk de level scorebord!'),
             new SlashCommandBuilder()
                 .setName('level')
-                .setDescription('Level scorebord!')
+                .setDescription('Zie je level!')
         ].map(commands => commands.toJSON());
 
-        const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN!);
-        await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID!, process.env.GUILD_ID!), {
-            body: commands,
-        });
+        await RefreshSlashCommands.refresh(commands);
     }
 }
 
