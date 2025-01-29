@@ -2,8 +2,8 @@ import { config } from 'dotenv';
 config();
 
 import { Client, Events, GatewayIntentBits } from 'discord.js';
-import { Logging } from './helpers/logging';
-import loadModules from './helpers/module_loader';
+import { Logging } from '../helpers/logging.ts';
+import loadModules from '../helpers/module_loader.ts';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
