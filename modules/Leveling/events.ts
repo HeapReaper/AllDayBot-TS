@@ -1,24 +1,19 @@
 // modules/Leveling/events/leveling.js
 
 import {Logging} from '../../helpers/logging';
-import {Client} from "discord.js";
+import { Client, Message } from "discord.js";
 
 export class LevelingEvents {
-    static usersXpAddedFromMessage: array = [];
-    static usersXpAddedFromVc: array = [];
+    static usersXpAddedFromMessage: Array<any> = [];
+    private client: Client;
 
     constructor(client: Client) {
         this.client = client;
         this.setupOnMessageCreateEvent();
-        this.setupOnMemberLeaveEvent();
-    }
-
-    setupOnMemberLeaveEvent(): void {
-        //
     }
 
     setupOnMessageCreateEvent(): void {
-        this.client.on('messageCreate', async (message: Message) => {
+        this.client.on('messageCreate', async (message: Message): Promise<void> => {
             if (message.author.bot) return;
 
             Logging.debug('New message received');
@@ -29,7 +24,7 @@ export class LevelingEvents {
         });
     }
 
-    static getUserXpAddedFromMessages(): array {
+    static getUserXpAddedFromMessages(): Array<any> {
         return LevelingEvents.usersXpAddedFromMessage;
     }
 
