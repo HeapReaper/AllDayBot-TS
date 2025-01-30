@@ -1,0 +1,43 @@
+{
+  "name": "Bun Discord.js",
+  "description": "A template for deploying a Bun Discord.js bot.",
+  "version": "1.0",
+  "author": "AeroBytes",
+  "website": "https://aerobytes.nl",
+  "game": "Discord Bot",
+  "server_type": "Application",
+  "supported_os": ["linux"],
+  "installation": {
+    "type": "script",
+    "script": "install.sh"
+  },
+  "configuration": {
+    "files": [
+      {
+        "path": ".env",
+        "template": false
+      },
+      {
+        "path": "src/index.ts",
+        "template": false
+      }
+    ],
+    "commands": {
+      "start": {
+        "command": "bun run src/index.ts",
+        "description": "Starts the Discord bot."
+      },
+      "stop": {
+        "command": "pkill -f \"bun run src/index.ts\"",
+        "description": "Stops the Discord bot."
+      },
+      "restart": {
+        "command": "pkill -f \"bun run src/index.ts\" && bun run src/index.ts",
+        "description": "Restarts the Discord bot."
+      }
+    }
+  },
+  "requirements": {
+    "bun": ">=1.0"
+  }
+}
