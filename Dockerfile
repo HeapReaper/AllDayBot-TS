@@ -11,4 +11,4 @@ COPY . .
 RUN bun install
 
 # Start the bot
-CMD ["bun", "run", "src.index.ts"]
+CMD ["bun", "run", "src/index.ts"]
