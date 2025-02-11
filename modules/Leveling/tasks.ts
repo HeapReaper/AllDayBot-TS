@@ -2,8 +2,8 @@
 
 import { Logging } from '@helpers/logging.ts';
 import LevelingEvents from './events.ts';
-import Database from "@helpers/database";
-import { Client } from "discord.js";
+import Database from '@helpers/database';
+import { Client } from 'discord.js';
 
 export default class LevelingTasks {
     private client: Client;
