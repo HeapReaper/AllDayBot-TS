@@ -1,9 +1,7 @@
 // helpers/database.js
 
 import {Logging} from './logging.ts';
-import { config } from 'dotenv';
-config();
-
+import { getEnv } from "@helpers/env.ts";
 import mysql from 'mysql2';
 import { Connection } from 'mysql2/typings/mysql/lib/Connection';
 
@@ -14,11 +12,10 @@ class Database {
         if (!Database.connection) {
             // @ts-ignore
             Database.connection = mysql.createConnection({
-                host: process.env.DATABASE_HOST,
-                user: process.env.DATABASE_USER,
-                password: process.env.DATABASE_PASSWORD,
-                database: process.env.DATABASE_NAME,
-                port: process.env.DATABASE_NAME,
+                host: getEnv('DATABASE_HOST'),
+                user: getEnv('DATABASE_USER'),
+                password: getEnv('DATABASE_PASSWORD'),
+                database: getEnv('DATABASE_NAME'),
             })
         }
     }

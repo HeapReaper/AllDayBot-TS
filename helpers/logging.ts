@@ -1,7 +1,6 @@
 // helpers/logging.js
 
-import { config } from 'dotenv';
-config();
+import { getEnv } from "@helpers/env.ts";
 
 export class Logging {
     /**
@@ -42,9 +41,8 @@ export class Logging {
      * @returns void - Returns nothing.
      */
     static debug(message: string): void {
-        if (process.env.ENVIRONMENT !== 'debug') {
-            return;
-        }
+        if (getEnv('ENVIRONMENT') !== 'debug') return;
+
         console.debug(`DEBUG: ${message}`);
     }
 }

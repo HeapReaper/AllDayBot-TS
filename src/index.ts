@@ -2,7 +2,7 @@ import { Client, Events, GatewayIntentBits } from 'discord.js';
 import { Logging } from '../helpers/logging.ts';
 import * as Sentry from '@sentry/bun';
 import loadModules from '@helpers/moduleLoader.ts';
-import { getEnv} from "@helpers/env.ts";
+import { getEnv } from "@helpers/env.ts";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
