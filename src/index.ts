@@ -5,7 +5,7 @@ config();
 import { Client, Events, GatewayIntentBits } from 'discord.js';
 import { Logging } from '../helpers/logging.ts';
 import * as Sentry from '@sentry/bun';
-import loadModules from '../helpers/module_loader.ts';
+import loadModules from '@helpers/moduleLoader.ts';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
