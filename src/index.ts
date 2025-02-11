@@ -13,7 +13,7 @@ client.on(Events.ClientReady, async client   => {
     // Add Sentry listening if environment is prod
     if (getEnv('ENVIRONMENT') !== 'prod') return;
     Sentry.init({
-        dsn: process.env.SENTRY_DSN,
+        dsn: getEnv('SENTRY_DSN'),
         tracesSampleRate: 1.0,
     });
 });
