@@ -6,7 +6,7 @@ export class Logging {
     /**
      * Logs info messages to the terminal.
      *
-     * @param message - The message that needs to be logged.
+     * @param {string} message - The message that needs to be logged.
      * @returns void - Returns nothing.
      */
     static info(message: string): void {
@@ -16,7 +16,7 @@ export class Logging {
     /**
      * Logs warning messages to the terminal.
      *
-     * @param message - The message that needs to be logged.
+     * @param {string} message - The message that needs to be logged.
      * @returns void - Returns nothing.
      */
     static warn(message: string): void {
@@ -26,7 +26,7 @@ export class Logging {
     /**
      * Logs error messages to the terminal.
      *
-     * @param message - The message that needs to be logged.
+     * @param {string} message - The message that needs to be logged.
      * @returns void - Returns nothing.
      */
     static error(message: string): void {
@@ -37,7 +37,7 @@ export class Logging {
      * Logs debug messages to the terminal.
      * It display the error message only if environment is set to 'debug'.
      *
-     * @param message - The message that needs to be logged.
+     * @param {string} message - The message that needs to be logged.
      * @returns void - Returns nothing.
      */
     static debug(message: string): void {

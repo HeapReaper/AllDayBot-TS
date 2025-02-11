@@ -23,7 +23,7 @@ class Database {
     /**
      * Opens the database connection
      *
-     * @returns void
+     * @returns {void} - Returns nothing.
      */
     static connect(): void {
         if (!Database.connection) {
@@ -43,11 +43,11 @@ class Database {
     /**
      * Executes an query
      *
-     * @param sql - The query
-     * @param params - Optional params
-     * @returns any
+     * @param {string} sql - The query to execute.
+     * @param {Array} params - Optional params.
+     * @returns any - Returns result.
      */
-    static query(sql: string, params = []): any {
+    static query(sql: string, params: Array<any> = []): any {
         return new Promise((resolve, reject) => {
             if (!Database.connection) {
                 Database.init();
@@ -64,9 +64,9 @@ class Database {
 
     // @ts-nocheck
     /**
-     * Closed the database connection
+     * Closed the database connection.
      *
-     * @returns void
+     * @returns void - Returns nothing.
      */
     static close(): void {
         if (Database.connection) {
@@ -83,10 +83,10 @@ class Database {
     /**
      * Retrieves item(s) from the database.
      *
-     * @param table - Table name
-     * @param columns - Array of column names. Defaults to "*" if empty.
-     * @param conditions - Object with column-value pairs to filter results.
-     * @returns Promise - Resolve to an array of results
+     * @param {string} table - Table name
+     * @param {Array} columns - Array of column names. Defaults to "*" if empty.
+     * @param {Object} conditions - Object with column-value pairs to filter results.
+     * @returns Promise - Resolve to an array of results.
      */
     static async select(table: string, columns: string[] = ["*"], conditions: Record<string, any> = {}): Promise<any[]> {
         const columnClause = columns.length > 0 ? columns.join(", ") : "*";
@@ -104,9 +104,9 @@ class Database {
     /**
      * Delete item(s) from the database.
      *
-     * @param table - The table name
-     * @param conditions - Object with column-value pairs to find specific entry to delete
-     * @returns Promise<void>
+     * @param {string} table - The table name.
+     * @param {Object} conditions - Object with column-value pairs to find specific entry to delete.
+     * @returns Promise<void> - Returns Nothing.
      */
     static async delete(table: string, conditions: Record<string, any> = {}): Promise<void> {
         const whereClause = Object.entries(conditions)
@@ -119,10 +119,10 @@ class Database {
     /**
      * Updates item(s) in the database.
      *
-     * @param table - Table name.
-     * @param values - Object with key-value pairs.
-     * @param conditions - Object with key-value pairs.
-     * @returns Promise<void>
+     * @param {string} table - The table name.
+     * @param {Object} values - Object with key-value pairs.
+     * @param {Object} conditions - Object with key-value pairs.
+     * @returns Promise<void> -- Returns nothing.
      */
     static async update(table: string, values: Record<string, any>, conditions: Record<string, any>): Promise<void> {
         const setClause: string = Object.entries(values)
@@ -142,9 +142,9 @@ class Database {
     /**
      * Inserts item(s) into the database.
      *
-     * @param table - The table name
-     * @param values - Object with column-value pairs to insert
-     * @returns Promise<void>
+     * @param {string} table - The table name.
+     * @param {Object} values - Object with column-value pairs to insert.
+     * @returns Promise<void> - Returns nothing.
      */
     static async insert(table: string, values: Record<string, any>): Promise<void> {
         const columns: string = Object.keys(values).join(', ');
