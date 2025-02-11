@@ -1,7 +1,7 @@
 // helpers/database.js
 
 import {Logging} from './logging.ts';
-import { getEnv } from "@helpers/env.ts";
+import { getEnv } from '@helpers/env.ts';
 import mysql from 'mysql2';
 import { Connection } from 'mysql2/typings/mysql/lib/Connection';
 

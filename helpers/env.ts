@@ -1,7 +1,7 @@
 // helpers/env.ts
 
 import { config } from 'dotenv';
-import * as process from "node:process";
+import * as process from 'node:process';
 config();
 
 export const getEnv = (key: string, fallback: string = ''): string|undefined => {

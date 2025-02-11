@@ -2,7 +2,7 @@
 
 import { Logging } from '@helpers/logging';
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { RefreshSlashCommands } from "@helpers/refreshSlashCommands";
+import { RefreshSlashCommands } from '@helpers/refreshSlashCommands';
 
 export default class LevelingCommands {
     constructor() {
