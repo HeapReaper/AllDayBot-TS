@@ -80,9 +80,6 @@ async function loadModules(client: any) {
             }
             Logging.info(`Loaded module '${moduleFolder}': ${modulePath}`);
         }
-
-
-
     } catch (error: any) {
         Logging.error(
             `Error reading modules directory: ${modulesPath}: ${error.message}`
