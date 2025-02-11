@@ -1,11 +1,11 @@
 // modules/Leveling/tasks
 
 import { Logging } from '@helpers/logging.ts';
-import { LevelingEvents } from './events.ts';
+import LevelingEvents from './events.ts';
 import Database from "@helpers/database";
 import { Client } from "discord.js";
 
-export class LevelingTasks {
+export default class LevelingTasks {
     private client: Client;
 
     // @ts-ignore
@@ -51,8 +51,4 @@ export class LevelingTasks {
             }
         }, time);
     }
-}
-
-export default function (client: Client): void {
-    new LevelingTasks(client);
 }

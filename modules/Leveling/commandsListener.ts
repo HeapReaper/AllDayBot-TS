@@ -6,18 +6,14 @@ import Database from '@helpers/database';
 import CanvasBuilder from '@helpers/canvasBuilder';
 import { Color } from '@enums/colorEnum.ts';
 
-class CommandsListener {
+export default class CommandsListener {
     private client: Client;
 
     constructor(client: Client) {
         this.client = client;
-        this.init()
+        this.commandListener()
             .then((): void => {Logging.debug('Leveling commands listener')})
             .catch((err: Error): void => {Logging.error(err.message)});
-    }
-
-    private async init(): Promise<void> {
-        await this.commandListener();
     }
 
     async commandListener(): Promise<void> {
@@ -77,8 +73,4 @@ class CommandsListener {
         // @ts-ignore
         await interaction.reply({ files: [{ attachment, name: 'userLevel.png' }] });
     }
-}
-
-export default function (client: Client): void {
-    new CommandsListener(client);
 }

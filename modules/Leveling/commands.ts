@@ -7,15 +7,11 @@ import { Logging } from '@helpers/logging';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { RefreshSlashCommands } from "@helpers/refreshSlashCommands";
 
-class LevelingCommands {
+export default class LevelingCommands {
     constructor() {
-        this.init()
+        this.setupCommands()
             .then((): void => {Logging.info('Leveling...')})
             .catch((err: Error): void => {Logging.error(err.message)});
-    }
-
-    private async init(): Promise<void> {
-        await this.setupCommands();
     }
 
     private async setupCommands(): Promise<void> {
@@ -30,8 +26,4 @@ class LevelingCommands {
 
         await RefreshSlashCommands.refresh(commands);
     }
-}
-
-export default function (): void {
-    new LevelingCommands();
 }
