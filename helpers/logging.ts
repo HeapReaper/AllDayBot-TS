@@ -37,10 +37,10 @@ export class Logging {
      * Logs debug messages to the terminal.
      * It display the error message only if environment is set to 'debug'.
      *
-     * @param message - The message that needs to be logged.
+     * @param {string} message - The message that needs to be logged.
      * @returns void - Returns nothing.
      */
-    static {string} debug(message: string): void {
+    static debug(message: string): void {
         if (getEnv('ENVIRONMENT') !== 'debug') return;
 
         console.debug(`DEBUG: ${message}`);
