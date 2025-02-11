@@ -106,9 +106,17 @@ class Database {
 
     /**
      * Delete item(s) from the database.
+     *
+     * @param table - The table name
+     * @param conditions - Object with column-value pairs to find specific entry to delete
+     * @returns Promise<void>
      */
-    static async delete() {
-        //
+    static async delete(table: string, conditions: Record<string, any> = {}): Promise<void> {
+        const whereClause = Object.entries(conditions)
+            .map(([key, value]) => `${key} = '${value}'`)
+            .join(', ');
+
+        await Database.query(`DELETE FROM ${table}${whereClause}`);
     }
 
     /**
