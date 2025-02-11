@@ -14,7 +14,7 @@ export class CanvasBuilder {
     /**
      * Sets the image background.
      *
-     * @param imageUrl - The URL of the image.
+     * @param {string} imageUrl - The URL of the image.
      * @returns Promise<void> - Returns nothing.
      */
     async setBackground(imageUrl: string): Promise<void> {
@@ -25,11 +25,11 @@ export class CanvasBuilder {
     /**
      * Draw rect.
      *
-     * @param x - Sets position on horizontal axis.
-     * @param y - Sets position on vertical axis.
-     * @param width - Sets total width.
-     * @param height - Sets total height.
-     * @param color - Sets color.
+     * @param {number} x - Sets position on horizontal axis.
+     * @param {number} y - Sets position on vertical axis.
+     * @param {number} width - Sets total width.
+     * @param {number} height - Sets total height.
+     * @param {string} color - Sets color.
      * @returns void - Returns nothing.
      */
     drawRect(x: number, y: number, width: number, height: number, color: string): void {
@@ -40,11 +40,11 @@ export class CanvasBuilder {
     /**
      * Draws text boxes.
      *
-     * @param text - The text to be displayed.
-     * @param x - Sets the horizontal position of the text.
-     * @param y - Sets the vertical position of the text.
-     * @param font - Sets the type of font to be used for the text.
-     * @param color - Sets the color of the text.
+     * @param {string} text - The text to be displayed.
+     * @param {number} x - Sets the horizontal position of the text.
+     * @param {number} y - Sets the vertical position of the text.
+     * @param {string} font - Sets the type of font to be used for the text.
+     * @param {string} color - Sets the color of the text.
      * @return void - Returns nothing.
      */
     drawText(text: string, x: number, y: number, font: string, color: string): void {
