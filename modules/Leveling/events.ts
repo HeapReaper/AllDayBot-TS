@@ -4,7 +4,7 @@ import { Logging } from '@helpers/logging.ts';
 import { Client, Message } from 'discord.js';
 import { EventNameEnum } from '@enums/eventNameEnum.ts'
 
-export class LevelingEvents {
+export default class LevelingEvents {
     static usersXpAddedFromMessage: Array<any> = [];
     private client: Client;
 
@@ -32,8 +32,4 @@ export class LevelingEvents {
     static purgeUserXpAddedFromMessages(): void {
         LevelingEvents.usersXpAddedFromMessage = [];
     }
-}
-
-export default function (client: Client) {
-    new LevelingEvents(client);
 }

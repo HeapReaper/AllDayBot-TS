@@ -21,7 +21,7 @@ async function loadModules(client: any) {
                 const commands = await import(commandsURL);
 
                 if (commands.default) {
-                    await commands.default(client);
+                    new commands.default(client);
                     Logging.debug(`Loaded commands for module: ${moduleFolder}`);
                 }
             } catch (error) {
@@ -38,7 +38,7 @@ async function loadModules(client: any) {
                 const commandsListeners = await import(commandsListenerURL);
 
                 if (commandsListeners.default) {
-                    await commandsListeners.default(client);
+                    new commandsListeners.default(client);
                     Logging.debug(`Loaded commandsListener for module: ${moduleFolder}`);
                 }
             } catch (error) {
@@ -55,7 +55,7 @@ async function loadModules(client: any) {
                 const events = await import(eventsURL);
 
                 if (events.default) {
-                    await events.default(client);
+                    new events.default(client);
                     Logging.debug(`Loaded events for event '${eventsFile}'`);
                 }
             } catch (error) {
@@ -72,7 +72,7 @@ async function loadModules(client: any) {
                 const tasks = await import(tasksURL);
 
                 if (tasks.default) {
-                    await tasks.default(client);
+                    new tasks.default(client);
                     Logging.debug(`Loaded tasks for task '${tasksFile}'`);
                 }
             } catch (error) {

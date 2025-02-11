@@ -13,6 +13,7 @@ client.on(Events.ClientReady, async client   => {
     Logging.info(`Logged in as ${client.user.tag}!`);
     await loadModules(client);
 
+    // Add Sentry listening if environment is prod
     if (process.env.ENVIRONMENT !== 'prod') return;
     Sentry.init({
         dsn: process.env.SENTRY_DSN,
