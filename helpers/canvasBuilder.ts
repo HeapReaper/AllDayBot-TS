@@ -1,6 +1,6 @@
 // helpers/canvasBuilder
 
-import { createCanvas, loadImage, Canvas, CanvasRenderingContext2D } from 'canvas';
+import {createCanvas, loadImage, Canvas, CanvasRenderingContext2D, Image} from 'canvas';
 
 export class CanvasBuilder {
     protected canvas: Canvas;
@@ -11,22 +11,53 @@ export class CanvasBuilder {
         this.ctx = this.canvas.getContext('2d');
     }
 
+    /**
+     * Sets the image background.
+     *
+     * @param imageUrl - The URL of the image.
+     * @returns Promise<void> - Returns nothing.
+     */
     async setBackground(imageUrl: string): Promise<void> {
-        const backgroundImage = await loadImage(imageUrl);
+        const backgroundImage: Image = await loadImage(imageUrl);
         this.ctx.drawImage(backgroundImage, 0, 0, this.canvas.width, this.canvas.height);
     }
-    
+
+    /**
+     * Draw rect.
+     *
+     * @param x - Sets position on horizontal axis.
+     * @param y - Sets position on vertical axis.
+     * @param width - Sets total width.
+     * @param height - Sets total height.
+     * @param color - Sets color.
+     * @returns void - Returns nothing.
+     */
     drawRect(x: number, y: number, width: number, height: number, color: string): void {
         this.ctx.fillStyle = color;
         this.ctx.fillRect(x, y, width, height);
     }
 
+    /**
+     * Draws text boxes.
+     *
+     * @param text - The text to be displayed.
+     * @param x - Sets the horizontal position of the text.
+     * @param y - Sets the vertical position of the text.
+     * @param font - Sets the type of font to be used for the text.
+     * @param color - Sets the color of the text.
+     * @return void - Returns nothing.
+     */
     drawText(text: string, x: number, y: number, font: string, color: string): void {
         this.ctx.fillStyle = color;
         this.ctx.font = font;
         this.ctx.fillText(text, x, y);
     }
 
+    /**
+     * Puts canvas into buffer.
+     *
+     * @returns Buffer - Returns the buffer.
+     */
     getBuffer(): Buffer {
         return this.canvas.toBuffer();
     }
