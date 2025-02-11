@@ -2,6 +2,11 @@
 
 import { getEnv } from '@helpers/env.ts';
 
+/**
+ * A helper class for logging messages to the console.
+ *
+ * @class Logging
+ */
 export class Logging {
     /**
      * Logs info messages to the terminal.

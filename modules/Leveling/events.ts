@@ -1,8 +1,7 @@
 // modules/Leveling/events/leveling.js
 
 import { Logging } from '@helpers/logging.ts';
-import { Client, Message } from 'discord.js';
-import { EventNameEnum } from '@enums/eventNameEnum.ts'
+import { Client, Message, Events as discordEvents } from 'discord.js';
 
 export default class LevelingEvents {
     static usersXpAddedFromMessage: Array<any> = [];
@@ -14,7 +13,7 @@ export default class LevelingEvents {
     }
 
     setupOnMessageCreateEvent(): void {
-        this.client.on(EventNameEnum.MessageCreate, async (message: Message): Promise<void> => {
+        this.client.on(discordEvents.MessageCreate, async (message: Message): Promise<void> => {
             if (message.author.bot) return;
 
             Logging.debug('New message received');
