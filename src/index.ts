@@ -18,4 +18,6 @@ client.on(Events.ClientReady, async client   => {
     });
 });
 
+console.log(getEnv('DISCORD_TOKEN'));
+
 client.login(getEnv('DISCORD_TOKEN'));

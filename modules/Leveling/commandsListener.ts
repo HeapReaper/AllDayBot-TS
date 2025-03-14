@@ -3,7 +3,7 @@
 import { Client, Interaction } from 'discord.js';
 import { Logging } from '@helpers/logging.ts';
 import Database from '@helpers/database';
-import CanvasBuilder from '@helpers/canvasBuilder';
+import CanvasBuilder from '@helpers/canvasBuilder.ts';
 import { Color } from '@enums/colorEnum.ts';
 
 export default class CommandsListener {
