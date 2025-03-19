@@ -16,6 +16,34 @@ export default class CommandsListener {
 			if (!interaction.isCommand()) return;
 			
 			const { commandName } = interaction;
-		})
+			// @ts-ignore
+			const subCommandName: any = interaction.options.getSubcommand();
+			
+			if (commandName !== 'verjaardag') return;
+			
+			switch (subCommandName) {
+				case 'toevoegen':
+					this.birthdayAdd(interaction);
+					break;
+				case 'verwijderen':
+					this.birthdayRemove(interaction);
+					break;
+				case 'lijst':
+					this.birthdayList(interaction);
+					break;
+			}
+		});
+	}
+	
+	birthdayAdd(interaction: Interaction): void {
+		console.log('TOEVOEGEN');
+	}
+	
+	birthdayRemove(interaction: Interaction): void {
+		console.log('VERWIJDEREN');
+	}
+	
+	birthdayList(interaction: Interaction): void {
+		console.log('LIJST');
 	}
 }
