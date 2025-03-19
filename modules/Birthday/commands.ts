@@ -2,7 +2,6 @@
 
 import { SlashCommandBuilder } from 'discord.js';
 import { RefreshSlashCommands } from '@helpers/refreshSlashCommands.ts';
-import { Logging } from '@helpers/logging';
 
 export default class Commands {
 	constructor() {
@@ -11,6 +10,22 @@ export default class Commands {
 	}
 	
 	async setupSlashCommands(): Promise<void> {
-	
+		const commands: any[] = [
+			new SlashCommandBuilder()
+				.setName('verjaardag')
+				.setDescription('Beheer je verjaardag!')
+				.addSubcommand(add =>
+					add
+						.setName('toevoegen')
+					    .setDescription('Voeg je verjaardag toe!')
+				)
+				.addSubcommand(remove =>
+					remove
+						.setName('verwijder')
+						.setDescription('Verwijder je verjaardag!')
+				)
+		];
+		
+		await RefreshSlashCommands.refresh(commands);
 	}
 }
