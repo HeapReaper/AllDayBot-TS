@@ -2,6 +2,7 @@
 
 import { getEnv } from '@helpers/env.ts';
 import chalk from 'chalk';
+import { appendFileSync } from 'fs';
 
 /**
  * Logging messages to the console.
@@ -17,8 +18,16 @@ export class Logging {
      */
     static info(message: string|number): void {
         const now = new Date();
-        //console.log(`${chalk.green('INFO')} - ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()} - ${message}`);
-        console.log(`[${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getUTCSeconds()}] [${chalk.green('INFO')}]  ${message}`);
+        
+        console.log(`[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [${chalk.green('INFO')}]  ${message}`);
+        
+        if (getEnv('LOG_LEVEL') == 'info' || getEnv('LOG_LEVEL') == 'all') {
+            appendFileSync(
+                './logs/app.log',
+                `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [INFO]  ${message}\n`,
+                'utf-8'
+            );
+        }
     }
 
     /**
@@ -30,7 +39,15 @@ export class Logging {
     static warn(message: string|number): void {
         const now = new Date();
         
-        console.log(`[${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getUTCSeconds()}] [${chalk.yellow('WARN')}]  ${message}`);
+        console.log(`[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [${chalk.yellow('WARN')}]  ${message}`);
+        
+        if (getEnv('LOG_LEVEL') == 'warn' || getEnv('LOG_LEVEL') == 'all') {
+            appendFileSync(
+                './logs/app.log',
+                `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [WARN]  ${message}\n`,
+                'utf-8'
+            );
+        }
     }
 
     /**
@@ -42,7 +59,15 @@ export class Logging {
     static error(message: string|number): void {
         const now = new Date();
         
-        console.log(`[${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getUTCSeconds()}] [${chalk.red('ERROR')}] ${message}`);
+        console.log(`[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [${chalk.red('ERROR')}] ${message}`);
+        
+        if (getEnv('LOG_LEVEL') == 'error' || getEnv('LOG_LEVEL') == 'all') {
+            appendFileSync(
+                './logs/app.log',
+                `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [ERROR] ${message}\n`,
+                'utf-8'
+            );
+        }
     }
 
     /**
@@ -57,6 +82,14 @@ export class Logging {
         
         if (getEnv('ENVIRONMENT') !== 'debug') return;
         
-        console.log(`[${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getUTCSeconds()}] [${chalk.blue('DEBUG')}] ${message}`);
+        console.log(`[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [${chalk.blue('DEBUG')}] ${message}`);
+        
+        if (getEnv('LOG_LEVEL') == 'debug' || getEnv('LOG_LEVEL') == 'all') {
+            appendFileSync(
+                './logs/app.log',
+                `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [DEBUG] ${message}\n`,
+                'utf-8'
+            );
+        }
     }
 }
