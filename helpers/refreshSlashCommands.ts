@@ -8,6 +8,12 @@ import { getEnv} from '@helpers/env.ts';
 async function commandsLoader() {
     const modulesPath: string = path.join(process.cwd(), 'modules');
     const modulesFolder: string[] = await fs.readdir(modulesPath);
+    const rest = new REST({version: '10'}).setToken(getEnv('DISCORD_TOKEN')!);
+    
+    /// Cleaning up old commands
+    await rest.put(Routes.applicationGuildCommands(getEnv('CLIENT_ID')!, getEnv('GUILD_ID')!), {
+        body: [],
+    });
     
     for (const module of modulesFolder) {
         Logging.debug(`Trying to load commands for module: ${module}`);
@@ -23,7 +29,6 @@ async function commandsLoader() {
             
             Logging.debug(`Commands: ${JSON.stringify(commandsFromModule.commands)}`);
             
-            const rest = new REST({version: '10'}).setToken(getEnv('DISCORD_TOKEN')!);
             await rest.put(Routes.applicationGuildCommands(getEnv('CLIENT_ID')!, getEnv('GUILD_ID')!), {
                 body: commandsFromModule.commands,
             });
