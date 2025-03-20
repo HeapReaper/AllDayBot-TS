@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import { appendFileSync } from 'fs';
 
 /**
- * Logging messages to the console.
+ * Logging messages to the console or file
  *
  * @class Logging
  */
