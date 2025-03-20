@@ -1,6 +1,6 @@
 // modules/Birthday/commandsListener.ts
 
-import { Client, Interaction, Events } from 'discord.js';
+import { Client, Interaction, Events, CommandInteraction} from 'discord.js';
 import Database from '@helpers/database';
 import { Logging } from '@helpers/logging';
 
@@ -24,27 +24,37 @@ export default class CommandsListener {
 			
 			switch (subCommandName) {
 				case 'toevoegen':
-					this.birthdayAdd(interaction);
+					void this.birthdayAdd(interaction);
 					break;
 				case 'verwijderen':
-					this.birthdayRemove(interaction);
+					void this.birthdayRemove(interaction);
 					break;
 				case 'lijst':
-					this.birthdayList(interaction);
+					void this.birthdayList(interaction);
 					break;
 			}
 		});
 	}
 	
-	birthdayAdd(interaction: Interaction): void {
-		Logging.info('Adding a birthday')
+	async birthdayAdd(interaction: Interaction): Promise<void> {
+		if (!interaction.isCommand()) return;
+		
+		Logging.info('Adding a birthday');
+		await interaction.reply('Yeeet');
 	}
 	
-	birthdayRemove(interaction: Interaction): void {
+	async birthdayRemove(interaction: Interaction): Promise<void> {
+		if (!interaction.isCommand()) return;
+		
 		Logging.info('Deleted a birthday');
+		await interaction.reply('Yeeet2');
 	}
 	
-	birthdayList(interaction: Interaction): void {
+	async birthdayList(interaction: Interaction): Promise<void> {
+		if (!interaction.isCommand()) return;
+		
 		Logging.info('Showing birthday list');
+		await interaction.reply('Yeeet3');
+		
 	}
 }
