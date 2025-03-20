@@ -2,6 +2,7 @@
 
 import { Client, Interaction, Events } from 'discord.js';
 import Database from '@helpers/database';
+import { Logging } from '@helpers/logging';
 
 export default class CommandsListener {
     private client: Client;
@@ -36,14 +37,14 @@ export default class CommandsListener {
 	}
 	
 	birthdayAdd(interaction: Interaction): void {
-		console.log('TOEVOEGEN');
+		Logging.info('Adding a birthday')
 	}
 	
 	birthdayRemove(interaction: Interaction): void {
-		console.log('VERWIJDEREN');
+		Logging.info('Deleted a birthday');
 	}
 	
 	birthdayList(interaction: Interaction): void {
-		console.log('LIJST');
+		Logging.info('Showing birthday list');
 	}
 }
