@@ -98,6 +98,7 @@ class Database {
                 .join(' AND ');
         }
 
+        Logging.debug(`SELECT ${columnClause} FROM ${table}${whereClause}`);
         return await Database.query(`SELECT ${columnClause} FROM ${table}${whereClause}`);
     }
 
@@ -113,7 +114,8 @@ class Database {
             .map(([key, value]) => `${key} = '${value}'`)
             .join(', ');
 
-        await Database.query(`DELETE FROM ${table}${whereClause}`);
+        Logging.debug(`DELETE FROM ${table} WHERE ${whereClause}`);
+        await Database.query(`DELETE FROM ${table} WHERE ${whereClause}`);
     }
 
     /**
@@ -133,6 +135,7 @@ class Database {
             .map(([key, value]) => `${key} = '${value}'`)
             .join(', ');
 
+        Logging.debug(`UPDATE ${table} SET ${setClause} WHERE ${whereClause}`);
         if (!Database.query(`UPDATE ${table} SET ${setClause} WHERE ${whereClause}`)) {
             Logging.error(`Error updating table: ${table}`);
             return;
@@ -162,6 +165,7 @@ class Database {
             })
             .join(', ');
 
+        Logging.debug(`INSERT INTO ${table} (${columns}) VALUES (${valuePlaceholders})`);
         await Database.query(`INSERT INTO ${table} (${columns}) VALUES (${valuePlaceholders})`);
     }
 }

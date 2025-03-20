@@ -1,6 +1,6 @@
 // modules/Birthday/commandsListener.ts
 
-import { Client, Interaction, Events, CommandInteraction} from 'discord.js';
+import { Client, Interaction, Events, MessageFlags} from 'discord.js';
 import Database from '@helpers/database';
 import { Logging } from '@helpers/logging';
 
@@ -29,32 +29,50 @@ export default class CommandsListener {
 				case 'verwijderen':
 					void this.birthdayRemove(interaction);
 					break;
-				case 'lijst':
-					void this.birthdayList(interaction);
-					break;
 			}
 		});
 	}
 	
 	async birthdayAdd(interaction: Interaction): Promise<void> {
 		if (!interaction.isCommand()) return;
-		
 		Logging.info('Adding a birthday');
-		await interaction.reply('Yeeet');
+		try {
+			if ((await Database.select('birthday', ['user_id'], {user_id: interaction.user.id})).length > 0) {
+				await interaction.reply({content: 'Je hebt jezelf al toegevoegd aan de verjaardag functie!', flags: MessageFlags.Ephemeral});
+				return;
+			}
+			await Database.insert('birthday', {
+				user_id: interaction.user.id,
+				// @ts-ignore - fix later
+				birthdate: `${interaction.options.getInteger('jaar')}-${interaction.options.getInteger('maand')}-${interaction.options.getInteger('dag')}`
+			});
+			
+			await interaction.reply({content: 'Je verjaardag is in AllDayBot toegevoegd!', flags: MessageFlags.Ephemeral});
+		} catch (error) {
+			Logging.error(`Error inside commandListener for Birthday: ${error}`);
+			await interaction.reply({content: 'Er ging iets mis! Het probleem is gerapporteerd aan de developer.', flags: MessageFlags.Ephemeral});
+			return;
+		}
 	}
 	
 	async birthdayRemove(interaction: Interaction): Promise<void> {
 		if (!interaction.isCommand()) return;
-		
 		Logging.info('Deleted a birthday');
-		await interaction.reply('Yeeet2');
-	}
-	
-	async birthdayList(interaction: Interaction): Promise<void> {
-		if (!interaction.isCommand()) return;
 		
-		Logging.info('Showing birthday list');
-		await interaction.reply('Yeeet3');
 		
+		
+		try {
+			if ((await Database.select('birthday', ['user_id'], {user_id: interaction.user.id})).length === 0) {
+				await interaction.reply({content: 'Je hebt geen verjaardag in AllDayBot staan!', flags: MessageFlags.Ephemeral});
+				return;
+			}
+			
+			await Database.delete('birthday', {user_id: interaction.user.id});
+			await interaction.reply({content: 'Je verjaardag is uit AllDayBot gehaald!', flags: MessageFlags.Ephemeral});
+		} catch (error) {
+			Logging.error(`Something went wrong while deleting birthday: ${error}`);
+			await interaction.reply({content: 'Er ging iets mis! Het probleem is gerapporteerd aan de developer.', flags: MessageFlags.Ephemeral});
+			return
+		}
 	}
 }
