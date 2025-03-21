@@ -66,7 +66,7 @@ export default class Events {
 `;
 
 const tasksFileWrite =
-`// modules/Birthday/tasks.ts
+`// modules/${moduleNameToCreate}/tasks.ts
 
 import { Client, TextChannel } from 'discord.js';
 
