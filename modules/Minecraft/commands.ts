@@ -17,4 +17,10 @@ export const commands = [
 					.setRequired(true)
 			)
 		)
+		.addSubcommand(add =>
+			add
+				.setName('verwijder_whitelist')
+				.setDescription('Verwijder je whitelist van onze bot.')
+			
+		)
 ].map(commands => commands.toJSON());

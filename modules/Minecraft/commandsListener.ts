@@ -26,6 +26,9 @@ export default class CommandsListener {
 				case 'whitelist':
 					void this.whitelist(interaction);
 					break;
+				case 'verwijder_whitelist':
+					void this.whitelistDelete(interaction);
+					break;
 			}
 		});
 	}
@@ -61,6 +64,19 @@ export default class CommandsListener {
 		} catch (error) {
 			await interaction.reply('Oeps! Er ging iets mis! Het probleem is gerapporteerd aan de developer.');
 			Logging.error(`Error checking Minecraft username: ${error}`);
+		}
+	}
+	
+	async whitelistDelete(interaction: Interaction): Promise<void> {
+		if (!interaction.isCommand()) return;
+		
+		try {
+			await Database.delete('minecraft', {user_id: interaction.user.id});
+			await interaction.reply('Je Minecraft gebruikersnaam is verwijderd!');
+			Logging.info(`A minecraft username has been deleted successfully.`);
+		} catch (error) {
+			await interaction.reply('Oeps! Er ging iets mis! Het probleem is gerapporteerd aan de developer.');
+			Logging.error(`Error deleting Minecraft username: ${error}`);
 		}
 	}
 }
