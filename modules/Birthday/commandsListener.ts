@@ -58,9 +58,7 @@ export default class CommandsListener {
 	async birthdayRemove(interaction: Interaction): Promise<void> {
 		if (!interaction.isCommand()) return;
 		Logging.info('Deleted a birthday');
-		
-		
-		
+
 		try {
 			if ((await Database.select('birthday', ['user_id'], {user_id: interaction.user.id})).length === 0) {
 				await interaction.reply({content: 'Je hebt geen verjaardag in AllDayBot staan!', flags: MessageFlags.Ephemeral});
