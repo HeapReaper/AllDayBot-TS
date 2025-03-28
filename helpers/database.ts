@@ -48,6 +48,8 @@ class Database {
      * @returns any - Returns result.
      */
     static query(sql: string, params: Array<any> = []): any {
+        if (!Database.connection) Database.connect();
+
         return new Promise((resolve, reject) => {
             if (!Database.connection) {
                 Database.init();
@@ -69,15 +71,17 @@ class Database {
      * @returns void - Returns nothing.
      */
     static close(): void {
-        if (Database.connection) {
-            Database.connection.end((error: any) => {
-                if (!error) {
-                    Logging.debug('Database connection closed');
-                    return;
-                }
-                Logging.error(`Error closing the database connection: ${error}`)
-            });
+        if (!Database.connection) {
+            return
         }
+
+        Database.connection.end((error: any) => {
+            if (!error) {
+                Logging.debug('Database connection closed');
+                return;
+            }
+            Logging.error(`Error closing the database connection: ${error}`)
+        });
     }
 
     /**
@@ -89,6 +93,8 @@ class Database {
      * @returns Promise - Resolve to an array of results.
      */
     static async select(table: string, columns: string[] = ["*"], conditions: Record<string, any> = {}): Promise<any[]> {
+        if (!Database.connection) Database.connect();
+
         const columnClause = columns.length > 0 ? columns.join(", ") : "*";
 
         let whereClause: string = '';
@@ -110,6 +116,8 @@ class Database {
      * @returns Promise<void> - Returns Nothing.
      */
     static async delete(table: string, conditions: Record<string, any> = {}): Promise<void> {
+        if (!Database.connection) Database.connect();
+
         const whereClause = Object.entries(conditions)
             .map(([key, value]) => `${key} = '${value}'`)
             .join(', ');
@@ -127,6 +135,8 @@ class Database {
      * @returns Promise<void> -- Returns nothing.
      */
     static async update(table: string, values: Record<string, any>, conditions: Record<string, any>): Promise<void> {
+        if (!Database.connection) Database.connect();
+
         const setClause: string = Object.entries(values)
             .map(([key, value]) => `${key} = ${typeof value === 'number' || value === 'NOW()' ? value : `'${value}'`}`)
             .join(', ');
@@ -150,6 +160,8 @@ class Database {
      * @returns Promise<void> - Returns nothing.
      */
     static async insert(table: string, values: Record<string, any>): Promise<void> {
+        if (!Database.connection) Database.connect();
+
         const columns: string = Object.keys(values).join(', ');
 
         const valuePlaceholders = Object.values(values)

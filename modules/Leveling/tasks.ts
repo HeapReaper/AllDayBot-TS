@@ -11,7 +11,7 @@ export default class LevelingTasks {
     // @ts-ignore
     constructor(client: client) {
         this.client = client;
-        this.addXpToMembersTask(10000) // Change to 60000 in prod
+        this.addXpToMembersTask(60000) // Change to 60000 in prod
             .then((): void => {})
             .catch((error: any): void => { Logging.error('Error in addXpToMembersTask') });
     }

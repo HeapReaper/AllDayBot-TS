@@ -11,9 +11,7 @@ export default class CommandsListener {
 
     constructor(client: Client) {
         this.client = client;
-        this.commandListener()
-            .then((): void => {Logging.debug('Leveling commands listener')})
-            .catch((err: Error): void => {Logging.error(err.message)});
+        void this.commandListener()
     }
 
     async commandListener(): Promise<void> {

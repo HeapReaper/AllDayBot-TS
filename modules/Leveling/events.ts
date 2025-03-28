@@ -18,9 +18,9 @@ export default class LevelingEvents {
 
             Logging.debug('New message received');
 
-            if (!LevelingEvents.usersXpAddedFromMessage.includes(message.author.id)) {
-                LevelingEvents.usersXpAddedFromMessage.push(message.author.id);
-            }
+            if (LevelingEvents.usersXpAddedFromMessage.includes(message.author.id)) return;
+
+            LevelingEvents.usersXpAddedFromMessage.push(message.author.id);
         });
     }
 
