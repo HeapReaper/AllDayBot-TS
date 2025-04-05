@@ -1,5 +1,3 @@
-// helpers/canvasBuilder
-
 import { createCanvas, loadImage, Canvas, CanvasRenderingContext2D, Image } from 'canvas';
 
 export class CanvasBuilder {
