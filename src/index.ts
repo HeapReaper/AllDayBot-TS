@@ -4,13 +4,21 @@ import * as Sentry from '@sentry/bun';
 import loadModules from '@helpers/moduleLoader.ts';
 import { getEnv } from '@helpers/env.ts';
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+// @ts-ignore
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildMessageReactions,
+    ]
+});
 
-client.on(Events.ClientReady, async client   => {
+client.on(Events.ClientReady, async client => {
     Logging.info(`Logged in as ${client.user.tag}!`);
     await loadModules(client);
 
-    // Add Sentry listening if environment is prod
     if (getEnv('ENVIRONMENT') !== 'prod') return;
     Sentry.init({
         dsn: getEnv('SENTRY_DSN'),
