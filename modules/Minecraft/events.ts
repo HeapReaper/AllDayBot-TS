@@ -1,5 +1,3 @@
-// modules/Minecraft/events.ts
-
 import { Client, TextChannel } from 'discord.js';
 
 export default class Events {

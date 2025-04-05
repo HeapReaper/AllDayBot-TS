@@ -1,5 +1,3 @@
-// modules/ServerLogger/events.ts
-
 import { Client, Events as discordEvents, Message, EmbedBuilder, TextChannel, User } from 'discord.js';
 import { Logging } from '@helpers/logging.ts';
 import { Color } from '@enums/colorEnum';

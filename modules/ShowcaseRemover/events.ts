@@ -1,5 +1,3 @@
-// modules/ShowcaseRemover/events.ts
-
 import { Client, TextChannel, Events, Message } from 'discord.js';
 import { getEnv } from '@helpers/env.ts';
 import { Logging } from '@helpers/logging';
