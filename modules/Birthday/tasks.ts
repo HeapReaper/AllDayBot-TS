@@ -1,5 +1,3 @@
-// modules/Birthday/tasks.ts
-
 import { Client, TextChannel } from 'discord.js';
 import { Logging } from '@helpers/logging';
 import Database from '@helpers/database';
