@@ -1,5 +1,3 @@
-// modules/Leveling/commands.js
-
 import { SlashCommandBuilder } from '@discordjs/builders';
 
 export const commands = [

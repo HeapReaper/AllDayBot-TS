@@ -1,5 +1,3 @@
-// modules/Leveling/tasks
-
 import { Logging } from '@helpers/logging.ts';
 import LevelingEvents from './events.ts';
 import Database from '@helpers/database';

@@ -1,5 +1,3 @@
-// modules/Leveling/commandsListener
-
 import { Client, Interaction } from 'discord.js';
 import { Logging } from '@helpers/logging.ts';
 import Database from '@helpers/database';
