@@ -1,5 +1,3 @@
-// modules/ShowcaseRemover/tasks.ts
-
 import { Client, TextChannel } from 'discord.js';
 
 export default class Tasks {

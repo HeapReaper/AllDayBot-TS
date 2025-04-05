@@ -1,5 +1,3 @@
-// modules/Birthday/commands.ts
-
 import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
 
 export const commands = [

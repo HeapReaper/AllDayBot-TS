@@ -1,5 +1,3 @@
-// modules/ShowcaseRemover/commandsListener.ts
-
 import { Client, Interaction, Events, MessageFlags} from 'discord.js';
 import Database from '@helpers/database';
 import { Logging } from '@helpers/logging';

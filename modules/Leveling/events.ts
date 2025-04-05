@@ -1,5 +1,3 @@
-// modules/Leveling/events/leveling.js
-
 import { Logging } from '@helpers/logging.ts';
 import { Client, Message, Events as discordEvents, GuildMember } from 'discord.js';
 import Database from "@helpers/database.ts";

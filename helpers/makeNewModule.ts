@@ -21,9 +21,7 @@ if (existsSync(`${modulesDir}/${moduleNameToCreate}`)) {
 mkdirSync(`${modulesDir}/${moduleNameToCreate}`);
 
 const commandsFileWrite =
-`// modules/${moduleNameToCreate}/commands.ts
-
-import { SlashCommandBuilder } from 'discord.js';
+`import { SlashCommandBuilder } from 'discord.js';
 
 export const commands = [
 
@@ -31,9 +29,7 @@ export const commands = [
 `;
 
 const commandsListenerFileWrite =
-`// modules/${moduleNameToCreate}/commandsListener.ts
-
-import { Client, Interaction, Events, MessageFlags} from 'discord.js';
+`import { Client, Interaction, Events, MessageFlags} from 'discord.js';
 import Database from '@helpers/database';
 import { Logging } from '@helpers/logging';
 
@@ -52,9 +48,7 @@ async function commandsListener(): Promise<void> {
 `;
 
 const eventsFileWrite =
-`// modules/${moduleNameToCreate}/events.ts
-
-import { Client, TextChannel } from 'discord.js';
+`import { Client, TextChannel } from 'discord.js';
 
 export default class Events {
     private client: Client;
@@ -66,9 +60,7 @@ export default class Events {
 `;
 
 const tasksFileWrite =
-`// modules/${moduleNameToCreate}/tasks.ts
-
-import { Client, TextChannel } from 'discord.js';
+`import { Client, TextChannel } from 'discord.js';
 
 export default class Tasks {
 	private client: Client;
