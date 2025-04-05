@@ -15,11 +15,10 @@ const client = new Client({
     ]
 });
 
-client.on(Events.ClientReady, async client   => {
+client.on(Events.ClientReady, async client => {
     Logging.info(`Logged in as ${client.user.tag}!`);
     await loadModules(client);
 
-    // Add Sentry listening if environment is prod
     if (getEnv('ENVIRONMENT') !== 'prod') return;
     Sentry.init({
         dsn: getEnv('SENTRY_DSN'),
