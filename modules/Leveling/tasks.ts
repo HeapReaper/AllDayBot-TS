@@ -41,7 +41,8 @@ export default class LevelingTasks {
 
             // Fetch channels and filter voice channels
             const channels = await guild.channels.fetch();
-            const voiceChannels = [...channels.filter(channel => channel.type === ChannelType.GuildVoice).values()] as VoiceChannel[];
+
+            const voiceChannels = [...channels.filter(channel => channel?.type === ChannelType.GuildVoice).values()] as VoiceChannel[];
 
             for (const voiceChannel of voiceChannels) {
                 if (!voiceChannel || !voiceChannel.members.size) continue;
