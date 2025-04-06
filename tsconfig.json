@@ -5,6 +5,7 @@
       "@helpers/*": ["./helpers/*"],
       "@enums/*": ["./enums/*"],
       "@src/*": ["./src/*"],
+      "@media/*": ["./src/media/*"],
     },
     "module": "commonjs",
     "target": "es2020",

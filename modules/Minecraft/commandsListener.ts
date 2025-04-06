@@ -101,11 +101,16 @@ export default class CommandsListener {
 			const mcCreative: PromiseSettledResult<JavaStatusResponse> = results[2];
 			const mcMiniGames: PromiseSettledResult<JavaStatusResponse> = results[3];
 
+			// @ts-ignore
 			console.log(`${mcLobby.value.players.online}`);
+			// @ts-ignore
 			console.log(`${mcSurvival.value.players.online}`);
+			// @ts-ignore
 			console.log(`${mcCreative.value.players.online}`);
-
-			console.log(`${mcMiniGames.value.players.online}`);
+			if (mcMiniGames.status === 'fulfilled') {
+				// @ts-ignore
+				console.log(`${mcMiniGames.value.players.online}`);
+			}
 
 			await interaction.reply('Jeeej');
 		} catch (error) {
