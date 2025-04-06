@@ -55,7 +55,7 @@ export default class CommandsListener {
 		const commandInteraction = interaction as unknown as ChatInputCommandInteraction;
 		const options = commandInteraction.options;
 
-		const builder = new CanvasBuilder(385, 80);
+		const builder = new CanvasBuilder(355, 80);
 
 		await builder.setBackground(path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg'));
 
@@ -111,7 +111,7 @@ export default class CommandsListener {
 		if (!interaction.isCommand()) return;
 
 		try {
-			const builder = new CanvasBuilder(375, 100);
+			const builder = new CanvasBuilder(355, 100);
 
 			await builder.setBackground(path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg'));
 
