@@ -40,10 +40,10 @@ export default class CommandsListener {
 		this.client = client;
 		void this.commandsListener();
 	}
-}
-
-async function commandsListener(): Promise<void> {
-	//
+	
+	async commandsListener(): Promise<void> {
+		//
+	}
 }
 `;
 
