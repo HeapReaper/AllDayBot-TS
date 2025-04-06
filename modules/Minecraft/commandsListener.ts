@@ -1,6 +1,7 @@
-import {Client, Interaction, Events, MessageFlags, ChatInputCommandInteraction} from 'discord.js';
+import { Client, Interaction, Events, MessageFlags, ChatInputCommandInteraction } from 'discord.js';
 import Database from '@helpers/database';
 import { Logging } from '@helpers/logging';
+import util, { JavaStatusResponse } from 'minecraft-server-util';
 
 export default class CommandsListener {
 	private client: Client;
@@ -26,6 +27,9 @@ export default class CommandsListener {
 					break;
 				case 'verwijder_whitelist':
 					void this.whitelistDelete(interaction);
+					break;
+				case 'online':
+					void this.getOnlineUsers(interaction);
 					break;
 			}
 		});
@@ -76,5 +80,11 @@ export default class CommandsListener {
 			await interaction.reply('Oeps! Er ging iets mis! Het probleem is gerapporteerd aan de developer.');
 			Logging.error(`Error deleting Minecraft username: ${error}`);
 		}
+	}
+
+	async getOnlineUsers(interaction: Interaction): Promise<void> {
+		if (!interaction.isCommand()) return;
+
+
 	}
 }
