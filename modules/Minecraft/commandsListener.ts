@@ -54,26 +54,44 @@ export default class CommandsListener {
 		
 		const commandInteraction = interaction as unknown as ChatInputCommandInteraction;
 		const options = commandInteraction.options;
-		
+
+		const builder = new CanvasBuilder(385, 80);
+
+		await builder.setBackground(path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg'));
+
+		const textColor = '#ffffff';
+		const titleFont = 'bold 24px sans-serif';
+		const descriptionFont = '16px sans-serif';
+
+		builder.drawText('Minecraft', 20, 30, titleFont, textColor);
+
 		try {
 			const resp: Response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${options.getString('gebruikersnaam')}`)
 			const minecraftUsernameInDB = await Database.select('minecraft', ['user_id', 'minecraft_username'], {user_id: interaction.user.id});
 			
 			if (resp.status === 404 ) {
-				await interaction.reply('Je gebruikersnaam is niet gevonden!');
 				Logging.warn(`I didn't found Minecraft username ${options.getString('gebruikersnaam')}`);
+
+				builder.drawText('Je gebruikersnaam is niet gevonden!', 20, 60, descriptionFont, textColor)
+				await interaction.reply({files: [builder.getBuffer()]})
 			}
 			
 			if (resp.status !== 200) {
+				Logging.error(`Error inside Minecraft whitelist command listener: ${resp.status}`);
 				return
 			}
 			
 			if (minecraftUsernameInDB.length < 1) {
 				await Database.insert('minecraft', { user_id: interaction.user.id, minecraft_username: options.getString('gebruikersnaam') });
-				await interaction.reply('Je Minecraft gebruikersnaam is toegevoegd!');
+
+				builder.drawText('Je Minecraft gebruikersnaam is toegevoegd!', 20, 60, descriptionFont, textColor)
+				await interaction.reply({files: [builder.getBuffer()]})
 			} else {
 				await Database.update('minecraft', {user_id: interaction.user.id}, {minecraft: options.getString('gebruikersnaam')});
-				await interaction.reply('Je Minecraft gebruikersnaam is aangepast!');
+
+				builder.drawText('Je Minecraft gebruikersnaam is aangepast!', 20, 60, descriptionFont, textColor)
+				await interaction.reply({files: [builder.getBuffer()]})
+
 			}
 			
 			Logging.info(`Added the Minecraft username ${options.getString('gebruikersnaam')} to the database.`);
@@ -91,10 +109,21 @@ export default class CommandsListener {
 	 */
 	async whitelistDelete(interaction: Interaction): Promise<void> {
 		if (!interaction.isCommand()) return;
-		
+
 		try {
+			const builder = new CanvasBuilder(375, 100);
+
+			await builder.setBackground(path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg'));
+
+			const textColor = '#ffffff';
+			const titleFont = 'bold 24px sans-serif';
+			const descriptionFont = '16px sans-serif';
+
+			builder.drawText('Minecraft', 20, 30, titleFont, textColor);
+			builder.drawText('Je Minecraft gebruikersnaam is verwijderd\nuit de whitelist!', 20, 60, descriptionFont, textColor)
+
 			await Database.delete('minecraft', {user_id: interaction.user.id});
-			await interaction.reply('Je Minecraft gebruikersnaam is verwijderd!');
+			await interaction.reply({files: [builder.getBuffer()]});
 			Logging.info(`A minecraft username has been deleted successfully.`);
 		} catch (error) {
 			await interaction.reply('Oeps! Er ging iets mis! Het probleem is gerapporteerd aan de developer.');
@@ -130,7 +159,7 @@ export default class CommandsListener {
 			await interaction.reply({files: [canvasBuffer]});
 		} catch (error) {
 			await interaction.reply('Er ging iets mis! Probleem is gerapporteerd aan de developer.');
-			Logging.error(`Error getting to Minecraft server in getOnlineUsers: ${error}`);
+			Logging.error(`Error getting in Minecraft whitelist delete command listener: ${error}`);
 		}
 	}
 
@@ -164,9 +193,7 @@ export default class CommandsListener {
 		const height: number = defaultHeight;
 		const builder = new CanvasBuilder(width, height);
 
-		await builder.setBackground(
-			path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg')
-		);
+		await builder.setBackground(path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg'));
 
 		const textColor = '#ffffff';
 		const titleFont = 'bold 24px sans-serif';
