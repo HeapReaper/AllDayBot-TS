@@ -9,8 +9,9 @@ export default class CommandsListener {
 		this.client = client;
 		void this.commandsListener();
 	}
+
+	async commandsListener(): Promise<void> {
+		//
+	}
 }
 
-async function commandsListener(): Promise<void> {
-	//
-}
