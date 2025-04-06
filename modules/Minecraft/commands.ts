@@ -10,15 +10,19 @@ export const commands = [
 			.setDescription('Krijg toegang tot onze Minecraft servers!')
 			.addStringOption(option =>
 				option
-					.setName('gebruikersnaam')
-					.setDescription('Gebruikers naam van Minecraft.')
-					.setRequired(true)
+				.setName('gebruikersnaam')
+				.setDescription('Gebruikers naam van Minecraft.')
+				.setRequired(true)
 			)
 		)
 		.addSubcommand(add =>
 			add
-				.setName('verwijder_whitelist')
-				.setDescription('Verwijder je whitelist van onze bot.')
-			
+			.setName('verwijder_whitelist')
+			.setDescription('Verwijder je whitelist van onze bot.')
+		)
+		.addSubcommand(add =>
+			add
+			.setName('online')
+			.setDescription('Zie wie online is!')
 		)
 ].map(commands => commands.toJSON());

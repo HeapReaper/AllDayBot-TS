@@ -1,6 +1,15 @@
-import {Client, Interaction, Events, MessageFlags, ChatInputCommandInteraction} from 'discord.js';
+import { Client,
+		 Interaction,
+		 Events,
+		 MessageFlags,
+		 ChatInputCommandInteraction,
+		 EmbedBuilder,
+} from 'discord.js';
 import Database from '@helpers/database';
 import { Logging } from '@helpers/logging';
+import { getEnv } from '@helpers/env.ts';
+import util, { JavaStatusResponse } from 'minecraft-server-util';
+import { Color } from '@enums/colorEnum';
 
 export default class CommandsListener {
 	private client: Client;
@@ -26,6 +35,9 @@ export default class CommandsListener {
 					break;
 				case 'verwijder_whitelist':
 					void this.whitelistDelete(interaction);
+					break;
+				case 'online':
+					void this.getOnlineUsers(interaction);
 					break;
 			}
 		});
@@ -75,6 +87,74 @@ export default class CommandsListener {
 		} catch (error) {
 			await interaction.reply('Oeps! Er ging iets mis! Het probleem is gerapporteerd aan de developer.');
 			Logging.error(`Error deleting Minecraft username: ${error}`);
+		}
+	}
+
+	async getOnlineUsers(interaction: Interaction): Promise<void> {
+		if (!interaction.isCommand()) return;
+
+		try {
+			const promises: Promise<JavaStatusResponse>[] = [
+				util.status(<string>getEnv('MC_IP'), parseInt(<string>getEnv('MC_LOBBY_PORT'))),
+				util.status(<string>getEnv('MC_IP'), parseInt(<string>getEnv('MC_SURVIVAL_PORT'))),
+				util.status(<string>getEnv('MC_IP'), parseInt(<string>getEnv('MC_CREATIVE_PORT'))),
+				util.status(<string>getEnv('MC_IP'), parseInt(<string>getEnv('MC_MINIGAMES_PORT'))),
+			];
+
+			const results: PromiseSettledResult<JavaStatusResponse>[] = await Promise.allSettled(promises);
+
+			const mcLobby: PromiseSettledResult<JavaStatusResponse> = results[0];
+			const mcSurvival: PromiseSettledResult<JavaStatusResponse> = results[1];
+			const mcCreative: PromiseSettledResult<JavaStatusResponse> = results[2];
+			const mcMiniGames: PromiseSettledResult<JavaStatusResponse> = results[3];
+
+			// @ts-ignore
+			console.log(`${mcLobby.value.players.online}`);
+
+			// @ts-ignore
+			console.log(`${mcSurvival.value.players.online}`);
+			// @ts-ignore
+			console.log(`${mcCreative.value.players.online}`);
+			if (mcMiniGames.status === 'fulfilled') {
+				// @ts-ignore
+				console.log(`${mcMiniGames.value.players.online}`);
+			}
+
+			const mcOnlineEmbed: EmbedBuilder = new EmbedBuilder()
+				.setColor(Color.Blue)
+				.setTitle('Minecraft')
+				.setDescription('Zie wie online is op onze servers!')
+				.addFields(
+					{
+						name: `Lobby [${mcLobby.status === 'fulfilled' ? mcLobby.value.players.online : '0'}]`,
+						value: mcLobby.status === 'fulfilled'
+							? mcLobby.value.players.sample?.map((player: { name: string; }) => player.name).join('\n') || 'Geen spelers online.'
+							: 'Minecraft server is offline.',
+					},
+					{
+						name: `Survival [${mcSurvival.status === 'fulfilled' ? mcSurvival.value.players.online : '0'}]`,
+						value: mcSurvival.status === 'fulfilled'
+							? mcSurvival.value.players.sample?.map((player: { name: string; }) => player.name).join('\n') || 'Geen spelers online.'
+							: 'Minecraft server is offline.',
+					},
+					{
+						name: `Creative [${mcCreative.status === 'fulfilled' ? mcCreative.value.players.online : '0'}]`,
+						value: mcCreative.status === 'fulfilled'
+							? mcCreative.value.players.sample?.map((player: { name: string; }) => player.name).join('\n') || 'Geen spelers online.'
+							: 'Minecraft server is offline.',
+					},
+					{
+						name: `MiniGames [${mcMiniGames.status === 'fulfilled' ? mcMiniGames.value.players.online : '0'}]`,
+						value: mcMiniGames.status === 'fulfilled'
+							? mcMiniGames.value.players.sample?.map((player: { name: string; }) => player.name).join('\n') || 'Geen spelers online.'
+							: 'Minecraft server is offline.',
+					}
+				);
+
+			await interaction.reply({embeds: [mcOnlineEmbed]});
+		} catch (error) {
+			await interaction.reply('Er ging iets mis! Probleem is gerapporteerd aan de developer.');
+			Logging.error(`Error getting to Minecraft server in getOnlineUsers: ${error}`);
 		}
 	}
 }
