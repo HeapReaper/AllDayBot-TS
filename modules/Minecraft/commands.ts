@@ -22,7 +22,7 @@ export const commands = [
 		)
 		.addSubcommand(add =>
 			add
-			.setName('online_whitelist')
+			.setName('online')
 			.setDescription('Zie wie online is!')
 		)
 ].map(commands => commands.toJSON());

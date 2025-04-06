@@ -1,6 +1,7 @@
 import { Client, Interaction, Events, MessageFlags, ChatInputCommandInteraction } from 'discord.js';
 import Database from '@helpers/database';
 import { Logging } from '@helpers/logging';
+import { getEnv } from '@helpers/env.ts';
 import util, { JavaStatusResponse } from 'minecraft-server-util';
 
 export default class CommandsListener {
@@ -85,6 +86,31 @@ export default class CommandsListener {
 	async getOnlineUsers(interaction: Interaction): Promise<void> {
 		if (!interaction.isCommand()) return;
 
+		try {
+			const promises = [
+				util.status(<string>getEnv('MC_IP'), parseInt(<string>getEnv('MC_LOBBY_PORT'))),
+				util.status(<string>getEnv('MC_IP'), parseInt(<string>getEnv('MC_SURVIVAL_PORT'))),
+				util.status(<string>getEnv('MC_IP'), parseInt(<string>getEnv('MC_CREATIVE_PORT'))),
+				util.status(<string>getEnv('MC_IP'), parseInt(<string>getEnv('MC_MINIGAMES_PORT'))),
+			];
 
+			const results = await Promise.allSettled(promises);
+
+			const mcLobby: PromiseSettledResult<JavaStatusResponse> = results[0];
+			const mcSurvival: PromiseSettledResult<JavaStatusResponse> = results[1];
+			const mcCreative: PromiseSettledResult<JavaStatusResponse> = results[2];
+			const mcMiniGames: PromiseSettledResult<JavaStatusResponse> = results[3];
+
+			console.log(`${mcLobby.value.players.online}`);
+			console.log(`${mcSurvival.value.players.online}`);
+			console.log(`${mcCreative.value.players.online}`);
+
+			console.log(`${mcMiniGames.value.players.online}`);
+
+			await interaction.reply('Jeeej');
+		} catch (error) {
+			await interaction.reply('Er ging iets mis! Probleem is gerapporteerd aan de developer.');
+			Logging.error(`Error getting to Minecraft server in getOnlineUsers: ${error}`);
+		}
 	}
 }
