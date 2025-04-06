@@ -55,7 +55,7 @@ export default class CommandsListener {
 		const commandInteraction = interaction as unknown as ChatInputCommandInteraction;
 		const options = commandInteraction.options;
 
-		const builder = new CanvasBuilder(385, 80);
+		const builder = new CanvasBuilder(355, 80);
 
 		await builder.setBackground(path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg'));
 
@@ -84,12 +84,12 @@ export default class CommandsListener {
 			if (minecraftUsernameInDB.length < 1) {
 				await Database.insert('minecraft', { user_id: interaction.user.id, minecraft_username: options.getString('gebruikersnaam') });
 
-				builder.drawText('Je Minecraft gebruikersnaam is toegevoegd!', 20, 60, descriptionFont, textColor)
+				builder.drawText('Je gebruikersnaam is toegevoegd!', 20, 60, descriptionFont, textColor)
 				await interaction.reply({files: [builder.getBuffer()]})
 			} else {
 				await Database.update('minecraft', {user_id: interaction.user.id}, {minecraft: options.getString('gebruikersnaam')});
 
-				builder.drawText('Je Minecraft gebruikersnaam is aangepast!', 20, 60, descriptionFont, textColor)
+				builder.drawText('Je gebruikersnaam is aangepast!', 20, 60, descriptionFont, textColor)
 				await interaction.reply({files: [builder.getBuffer()]})
 
 			}
@@ -111,7 +111,7 @@ export default class CommandsListener {
 		if (!interaction.isCommand()) return;
 
 		try {
-			const builder = new CanvasBuilder(375, 100);
+			const builder = new CanvasBuilder(355, 100);
 
 			await builder.setBackground(path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg'));
 
@@ -120,7 +120,7 @@ export default class CommandsListener {
 			const descriptionFont = '16px sans-serif';
 
 			builder.drawText('Minecraft', 20, 30, titleFont, textColor);
-			builder.drawText('Je Minecraft gebruikersnaam is verwijderd\nuit de whitelist!', 20, 60, descriptionFont, textColor)
+			builder.drawText('Je gebruikersnaam is verwijderd\nuit de whitelist!', 20, 60, descriptionFont, textColor)
 
 			await Database.delete('minecraft', {user_id: interaction.user.id});
 			await interaction.reply({files: [builder.getBuffer()]});
