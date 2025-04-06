@@ -126,28 +126,28 @@ export default class CommandsListener {
 				.setDescription('Zie wie online is op onze servers!')
 				.addFields(
 					{
-						name: `Lobby [${mcLobby.status === 'fulfilled' ? mcLobby.value.players.online : '0'}]`,
+						name: `Lobby [${mcLobby.status === 'fulfilled' ? mcLobby.value.players.online : '0'}/10]`,
 						value: mcLobby.status === 'fulfilled'
 							? mcLobby.value.players.sample?.map((player: { name: string; }) => player.name).join('\n') || 'Geen spelers online.'
-							: 'Minecraft server is offline.',
+							: 'Server is offline.',
 					},
 					{
-						name: `Survival [${mcSurvival.status === 'fulfilled' ? mcSurvival.value.players.online : '0'}]`,
+						name: `Survival [${mcSurvival.status === 'fulfilled' ? mcSurvival.value.players.online : '0'}/10]`,
 						value: mcSurvival.status === 'fulfilled'
 							? mcSurvival.value.players.sample?.map((player: { name: string; }) => player.name).join('\n') || 'Geen spelers online.'
-							: 'Minecraft server is offline.',
+							: 'Server is offline.',
 					},
 					{
-						name: `Creative [${mcCreative.status === 'fulfilled' ? mcCreative.value.players.online : '0'}]`,
+						name: `Creative [${mcCreative.status === 'fulfilled' ? mcCreative.value.players.online : '0'}/10]`,
 						value: mcCreative.status === 'fulfilled'
 							? mcCreative.value.players.sample?.map((player: { name: string; }) => player.name).join('\n') || 'Geen spelers online.'
-							: 'Minecraft server is offline.',
+							: 'Server is offline.',
 					},
 					{
-						name: `MiniGames [${mcMiniGames.status === 'fulfilled' ? mcMiniGames.value.players.online : '0'}]`,
+						name: `MiniGames [${mcMiniGames.status === 'fulfilled' ? mcMiniGames.value.players.online : '0'}/10]`,
 						value: mcMiniGames.status === 'fulfilled'
 							? mcMiniGames.value.players.sample?.map((player: { name: string; }) => player.name).join('\n') || 'Geen spelers online.'
-							: 'Minecraft server is offline.',
+							: 'Server is offline.',
 					}
 				);
 
