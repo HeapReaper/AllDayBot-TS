@@ -84,12 +84,12 @@ export default class CommandsListener {
 			if (minecraftUsernameInDB.length < 1) {
 				await Database.insert('minecraft', { user_id: interaction.user.id, minecraft_username: options.getString('gebruikersnaam') });
 
-				builder.drawText('Je Minecraft gebruikersnaam is toegevoegd!', 20, 60, descriptionFont, textColor)
+				builder.drawText('Je gebruikersnaam is toegevoegd!', 20, 60, descriptionFont, textColor)
 				await interaction.reply({files: [builder.getBuffer()]})
 			} else {
 				await Database.update('minecraft', {user_id: interaction.user.id}, {minecraft: options.getString('gebruikersnaam')});
 
-				builder.drawText('Je Minecraft gebruikersnaam is aangepast!', 20, 60, descriptionFont, textColor)
+				builder.drawText('Je gebruikersnaam is aangepast!', 20, 60, descriptionFont, textColor)
 				await interaction.reply({files: [builder.getBuffer()]})
 
 			}
@@ -120,7 +120,7 @@ export default class CommandsListener {
 			const descriptionFont = '16px sans-serif';
 
 			builder.drawText('Minecraft', 20, 30, titleFont, textColor);
-			builder.drawText('Je Minecraft gebruikersnaam is verwijderd\nuit de whitelist!', 20, 60, descriptionFont, textColor)
+			builder.drawText('Je gebruikersnaam is verwijderd\nuit de whitelist!', 20, 60, descriptionFont, textColor)
 
 			await Database.delete('minecraft', {user_id: interaction.user.id});
 			await interaction.reply({files: [builder.getBuffer()]});
