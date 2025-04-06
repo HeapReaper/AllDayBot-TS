@@ -1,16 +1,16 @@
 import { Client,
 		 Interaction,
 		 Events,
-		 MessageFlags,
 		 ChatInputCommandInteraction,
-		 EmbedBuilder,
 } from 'discord.js';
 import Database from '@helpers/database';
 import { Logging } from '@helpers/logging';
 import { getEnv } from '@helpers/env.ts';
 import util, { JavaStatusResponse } from 'minecraft-server-util';
-import { Color } from '@enums/colorEnum';
+import { CanvasBuilder } from '@helpers/canvasBuilder';
+import path from 'path';
 
+// TODO: Refactor to use https://discordapp.com/channels/1038516673315078154/1038837019008323584/1358495590719295499
 export default class CommandsListener {
 	private client: Client;
 	
@@ -42,7 +42,13 @@ export default class CommandsListener {
 			}
 		});
 	}
-	
+
+	/**
+	 * Processes the 'whitelist' command to add or update a user's Minecraft username.
+	 * in the database.
+	 * @param interaction
+	 * @return Promise<void> - Returns nothing.
+	 */
 	async whitelist(interaction: Interaction): Promise<void> {
 		if (!interaction.isCommand()) return;
 		
@@ -76,7 +82,13 @@ export default class CommandsListener {
 			Logging.error(`Error checking Minecraft username: ${error}`);
 		}
 	}
-	
+
+	/**
+	 * Processes the 'whitelist' command to delete a user's Minecraft username.
+	 * from the database.
+	 * @param interaction
+	 * @return Promise<void> - Returns nothing.
+	 */
 	async whitelistDelete(interaction: Interaction): Promise<void> {
 		if (!interaction.isCommand()) return;
 		
@@ -90,6 +102,11 @@ export default class CommandsListener {
 		}
 	}
 
+	/**
+	 * Gets the online users and calls createMcCanvas to make the canvas.
+	 * @param interaction
+	 * @returns Promise<void> - Returns nothing.
+	 */
 	async getOnlineUsers(interaction: Interaction): Promise<void> {
 		if (!interaction.isCommand()) return;
 
@@ -103,58 +120,111 @@ export default class CommandsListener {
 
 			const results: PromiseSettledResult<JavaStatusResponse>[] = await Promise.allSettled(promises);
 
-			const mcLobby: PromiseSettledResult<JavaStatusResponse> = results[0];
-			const mcSurvival: PromiseSettledResult<JavaStatusResponse> = results[1];
-			const mcCreative: PromiseSettledResult<JavaStatusResponse> = results[2];
-			const mcMiniGames: PromiseSettledResult<JavaStatusResponse> = results[3];
+			const canvasBuffer = await this.createMcCanvas(
+				`Lobby ${this.getServerName(results[0])}`, this.getPlayerValueCanvas(results[0]),
+				`Survival ${this.getServerName(results[1])}`, this.getPlayerValueCanvas(results[1]),
+				`Creative ${this.getServerName(results[2])}`, this.getPlayerValueCanvas(results[2]),
+				`MiniGames ${this.getServerName(results[3])}`, this.getPlayerValueCanvas(results[3])
+			);
 
-			// @ts-ignore
-			console.log(`${mcLobby.value.players.online}`);
-
-			// @ts-ignore
-			console.log(`${mcSurvival.value.players.online}`);
-			// @ts-ignore
-			console.log(`${mcCreative.value.players.online}`);
-			if (mcMiniGames.status === 'fulfilled') {
-				// @ts-ignore
-				console.log(`${mcMiniGames.value.players.online}`);
-			}
-
-			const mcOnlineEmbed: EmbedBuilder = new EmbedBuilder()
-				.setColor(Color.Blue)
-				.setTitle('Minecraft')
-				.setDescription('Zie wie online is op onze servers!')
-				.addFields(
-					{
-						name: `Lobby [${mcLobby.status === 'fulfilled' ? mcLobby.value.players.online : '0'}/10]`,
-						value: mcLobby.status === 'fulfilled'
-							? mcLobby.value.players.sample?.map((player: { name: string; }) => player.name).join('\n') || 'Geen spelers online.'
-							: 'Server is offline.',
-					},
-					{
-						name: `Survival [${mcSurvival.status === 'fulfilled' ? mcSurvival.value.players.online : '0'}/10]`,
-						value: mcSurvival.status === 'fulfilled'
-							? mcSurvival.value.players.sample?.map((player: { name: string; }) => player.name).join('\n') || 'Geen spelers online.'
-							: 'Server is offline.',
-					},
-					{
-						name: `Creative [${mcCreative.status === 'fulfilled' ? mcCreative.value.players.online : '0'}/10]`,
-						value: mcCreative.status === 'fulfilled'
-							? mcCreative.value.players.sample?.map((player: { name: string; }) => player.name).join('\n') || 'Geen spelers online.'
-							: 'Server is offline.',
-					},
-					{
-						name: `MiniGames [${mcMiniGames.status === 'fulfilled' ? mcMiniGames.value.players.online : '0'}/10]`,
-						value: mcMiniGames.status === 'fulfilled'
-							? mcMiniGames.value.players.sample?.map((player: { name: string; }) => player.name).join('\n') || 'Geen spelers online.'
-							: 'Server is offline.',
-					}
-				);
-
-			await interaction.reply({embeds: [mcOnlineEmbed]});
+			await interaction.reply({files: [canvasBuffer]});
 		} catch (error) {
 			await interaction.reply('Er ging iets mis! Probleem is gerapporteerd aan de developer.');
 			Logging.error(`Error getting to Minecraft server in getOnlineUsers: ${error}`);
 		}
+	}
+
+	/**
+	 * Creates the Minecraft canvas with.
+	 * player count, player names and server status.
+	 * @param lobbyName
+	 * @param lobbyPlayers
+	 * @param survivalName
+	 * @param survivalPlayers
+	 * @param creativeName
+	 * @param creativePlayers
+	 * @param minigamesName
+	 * @param minigamesPlayers
+	 * @return Promise<Buffer> - The embed
+	 */
+	async createMcCanvas(
+		lobbyName: string, lobbyPlayers: Array<any>,
+		survivalName: string, survivalPlayers: Array<any>,
+		creativeName: string, creativePlayers: Array<any>,
+		minigamesName: string, minigamesPlayers: Array<any>
+	): Promise<Buffer> {
+		let totalOnlinePlayers = lobbyPlayers.concat(survivalPlayers, creativePlayers, minigamesPlayers);
+		let defaultHeight = 325;
+
+		for (let i: number = 0; i < totalOnlinePlayers.length; i++) {
+			defaultHeight += 25
+		}
+
+		const width: number = 300;
+		const height: number = defaultHeight;
+		const builder = new CanvasBuilder(width, height);
+
+		await builder.setBackground(
+			path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg')
+		);
+
+		const textColor = '#ffffff';
+		const titleFont = 'bold 24px sans-serif';
+		const descriptionFont = '16px sans-serif';
+		const serverFont = 'bold 18px sans-serif';
+		const playersFont = '16px sans-serif';
+
+		builder.drawText('Minecraft', 20, 30, titleFont, textColor);
+		builder.drawText('Zie wie online is op onze servers!', 20, 60, descriptionFont, textColor);
+
+		const serverData = [
+			{ name: lobbyName, players: lobbyPlayers },
+			{ name: survivalName, players: survivalPlayers },
+			{ name: creativeName, players: creativePlayers },
+			{ name: minigamesName, players: minigamesPlayers },
+		];
+
+		let yOffset = 90;
+		serverData.forEach(server => {
+			yOffset += 30;
+			builder.drawText(server.name, 20, yOffset, serverFont, textColor);
+			yOffset += 25;
+
+			if (server.players.length === 0) {
+				builder.drawText('Geen spelers online.', 20, yOffset, playersFont, '#99aab5');
+			} else {
+				server.players.forEach(player => {
+					builder.drawText(player.trim(), 20, yOffset, playersFont, '#99aab5');
+					yOffset += 20;
+				});
+			}
+
+			yOffset += 5;
+		});
+
+		return builder.getBuffer();
+	}
+
+	/**
+	 * Creates the server title count and fills in the player count.
+	 * Sets it to 0 if server is offline. Else fill in the current player count.
+	 * @param server
+	 * @return string - Server count
+	 */
+	getServerName(server: any): string {
+		return `[${server.status === 'fulfilled' || undefined ? server.value.players.online : '0'}/10]`
+	}
+
+	/**
+	 * Makes the value of players for a server.
+	 * @param server any
+	 * @return Array<any> - Player names or Server is offline
+	 */
+	getPlayerValueCanvas(server: any): Array<any> {
+		return server.status === 'fulfilled'
+			? server.value.players.online
+				? server.value.players.sample.map((p: any) => p.name)
+				: []
+			: ['Server is offline'];
 	}
 }
