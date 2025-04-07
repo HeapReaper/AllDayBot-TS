@@ -62,9 +62,9 @@ export default class LevelingTasks {
             .select('leveling')
             .columns(['xp', 'level'])
             .where({'user_id': `${userId}`})
-            .execute();
+            .first();
 
-        if (user[0] == undefined) {
+        if (user == undefined) {
             await QueryBuilder
                 .insert('leveling')
                 .values({user_id: userId, xp: xpToAdd})
@@ -72,9 +72,9 @@ export default class LevelingTasks {
             return;
         }
 
-        const newXp: number = user[0].xp + xpToAdd;
+        const newXp: number = user.xp + xpToAdd;
 
-        if (newXp < Math.floor(8.196 * Math.pow(user[0].level + 1, 2.65) + 200)) {
+        if (newXp < Math.floor(8.196 * Math.pow(user.level + 1, 2.65) + 200)) {
             await QueryBuilder.update('leveling')
                 .set({xp: newXp})
                 .where({user_id: userId})
@@ -83,7 +83,7 @@ export default class LevelingTasks {
         }
 
         await QueryBuilder.update('leveling')
-            .set({xp: newXp, level: user[0].level + 1})
+            .set({xp: newXp, level: user.level + 1})
             .where({user_id: userId})
             .execute();
     }
