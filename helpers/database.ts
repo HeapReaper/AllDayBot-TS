@@ -15,7 +15,7 @@ import {Logging} from '@helpers/logging';
  * @method where - {key: value}
  * @method limit - integer
  * @method execute -
- * @returns
+ * @returns - wop
  */
 class QueryBuilder {
     static connection: Connection;
