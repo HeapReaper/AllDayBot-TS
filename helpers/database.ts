@@ -29,6 +29,7 @@ class QueryBuilder {
     private firstMode: Boolean = false;
     private updateValues: Record<string, any> = {};
     private insertValues: Record<string, any> = {};
+    private countBoolean: Boolean = false;
 
     static init() {
         QueryBuilder.connection = mysql.createConnection({
@@ -108,10 +109,22 @@ class QueryBuilder {
         return this;
     }
 
+    count(): QueryBuilder {
+        this.countBoolean = true;
+        return this;
+    }
+
     private async executeSelect(): Promise<any> {
         if (!QueryBuilder.connection) QueryBuilder.connect();
 
-        const columnClause = this.columnsArray.join(', ');
+        let countString: string = '';
+        this.countBoolean ? countString = 'COUNT(*) ' : countString = '';
+
+        let columnClause = this.columnsArray.join(', ');
+
+        if (countString && columnClause[0] === '*') {
+            columnClause = '';
+        }
 
         let whereString: string = '';
         const whereValues: any[] = []
@@ -130,7 +143,7 @@ class QueryBuilder {
         let limitString: string = '';
         this.limitNumber !== null ? limitString = ` LIMIT ${this.limitNumber}` : limitString = ''
 
-        const sql = `SELECT ${columnClause} FROM ${this.tableName}${whereString}${orderByString}${limitString}`;
+        const sql = `SELECT ${countString}${columnClause} FROM ${this.tableName}${whereString}${orderByString}${limitString}`;
 
         Logging.debug(`Selecting: ${sql}`);
 
@@ -141,7 +154,10 @@ class QueryBuilder {
                 // @ts-ignore
                 if (this.firstMode) return resolve(res[0]);
 
-                resolve(res);
+                // @ts-ignore
+                if (this.countBoolean) return resolve(res[0]['COUNT(*)']);
+
+                return resolve(res);
             })
         })
     }
@@ -240,5 +256,11 @@ class QueryBuilder {
         }
     }
 }
+
+// await QueryBuilder.insert('leveling').values({ user_id: '12345', xp: 0, level: 1 }).execute();
+
+// await QueryBuilder.update('leveling').set({ xp: 100 }).where({ id: 1 }).execute();
+
+// await QueryBuilder.delete('leveling').where({ id: 1 }).execute();
 
 export default QueryBuilder;
