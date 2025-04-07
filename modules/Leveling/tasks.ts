@@ -1,12 +1,10 @@
 import { Logging } from '@helpers/logging.ts';
 import LevelingEvents from './events.ts';
-import Database from '@helpers/database';
+import QueryBuilder from '@helpers/database';
 import { Client, ChannelType, VoiceChannel, Guild } from 'discord.js';
-import {getEnv} from "@helpers/env.ts";
 
 export default class LevelingTasks {
     private client: Client;
-    private static taskRunning: boolean = false;
 
     // @ts-ignore
     constructor(client: Client) {
@@ -37,9 +35,7 @@ export default class LevelingTasks {
 
             if (!guild) return;
 
-            // Fetch channels and filter voice channels
             const channels = await guild.channels.fetch();
-
             const voiceChannels = [...channels.filter(channel => channel?.type === ChannelType.GuildVoice).values()] as VoiceChannel[];
 
             for (const voiceChannel of voiceChannels) {
@@ -62,24 +58,41 @@ export default class LevelingTasks {
     }
 
     async addXpToMember(userId: String, xpToAdd: number) {
-        const result: any = await Database.select('leveling', ['xp', 'level'], {user_id: userId});
-        if (result.length == 0) {
-            await Database.insert('leveling', {'user_id': userId, 'xp': xpToAdd});
+        const user = await QueryBuilder
+            .select('leveling')
+            .columns(['xp', 'level'])
+            .where({'user_id': `${userId}`})
+            .execute();
+
+        //const result: any = await Database.select('leveling', ['xp', 'level'], {user_id: userId});
+        if (user[0] == undefined) {
+            await QueryBuilder
+                .insert('leveling')
+                .values({user_id: userId, xp: xpToAdd})
+                .execute();
+            //await Database.insert('leveling', {'user_id': userId, 'xp': xpToAdd});
             return;
         }
 
-        const newXp: number = result[0].xp + xpToAdd;
+        const newXp: number = user[0].xp + xpToAdd;
 
-        if (newXp < Math.floor(8.196 * Math.pow(result[0].level + 1, 2.65) + 200)) {
-            await Database.update('leveling', {xp: newXp}, {user_id: userId});
+        if (newXp < Math.floor(8.196 * Math.pow(user[0].level + 1, 2.65) + 200)) {
+            await QueryBuilder.update('leveling')
+                .set({xp: newXp})
+                .where({user_id: userId})
+                .execute();
+            //await Database.update('leveling', {xp: newXp}, {user_id: userId});
             return;
         }
 
-        await Database.update('leveling', {xp: newXp, level: result[0].level + 1}, {user_id: userId});
+        await QueryBuilder.update('leveling')
+            .set({xp: newXp, level: user[0].level + 1})
+            .where({user_id: userId})
+            .execute();
+        //await Database.update('leveling', {xp: newXp, level: result[0].level + 1}, {user_id: userId});
     }
 
-    // Returns a random number between min and max
-    generateRandomNumber(min: number, max: number): Number {
+    generateRandomNumber(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 }
