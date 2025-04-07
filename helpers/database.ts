@@ -242,6 +242,15 @@ class QueryBuilder {
         })
     }
 
+    async first(): Promise<any> {
+        this.firstMode = true;
+        return await this.executeSelect();
+    }
+
+    async get(): Promise<any> {
+        return await this.executeSelect();
+    }
+
     // @ts-ignore
     async execute(): Promise<any[]> {
         switch (this.currentMode) {
