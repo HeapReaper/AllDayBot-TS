@@ -1,6 +1,6 @@
 import { Client, Interaction } from 'discord.js';
 import { Logging } from '@helpers/logging.ts';
-import Database from '@helpers/database';
+import QueryBuilder from '@helpers/database';
 import { Color } from '@enums/colorEnum.ts';
 import { CanvasBuilder } from '@helpers/canvasBuilder';
 
@@ -39,7 +39,7 @@ export default class CommandsListener {
 
     async handleScoreBoard(interaction: Interaction): Promise<void> {
         try {
-            const users: any[] = await Database.select('leveling');
+            const users: any[] = await QueryBuilder.select('leveling').execute();
             let canvasHeight: number = 150;
             let canvasWidth: number = 225;
 
