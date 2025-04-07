@@ -8,6 +8,12 @@ export const commands = [
             add
             .setName('scorebord')
             .setDescription('Zie onze scorebord!')
+            .addIntegerOption(option =>
+                option
+                .setName('pagina')
+                .setDescription('Ga naar een specifieke pagina')
+                .setRequired(true)
+            ),
         )
         .addSubcommand(add =>
             add
