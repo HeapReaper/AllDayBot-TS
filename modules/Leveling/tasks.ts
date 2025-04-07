@@ -64,13 +64,11 @@ export default class LevelingTasks {
             .where({'user_id': `${userId}`})
             .execute();
 
-        //const result: any = await Database.select('leveling', ['xp', 'level'], {user_id: userId});
         if (user[0] == undefined) {
             await QueryBuilder
                 .insert('leveling')
                 .values({user_id: userId, xp: xpToAdd})
                 .execute();
-            //await Database.insert('leveling', {'user_id': userId, 'xp': xpToAdd});
             return;
         }
 
@@ -81,7 +79,6 @@ export default class LevelingTasks {
                 .set({xp: newXp})
                 .where({user_id: userId})
                 .execute();
-            //await Database.update('leveling', {xp: newXp}, {user_id: userId});
             return;
         }
 
@@ -89,7 +86,6 @@ export default class LevelingTasks {
             .set({xp: newXp, level: user[0].level + 1})
             .where({user_id: userId})
             .execute();
-        //await Database.update('leveling', {xp: newXp, level: result[0].level + 1}, {user_id: userId});
     }
 
     generateRandomNumber(min: number, max: number): number {
