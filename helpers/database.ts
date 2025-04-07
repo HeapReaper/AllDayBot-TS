@@ -1,105 +1,135 @@
-import {Logging} from './logging.ts';
-import { getEnv } from '@helpers/env.ts';
+import { getEnv } from '@helpers/env';
 import mysql from 'mysql2';
 import { Connection } from 'mysql2/typings/mysql/lib/Connection';
+import {Logging} from '@helpers/logging';
 
-class Database {
+/**
+ * Database abstraction.
+ * @method connect - not needed.
+ * @method close - not needed.
+ * @method select - table name string.
+ * @method update - table name string.
+ * @method delete - table name string.
+ * @method insert - table name string.
+ * @method columns - ['column_name']
+ * @method where - {key: value}
+ * @method limit - integer
+ * @method execute -
+ * @returns - wop
+ */
+class QueryBuilder {
     static connection: Connection;
+    private tableName: string | undefined;
+    private columnsArray: string[] = ['*'];
+    private whereClause: {} = {};
+    private orderByColumnName: string | null = null;
+    private orderByDirection: 'ASC' | 'DESC' = 'DESC';
+    private limitNumber: number | null = null;
+    private currentMode: string = '';
+    private firstMode: Boolean = false;
+    private updateValues: Record<string, any> = {};
+    private insertValues: Record<string, any> = {};
+    private countBoolean: Boolean = false;
 
     static init() {
-        if (!Database.connection) {
-            // @ts-ignore
-            Database.connection = mysql.createConnection({
-                host: getEnv('DATABASE_HOST'),
-                user: getEnv('DATABASE_USER'),
-                password: getEnv('DATABASE_PASSWORD'),
-                database: getEnv('DATABASE_NAME'),
-            })
-        }
-    }
-
-    /**
-     * Opens the database connection
-     *
-     * @returns {void} - Returns nothing.
-     */
-    static connect(): void {
-        if (!Database.connection) {
-            Database.init();
-        }
-
-        Database.connection.connect((err) => {
-            if (!err) {
-                Logging.debug('Connected to database');
-                return;
-            }
-
-            Logging.error(`Database connection error inside helpers/database.js: ${err}`);
-        })
-    }
-
-    /**
-     * Executes an query
-     *
-     * @param {string} sql - The query to execute.
-     * @param {Array} params - Optional params.
-     * @returns any - Returns result.
-     */
-    static query(sql: string, params: Array<any> = []): any {
-        if (!Database.connection) Database.connect();
-
-        return new Promise((resolve, reject) => {
-            if (!Database.connection) {
-                Database.init();
-            }
-
-            Database.connection.query(sql, params, (err, result) => {
-                if (!err) {
-                    resolve(result);
-                }
-                reject(err);
-            })
-        })
-    }
-
-    // @ts-nocheck
-    /**
-     * Closed the database connection.
-     *
-     * @returns void - Returns nothing.
-     */
-    static close(): void {
-        if (!Database.connection) {
-            return
-        }
-
-        Database.connection.end((error: any) => {
-            if (!error) {
-                Logging.debug('Database connection closed');
-                return;
-            }
-            Logging.error(`Error closing the database connection: ${error}`)
+        QueryBuilder.connection = mysql.createConnection({
+            host: <string>getEnv('DATABASE_HOST'),
+            user: <string>getEnv('DATABASE_USER'),
+            password: <string>getEnv('DATABASE_PASSWORD'),
+            database: <string>getEnv('DATABASE_NAME'),
         });
     }
 
-    /**
-     * Retrieves item(s) from the database.
-     *
-     * @param {string} table - Table name
-     * @param {Array} columns - Array of column names. Defaults to "*" if empty.
-     * @param {Object} conditions - Object with column-value pairs to filter results.
-     * @returns Promise - Resolve to an array of results.
-     */
-    static async select(table: string, columns: string[] = ["*"], conditions: Record<string, any> = {}): Promise<any[]> {
-        if (!Database.connection) Database.connect();
+    static connect(): void {
+        if (QueryBuilder.connection) return;
+        QueryBuilder.init();
+    }
 
-        const columnClause = columns.length > 0 ? columns.join(", ") : "*";
+    static close(): void {
+        if (!QueryBuilder.connection) return;
+        QueryBuilder.connection.end();
+    }
 
-        let whereClause: string = '';
-        const whereValues: any[] = [];
+    static select(tableName: string): QueryBuilder {
+        const builder = new QueryBuilder();
+        builder.tableName = tableName;
+        builder.currentMode = 'select';
+        return builder;
+    }
 
-        if (Object.keys(conditions).length > 0) {
-            whereClause = ' WHERE ' + Object.entries(conditions)
+    static update(tableName: string) {
+        const builder = new QueryBuilder();
+        builder.tableName = tableName;
+        builder.currentMode = 'update';
+        return builder;
+    }
+
+    static delete(tableName: string) {
+        const builder = new QueryBuilder();
+        builder.tableName = tableName;
+        builder.currentMode = 'delete';
+        return builder;
+    }
+
+    static insert(tableName: string) {
+        const builder = new QueryBuilder();
+        builder.tableName = tableName;
+        builder.currentMode = 'insert';
+        return builder;
+    }
+
+    columns(columns: string[]): QueryBuilder {
+        this.columnsArray = columns;
+        return this;
+    }
+
+    where(conditions: Record<string, any>): QueryBuilder {
+        this.whereClause = conditions;
+        return this;
+    }
+
+    limit(limit: number): QueryBuilder {
+        this.limitNumber = limit;
+        return this;
+    }
+
+    orderBy(column: string, direction: 'ASC' | 'DESC' = 'DESC'): QueryBuilder {
+        this.orderByColumnName = column;
+        this.orderByDirection = direction;
+        return this;
+    }
+
+    set(values: Record<string, any>): QueryBuilder {
+        this.updateValues = values;
+        return this;
+    }
+
+    values(values: Record<string, any>): QueryBuilder {
+        this.insertValues = values;
+        return this;
+    }
+
+    count(): QueryBuilder {
+        this.countBoolean = true;
+        return this;
+    }
+
+    private async executeSelect(): Promise<any> {
+        if (!QueryBuilder.connection) QueryBuilder.connect();
+
+        let countString: string = '';
+        this.countBoolean ? countString = 'COUNT(*) ' : countString = '';
+
+        let columnClause = this.columnsArray.join(', ');
+
+        if (countString && columnClause[0] === '*') {
+            columnClause = '';
+        }
+
+        let whereString: string = '';
+        const whereValues: any[] = []
+        if (Object.keys(this.whereClause).length > 0) {
+            whereString = ' WHERE ' + Object.entries(this.whereClause)
                 .map(([key, value]) => {
                     whereValues.push(value);
                     return `${key} = ?`;
@@ -107,85 +137,130 @@ class Database {
                 .join(' AND ');
         }
 
-        const sql = `SELECT ${columnClause} FROM ${table}${whereClause}`;
+        let orderByString: string = '';
+        if (this.orderByColumnName !== null) orderByString = ` ORDER BY ${this.orderByColumnName} ${this.orderByDirection}`;
 
-        Logging.debug(`SQL: ${sql}`);
+        let limitString: string = '';
+        this.limitNumber !== null ? limitString = ` LIMIT ${this.limitNumber}` : limitString = ''
 
-        return await Database.query(sql, whereValues);
-    }
+        const sql = `SELECT ${countString}${columnClause} FROM ${this.tableName}${whereString}${orderByString}${limitString}`;
 
-    /**
-     * Delete item(s) from the database.
-     *
-     * @param {string} table - The table name.
-     * @param {Object} conditions - Object with column-value pairs to find specific entry to delete.
-     * @returns Promise<void> - Returns Nothing.
-     */
-    static async delete(table: string, conditions: Record<string, any> = {}): Promise<void> {
-        if (!Database.connection) Database.connect();
+        Logging.debug(`Selecting: ${sql}`);
 
-        const whereClause = Object.entries(conditions)
-            .map(([key, value]) => `${key} = '${value}'`)
-            .join(', ');
+        return new Promise((resolve, reject) => {
+            QueryBuilder.connection.query(sql, whereValues, (err, res) => {
+                if (err) return reject(err);
 
-        Logging.debug(`DELETE FROM ${table} WHERE ${whereClause}`);
-        await Database.query(`DELETE FROM ${table} WHERE ${whereClause}`);
-    }
+                // @ts-ignore
+                if (this.firstMode) return resolve(res[0]);
 
-    /**
-     * Updates item(s) in the database.
-     *
-     * @param {string} table - The table name.
-     * @param {Object} values - Object with key-value pairs.
-     * @param {Object} conditions - Object with key-value pairs.
-     * @returns Promise<void> -- Returns nothing.
-     */
-    static async update(table: string, values: Record<string, any>, conditions: Record<string, any>): Promise<void> {
-        if (!Database.connection) Database.connect();
+                // @ts-ignore
+                if (this.countBoolean) return resolve(res[0]['COUNT(*)']);
 
-        const setClause: string = Object.entries(values)
-            .map(([key, value]) => `${key} = ${typeof value === 'number' || value === 'NOW()' ? value : `'${value}'`}`)
-            .join(', ');
-
-        const whereClause = Object.entries(conditions)
-            .map(([key, value]) => `${key} = '${value}'`)
-            .join(', ');
-
-        Logging.debug(`UPDATE ${table} SET ${setClause} WHERE ${whereClause}`);
-        if (!Database.query(`UPDATE ${table} SET ${setClause} WHERE ${whereClause}`)) {
-            Logging.error(`Error updating table: ${table}`);
-            return;
-        }
-    }
-
-    /**
-     * Inserts item(s) into the database.
-     *
-     * @param {string} table - The table name.
-     * @param {Object} values - Object with column-value pairs to insert.
-     * @returns Promise<void> - Returns nothing.
-     */
-    static async insert(table: string, values: Record<string, any>): Promise<void> {
-        if (!Database.connection) Database.connect();
-
-        const columns: string = Object.keys(values).join(', ');
-
-        const valuePlaceholders = Object.values(values)
-            .map(value => {
-                switch (value) {
-                    case typeof value === 'number':
-                        return value;
-                    case typeof value === 'string':
-                        return value.toUpperCase() === 'NOW()' ? value : `'${value.replace(/'/g, "''")}'`;
-                    default:
-                        return `'${String(value).replace(/'/g, "''")}'`;
-                }
+                return resolve(res);
             })
+        })
+    }
+
+    private async executeUpdate(): Promise<any> {
+        if (!QueryBuilder.connection) QueryBuilder.connect();
+
+        let updateString = ' SET ' + Object.entries(this.updateValues)
+            .map(([key, value]) => `${key} = ?`)
             .join(', ');
 
-        Logging.debug(`INSERT INTO ${table} (${columns}) VALUES (${valuePlaceholders})`);
-        await Database.query(`INSERT INTO ${table} (${columns}) VALUES (${valuePlaceholders})`);
+        let whereString = '';
+        const whereValues: any[] = Object.values(this.updateValues);
+
+        if (Object.keys(this.whereClause).length > 0) {
+            whereString = ' WHERE ' + Object.entries(this.whereClause)
+                .map(([key, value]) => {
+                    whereValues.push(value);
+                    return `${key} = ?`;
+                })
+                .join(' AND ');
+        }
+
+
+        const sql = `UPDATE ${this.tableName}${updateString}${whereString}`;
+
+        Logging.debug(`Updating: ${sql}`);
+
+        return new Promise((resolve, reject) => {
+            QueryBuilder.connection.query(sql, whereValues, (err, res) => {
+                if (err) return reject(err);
+
+                resolve(res);
+            })
+        })
+    }
+
+    private async executeDelete(): Promise<any> {
+        if (!QueryBuilder.connection) QueryBuilder.connect();
+
+        let whereString: string = '';
+        const whereValues: any[] = []
+        if (Object.keys(this.whereClause).length > 0) {
+            whereString = ' WHERE ' + Object.entries(this.whereClause)
+                .map(([key, value]) => {
+                    whereValues.push(value);
+                    return `${key} = ?`;
+                })
+                .join(' AND ');
+        }
+
+        const sql = `DELETE FROM ${this.tableName}${whereString}`;
+
+        Logging.debug(`Deleting: ${sql}`);
+
+        return new Promise((resolve, reject) => {
+            QueryBuilder.connection.query(sql, whereValues, (err, res) => {
+                if (err) return reject(err);
+
+                resolve(res);
+            })
+        })
+    }
+
+    private async executeInsert(): Promise<any> {
+        if (!QueryBuilder.connection) QueryBuilder.connect();
+
+        const columns = Object.keys(this.insertValues).join(', ');
+        const placeholders = Object.values(this.insertValues).map(() => '?').join(', ');
+        const values = Object.values(this.insertValues);
+
+        const sql = `INSERT INTO ${this.tableName} (${columns}) VALUES (${placeholders})`;
+
+        Logging.debug(`Inserting: ${sql}`);
+
+        return new Promise((resolve, reject) => {
+            QueryBuilder.connection.query(sql, values, (err, res) => {
+                if (err) return reject(err);
+
+                resolve(res);
+            })
+        })
+    }
+
+    // @ts-ignore
+    async execute(): Promise<any[]> {
+        switch (this.currentMode) {
+            case 'select':
+                return await this.executeSelect();
+            case 'update':
+                return await this.executeUpdate();
+            case 'delete':
+                return await this.executeDelete();
+            case 'insert':
+                return await this.executeInsert();
+        }
     }
 }
 
-export default Database;
+// await QueryBuilder.insert('leveling').values({ user_id: '12345', xp: 0, level: 1 }).execute();
+
+// await QueryBuilder.update('leveling').set({ xp: 100 }).where({ id: 1 }).execute();
+
+// await QueryBuilder.delete('leveling').where({ id: 1 }).execute();
+
+export default QueryBuilder;

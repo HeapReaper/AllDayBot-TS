@@ -3,7 +3,7 @@ import { Client,
 		 Events,
 		 ChatInputCommandInteraction,
 } from 'discord.js';
-import Database from '@helpers/database';
+import QueryBuilder from '@helpers/database';
 import { Logging } from '@helpers/logging';
 import { getEnv } from '@helpers/env.ts';
 import util, { JavaStatusResponse } from 'minecraft-server-util';
@@ -67,8 +67,12 @@ export default class CommandsListener {
 
 		try {
 			const resp: Response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${options.getString('gebruikersnaam')}`)
-			const minecraftUsernameInDB = await Database.select('minecraft', ['user_id', 'minecraft_username'], {user_id: interaction.user.id});
-			
+			const mcUsernameInDbCount: any = await QueryBuilder
+				.select('minecraft')
+				.where({user_id: interaction.user.id})
+				.count()
+				.execute()
+
 			if (resp.status === 404 ) {
 				Logging.warn(`I didn't found Minecraft username ${options.getString('gebruikersnaam')}`);
 
@@ -81,17 +85,23 @@ export default class CommandsListener {
 				return
 			}
 			
-			if (minecraftUsernameInDB.length < 1) {
-				await Database.insert('minecraft', { user_id: interaction.user.id, minecraft_username: options.getString('gebruikersnaam') });
+			// @ts-ignore
+			if (mcUsernameInDbCount === 0) {
+				await QueryBuilder
+					.insert('minecraft')
+					.values({user_id: interaction.user.id, minecraft_username: options.getString('gebruikersnaam')})
+					.execute();
 
 				builder.drawText('Je gebruikersnaam is toegevoegd!', 20, 60, descriptionFont, textColor)
 				await interaction.reply({files: [builder.getBuffer()]})
 			} else {
-				await Database.update('minecraft', {user_id: interaction.user.id}, {minecraft: options.getString('gebruikersnaam')});
+				await QueryBuilder.update('minecraft')
+					.set({minecraft_username: options.getString('gebruikersnaam')})
+					.where({user_id: interaction.user.id})
+					.execute();
 
 				builder.drawText('Je gebruikersnaam is aangepast!', 20, 60, descriptionFont, textColor)
 				await interaction.reply({files: [builder.getBuffer()]})
-
 			}
 			
 			Logging.info(`Added the Minecraft username ${options.getString('gebruikersnaam')} to the database.`);
@@ -122,7 +132,10 @@ export default class CommandsListener {
 			builder.drawText('Minecraft', 20, 30, titleFont, textColor);
 			builder.drawText('Je gebruikersnaam is verwijderd\nuit de whitelist!', 20, 60, descriptionFont, textColor)
 
-			await Database.delete('minecraft', {user_id: interaction.user.id});
+			await QueryBuilder
+				.delete('minecraft')
+				.where({user_id: interaction.user.id})
+				.execute();
 			await interaction.reply({files: [builder.getBuffer()]});
 			Logging.info(`A minecraft username has been deleted successfully.`);
 		} catch (error) {
