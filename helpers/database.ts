@@ -96,14 +96,22 @@ class Database {
         const columnClause = columns.length > 0 ? columns.join(", ") : "*";
 
         let whereClause: string = '';
+        const whereValues: any[] = [];
+
         if (Object.keys(conditions).length > 0) {
             whereClause = ' WHERE ' + Object.entries(conditions)
-                .map(([key, value]) => `${key} = ${typeof value === 'number' ? value : `'${value}'`}`)
+                .map(([key, value]) => {
+                    whereValues.push(value);
+                    return `${key} = ?`;
+                })
                 .join(' AND ');
         }
 
-        Logging.debug(`SELECT ${columnClause} FROM ${table}${whereClause}`);
-        return await Database.query(`SELECT ${columnClause} FROM ${table}${whereClause}`);
+        const sql = `SELECT ${columnClause} FROM ${table}${whereClause}`;
+
+        Logging.debug(`SQL: ${sql}`);
+
+        return await Database.query(sql, whereValues);
     }
 
     /**

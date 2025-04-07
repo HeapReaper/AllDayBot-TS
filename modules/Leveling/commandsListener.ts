@@ -1,8 +1,11 @@
 import { Client, Interaction } from 'discord.js';
 import { Logging } from '@helpers/logging.ts';
 import Database from '@helpers/database';
-import CanvasBuilder from '@helpers/canvasBuilder.ts';
 import { Color } from '@enums/colorEnum.ts';
+import { CanvasBuilder } from '@helpers/canvasBuilder';
+
+import path from "path";
+import {Canvas} from "canvas";
 
 export default class CommandsListener {
     private client: Client;
@@ -17,6 +20,7 @@ export default class CommandsListener {
             if (!interaction.isCommand()) return;
 
             const { commandName } = interaction;
+            // @ts-ignore
             const subCommandName: any = interaction.options.getSubcommand();
 
             switch (subCommandName) {
@@ -34,7 +38,58 @@ export default class CommandsListener {
     }
 
     async handleScoreBoard(interaction: Interaction): Promise<void> {
-        //
+        try {
+            const users: any[] = await Database.select('leveling');
+            let canvasHeight: number = 150;
+            let canvasWidth: number = 225;
+
+            for (const user of users) {
+                canvasHeight += 25;
+
+                const userObject = await this.client.users.fetch(user.user_id);
+                if (userObject.displayName.length > 10) {
+                    canvasWidth += (userObject.displayName.length - 4) * 5;
+                }
+            }
+
+            const builder = new CanvasBuilder(canvasWidth, canvasHeight);
+
+            await builder.setBackground(path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg'));
+
+            const textColor = '#ffffff';
+            const titleFont = 'bold 20px sans-serif';
+            const userNameFont = 'bold 15px sans-serif';
+            const descriptionFont = '16px sans-serif';
+            const smallDescriptionFont = '14px sans-serif';
+
+            builder.drawText('XP scorebord', 20, 30, titleFont, textColor);
+            builder.drawText('Pagina 1 van de 10', 20, 50, smallDescriptionFont, textColor);
+
+            let userY: number = 80;
+            let loopIndex: number = 1;
+            for (const user of users) {
+                try {
+                    const userObject = await this.client.users.fetch(user.user_id);
+
+                    builder.drawText(`#${loopIndex} - ${userObject.displayName}`, 20, userY, userNameFont, textColor);
+                } catch (error) {
+                    builder.drawText(`#1 - Onbekend`, 20, userY, userNameFont, textColor);
+                }
+
+                builder.drawText(`Level: ${user.level}`, 20, userY + 20, smallDescriptionFont, textColor);
+                builder.drawText(`XP:     ${user.xp}`, 20, userY + 35, smallDescriptionFont, textColor);
+
+                userY += 60;
+                loopIndex++;
+            }
+
+            // @ts-ignore
+            await interaction.reply({files: [builder.getBuffer()]})
+        } catch (error) {
+            Logging.error(`Something went wrong getting leveling scoreboard: ${error}`);
+            // @ts-ignore
+            await interaction.reply('Er ging iets mis! Het probleem is gerapporteerd aan de developer.');
+        }
     }
 
     async handleLevel(interaction: Interaction): Promise<void> {
@@ -45,7 +100,7 @@ export default class CommandsListener {
 
     }
 
-    createLevelEmbed() {
-
+    async createLevelCanvas(width: number, height: number) {
+        //
     }
 }
