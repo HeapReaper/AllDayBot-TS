@@ -1,6 +1,6 @@
 import { Client, TextChannel } from 'discord.js';
 import { Logging } from '@helpers/logging';
-import Database from '@helpers/database';
+import QueryBuilder from '@helpers/database';
 import { getEnv } from '@helpers/env.ts';
 
 export default class Tasks {
@@ -24,7 +24,7 @@ export default class Tasks {
 				// To prevent spamming
 				this.counter = 1;
 				
-				const birthdays: any[] = await Database.select('birthday');
+				const birthdays: any[] = await QueryBuilder.select('birthdays').get();
 				
 				for (const birthday of birthdays) {
 					const paredBirthday = new Date(Date.parse(birthday.birthdate));
@@ -43,8 +43,6 @@ export default class Tasks {
 			}
 			
 			if (now.getHours() == 10 && now.getMinutes() == 10) this.counter = 0;
-			
-			
 		}, 10000);
 	}
 }

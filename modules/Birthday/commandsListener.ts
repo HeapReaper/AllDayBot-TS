@@ -37,7 +37,7 @@ export default class CommandsListener {
 
 		try {
 			// @ts-ignore
-			if (await QueryBuilder.select('birthday').where({user_id: interaction.user.id}).count().execute() !== 0) {
+			if (await QueryBuilder.select('birthday').where({user_id: interaction.user.id}).count().get() !== 0) {
 				await interaction.reply({content: 'Je hebt jezelf al toegevoegd aan de verjaardag functie!', flags: MessageFlags.Ephemeral});
 				return;
 			}
@@ -70,7 +70,7 @@ export default class CommandsListener {
 
 		try {
 			// @ts-ignore
-			if (await QueryBuilder.select('birthday').where({user_id: interaction.user.id}).count().execute() === 0) {
+			if (await QueryBuilder.select('birthday').where({user_id: interaction.user.id}).count().get() === 0) {
 				await interaction.reply({content: 'Je hebt geen verjaardag in AllDayBot staan!', flags: MessageFlags.Ephemeral});
 				return;
 			}
