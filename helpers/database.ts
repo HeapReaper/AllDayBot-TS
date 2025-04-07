@@ -4,17 +4,17 @@ import { Connection } from 'mysql2/typings/mysql/lib/Connection';
 import {Logging} from '@helpers/logging';
 
 /**
- * Database abstraction
- * @method connect
- * @method close
- * @method select
- * @method update
- * @method delete
- * @method insert
- * @method columns
- * @method where
- * @method limit
- * @method get
+ * Database abstraction.
+ * @method connect - not needed.
+ * @method close - not needed.
+ * @method select - table name string.
+ * @method update - table name string.
+ * @method delete - table name string.
+ * @method insert - table name string.
+ * @method columns - ['column_name']
+ * @method where - {key: value}
+ * @method limit - integer
+ * @method execute -
  * @returns
  */
 class QueryBuilder {
@@ -239,14 +239,6 @@ class QueryBuilder {
                 return await this.executeInsert();
         }
     }
-
-    // async first(): Promise<any> {
-    //     this.firstMode = true;
-    //     switch (this.currentMode) {
-    //         case 'select':
-    //             return await this.executeSelect();
-    //     }
-    // }
 }
 
 export default QueryBuilder;
