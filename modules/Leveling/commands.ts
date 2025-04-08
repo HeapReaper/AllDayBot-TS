@@ -17,7 +17,7 @@ export const commands = [
         )
         .addSubcommand(add =>
             add
-            .setName('level')
+            .setName('huidig')
             .setDescription('Zie je huidige level')
         )
         .addSubcommand(add =>

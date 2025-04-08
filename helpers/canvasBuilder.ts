@@ -20,6 +20,12 @@ export class CanvasBuilder {
         this.ctx.drawImage(backgroundImage, 0, 0, this.canvas.width, this.canvas.height);
     }
 
+    async drawImg(imageUrl: string, x: number, y: number, width: number, height: number): Promise<void> {
+        const img: Image = await loadImage(imageUrl);
+        this.ctx.drawImage(img, x, y, width, height);
+
+    }
+
     /**
      * Draw rect.
      *
