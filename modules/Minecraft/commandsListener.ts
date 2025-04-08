@@ -57,7 +57,7 @@ export default class CommandsListener {
 
 		const builder = new CanvasBuilder(355, 80);
 
-		await builder.setBackground(path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg'));
+		await builder.setFixedBackground(path.resolve(__dirname, '..', '..' , 'src', 'media', 'mc.jpg'), 420, 760);
 
 		const textColor = '#ffffff';
 		const titleFont = 'bold 24px sans-serif';
@@ -123,7 +123,7 @@ export default class CommandsListener {
 		try {
 			const builder = new CanvasBuilder(355, 100);
 
-			await builder.setBackground(path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg'));
+			await builder.setFixedBackground(path.resolve(__dirname, '..', '..' , 'src', 'media', 'mc.jpg'), 420, 760);
 
 			const textColor = '#ffffff';
 			const titleFont = 'bold 24px sans-serif';
@@ -172,7 +172,7 @@ export default class CommandsListener {
 			await interaction.reply({files: [canvasBuffer]});
 		} catch (error) {
 			await interaction.reply('Er ging iets mis! Probleem is gerapporteerd aan de developer.');
-			Logging.error(`Error getting in Minecraft whitelist delete command listener: ${error}`);
+			Logging.error(`Error getting in Minecraft getOnlineUsers command listener: ${error}`);
 		}
 	}
 
@@ -202,11 +202,11 @@ export default class CommandsListener {
 			defaultHeight += 25
 		}
 
-		const width: number = 300;
-		const height: number = defaultHeight;
-		const builder = new CanvasBuilder(width, height);
+		const builder = new CanvasBuilder(300, defaultHeight);
 
-		await builder.setBackground(path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg'));
+		await builder.setFixedBackground(path.resolve(__dirname, '..', '..' , 'src', 'media', 'mc.jpg'), 420, 760);
+		await builder.drawImg(path.resolve(__dirname, '..', '..', 'src', 'media', 'adtg.png'), 170, 4, 120, 120)
+
 
 		const textColor = '#ffffff';
 		const titleFont = 'bold 24px sans-serif';
@@ -215,7 +215,7 @@ export default class CommandsListener {
 		const playersFont = '16px sans-serif';
 
 		builder.drawText('Minecraft', 20, 30, titleFont, textColor);
-		builder.drawText('Zie wie online is op onze servers!', 20, 60, descriptionFont, textColor);
+		builder.drawText('Zie wie online is!', 20, 60, descriptionFont, textColor);
 
 		const serverData = [
 			{ name: lobbyName, players: lobbyPlayers },
