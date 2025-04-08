@@ -26,6 +26,7 @@ export default class LevelingEvents {
     }
 
     onMemberLeaveEvent(): void {
+        // @ts-ignore
         this.client.on(discordEvents.GuildMemberRemove, async (member: GuildMember): Promise<void> => {
             try {
                 await QueryBuilder
