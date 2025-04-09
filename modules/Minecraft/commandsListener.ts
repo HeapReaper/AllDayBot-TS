@@ -66,22 +66,26 @@ export default class CommandsListener {
 		builder.drawText('Minecraft', 20, 30, titleFont, textColor);
 
 		try {
-			const resp: Response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${options.getString('gebruikersnaam')}`)
+			const mojangRequest: Response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${options.getString('gebruikersnaam')}`)
 			const mcUsernameInDbCount: any = await QueryBuilder
 				.select('minecraft')
 				.where({user_id: interaction.user.id})
 				.count()
 				.execute()
 
-			if (resp.status === 404 ) {
+			const mojangData = await mojangRequest.json();
+
+
+			if (mojangRequest.status === 404 ) {
 				Logging.warn(`I didn't found Minecraft username ${options.getString('gebruikersnaam')}`);
 
 				builder.drawText('Je gebruikersnaam is niet gevonden!', 20, 60, descriptionFont, textColor)
 				await interaction.reply({files: [builder.getBuffer()]})
 			}
 			
-			if (resp.status !== 200) {
-				Logging.error(`Error inside Minecraft whitelist command listener: ${resp.status}`);
+			if (mojangRequest.status !== 200) {
+				Logging.error(`Error inside Minecraft whitelist command listener: ${mojangRequest.status}`);
+				await interaction.reply(`Er ging iets mis! Probleem is gerapporteerd aan de developer!`);
 				return
 			}
 			
@@ -89,7 +93,7 @@ export default class CommandsListener {
 			if (mcUsernameInDbCount === 0) {
 				await QueryBuilder
 					.insert('minecraft')
-					.values({user_id: interaction.user.id, minecraft_username: options.getString('gebruikersnaam')})
+					.values({user_id: interaction.user.id, minecraft_username: mojangData.name, minecraft_id: mojangData.id})
 					.execute();
 
 				builder.drawText('Je gebruikersnaam is toegevoegd!', 20, 60, descriptionFont, textColor)
@@ -205,8 +209,6 @@ export default class CommandsListener {
 		const builder = new CanvasBuilder(300, defaultHeight);
 
 		await builder.setFixedBackground(path.resolve(__dirname, '..', '..' , 'src', 'media', 'mc.jpg'), 420, 760);
-		await builder.drawImg(path.resolve(__dirname, '..', '..', 'src', 'media', 'adtg.png'), 170, 4, 120, 120)
-
 
 		const textColor = '#ffffff';
 		const titleFont = 'bold 24px sans-serif';
@@ -224,24 +226,23 @@ export default class CommandsListener {
 			{ name: minigamesName, players: minigamesPlayers },
 		];
 
-		let yOffset = 90;
-		serverData.forEach(server => {
+		let yOffset = 65;
+		for (const server of serverData) {
 			yOffset += 30;
 			builder.drawText(server.name, 20, yOffset, serverFont, textColor);
 			yOffset += 25;
 
 			if (server.players.length === 0) {
-				builder.drawText('Geen spelers online.', 20, yOffset, playersFont, '#99aab5');
+				builder.drawText('Geen spelers online.', 20, yOffset, playersFont, textColor);
 			} else {
-				server.players.forEach(player => {
-					builder.drawText(player.trim(), 20, yOffset, playersFont, '#99aab5');
+				for (const player of server.players) {
+					builder.drawText(`${player.trim()}`, 20, yOffset, playersFont, textColor);
 					yOffset += 20;
-				});
+				}
 			}
 
 			yOffset += 5;
-		});
-
+		}
 		return builder.getBuffer();
 	}
 
