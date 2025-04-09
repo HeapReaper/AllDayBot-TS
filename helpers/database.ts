@@ -1,5 +1,5 @@
 import { getEnv } from '@helpers/env';
-import mysql from 'mysql2';
+import mysql, {QueryResult} from 'mysql2';
 import { Connection } from 'mysql2/typings/mysql/lib/Connection';
 import {Logging} from '@helpers/logging';
 
@@ -30,6 +30,7 @@ class QueryBuilder {
     private updateValues: Record<string, any> = {};
     private insertValues: Record<string, any> = {};
     private countBoolean: Boolean = false;
+    private LoggingEnabled: boolean = false;
 
     static init() {
         QueryBuilder.connection = mysql.createConnection({
@@ -76,6 +77,10 @@ class QueryBuilder {
         builder.tableName = tableName;
         builder.currentMode = 'insert';
         return builder;
+    }
+
+    enableLogging(enabled: boolean): void {
+        this.LoggingEnabled = enabled;
     }
 
     columns(columns: string[]): QueryBuilder {
@@ -148,13 +153,11 @@ class QueryBuilder {
         Logging.debug(`Selecting: ${sql}`);
 
         return new Promise((resolve, reject) => {
-            QueryBuilder.connection.query(sql, whereValues, (err, res) => {
+            QueryBuilder.connection.query(sql, whereValues, (err, res: any) => {
                 if (err) return reject(err);
 
-                // @ts-ignore
                 if (this.firstMode) return resolve(res[0]);
 
-                // @ts-ignore
                 if (this.countBoolean) return resolve(res[0]['COUNT(*)']);
 
                 return resolve(res);
