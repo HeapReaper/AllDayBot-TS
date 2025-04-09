@@ -1,11 +1,8 @@
-import { Client, Interaction } from 'discord.js';
+import {ChatInputCommandInteraction, Client, Interaction} from 'discord.js';
 import { Logging } from '@helpers/logging.ts';
 import QueryBuilder from '@helpers/database';
-import { Color } from '@enums/colorEnum.ts';
 import { CanvasBuilder } from '@helpers/canvasBuilder';
-
-import path from "path";
-import {Canvas} from "canvas";
+import path from 'path';
 
 export default class CommandsListener {
     private client: Client;
@@ -25,21 +22,19 @@ export default class CommandsListener {
 
             switch (subCommandName) {
                 case 'scorebord':
-                    await this.handleScoreBoard(interaction);
+                    await this.handleScoreBoard(interaction as ChatInputCommandInteraction);
                     break;
                 case 'huidig':
-                    await this.handleLevel(interaction);
+                    await this.handleLevel(interaction as ChatInputCommandInteraction);
                     break;
                 case 'bereken_level':
-                    await this.handleCalculateLevel(interaction);
+                    await this.handleCalculateLevel(interaction as ChatInputCommandInteraction);
                     break;
             }
         });
     }
 
-    async handleScoreBoard(interaction: Interaction): Promise<void> {
-        if (!interaction.isCommand()) return;
-
+    async handleScoreBoard(interaction: ChatInputCommandInteraction): Promise<void> {
         try {
             const users: any[] = await QueryBuilder
                 .select('leveling')
@@ -96,9 +91,7 @@ export default class CommandsListener {
         }
     }
 
-    async handleLevel(interaction: Interaction): Promise<void> {
-        if (!interaction.isCommand()) return;
-
+    async handleLevel(interaction: ChatInputCommandInteraction): Promise<void> {
         const user: any = await QueryBuilder
             .select('leveling')
             .where({user_id: interaction.user.id})
@@ -107,8 +100,7 @@ export default class CommandsListener {
         await interaction.reply('Still some stuff to do...');
     }
 
-    async handleCalculateLevel(interaction: Interaction): Promise<void> {
-        if (!interaction.isCommand()) return;
+    async handleCalculateLevel(interaction: ChatInputCommandInteraction): Promise<void> {
 
     }
 
