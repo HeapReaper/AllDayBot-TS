@@ -54,7 +54,7 @@ export default class CommandsListener {
 
             const builder = new CanvasBuilder(canvasWidth, canvasHeight);
 
-            await builder.setBackground(path.join(__dirname, '..', '..', 'src/media', 'bg_banner.jpg'));
+            await builder.setBackground();
 
             const textColor = '#ffffff';
             const titleFont = 'bold 20px sans-serif';
