@@ -3,16 +3,19 @@ import chalk from 'chalk';
 import { appendFileSync } from 'fs';
 
 /**
- * Logging messages to the console or file
+ * A helper class for logging messages with different log levels.
+ * Supports logging messages to the terminal and appending them to a log file
+ * based of the environment en log level config
  *
  * @class Logging
  */
 export class Logging {
     /**
-     * Logs info messages to the terminal.
+     * Logs an informational message to the terminal and the log file (if the log level is 'info' or 'all').
+     * The message is prefixed with a timestamp and the log level 'INFO'.
      *
-     * @param {string|number} message - The message that needs to be logged.
-     * @returns void - Returns nothing.
+     * @param {string|number} message - The message to be logged.
+     * @returns {void} - This method does not return a value.
      */
     static info(message: string|number): void {
         const now = new Date();
@@ -29,10 +32,11 @@ export class Logging {
     }
 
     /**
-     * Logs warning messages to the terminal.
+     * Logs a warning message to the terminal and the log file (if the log level is 'warn' or 'all').
+     * The message is prefixed with a timestamp and the log level 'WARN'.
      *
-     * @param {string|number} message - The message that needs to be logged.
-     * @returns void - Returns nothing.
+     * @param {string|number} message - The warning message to be logged.
+     * @returns {void} - This method does not return a value.
      */
     static warn(message: string|number): void {
         const now = new Date();
@@ -49,10 +53,11 @@ export class Logging {
     }
 
     /**
-     * Logs error messages to the terminal.
+     * Logs an error message to the terminal and the log file (if the log level is 'error' or 'all').
+     * The message is prefixed with a timestamp and the log level 'ERROR'.
      *
-     * @param {string|number} message - The message that needs to be logged.
-     * @returns void - Returns nothing.
+     * @param {string|number} message - The error message to be logged.
+     * @returns {void} - This method does not return a value.
      */
     static error(message: string|number): void {
         const now = new Date();
@@ -69,11 +74,12 @@ export class Logging {
     }
 
     /**
-     * Logs debug messages to the terminal.
-     * It display the error message only if environment is set to 'debug'.
+     * Logs a debug message to the terminal and the log file (if the environment is 'debug'
+     * and the log level is 'debug' or 'all'). The message is prefixed with a timestamp and the log level 'DEBUG'.
+     * Debug messages are only logged when the environment variable 'ENVIRONMENT' is set to 'debug'.
      *
-     * @param {string|number} message - The message that needs to be logged.
-     * @returns void - Returns nothing.
+     * @param {string|number} message - The debug message to be logged.
+     * @returns {void} - This method does not return a value.
      */
     static debug(message: string|number): void {
         const now = new Date();
