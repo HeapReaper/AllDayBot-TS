@@ -27,7 +27,7 @@ export default class CommandsListener {
                 case 'scorebord':
                     await this.handleScoreBoard(interaction);
                     break;
-                case 'level':
+                case 'huidig':
                     await this.handleLevel(interaction);
                     break;
                 case 'bereken_level':
@@ -38,8 +38,13 @@ export default class CommandsListener {
     }
 
     async handleScoreBoard(interaction: Interaction): Promise<void> {
+        if (!interaction.isCommand()) return;
+
         try {
-            const users: any[] = await QueryBuilder.select('leveling').execute();
+            const users: any[] = await QueryBuilder
+                .select('leveling')
+                .execute();
+
             let canvasHeight: number = 150;
             let canvasWidth: number = 225;
 
@@ -83,7 +88,6 @@ export default class CommandsListener {
                 loopIndex++;
             }
 
-            // @ts-ignore
             await interaction.reply({files: [builder.getBuffer()]})
         } catch (error) {
             Logging.error(`Something went wrong getting leveling scoreboard: ${error}`);
@@ -93,10 +97,18 @@ export default class CommandsListener {
     }
 
     async handleLevel(interaction: Interaction): Promise<void> {
-        //
+        if (!interaction.isCommand()) return;
+
+        const user: any = await QueryBuilder
+            .select('leveling')
+            .where({user_id: interaction.user.id})
+            .first();
+
+        await interaction.reply('Still some stuff to do...');
     }
 
     async handleCalculateLevel(interaction: Interaction): Promise<void> {
+        if (!interaction.isCommand()) return;
 
     }
 
