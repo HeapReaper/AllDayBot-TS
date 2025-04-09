@@ -79,7 +79,7 @@ class QueryBuilder {
         return builder;
     }
 
-    enableLogging(enabled: boolean): QueryBuilder {
+    logging(enabled: boolean): QueryBuilder {
         this.loggingEnabled = enabled;
         return this;
     }
@@ -157,9 +157,7 @@ class QueryBuilder {
 
         return new Promise((resolve, reject) => {
             QueryBuilder.connection.query(sql, whereValues, (err, res: any) => {
-                const endTime: number = Date.now();
-
-                if (this.loggingEnabled) Logging.info(`Select query duration: ${endTime - startTime}ms`);
+                if (this.loggingEnabled) Logging.info(`Select query duration: ${Date.now() - startTime}ms`);
 
                 if (err) return reject(err);
 
@@ -196,8 +194,12 @@ class QueryBuilder {
 
         Logging.debug(`Updating: ${sql}`);
 
+        const startTime: number = Date.now();
+
         return new Promise((resolve, reject) => {
             QueryBuilder.connection.query(sql, whereValues, (err, res) => {
+                if (this.loggingEnabled) Logging.info(`Update query duration: ${Date.now() - startTime}ms`);
+
                 if (err) return reject(err);
 
                 resolve(res);
@@ -223,8 +225,12 @@ class QueryBuilder {
 
         Logging.debug(`Deleting: ${sql}`);
 
+        const startTime: number = Date.now();
+
         return new Promise((resolve, reject) => {
             QueryBuilder.connection.query(sql, whereValues, (err, res) => {
+                if (this.loggingEnabled) Logging.info(`Delete query duration: ${Date.now() - startTime}ms`);
+
                 if (err) return reject(err);
 
                 resolve(res);
@@ -243,8 +249,12 @@ class QueryBuilder {
 
         Logging.debug(`Inserting: ${sql}`);
 
+        const startTime: number = Date.now();
+
         return new Promise((resolve, reject) => {
             QueryBuilder.connection.query(sql, values, (err, res) => {
+                if (this.loggingEnabled) Logging.info(`Insert query duration: ${Date.now() - startTime}ms`);
+
                 if (err) return reject(err);
 
                 resolve(res);
