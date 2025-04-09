@@ -30,7 +30,7 @@ class QueryBuilder {
     private updateValues: Record<string, any> = {};
     private insertValues: Record<string, any> = {};
     private countBoolean: Boolean = false;
-    private LoggingEnabled: boolean = false;
+    private loggingEnabled: boolean = false;
 
     static init() {
         QueryBuilder.connection = mysql.createConnection({
@@ -79,8 +79,9 @@ class QueryBuilder {
         return builder;
     }
 
-    enableLogging(enabled: boolean): void {
-        this.LoggingEnabled = enabled;
+    enableLogging(enabled: boolean): QueryBuilder {
+        this.loggingEnabled = enabled;
+        return this;
     }
 
     columns(columns: string[]): QueryBuilder {
@@ -152,8 +153,14 @@ class QueryBuilder {
 
         Logging.debug(`Selecting: ${sql}`);
 
+        const startTime: number = Date.now();
+
         return new Promise((resolve, reject) => {
             QueryBuilder.connection.query(sql, whereValues, (err, res: any) => {
+                const endTime: number = Date.now();
+
+                if (this.loggingEnabled) Logging.info(`Select query duration: ${endTime - startTime}ms`);
+
                 if (err) return reject(err);
 
                 if (this.firstMode) return resolve(res[0]);
