@@ -287,9 +287,7 @@ class QueryBuilder {
 }
 
 // await QueryBuilder.insert('leveling').values({ user_id: '12345', xp: 0, level: 1 }).execute();
-
 // await QueryBuilder.update('leveling').set({ xp: 100 }).where({ id: 1 }).execute();
-
 // await QueryBuilder.delete('leveling').where({ id: 1 }).execute();
 
 export default QueryBuilder;
