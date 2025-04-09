@@ -1,4 +1,7 @@
 import { createCanvas, loadImage, Canvas, CanvasRenderingContext2D, Image } from 'canvas';
+import { Logging } from '@helpers/logging';
+import path from 'path';
+import fs from 'fs';
 
 export class CanvasBuilder {
     protected canvas: Canvas;
@@ -16,19 +19,29 @@ export class CanvasBuilder {
      * @returns Promise<void> - Returns nothing.
      */
     async setBackground(imageUrl: string): Promise<void> {
-        const backgroundImage: Image = await loadImage(imageUrl);
-        this.ctx.drawImage(backgroundImage, 0, 0, this.canvas.width, this.canvas.height);
+        try {
+            const backgroundImage: Image = await loadImage(
+                await this.getImageFromFs(imageUrl)
+            );
+            this.ctx.drawImage(backgroundImage, 0, 0, this.canvas.width, this.canvas.height);
+        } catch (error) {
+            Logging.debug(`Error inside canvasBuilder setBackground: ${error}`);
+        }
+
     }
 
     async setFixedBackground(imageUrl: string, width: number, height: number): Promise<void> {
-        const backgroundImage: Image = await loadImage(imageUrl);
+        const backgroundImage: Image = await loadImage(
+            await this.getImageFromFs(imageUrl)
+        );
         this.ctx.drawImage(backgroundImage, 0, 0, width, height);
     }
 
-    async drawImg(imageUrl: Response, x: number, y: number, width: number, height: number): Promise<void> {
-        const img: Image = await loadImage(imageUrl);
+    async drawImg(imageUrl: string, x: number, y: number, width: number, height: number): Promise<void> {
+        const img: Image = await loadImage(
+            await this.getImageFromFs(imageUrl)
+        );
         this.ctx.drawImage(img, x, y, width, height);
-
     }
 
     /**
@@ -62,11 +75,18 @@ export class CanvasBuilder {
         this.ctx.fillText(text, x, y);
     }
 
-    /**
-     * Puts canvas into buffer.
-     *
-     * @returns Buffer - Returns the buffer.
-     */
+    async getImageFromFs(imageUrl: string): Promise<any> {
+        try {
+            return fs.readFileSync(path.join(imageUrl));
+        } catch (error: any) {
+            if (error.code !== 'ENOENT') {
+                Logging.error(`Error inside getImageFromFs(): ${error}`);
+                return;
+            }
+            throw new Error(`Could not find image from ${imageUrl}`);
+        }
+    }
+
     getBuffer(): Buffer {
         return this.canvas.toBuffer();
     }

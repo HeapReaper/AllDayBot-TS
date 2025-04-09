@@ -1,5 +1,5 @@
 import { getEnv } from '@helpers/env';
-import mysql from 'mysql2';
+import mysql, {QueryResult} from 'mysql2';
 import { Connection } from 'mysql2/typings/mysql/lib/Connection';
 import {Logging} from '@helpers/logging';
 
@@ -30,6 +30,7 @@ class QueryBuilder {
     private updateValues: Record<string, any> = {};
     private insertValues: Record<string, any> = {};
     private countBoolean: Boolean = false;
+    private loggingEnabled: boolean = false;
 
     static init() {
         QueryBuilder.connection = mysql.createConnection({
@@ -76,6 +77,11 @@ class QueryBuilder {
         builder.tableName = tableName;
         builder.currentMode = 'insert';
         return builder;
+    }
+
+    logging(enabled: boolean): QueryBuilder {
+        this.loggingEnabled = enabled;
+        return this;
     }
 
     columns(columns: string[]): QueryBuilder {
@@ -147,14 +153,16 @@ class QueryBuilder {
 
         Logging.debug(`Selecting: ${sql}`);
 
+        const startTime: number = Date.now();
+
         return new Promise((resolve, reject) => {
-            QueryBuilder.connection.query(sql, whereValues, (err, res) => {
+            QueryBuilder.connection.query(sql, whereValues, (err, res: any) => {
+                if (this.loggingEnabled) Logging.info(`Select query duration: ${Date.now() - startTime}ms`);
+
                 if (err) return reject(err);
 
-                // @ts-ignore
                 if (this.firstMode) return resolve(res[0]);
 
-                // @ts-ignore
                 if (this.countBoolean) return resolve(res[0]['COUNT(*)']);
 
                 return resolve(res);
@@ -186,8 +194,12 @@ class QueryBuilder {
 
         Logging.debug(`Updating: ${sql}`);
 
+        const startTime: number = Date.now();
+
         return new Promise((resolve, reject) => {
             QueryBuilder.connection.query(sql, whereValues, (err, res) => {
+                if (this.loggingEnabled) Logging.info(`Update query duration: ${Date.now() - startTime}ms`);
+
                 if (err) return reject(err);
 
                 resolve(res);
@@ -213,8 +225,12 @@ class QueryBuilder {
 
         Logging.debug(`Deleting: ${sql}`);
 
+        const startTime: number = Date.now();
+
         return new Promise((resolve, reject) => {
             QueryBuilder.connection.query(sql, whereValues, (err, res) => {
+                if (this.loggingEnabled) Logging.info(`Delete query duration: ${Date.now() - startTime}ms`);
+
                 if (err) return reject(err);
 
                 resolve(res);
@@ -233,8 +249,12 @@ class QueryBuilder {
 
         Logging.debug(`Inserting: ${sql}`);
 
+        const startTime: number = Date.now();
+
         return new Promise((resolve, reject) => {
             QueryBuilder.connection.query(sql, values, (err, res) => {
+                if (this.loggingEnabled) Logging.info(`Insert query duration: ${Date.now() - startTime}ms`);
+
                 if (err) return reject(err);
 
                 resolve(res);
@@ -267,9 +287,7 @@ class QueryBuilder {
 }
 
 // await QueryBuilder.insert('leveling').values({ user_id: '12345', xp: 0, level: 1 }).execute();
-
 // await QueryBuilder.update('leveling').set({ xp: 100 }).where({ id: 1 }).execute();
-
 // await QueryBuilder.delete('leveling').where({ id: 1 }).execute();
 
 export default QueryBuilder;
