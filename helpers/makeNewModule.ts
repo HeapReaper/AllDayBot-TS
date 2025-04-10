@@ -7,7 +7,7 @@ if (process.argv.slice(2).length == 0) {
 	process.exit();
 }
 
-const modulesDir = `${<string>getEnv('MODULES_BASE_PATH')}modules`;
+const modulesDir = `./modules`;
 const moduleNameToCreate = process.argv.slice(2)[0];
 
 console.log(`Making module named ${moduleNameToCreate} inside ${modulesDir}/`);

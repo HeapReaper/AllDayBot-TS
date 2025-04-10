@@ -24,7 +24,7 @@ export class Logging {
         
         if (getEnv('LOG_LEVEL') == 'info' || getEnv('LOG_LEVEL') == 'all') {
             appendFileSync(
-                './logs/app.log',
+                `${<string>getEnv('MODULES_BASE_PATH')}logs/app.log`,
                 `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [INFO]  ${message}\n`,
                 'utf-8'
             );
@@ -45,7 +45,7 @@ export class Logging {
         
         if (getEnv('LOG_LEVEL') == 'warn' || getEnv('LOG_LEVEL') == 'all') {
             appendFileSync(
-                './logs/app.log',
+                `${<string>getEnv('MODULES_BASE_PATH')}logs/app.log`,
                 `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [WARN]  ${message}\n`,
                 'utf-8'
             );
@@ -66,7 +66,7 @@ export class Logging {
         
         if (getEnv('LOG_LEVEL') == 'error' || getEnv('LOG_LEVEL') == 'all') {
             appendFileSync(
-                './logs/app.log',
+                `${<string>getEnv('MODULES_BASE_PATH')}logs/app.log`,
                 `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [ERROR] ${message}\n`,
                 'utf-8'
             );
@@ -90,7 +90,7 @@ export class Logging {
         
         if (getEnv('LOG_LEVEL') == 'debug' || getEnv('LOG_LEVEL') == 'all') {
             appendFileSync(
-                './logs/app.log',
+                `${<string>getEnv('MODULES_BASE_PATH')}logs/app.log`,
                 `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [DEBUG] ${message}\n`,
                 'utf-8'
             );
