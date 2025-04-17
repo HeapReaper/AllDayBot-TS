@@ -31,6 +31,8 @@ export default class Events {
      * @return void
      */
     messageEvents(): void {
+        const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
+
         // @ts-ignore temp
         this.client.on(discordEvents.MessageUpdate, async (oldMessage: Message, newMessage: Message): Promise<void> => {
             Logging.debug('An message has been edited!');
@@ -38,24 +40,24 @@ export default class Events {
             const messageUpdateEmbed: any = new EmbedBuilder()
                 .setColor(Color.Orange)
                 .setTitle('Bericht bewerkt')
-                .setDescription(`${oldMessage.url}`)
+                .setDescription(`Door: <@${oldMessage.author.id}>`)
                 .setAuthor({
                     name: oldMessage.author.displayName,
                     iconURL: oldMessage.author.displayAvatarURL(),
                     url: oldMessage.author.displayAvatarURL()
                 })
+                .setThumbnail('attachment://chat.png')
                 .addFields(
                     { name: 'Oud:', value: oldMessage.content },
                     { name: 'Nieuw:', value: newMessage.content}
                 );
 
-            this.logChannel.send({ embeds: [messageUpdateEmbed] });
+            this.logChannel.send({ embeds: [messageUpdateEmbed], files: [chatIcon] });
         });
 
         // @ts-ignore
         this.client.on(discordEvents.MessageDelete, async (message: Message): Promise<void> => {
             Logging.debug('An message has been deleted!');
-            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
 
             const messageDelete: any = new EmbedBuilder()
                 .setColor(Color.Red)
@@ -75,9 +77,25 @@ export default class Events {
         });
 
         // @ts-ignore
-        this.client.on(discordEvents.MessageBulkDelete, async (messages: Message[]): Promise<void> => {
-            Logging.debug('Bulks messages has been deleted!');
-            // WOP
+        this.client.on(discordEvents.MessageBulkDelete, async (messages: Collection<string, Message>): Promise<void> => {
+            Logging.debug('Bulk messages have been deleted!');
+
+            const deletedMessages: any[] = [];
+
+            for (const message of messages.values()) {
+                deletedMessages.push({
+                    name: `Van: ${message.member?.displayName || message.author?.tag || 'Niet bekend'}`,
+                    value: message.content || '[Geen inhoud]',
+                });
+            }
+
+            const bulkMessagesDeleted: EmbedBuilder = new EmbedBuilder()
+                .setColor(Color.Red)
+                .setTitle('Bulk berichten verwijderd')
+                .setThumbnail('attachment://chat.png')
+                .addFields(...deletedMessages);
+
+            await this.logChannel.send({ embeds: [bulkMessagesDeleted], files: [chatIcon]});
         });
     }
 
