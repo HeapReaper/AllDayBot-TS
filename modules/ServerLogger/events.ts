@@ -4,7 +4,7 @@ import {
     Message,
     EmbedBuilder,
     TextChannel, User,
-    AttachmentBuilder,
+    AttachmentBuilder, VoiceState,
 } from 'discord.js';
 import { Logging } from '@helpers/logging.ts';
 import { Color } from '@enums/colorEnum';
@@ -20,6 +20,7 @@ export default class Events {
         this.logChannel = this.client.channels.cache.get(getEnv('ALL_DAY_LOG') as TextChannel);
         this.messageEvents();
         this.reactionEvents();
+        this.voiceChannelEvents();
     }
 
     /**
@@ -105,6 +106,8 @@ export default class Events {
      * @return void
      */
     reactionEvents(): void {
+        const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
+
         this.client.on(discordEvents.MessageReactionAdd, async (reaction, user) => {            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
             Logging.info('Reaction added to message!');
 
@@ -138,23 +141,89 @@ export default class Events {
         });
     }
 
+    voiceChannelEvents(): void {
+        this.client.on(discordEvents.VoiceStateUpdate, async (oldState: VoiceState, newState: VoiceState) => {
+            const voiceChannelIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
+
+            // If user joins voice channel
+            if (!oldState.channel && newState.channel) {
+                const voiceChannelEmbed: EmbedBuilder = new EmbedBuilder()
+                    .setColor(Color.Green)
+                    .setTitle('Voice kanaal gejoined')
+                    .setDescription(`Door: <@${oldState.member?.id}>`)
+                    .setAuthor({
+                        name: newState.member?.displayName ?? 'Niet bekend',
+                        iconURL: newState.member?.displayAvatarURL(),
+                        url: newState.member?.displayAvatarURL()
+                    })
+                    .setThumbnail('attachment://microphone.png')
+                    .addFields(
+                        { name: 'Kanaal:', value: `${newState.channel.url}` },
+                    );
+
+                await this.logChannel.send({embeds: [voiceChannelEmbed], files: [voiceChannelIcon]});
+            }
+
+            // If user leaves voice channel
+            if (oldState.channel && !newState.channel) {
+                Logging.info('A user leaved VC');
+
+                const voiceChannelEmbed: EmbedBuilder = new EmbedBuilder()
+                    .setColor(Color.Orange)
+                    .setTitle('Voice kanaal verlaten')
+                    .setDescription(`Door: <@${oldState.member?.id}>`)
+                    .setAuthor({
+                        name: oldState.member?.displayName ?? 'Niet bekend',
+                        iconURL: oldState.member?.displayAvatarURL(),
+                        url: oldState.member?.displayAvatarURL()
+                    })
+                    .setThumbnail('attachment://microphone.png')
+                    .addFields(
+                        { name: 'Kanaal:', value: `${oldState.channel.url}` },
+                    );
+
+                await this.logChannel.send({embeds: [voiceChannelEmbed], files: [voiceChannelIcon]});
+            }
+
+            // If user changes voice channel
+            if (oldState.channel && newState.channel) {
+                Logging.info('A user changed VC');
+
+                const voiceChannelEmbed: EmbedBuilder = new EmbedBuilder()
+                    .setColor(Color.Green)
+                    .setTitle('Voice kanaal veranderd')
+                    .setDescription(`Door: <@${oldState.member?.id}>`)
+                    .setAuthor({
+                        name: newState.member?.displayName ?? 'Niet bekend',
+                        iconURL: newState.member?.displayAvatarURL(),
+                        url: newState.member?.displayAvatarURL()
+                    })
+                    .setThumbnail('attachment://microphone.png')
+                    .addFields(
+                        { name: 'Oud:', value: `${oldState.channel.url}` },
+                        { name: 'Nieuw:', value: `${newState.channel.url}` },
+                    );
+
+                await this.logChannel.send({embeds: [voiceChannelEmbed], files: [voiceChannelIcon]});
+            }
+        });
+    }
+
     // message edit (done)
     // message delete (done)
     // bulk message delete (done)
 
-    // reaction add
-    // reaction remove
+    // reaction add (done)
+    // reaction remove (done)
+
+    // voice join (done)
+    // voice leave (done)
+    // voice change (done)
 
     // member join
     // member remove
     // member ban
     // member unban
     // member update (nickname change)
-
-    // voice join
-    // voice leave
-    // voice change
-
-
 }
 
