@@ -3,6 +3,7 @@ import { Logging } from '@helpers/logging.ts';
 import QueryBuilder from '@helpers/database';
 import { CanvasBuilder } from '@helpers/canvasBuilder';
 import path from 'path';
+import {getEnv} from "@helpers/env.ts";
 
 export default class CommandsListener {
     private client: Client;
@@ -96,6 +97,11 @@ export default class CommandsListener {
             .select('leveling')
             .where({user_id: interaction.user.id})
             .first();
+
+        const guild: Guild  = await this.client.guilds.fetch(<string>getEnv('GUILD_ID'));
+        const member = await guild.members.fetch(interaction.user.id);
+
+        console.log(member.displayAvatarURL())
 
         await interaction.reply('Still some stuff to do...');
     }

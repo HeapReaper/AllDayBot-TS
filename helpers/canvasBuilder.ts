@@ -44,6 +44,11 @@ export class CanvasBuilder {
         this.ctx.drawImage(img, x, y, width, height);
     }
 
+    async drawImgFromUrl(url: string, x: number, y: number, width: number, height: number): Promise<void>  {
+        const img: Image = await loadImage(url);
+        this.ctx.drawImage(img, x, y, width, height);
+    }
+
     /**
      * Draw rect.
      *
