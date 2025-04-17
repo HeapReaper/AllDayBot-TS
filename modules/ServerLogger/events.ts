@@ -85,7 +85,7 @@ export default class Events {
             for (const message of messages.values()) {
                 deletedMessages.push({
                     name: `Van: ${message.member?.displayName || message.author?.tag || 'Niet bekend'}`,
-                    value: message.content || '[Geen inhoud]',
+                    value: message.content || 'Geen inhoud',
                 });
             }
 
@@ -105,14 +105,42 @@ export default class Events {
      * @return void
      */
     reactionEvents(): void {
-        // @ts-ignore
-        this.client.on('messageReactionAdd', (reaction, user) => {
-            console.log(`messageReactionAdd: ${reaction} | ${user}`);
+        this.client.on(discordEvents.MessageReactionAdd, async (reaction, user) => {            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
+            Logging.info('Reaction added to message!');
+
+            const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
+                .setColor(Color.Green)
+                .setTitle('Reactie toegevoegd')
+                .setDescription(`Door: <@${user.id}>`)
+                .setThumbnail('attachment://chat.png')
+                .addFields(
+                    { name: 'Emoji:', value: `${reaction.emoji}` },
+                    { name: 'Bericht:', value: `${reaction.message.url}` }
+                );
+
+            await this.logChannel.send({embeds: [messageReactionAddEmbed], files: [chatIcon]});
+        });
+
+        this.client.on(discordEvents.MessageReactionRemove, async (reaction, user) => {            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
+            Logging.info('Reaction removed to message!');
+
+            const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
+                .setColor(Color.Orange)
+                .setTitle('Reactie verwijderd')
+                .setDescription(`Door: <@${user.id}>`)
+                .setThumbnail('attachment://chat.png')
+                .addFields(
+                    { name: 'Emoji:', value: `${reaction.emoji}` },
+                    { name: 'Bericht:', value: `${reaction.message.url}` }
+                );
+
+            await this.logChannel.send({embeds: [messageReactionAddEmbed], files: [chatIcon]});
         });
     }
+
     // message edit (done)
     // message delete (done)
-    // bulk message delete
+    // bulk message delete (done)
 
     // reaction add
     // reaction remove
