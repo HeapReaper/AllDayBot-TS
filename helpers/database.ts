@@ -31,6 +31,7 @@ class QueryBuilder {
     private insertValues: Record<string, any> = {};
     private countBoolean: Boolean = false;
     private loggingEnabled: boolean = false;
+    private rawQuery: string = '';
 
     static init() {
         QueryBuilder.connection = mysql.createConnection({
@@ -76,6 +77,13 @@ class QueryBuilder {
         const builder = new QueryBuilder();
         builder.tableName = tableName;
         builder.currentMode = 'insert';
+        return builder;
+    }
+
+    static raw(query: string): QueryBuilder {
+        const builder = new QueryBuilder();
+        builder.currentMode = 'raw';
+        builder.rawQuery = query;
         return builder;
     }
 
@@ -262,6 +270,22 @@ class QueryBuilder {
         })
     }
 
+    private async executeRaw(): Promise<any> {
+        if (!QueryBuilder.connection) QueryBuilder.connect();
+
+        const startTime: number = Date.now();
+
+        return new Promise<any>((resolve, reject) => {
+            QueryBuilder.connection.query(this.rawQuery, (err, res) => {
+                if (this.loggingEnabled) Logging.info(`Raw query duration: ${Date.now() - startTime}ms`);
+
+                if (err) return reject(err);
+
+                resolve(res);
+            })
+        })
+    }
+
     async first(): Promise<any> {
         this.firstMode = true;
         return await this.executeSelect();
@@ -282,6 +306,8 @@ class QueryBuilder {
                 return await this.executeDelete();
             case 'insert':
                 return await this.executeInsert();
+            case 'raw':
+                return await this.executeRaw();
         }
     }
 }
