@@ -1,4 +1,11 @@
-import { Client, Events as discordEvents, Message, EmbedBuilder, TextChannel, User } from 'discord.js';
+import {
+    Client,
+    Events as discordEvents,
+    Message,
+    EmbedBuilder,
+    TextChannel, User,
+    AttachmentBuilder,
+} from 'discord.js';
 import { Logging } from '@helpers/logging.ts';
 import { Color } from '@enums/colorEnum';
 import { getEnv } from '@helpers/env.ts';
@@ -48,20 +55,23 @@ export default class Events {
         // @ts-ignore
         this.client.on(discordEvents.MessageDelete, async (message: Message): Promise<void> => {
             Logging.debug('An message has been deleted!');
+            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
 
             const messageDelete: any = new EmbedBuilder()
                 .setColor(Color.Red)
                 .setTitle('Bericht verwijderd')
+                .setDescription(`Door: <@${message.author.id}>`)
                 .setAuthor({
                     name: message.author.displayName,
                     iconURL: message.author.displayAvatarURL(),
                     url: message.author.displayAvatarURL()
                 })
+                .setThumbnail('attachment://chat.png')
                 .addFields(
                     { name: 'Bericht:', value: message.content },
                 );
 
-            this.logChannel.send({ embeds: [messageDelete] });
+            this.logChannel.send({ embeds: [messageDelete], files: [chatIcon] });
         });
 
         // @ts-ignore
