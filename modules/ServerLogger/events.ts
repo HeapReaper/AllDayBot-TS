@@ -9,6 +9,7 @@ import {
 import { Logging } from '@helpers/logging.ts';
 import { Color } from '@enums/colorEnum';
 import { getEnv } from '@helpers/env.ts';
+import S3 from '@helpers/s3';
 
 export default class Events {
     private client: Client;
@@ -33,6 +34,13 @@ export default class Events {
      */
     messageEvents(): void {
         const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
+
+        this.client.on(discordEvents.MessageCreate, async (message: Message): Promise<void> => {
+            if (message.author.bot) return;
+
+            S3.init();
+            await S3.setBucket('test').uploadFile('test.txt', '/test.txt');
+        });
 
         // @ts-ignore temp
         this.client.on(discordEvents.MessageUpdate, async (oldMessage: Message, newMessage: Message): Promise<void> => {
