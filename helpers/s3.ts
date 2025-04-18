@@ -38,4 +38,28 @@ export default class S3OperationBuilder {
             return { success: false, error: error };
         }
     }
+
+    async getObjectUrl(objectName: string): Promise<any> {
+        try {
+            const object = await S3OperationBuilder.minioClient.presignedGetObject(this.bucketName, objectName);
+
+            Logging.debug('S3 getObject successful!');
+            return { success: object };
+        } catch (error) {
+            Logging.debug(`S3 getObject failed: ${error}`);
+            return { success: false, error: error };
+        }
+    }
+
+    async deleteObject(objectName: string): Promise<any> {
+        try {
+            const object = await S3OperationBuilder.minioClient.removeObject(this.bucketName, objectName);
+
+            Logging.debug('S3 delete successful!');
+            return { success: object };
+        } catch (error) {
+            Logging.debug(`S3 delete failed: ${error}`);
+            return { success: false, error: error };
+        }
+    }
 }
