@@ -58,7 +58,32 @@ export default class S3OperationBuilder {
             Logging.debug('S3 delete successful!');
             return { success: object };
         } catch (error) {
-            Logging.debug(`S3 delete failed: ${error}`);
+            Logging.error(`S3 delete failed: ${error}`);
+            return { success: false, error: error };
+        }
+    }
+
+    async listObjects(): Promise<any> {
+        try {
+            const data: any[] = [];
+            const stream = await S3OperationBuilder.minioClient.listObjects(this.bucketName);
+
+
+            return new Promise((resolve, reject) => {
+                stream.on('data', (obj: Minio.BucketItem) => {
+                    data.push(obj);
+                });
+                stream.on('end', () => {
+                    Logging.debug(`S3 lists successful! Found ${data.length} objects.`);
+                    resolve({ success: true, data });
+                });
+                stream.on('error', (error: any) => {
+                    Logging.error(`S3 lists failed: ${error}`);
+                    reject({ success: false, error });
+                });
+            });
+        } catch (error) {
+            Logging.debug(`S3 lists failed: ${error}`);
             return { success: false, error: error };
         }
     }
