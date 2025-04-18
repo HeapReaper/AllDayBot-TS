@@ -16,11 +16,11 @@ export default class Events {
 
     constructor(client: Client) {
         this.client = client;
-        // @ts-ignore
-        this.logChannel = this.client.channels.cache.get(getEnv('ALL_DAY_LOG') as TextChannel);
+        this.logChannel = this.client.channels.cache.get(<string>getEnv('ALL_DAY_LOG')) as TextChannel;
         this.messageEvents();
         this.reactionEvents();
         this.voiceChannelEvents();
+        this.memberEvents();
     }
 
     /**
@@ -141,6 +141,11 @@ export default class Events {
         });
     }
 
+    /**
+     * Handles voice channel logging
+     *
+     * @return void
+     */
     voiceChannelEvents(): void {
         this.client.on(discordEvents.VoiceStateUpdate, async (oldState: VoiceState, newState: VoiceState) => {
             const voiceChannelIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
@@ -209,9 +214,19 @@ export default class Events {
         });
     }
 
+    memberEvents(): void {
+        this.client.on(discordEvents.GuildMemberUpdate, async (oldMember, newMember): Promise<void> => {
+            if (oldMember.displayName !== newMember.displayName || oldMember.nickname !== newMember.nickname) {
+                Logging.info('A user changed its nickname or display name!');
+            }
+        });
+    }
+
     // message edit (done)
     // message delete (done)
     // bulk message delete (done)
+
+    // image/video/gif cacher S3
 
     // reaction add (done)
     // reaction remove (done)
@@ -219,6 +234,7 @@ export default class Events {
     // voice join (done)
     // voice leave (done)
     // voice change (done)
+
 
     // member join
     // member remove
