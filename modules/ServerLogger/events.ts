@@ -50,15 +50,15 @@ export default class Events {
                     const arrayBuffer = await response.arrayBuffer();
                     const buffer = Buffer.from(arrayBuffer);
 
-                    if (attachment.contentType?.startsWith('image/') || attachment.contentType?.startsWith('video/')) {
-                        Logging.info('Caching a image/video to S3');
+                    if (!attachment.contentType?.startsWith('image/') && !attachment.contentType?.startsWith('video/')) return;
 
-                        await S3OperationBuilder
-                            .setBucket('alldaybot')
-                            .uploadFileFromBuffer(`serverLogger/${fileName}`, buffer, {
-                                'Content-Type': attachment.contentType,
-                            });
-                    }
+                    Logging.info('Caching a image/video to S3');
+
+                    await S3OperationBuilder
+                        .setBucket('alldaybot')
+                        .uploadFileFromBuffer(`serverLogger/${fileName}`, buffer, {
+                            'Content-Type': attachment.contentType,
+                        });
                 }
             } catch (error) {
                 Logging.error(`Error while caching image/video inside server logger: ${error}`);
