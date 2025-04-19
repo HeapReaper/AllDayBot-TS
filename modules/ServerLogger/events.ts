@@ -3,8 +3,9 @@ import {
     Events as discordEvents,
     Message,
     EmbedBuilder,
-    TextChannel, User,
-    AttachmentBuilder, VoiceState,
+    TextChannel,
+    AttachmentBuilder,
+    VoiceState,
 } from 'discord.js';
 import { Logging } from '@helpers/logging.ts';
 import { Color } from '@enums/colorEnum';
