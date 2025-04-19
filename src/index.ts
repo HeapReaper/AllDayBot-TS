@@ -1,9 +1,9 @@
-import { Client, Events, GatewayIntentBits } from 'discord.js';
-import { Logging } from '@helpers/logging.ts';
+import {Client, Events, GatewayIntentBits, Partials} from 'discord.js';
+import {Logging} from '@helpers/logging.ts';
 import * as Sentry from '@sentry/bun';
 import loadModules from '@helpers/moduleLoader.ts';
-import { getEnv } from '@helpers/env.ts';
-import { runMigrations } from '@helpers/migrations.ts';
+import {getEnv} from '@helpers/env.ts';
+import {runMigrations} from '@helpers/migrations.ts';
 
 // @ts-ignore
 const client = new Client({
@@ -13,7 +13,12 @@ const client = new Client({
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildVoiceStates,
         GatewayIntentBits.GuildMessageReactions,
-    ]
+    ],
+    partials: [
+        Partials.Channel,
+        Partials.Message,
+        Partials.Reaction
+    ],
 });
 
 client.on(Events.ClientReady, async client => {
@@ -24,9 +29,9 @@ client.on(Events.ClientReady, async client => {
 
     if (getEnv('ENVIRONMENT') !== 'prod') return;
     Sentry.init({
-        dsn: getEnv('SENTRY_DSN'),
+        dsn: <string>getEnv('SENTRY_DSN'),
         tracesSampleRate: 1.0,
     });
 });
 
-client.login(getEnv('DISCORD_TOKEN'));
+client.login(<string>getEnv('DISCORD_TOKEN'));
