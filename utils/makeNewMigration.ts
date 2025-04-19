@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs';
 import * as process from 'node:process';
-import { getEnv } from '@helpers/env';
+import { getEnv } from '@utils/env';
 
 if (process.argv.slice(2).length  < 1) {
     console.error('Please specify the migration name you weirdo!');

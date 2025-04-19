@@ -1,7 +1,7 @@
 import { Client, TextChannel } from 'discord.js';
-import { Logging } from '@helpers/logging';
-import QueryBuilder from '@helpers/database';
-import { getEnv } from '@helpers/env.ts';
+import { Logging } from '@utils/logging';
+import QueryBuilder from '@utils/database';
+import { getEnv } from '@utils/env.ts';
 
 export default class Tasks {
 	private client: Client;

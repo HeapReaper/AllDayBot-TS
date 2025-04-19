@@ -1,7 +1,7 @@
 import { Client, TextChannel } from 'discord.js';
-import { getEnv } from '@helpers/env.ts';
-import { Logging } from '@helpers/logging';
-import Database from '@helpers/database';
+import { getEnv } from '@utils/env.ts';
+import { Logging } from '@utils/logging';
+import Database from '@utils/database';
 
 export default class Events {
     private client: Client;

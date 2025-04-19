@@ -2,8 +2,8 @@ import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v10';
 import fs from 'fs/promises';
 import path from 'path';
-import { Logging } from '@helpers/logging';
-import { getEnv } from '@helpers/env.ts';
+import { Logging } from '@utils/logging';
+import { getEnv } from '@utils/env.ts';
 
 async function commandsLoader() {
     const modulesPath: string = path.join(process.cwd(), 'modules');

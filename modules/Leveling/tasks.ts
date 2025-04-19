@@ -1,6 +1,6 @@
-import { Logging } from '@helpers/logging.ts';
+import { Logging } from '@utils/logging.ts';
 import LevelingEvents from './events.ts';
-import QueryBuilder from '@helpers/database';
+import QueryBuilder from '@utils/database';
 import { Client, ChannelType, VoiceChannel, Guild } from 'discord.js';
 
 export default class LevelingTasks {

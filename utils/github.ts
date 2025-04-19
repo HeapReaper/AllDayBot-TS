@@ -1,5 +1,5 @@
-import { getEnv } from '@helpers/env';
-import {Logging} from "@helpers/logging.ts";
+import { getEnv } from '@utils/env';
+import {Logging} from "@utils/logging.ts";
 
 export class Github {
     private owner: string;

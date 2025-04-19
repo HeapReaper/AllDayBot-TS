@@ -1,5 +1,5 @@
 import { createCanvas, loadImage, Canvas, CanvasRenderingContext2D, Image } from 'canvas';
-import { Logging } from '@helpers/logging';
+import { Logging } from '@utils/logging';
 import path from 'path';
 import fs from 'fs';
 

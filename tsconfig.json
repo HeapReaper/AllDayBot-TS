@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@helpers/*": ["./helpers/*"],
+      "@utils/*": ["./utils/*"],
       "@enums/*": ["./enums/*"],
       "@src/*": ["./src/*"],
       "@media/*": ["./src/media/*"],
