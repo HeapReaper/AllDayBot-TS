@@ -10,6 +10,7 @@ import { Logging } from '@helpers/logging.ts';
 import { Color } from '@enums/colorEnum';
 import { getEnv } from '@helpers/env.ts';
 import S3OperationBuilder from '@helpers/s3';
+import QueryBuilder from '@helpers/database.ts';
 import path from 'path';
 
 export default class Events {
@@ -37,7 +38,31 @@ export default class Events {
         const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
 
         this.client.on(discordEvents.MessageCreate, async (message: Message): Promise<void> => {
+            Logging.info('Caching message and media in server logger');
             if (message.author.bot) return;
+
+            try {
+                const messageDbCache = await QueryBuilder.insert('messages')
+                    .values({
+                        id: message.id,
+                        channel_id: message.channel.id,
+                        guild_id: message.guild?.id,
+                        author_id: message.author.id,
+                        content: message.content,
+                        created_at: message.createdAt,
+                        attachments: JSON.stringify(
+                            message.attachments.map(attachment => ({
+                                url: attachment.url,
+                                name: attachment.name,
+                                contentType: attachment.contentType,
+                                s3Key: `serverLogger/${message.id}-${attachment.name}`,
+                            })),
+                        )
+                    })
+                    .execute();
+            } catch (error) {
+                Logging.error(`Error while trying to cache message inside server logger: ${error}`);
+            }
 
             if (!message.attachments.size) return;
 
@@ -91,21 +116,63 @@ export default class Events {
         this.client.on(discordEvents.MessageDelete, async (message: Message): Promise<void> => {
             Logging.debug('An message has been deleted!');
 
+            const allS3Files = await S3OperationBuilder
+                .setBucket('alldaybot')
+                .listObjects();
+
+            const messageFromDbCache = await QueryBuilder
+                .select('messages')
+                .where({id: message.id})
+                .first();
+
+            Logging.debug(`${messageFromDbCache}`)
+
+            if (!allS3Files.success) {
+                Logging.warn('Failed to list S3 objects. Skipping attachment restoration.');
+                return;
+            }
+
+            const filesToAttach = allS3Files.data.filter((file: any) =>
+                file?.name?.startsWith(`serverLogger/${message.id}-`)
+            );
+
+            const attachments: AttachmentBuilder[] = [];
+
             const messageDelete: any = new EmbedBuilder()
                 .setColor(Color.Red)
                 .setTitle('Bericht verwijderd')
-                .setDescription(`Door: <@${message.author.id}>`)
+                .setDescription(`Door: <@${message.partial ? messageFromDbCache.author_id ?? 0o10101 : message.author.id}>`)
                 .setAuthor({
-                    name: message.author.displayName,
-                    iconURL: message.author.displayAvatarURL(),
-                    url: message.author.displayAvatarURL()
+                    name: message.author?.displayName ?? messageFromDbCache?.author_id ?? 'Niet bekend',
+                    iconURL: message.author?.displayAvatarURL() ?? 'https://placehold.co/30x30',
+                    url: message.author?.displayAvatarURL() ?? 'https://placehold.co/30x30',
                 })
+
                 .setThumbnail('attachment://chat.png')
                 .addFields(
                     { name: 'Bericht:', value: message.content },
                 );
 
-            this.logChannel.send({ embeds: [messageDelete], files: [chatIcon] });
+            for (const file of filesToAttach) {
+                const url = await S3OperationBuilder
+                    .setBucket('alldaybot')
+                    .getObjectUrl(file.name);
+
+                const response = await fetch(url);
+                const arrayBuffer = await response.arrayBuffer();
+                const buffer = Buffer.from(arrayBuffer);
+
+                const filename = file.name.split('/').pop() ?? 'attachment';
+                attachments.push(new AttachmentBuilder(buffer, { name: filename }));
+            }
+
+            attachments.push(chatIcon);
+
+            await this.logChannel.send({ embeds: [messageDelete], files: attachments });
+
+            if (attachments.length === 0) return;
+
+            await this.logChannel.send({ files: attachments });
         });
 
         // @ts-ignore
