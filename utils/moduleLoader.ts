@@ -1,8 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { pathToFileURL } from 'url';
-import { Logging } from '@helpers/logging';
-import { getEnv } from '@helpers/env';
+import { Logging } from '@utils/logging';
+import { getEnv } from '@utils/env';
 
 async function loadModules(client: any) {
     let modulesPath: string;

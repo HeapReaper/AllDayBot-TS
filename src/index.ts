@@ -1,9 +1,9 @@
 import { Client, Events as discordEvents, GatewayIntentBits, Partials } from 'discord.js';
-import { Logging } from '@helpers/logging.ts';
+import { Logging } from '@utils/logging.ts';
 import * as Sentry from '@sentry/bun';
-import loadModules from '@helpers/moduleLoader.ts';
-import { getEnv } from '@helpers/env.ts';
-import { runMigrations } from '@helpers/migrations.ts';
+import loadModules from '@utils/moduleLoader.ts';
+import { getEnv } from '@utils/env.ts';
+import { runMigrations } from '@utils/migrations.ts';
 
 // @ts-ignore
 const client = new Client({

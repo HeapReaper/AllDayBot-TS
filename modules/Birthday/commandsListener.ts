@@ -1,6 +1,6 @@
 import { Client, Interaction, Events, MessageFlags} from 'discord.js';
-import { Logging } from '@helpers/logging';
-import QueryBuilder from '@helpers/database';
+import { Logging } from '@utils/logging';
+import QueryBuilder from '@utils/database';
 
 export default class CommandsListener {
     private client: Client;

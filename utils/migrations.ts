@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import QueryBuilder from '@helpers/database';
-import { getEnv } from '@helpers/env';
-import { Logging } from '@helpers/logging';
+import QueryBuilder from '@utils/database';
+import { getEnv } from '@utils/env';
+import { Logging } from '@utils/logging';
 
 export async function runMigrations(): Promise<void> {
     await QueryBuilder

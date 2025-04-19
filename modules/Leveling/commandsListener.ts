@@ -1,9 +1,9 @@
 import {ChatInputCommandInteraction, Client, Interaction} from 'discord.js';
-import { Logging } from '@helpers/logging.ts';
-import QueryBuilder from '@helpers/database';
-import { CanvasBuilder } from '@helpers/canvasBuilder';
+import { Logging } from '@utils/logging.ts';
+import QueryBuilder from '@utils/database';
+import { CanvasBuilder } from '@utils/canvasBuilder';
 import path from 'path';
-import {getEnv} from "@helpers/env.ts";
+import {getEnv} from "@utils/env.ts";
 
 export default class CommandsListener {
     private client: Client;

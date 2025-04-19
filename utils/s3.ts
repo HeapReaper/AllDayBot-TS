@@ -1,6 +1,6 @@
 import * as Minio from 'minio';
-import { getEnv } from '@helpers/env';
-import { Logging } from '@helpers/logging';
+import { getEnv } from '@utils/env';
+import { Logging } from '@utils/logging';
 
 export default class S3OperationBuilder {
     private static minioClient: any;

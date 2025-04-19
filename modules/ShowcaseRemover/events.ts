@@ -1,6 +1,6 @@
 import { Client, TextChannel, Events, Message } from 'discord.js';
-import { getEnv } from '@helpers/env.ts';
-import { Logging } from '@helpers/logging';
+import { getEnv } from '@utils/env.ts';
+import { Logging } from '@utils/logging';
 
 export default class ShowcaseEvents {
     private client: Client;

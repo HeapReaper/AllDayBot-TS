@@ -7,13 +7,13 @@ import {
     AttachmentBuilder,
     VoiceState,
 } from 'discord.js';
-import { Logging } from '@helpers/logging.ts';
+import { Logging } from '@utils/logging.ts';
 import { Color } from '@enums/colorEnum';
-import { getEnv } from '@helpers/env.ts';
-import S3OperationBuilder from '@helpers/s3';
-import QueryBuilder from '@helpers/database.ts';
+import { getEnv } from '@utils/env.ts';
+import S3OperationBuilder from '@utils/s3';
+import QueryBuilder from '@utils/database.ts';
 import path from 'path';
-import { Github } from '@helpers/github';
+import { Github } from '@utils/github';
 
 export default class Events {
     private client: Client;

@@ -3,11 +3,11 @@ import { Client,
 		 Events,
 		 ChatInputCommandInteraction,
 } from 'discord.js';
-import QueryBuilder from '@helpers/database';
-import { Logging } from '@helpers/logging';
-import { getEnv } from '@helpers/env.ts';
+import QueryBuilder from '@utils/database';
+import { Logging } from '@utils/logging';
+import { getEnv } from '@utils/env.ts';
 import util, { JavaStatusResponse } from 'minecraft-server-util';
-import { CanvasBuilder } from '@helpers/canvasBuilder';
+import { CanvasBuilder } from '@utils/canvasBuilder';
 import path from 'path';
 
 // TODO: Refactor to use https://discordapp.com/channels/1038516673315078154/1038837019008323584/1358495590719295499

@@ -1,7 +1,7 @@
-import { Logging } from '@helpers/logging.ts';
+import { Logging } from '@utils/logging.ts';
 import { Client, Message, Events as discordEvents, GuildMember } from 'discord.js';
-import Database from "@helpers/database.ts";
-import QueryBuilder from "@helpers/database.ts";
+import Database from "@utils/database.ts";
+import QueryBuilder from "@utils/database.ts";
 
 export default class LevelingEvents {
     static usersXpAddedFromMessage: Array<any> = [];

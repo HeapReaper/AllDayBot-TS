@@ -1,6 +1,6 @@
 import { Client } from 'discord.js';
-import S3OperationBuilder from '@helpers/s3';
-import QueryBuilder from '@helpers/database';
+import S3OperationBuilder from '@utils/s3';
+import QueryBuilder from '@utils/database';
 
 export default class Tasks {
     private client: Client;
