@@ -39,6 +39,17 @@ export default class S3OperationBuilder {
         }
     }
 
+    async uploadFileFromBuffer(ObjectName: string, buffer: any): Promise<any> {
+        try {
+            await S3OperationBuilder.minioClient.putObject(this.bucketName, buffer);
+            Logging.debug('S3 upload successful!');
+            return { success: true };
+        } catch (error) {
+            Logging.debug(`S3 upload failed: ${error}`);
+            return { success: false, error: error };
+        }
+    }
+
     async getObjectUrl(objectName: string): Promise<any> {
         try {
             const object = await S3OperationBuilder.minioClient.presignedGetObject(this.bucketName, objectName);
