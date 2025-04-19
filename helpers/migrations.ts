@@ -6,7 +6,7 @@ import { Logging } from '@helpers/logging';
 
 export async function runMigrations(): Promise<void> {
     await QueryBuilder
-        .raw(fs.readFileSync(`${<string>getEnv('MODULES_BASE_PATH')}migrations/01_create_migrations_table.sql`, 'utf-8'))
+        .raw(fs.readFileSync(`${<string>getEnv('MODULES_BASE_PATH')}migrations/1745074005-create_migrations_table.sql`, 'utf-8'))
         .execute();
 
     const rows: any[] = await QueryBuilder
