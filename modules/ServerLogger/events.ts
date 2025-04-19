@@ -9,7 +9,8 @@ import {
 import { Logging } from '@helpers/logging.ts';
 import { Color } from '@enums/colorEnum';
 import { getEnv } from '@helpers/env.ts';
-import S3 from '@helpers/s3';
+import S3OperationBuilder from '@helpers/s3';
+import path from 'path';
 
 export default class Events {
     private client: Client;
@@ -38,8 +39,30 @@ export default class Events {
         this.client.on(discordEvents.MessageCreate, async (message: Message): Promise<void> => {
             if (message.author.bot) return;
 
-            S3.init();
-            await S3.setBucket('test').uploadFile('test.txt', '/test.txt');
+            if (!message.attachments.size) return;
+
+            try {
+                for (const attachment of message.attachments.values()) {
+                    const fileUrl = attachment.url;
+                    const fileName = `${message.id}-${path.basename(fileUrl)}`;
+
+                    const response = await fetch(fileUrl);
+                    const arrayBuffer = await response.arrayBuffer();
+                    const buffer = Buffer.from(arrayBuffer);
+
+                    if (attachment.contentType?.startsWith('image/') || attachment.contentType?.startsWith('video/')) {
+                        Logging.info('Caching a image/video to S3');
+
+                        await S3OperationBuilder
+                            .setBucket('alldaybot')
+                            .uploadFileFromBuffer(`serverLogger/${fileName}`, buffer, {
+                                'Content-Type': attachment.contentType,
+                            });
+                    }
+                }
+            } catch (error) {
+                Logging.error(`Error while caching image/video inside server logger: ${error}`);
+            }
         });
 
         // @ts-ignore temp
