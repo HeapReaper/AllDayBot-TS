@@ -3,8 +3,9 @@ import {
     Events as discordEvents,
     Message,
     EmbedBuilder,
-    TextChannel, User,
-    AttachmentBuilder, VoiceState,
+    TextChannel,
+    AttachmentBuilder,
+    VoiceState,
 } from 'discord.js';
 import { Logging } from '@helpers/logging.ts';
 import { Color } from '@enums/colorEnum';
@@ -12,6 +13,7 @@ import { getEnv } from '@helpers/env.ts';
 import S3OperationBuilder from '@helpers/s3';
 import QueryBuilder from '@helpers/database.ts';
 import path from 'path';
+import { Github } from '@helpers/github';
 
 export default class Events {
     private client: Client;
@@ -20,10 +22,46 @@ export default class Events {
     constructor(client: Client) {
         this.client = client;
         this.logChannel = this.client.channels.cache.get(<string>getEnv('ALL_DAY_LOG')) as TextChannel;
+        void this.bootEvent();
         this.messageEvents();
         this.reactionEvents();
         this.voiceChannelEvents();
         this.memberEvents();
+    }
+
+    async bootEvent(): Promise<void> {
+        Logging.info(`Current bot version: ${await Github.getCurrentRelease()}`);
+
+        const botIcon = new AttachmentBuilder(
+            `${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/bot.png`
+        );
+
+        const currentRelease: string | null = await Github.getCurrentRelease();
+
+        await new Promise<void>(resolve => {
+            const interval: Timer = setInterval((): void => {
+                if (this.client.ws.ping >= 0) {
+                    clearInterval(interval);
+                    resolve();
+                }
+            }, 500);
+        });
+
+        const bootEmbed: EmbedBuilder = new EmbedBuilder()
+            .setTitle('Ik ben opnieuw opgestart!')
+            .setAuthor({
+                name: this.client.user?.displayName ?? 'Onbekend',
+                iconURL: this.client.user?.displayAvatarURL(),
+                url: this.client.user?.displayAvatarURL(),
+            })
+            .addFields(
+                { name: 'Versie:', value: `${currentRelease !== null ? currentRelease : 'Rate limited'}` },
+                { name: 'Ping:', value: `${this.client.ws.ping}ms` }
+            )
+            .setThumbnail('attachment://bot.png');
+
+        const logChannel = this.client.channels.cache.get(<string>getEnv('ALL_DAY_LOG')) as TextChannel;
+        await logChannel.send({ embeds: [bootEmbed], files: [botIcon] });
     }
 
     /**
@@ -42,7 +80,7 @@ export default class Events {
             if (message.author.bot) return;
 
             try {
-                const messageDbCache = await QueryBuilder.insert('messages')
+                await QueryBuilder.insert('messages')
                     .values({
                         id: message.id,
                         channel_id: message.channel.id,
