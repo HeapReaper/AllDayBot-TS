@@ -1,9 +1,9 @@
-import {Client, Events, GatewayIntentBits, Partials} from 'discord.js';
-import {Logging} from '@helpers/logging.ts';
+import { Client, Events as discordEvents, GatewayIntentBits, Partials } from 'discord.js';
+import { Logging } from '@helpers/logging.ts';
 import * as Sentry from '@sentry/bun';
 import loadModules from '@helpers/moduleLoader.ts';
-import {getEnv} from '@helpers/env.ts';
-import {runMigrations} from '@helpers/migrations.ts';
+import { getEnv } from '@helpers/env.ts';
+import { runMigrations } from '@helpers/migrations.ts';
 
 // @ts-ignore
 const client = new Client({
@@ -21,7 +21,7 @@ const client = new Client({
     ],
 });
 
-client.on(Events.ClientReady, async client => {
+client.on(discordEvents.ClientReady, async client => {
     Logging.info(`Logged in as ${client.user.tag}!`);
 
     await loadModules(client);
