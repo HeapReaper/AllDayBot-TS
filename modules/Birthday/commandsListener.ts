@@ -50,12 +50,7 @@ export default class CommandsListener {
 					birthdate: `${interaction.options.getInteger('jaar')}-${interaction.options.getInteger('maand')}-${interaction.options.getInteger('dag')}`
 				})
 				.execute();
-			// await Database.insert('birthday', {
-			// 	user_id: interaction.user.id,
-			// 	// @ts-ignore - fix later
-			// 	birthdate: `${interaction.options.getInteger('jaar')}-${interaction.options.getInteger('maand')}-${interaction.options.getInteger('dag')}`
-			// });
-			
+
 			await interaction.reply({content: 'Je verjaardag is in AllDayBot toegevoegd!', flags: MessageFlags.Ephemeral});
 		} catch (error) {
 			Logging.error(`Error inside commandListener for Birthday: ${error}`);

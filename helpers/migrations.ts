@@ -18,13 +18,18 @@ export async function runMigrations(): Promise<void> {
 
     const migrationFiles = fs
         .readdirSync(`${<string>getEnv('MODULES_BASE_PATH')}migrations`)
-        .filter((file) => file.endsWith('.sql'));
+        .filter((file: string) => file.endsWith('.sql'))
+        .sort((a: string, b: string): number => {
+            const aTime: number = parseInt(a.split('-')[0], 10);
+            const bTime: number = parseInt(b.split('-')[1], 10);
+            return aTime - bTime;
+        });
 
     for (const file of migrationFiles) {
         if (appliedMigrations.has(file)) continue;
 
         try {
-            const migrationFile = fs.readFileSync(`${<string>getEnv('MODULES_BASE_PATH')}migrations/${file}`, 'utf-8');
+            const migrationFile: string = fs.readFileSync(`${<string>getEnv('MODULES_BASE_PATH')}migrations/${file}`, 'utf-8');
 
             await QueryBuilder
                 .raw(migrationFile)
