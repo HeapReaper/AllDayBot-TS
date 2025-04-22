@@ -49,11 +49,6 @@ export default class Events {
 
         const bootEmbed: EmbedBuilder = new EmbedBuilder()
             .setTitle('Ik ben opnieuw opgestart!')
-            .setAuthor({
-                name: this.client.user?.displayName ?? 'Onbekend',
-                iconURL: this.client.user?.displayAvatarURL(),
-                url: this.client.user?.displayAvatarURL(),
-            })
             .addFields(
                 { name: 'Versie:', value: `${currentRelease !== null ? currentRelease : 'Rate limited'}` },
                 { name: 'Ping:', value: `${this.client.ws.ping}ms` }
@@ -136,11 +131,6 @@ export default class Events {
                 .setColor(Color.Orange)
                 .setTitle('Bericht bewerkt')
                 .setDescription(`Door: <@${oldMessage.author.id}>`)
-                .setAuthor({
-                    name: oldMessage.author.displayName,
-                    iconURL: oldMessage.author.displayAvatarURL(),
-                    url: oldMessage.author.displayAvatarURL()
-                })
                 .setThumbnail('attachment://chat.png')
                 .addFields(
                     { name: 'Oud:', value: oldMessage.content },
@@ -180,12 +170,6 @@ export default class Events {
                 .setColor(Color.Red)
                 .setTitle('Bericht verwijderd')
                 .setDescription(`Door: <@${message.partial ? messageFromDbCache.author_id ?? 0o10101 : message.author.id}>`)
-                .setAuthor({
-                    name: message.author?.displayName ?? messageFromDbCache?.author_id ?? 'Niet bekend',
-                    iconURL: message.author?.displayAvatarURL() ?? 'https://placehold.co/30x30',
-                    url: message.author?.displayAvatarURL() ?? 'https://placehold.co/30x30',
-                })
-
                 .setThumbnail('attachment://chat.png')
                 .addFields(
                     { name: 'Bericht:', value: message.content },
@@ -292,11 +276,6 @@ export default class Events {
                     .setColor(Color.Green)
                     .setTitle('Voice kanaal gejoined')
                     .setDescription(`Door: <@${oldState.member?.id}>`)
-                    .setAuthor({
-                        name: newState.member?.displayName ?? 'Niet bekend',
-                        iconURL: newState.member?.displayAvatarURL(),
-                        url: newState.member?.displayAvatarURL()
-                    })
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
                         { name: 'Kanaal:', value: `${newState.channel.url}` },
@@ -313,11 +292,6 @@ export default class Events {
                     .setColor(Color.Orange)
                     .setTitle('Voice kanaal verlaten')
                     .setDescription(`Door: <@${oldState.member?.id}>`)
-                    .setAuthor({
-                        name: oldState.member?.displayName ?? 'Niet bekend',
-                        iconURL: oldState.member?.displayAvatarURL(),
-                        url: oldState.member?.displayAvatarURL()
-                    })
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
                         { name: 'Kanaal:', value: `${oldState.channel.url}` },
@@ -334,11 +308,6 @@ export default class Events {
                     .setColor(Color.Green)
                     .setTitle('Voice kanaal veranderd')
                     .setDescription(`Door: <@${oldState.member?.id}>`)
-                    .setAuthor({
-                        name: newState.member?.displayName ?? 'Niet bekend',
-                        iconURL: newState.member?.displayAvatarURL(),
-                        url: newState.member?.displayAvatarURL()
-                    })
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
                         { name: 'Oud:', value: `${oldState.channel.url}` },
