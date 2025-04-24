@@ -332,65 +332,76 @@ export default class Events {
      * @return {Promise<void>} Resolves when the events are registered and handled properly.
      */
     async memberEvents(): Promise<void> {
-        const memberEventEmbed: EmbedBuilder = new EmbedBuilder();
-        let icon: string = '';
-
         this.client.on(discordEvents.GuildMemberAdd, async (member: GuildMember): Promise<void> => {
             Logging.info('A user joined this Discord!');
 
-            memberEventEmbed.setColor(Color.Green);
-            memberEventEmbed.setTitle('Nieuw lid');
-            memberEventEmbed.setDescription(`Wie: <@${member.id}>`)
-            icon = 'group.png';
+            const memberEventEmbed = new EmbedBuilder()
+                .setColor(Color.Green)
+                .setTitle('Nieuw lid')
+                .setDescription(`Wie: <@${member.id}>`)
+                .setThumbnail('attachment://group.png');
+
+            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
+            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
         });
 
         this.client.on(discordEvents.GuildMemberRemove, async (member: GuildMember|PartialGuildMember): Promise<void> => {
             Logging.info('A user left this Discord!');
 
-            memberEventEmbed.setColor(Color.Red);
-            memberEventEmbed.setTitle('Lid verlaten');
-            memberEventEmbed.setDescription(`Wie: <@${member.id}>`)
-            icon = 'group.png';
+            const memberEventEmbed = new EmbedBuilder()
+                .setColor(Color.Red)
+                .setTitle('Lid verlaten')
+                .setDescription(`Wie: <@${member.id}>`)
+                .setThumbnail('attachment://group.png');
+
+            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
+            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
         });
 
         this.client.on(discordEvents.GuildBanAdd, async (ban: GuildBan): Promise<void> => {
             Logging.info('A user was banned on this Discord!');
 
-            memberEventEmbed.setColor(Color.Red);
-            memberEventEmbed.setTitle('Lid gebanned');
-            memberEventEmbed.setDescription(`Wie: <@${ban.user.id}>`)
-            icon = 'moderator.png';
+            const memberEventEmbed = new EmbedBuilder()
+                .setColor(Color.Red)
+                .setTitle('Lid gebanned')
+                .setDescription(`Wie: <@${ban.user.id}>`)
+                .setThumbnail('attachment://moderator.png');
+
+            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderator.png`);
+            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
         });
 
         this.client.on(discordEvents.GuildBanRemove, async (ban: GuildBan): Promise<void> => {
             Logging.info('A user was unbanned on this Discord!');
 
-            memberEventEmbed.setColor(Color.Orange);
-            memberEventEmbed.setTitle('Lid unbanned');
-            memberEventEmbed.setDescription(`Wie: <@${ban.user.id}>`)
-            icon = 'moderator.png';
+            const memberEventEmbed = new EmbedBuilder()
+                .setColor(Color.Orange)
+                .setTitle('Lid unbanned')
+                .setDescription(`Wie: <@${ban.user.id}>`)
+                .setThumbnail('attachment://moderator.png');
+
+            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderator.png`);
+            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
         });
 
         this.client.on(discordEvents.GuildMemberUpdate, async (oldMember: GuildMember|PartialGuildMember, newMember: GuildMember): Promise<void> => {
             Logging.info('A user was updated in this Discord!');
 
-            memberEventEmbed.setColor(Color.Green);
-            memberEventEmbed.setTitle('Lid gebruikersnaam update');
-            memberEventEmbed.setDescription(`Wie: <@${newMember.id}>`)
-            icon = 'group.png';
-
             if (oldMember.displayName === newMember.displayName) return;
 
-            memberEventEmbed.addFields(
-                { name: 'Oud:', value: `${oldMember.displayName ?? 'Niet gevonden'}` },
-                { name: 'Nieuw:', value: `${newMember.displayName ?? 'Niet gevonden'}` },
-            )
+            const memberEventEmbed = new EmbedBuilder()
+                .setColor(Color.Green)
+                .setTitle('Lid gebruikersnaam update')
+                .setDescription(`Wie: <@${newMember.id}>`)
+                .setThumbnail('attachment://group.png')
+                .addFields(
+                    { name: 'Oud:', value: `${oldMember.displayName ?? 'Niet gevonden'}` },
+                    { name: 'Nieuw:', value: `${newMember.displayName ?? 'Niet gevonden'}` },
+                );
+
+            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
+            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
         });
-
-        memberEventEmbed.setThumbnail(`attachment://${icon}`);
-        const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
-
-        await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
     }
 }
 
