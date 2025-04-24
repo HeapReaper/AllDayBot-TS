@@ -31,7 +31,6 @@ async function loadModules(client: any) {
             if (!commandsModule.commands) {
                 Logging.error(`Module ${moduleFolder} commands.ts does not have 'commands' export`);
             } else {
-                // Don't try to instantiate commands - they're just data
                 Logging.debug(`Loaded commands for module: ${moduleFolder}`);
                 moduleLoaded = true;
             }
