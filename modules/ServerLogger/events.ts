@@ -8,7 +8,7 @@ import {
     VoiceState,
     GuildMember,
     PartialGuildMember,
-    GuildBan,
+    GuildBan, OmitPartialGroupDMChannel, PartialMessage,
 } from 'discord.js';
 import { Logging } from '@utils/logging.ts';
 import { Color } from '@enums/colorEnum';
@@ -126,23 +126,19 @@ export default class Events {
             }
         });
 
-        // @ts-ignore temp
-        this.client.on(discordEvents.MessageUpdate, async (oldMessage: Message, newMessage: Message): Promise<void> => {
+        this.client.on(discordEvents.MessageUpdate, async (
+            oldMessage: OmitPartialGroupDMChannel<Message<boolean> | PartialMessage>,
+            newMessage: OmitPartialGroupDMChannel<Message<boolean>>): Promise<void> => {
             Logging.debug('An message has been edited!');
 
             const messageUpdateEmbed: any = new EmbedBuilder()
                 .setColor(Color.Orange)
                 .setTitle('Bericht bewerkt')
-                .setDescription(`Door: <@${oldMessage.author.id}>`)
-                .setAuthor({
-                    name: oldMessage.author.displayName,
-                    iconURL: oldMessage.author.displayAvatarURL(),
-                    url: oldMessage.author.displayAvatarURL()
-                })
+                .setDescription(`Door: <@${oldMessage.author?.id}>`)
                 .setThumbnail('attachment://chat.png')
                 .addFields(
-                    { name: 'Oud:', value: oldMessage.content },
-                    { name: 'Nieuw:', value: newMessage.content}
+                    { name: 'Oud:', value: oldMessage.content ?? 'Er ging wat fout' },
+                    { name: 'Nieuw:', value: newMessage.content ?? 'Er ging wat fout'}
                 );
 
             this.logChannel.send({ embeds: [messageUpdateEmbed], files: [chatIcon] });
@@ -178,12 +174,6 @@ export default class Events {
                 .setColor(Color.Red)
                 .setTitle('Bericht verwijderd')
                 .setDescription(`Door: <@${message.partial ? messageFromDbCache.author_id ?? 0o10101 : message.author.id}>`)
-                .setAuthor({
-                    name: message.author?.displayName ?? messageFromDbCache?.author_id ?? 'Niet bekend',
-                    iconURL: message.author?.displayAvatarURL() ?? 'https://placehold.co/30x30',
-                    url: message.author?.displayAvatarURL() ?? 'https://placehold.co/30x30',
-                })
-
                 .setThumbnail('attachment://chat.png')
                 .addFields(
                     { name: 'Bericht:', value: message.content },
@@ -290,11 +280,6 @@ export default class Events {
                     .setColor(Color.Green)
                     .setTitle('Voice kanaal gejoined')
                     .setDescription(`Door: <@${oldState.member?.id}>`)
-                    .setAuthor({
-                        name: newState.member?.displayName ?? 'Niet bekend',
-                        iconURL: newState.member?.displayAvatarURL(),
-                        url: newState.member?.displayAvatarURL()
-                    })
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
                         { name: 'Kanaal:', value: `${newState.channel.url}` },
@@ -311,11 +296,6 @@ export default class Events {
                     .setColor(Color.Orange)
                     .setTitle('Voice kanaal verlaten')
                     .setDescription(`Door: <@${oldState.member?.id}>`)
-                    .setAuthor({
-                        name: oldState.member?.displayName ?? 'Niet bekend',
-                        iconURL: oldState.member?.displayAvatarURL(),
-                        url: oldState.member?.displayAvatarURL()
-                    })
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
                         { name: 'Kanaal:', value: `${oldState.channel.url}` },
@@ -332,11 +312,6 @@ export default class Events {
                     .setColor(Color.Green)
                     .setTitle('Voice kanaal veranderd')
                     .setDescription(`Door: <@${oldState.member?.id}>`)
-                    .setAuthor({
-                        name: newState.member?.displayName ?? 'Niet bekend',
-                        iconURL: newState.member?.displayAvatarURL(),
-                        url: newState.member?.displayAvatarURL()
-                    })
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
                         { name: 'Oud:', value: `${oldState.channel.url}` },
