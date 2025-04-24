@@ -6,6 +6,11 @@ import {
     TextChannel,
     AttachmentBuilder,
     VoiceState,
+    GuildMember,
+    PartialGuildMember,
+    GuildBan,
+    OmitPartialGroupDMChannel,
+    PartialMessage,
 } from 'discord.js';
 import { Logging } from '@utils/logging.ts';
 import { Color } from '@enums/colorEnum';
@@ -26,42 +31,37 @@ export default class Events {
         this.messageEvents();
         this.reactionEvents();
         this.voiceChannelEvents();
-        this.memberEvents();
+        void this.memberEvents();
     }
 
     async bootEvent(): Promise<void> {
-        Logging.info(`Current bot version: ${await Github.getCurrentRelease()}`);
+        try {
+            const botIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/bot.png`);
 
-        const botIcon = new AttachmentBuilder(
-            `${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/bot.png`
-        );
+            const currentRelease: string | null = await Github.getCurrentRelease();
 
-        const currentRelease: string | null = await Github.getCurrentRelease();
+            await new Promise<void>(resolve => {
+                const interval: Timer = setInterval((): void => {
+                    if (this.client.ws.ping >= 0) {
+                        clearInterval(interval);
+                        resolve();
+                    }
+                }, 500);
+            });
 
-        await new Promise<void>(resolve => {
-            const interval: Timer = setInterval((): void => {
-                if (this.client.ws.ping >= 0) {
-                    clearInterval(interval);
-                    resolve();
-                }
-            }, 500);
-        });
+            const bootEmbed: EmbedBuilder = new EmbedBuilder()
+                .setColor(Color.Green)
+                .setTitle('Ik ben opnieuw opgestart!')
+                .addFields(
+                    { name: 'Versie:', value: `${currentRelease ? currentRelease : 'Rate limited'}` },
+                    { name: 'Ping:', value: `${this.client.ws.ping}ms` }
+                )
+                .setThumbnail('attachment://bot.png');
 
-        const bootEmbed: EmbedBuilder = new EmbedBuilder()
-            .setTitle('Ik ben opnieuw opgestart!')
-            .setAuthor({
-                name: this.client.user?.displayName ?? 'Onbekend',
-                iconURL: this.client.user?.displayAvatarURL(),
-                url: this.client.user?.displayAvatarURL(),
-            })
-            .addFields(
-                { name: 'Versie:', value: `${currentRelease !== null ? currentRelease : 'Rate limited'}` },
-                { name: 'Ping:', value: `${this.client.ws.ping}ms` }
-            )
-            .setThumbnail('attachment://bot.png');
-
-        const logChannel = this.client.channels.cache.get(<string>getEnv('ALL_DAY_LOG')) as TextChannel;
-        await logChannel.send({ embeds: [bootEmbed], files: [botIcon] });
+            await this.logChannel.send({ embeds: [bootEmbed], files: [botIcon]});
+        } catch (error) {
+            Logging.error(`Error in bootEvent serverLogger: ${error}`);
+        }
     }
 
     /**
@@ -128,23 +128,19 @@ export default class Events {
             }
         });
 
-        // @ts-ignore temp
-        this.client.on(discordEvents.MessageUpdate, async (oldMessage: Message, newMessage: Message): Promise<void> => {
+        this.client.on(discordEvents.MessageUpdate, async (
+            oldMessage: OmitPartialGroupDMChannel<Message<boolean> | PartialMessage>,
+            newMessage: OmitPartialGroupDMChannel<Message<boolean>>): Promise<void> => {
             Logging.debug('An message has been edited!');
 
             const messageUpdateEmbed: any = new EmbedBuilder()
                 .setColor(Color.Orange)
                 .setTitle('Bericht bewerkt')
-                .setDescription(`Door: <@${oldMessage.author.id}>`)
-                .setAuthor({
-                    name: oldMessage.author.displayName,
-                    iconURL: oldMessage.author.displayAvatarURL(),
-                    url: oldMessage.author.displayAvatarURL()
-                })
+                .setDescription(`Door: <@${oldMessage.author?.id}>`)
                 .setThumbnail('attachment://chat.png')
                 .addFields(
-                    { name: 'Oud:', value: oldMessage.content },
-                    { name: 'Nieuw:', value: newMessage.content}
+                    { name: 'Oud:', value: oldMessage.content ?? 'Er ging wat fout' },
+                    { name: 'Nieuw:', value: newMessage.content ?? 'Er ging wat fout'}
                 );
 
             this.logChannel.send({ embeds: [messageUpdateEmbed], files: [chatIcon] });
@@ -180,12 +176,6 @@ export default class Events {
                 .setColor(Color.Red)
                 .setTitle('Bericht verwijderd')
                 .setDescription(`Door: <@${message.partial ? messageFromDbCache.author_id ?? 0o10101 : message.author.id}>`)
-                .setAuthor({
-                    name: message.author?.displayName ?? messageFromDbCache?.author_id ?? 'Niet bekend',
-                    iconURL: message.author?.displayAvatarURL() ?? 'https://placehold.co/30x30',
-                    url: message.author?.displayAvatarURL() ?? 'https://placehold.co/30x30',
-                })
-
                 .setThumbnail('attachment://chat.png')
                 .addFields(
                     { name: 'Bericht:', value: message.content },
@@ -292,11 +282,6 @@ export default class Events {
                     .setColor(Color.Green)
                     .setTitle('Voice kanaal gejoined')
                     .setDescription(`Door: <@${oldState.member?.id}>`)
-                    .setAuthor({
-                        name: newState.member?.displayName ?? 'Niet bekend',
-                        iconURL: newState.member?.displayAvatarURL(),
-                        url: newState.member?.displayAvatarURL()
-                    })
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
                         { name: 'Kanaal:', value: `${newState.channel.url}` },
@@ -313,11 +298,6 @@ export default class Events {
                     .setColor(Color.Orange)
                     .setTitle('Voice kanaal verlaten')
                     .setDescription(`Door: <@${oldState.member?.id}>`)
-                    .setAuthor({
-                        name: oldState.member?.displayName ?? 'Niet bekend',
-                        iconURL: oldState.member?.displayAvatarURL(),
-                        url: oldState.member?.displayAvatarURL()
-                    })
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
                         { name: 'Kanaal:', value: `${oldState.channel.url}` },
@@ -334,11 +314,6 @@ export default class Events {
                     .setColor(Color.Green)
                     .setTitle('Voice kanaal veranderd')
                     .setDescription(`Door: <@${oldState.member?.id}>`)
-                    .setAuthor({
-                        name: newState.member?.displayName ?? 'Niet bekend',
-                        iconURL: newState.member?.displayAvatarURL(),
-                        url: newState.member?.displayAvatarURL()
-                    })
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
                         { name: 'Oud:', value: `${oldState.channel.url}` },
@@ -350,32 +325,83 @@ export default class Events {
         });
     }
 
-    memberEvents(): void {
-        this.client.on(discordEvents.GuildMemberUpdate, async (oldMember, newMember): Promise<void> => {
-            if (oldMember.displayName !== newMember.displayName || oldMember.nickname !== newMember.nickname) {
-                Logging.info('A user changed its nickname or display name!');
-            }
+    /**
+     * Handles membership-related events in a Discord server, such as when members join, leave, are banned, unbanned, or updated.
+     * Logs the events and sends an embed message to a designated channel with information about the membership event.
+     *
+     * @return {Promise<void>} Resolves when the events are registered and handled properly.
+     */
+    async memberEvents(): Promise<void> {
+        this.client.on(discordEvents.GuildMemberAdd, async (member: GuildMember): Promise<void> => {
+            Logging.info('A user joined this Discord!');
+
+            const memberEventEmbed = new EmbedBuilder()
+                .setColor(Color.Green)
+                .setTitle('Nieuw lid')
+                .setDescription(`Wie: <@${member.id}>`)
+                .setThumbnail('attachment://group.png');
+
+            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
+            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+        });
+
+        this.client.on(discordEvents.GuildMemberRemove, async (member: GuildMember|PartialGuildMember): Promise<void> => {
+            Logging.info('A user left this Discord!');
+
+            const memberEventEmbed = new EmbedBuilder()
+                .setColor(Color.Red)
+                .setTitle('Lid verlaten')
+                .setDescription(`Wie: <@${member.id}>`)
+                .setThumbnail('attachment://group.png');
+
+            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
+            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+        });
+
+        this.client.on(discordEvents.GuildBanAdd, async (ban: GuildBan): Promise<void> => {
+            Logging.info('A user was banned on this Discord!');
+
+            const memberEventEmbed = new EmbedBuilder()
+                .setColor(Color.Red)
+                .setTitle('Lid gebanned')
+                .setDescription(`Wie: <@${ban.user.id}>`)
+                .setThumbnail('attachment://moderator.png');
+
+            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderator.png`);
+            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+        });
+
+        this.client.on(discordEvents.GuildBanRemove, async (ban: GuildBan): Promise<void> => {
+            Logging.info('A user was unbanned on this Discord!');
+
+            const memberEventEmbed = new EmbedBuilder()
+                .setColor(Color.Orange)
+                .setTitle('Lid unbanned')
+                .setDescription(`Wie: <@${ban.user.id}>`)
+                .setThumbnail('attachment://moderator.png');
+
+            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderator.png`);
+            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+        });
+
+        this.client.on(discordEvents.GuildMemberUpdate, async (oldMember: GuildMember|PartialGuildMember, newMember: GuildMember): Promise<void> => {
+            Logging.info('A user was updated in this Discord!');
+
+            if (oldMember.displayName === newMember.displayName) return;
+
+            const memberEventEmbed = new EmbedBuilder()
+                .setColor(Color.Green)
+                .setTitle('Lid gebruikersnaam update')
+                .setDescription(`Wie: <@${newMember.id}>`)
+                .setThumbnail('attachment://group.png')
+                .addFields(
+                    { name: 'Oud:', value: `${oldMember.displayName ?? 'Niet gevonden'}` },
+                    { name: 'Nieuw:', value: `${newMember.displayName ?? 'Niet gevonden'}` },
+                );
+
+            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
+            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
         });
     }
-
-    // message edit (done)
-    // message delete (done)
-    // bulk message delete (done)
-
-    // image/video/gif cacher S3
-
-    // reaction add (done)
-    // reaction remove (done)
-
-    // voice join (done)
-    // voice leave (done)
-    // voice change (done)
-
-
-    // member join
-    // member remove
-    // member ban
-    // member unban
-    // member update (nickname change)
 }
 
