@@ -31,7 +31,7 @@ export default class Events {
         this.messageEvents();
         this.reactionEvents();
         this.voiceChannelEvents();
-        //void this.memberEvents();
+        void this.memberEvents();
     }
 
     async bootEvent(): Promise<void> {
@@ -325,6 +325,12 @@ export default class Events {
         });
     }
 
+    /**
+     * Handles membership-related events in a Discord server, such as when members join, leave, are banned, unbanned, or updated.
+     * Logs the events and sends an embed message to a designated channel with information about the membership event.
+     *
+     * @return {Promise<void>} Resolves when the events are registered and handled properly.
+     */
     async memberEvents(): Promise<void> {
         const memberEventEmbed: EmbedBuilder = new EmbedBuilder();
         let icon: string = '';
@@ -369,9 +375,16 @@ export default class Events {
             Logging.info('A user was updated in this Discord!');
 
             memberEventEmbed.setColor(Color.Green);
-            memberEventEmbed.setTitle('Lid update');
+            memberEventEmbed.setTitle('Lid gebruikersnaam update');
             memberEventEmbed.setDescription(`Wie: <@${newMember.id}>`)
             icon = 'group.png';
+
+            if (oldMember.displayName === newMember.displayName) return;
+
+            memberEventEmbed.addFields(
+                { name: 'Oud:', value: `${oldMember.displayName ?? 'Niet gevonden'}` },
+                { name: 'Nieuw:', value: `${newMember.displayName ?? 'Niet gevonden'}` },
+            )
         });
 
         memberEventEmbed.setThumbnail(`attachment://${icon}`);
@@ -379,25 +392,5 @@ export default class Events {
 
         await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
     }
-
-    // message edit (done)
-    // message delete (done)
-    // bulk message delete (done)
-
-    // image/video/gif cacher S3
-
-    // reaction add (done)
-    // reaction remove (done)
-
-    // voice join (done)
-    // voice leave (done)
-    // voice change (done)
-
-
-    // member join
-    // member remove
-    // member ban
-    // member unban
-    // member update (nickname change)
 }
 
