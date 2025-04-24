@@ -5,7 +5,6 @@ import loadModules from '@utils/moduleLoader.ts';
 import { getEnv } from '@utils/env.ts';
 import { runMigrations } from '@utils/migrations.ts';
 
-// @ts-ignore
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
