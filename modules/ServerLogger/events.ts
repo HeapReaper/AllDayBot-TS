@@ -6,6 +6,9 @@ import {
     TextChannel,
     AttachmentBuilder,
     VoiceState,
+    GuildMember,
+    PartialGuildMember,
+    GuildBan,
 } from 'discord.js';
 import { Logging } from '@utils/logging.ts';
 import { Color } from '@enums/colorEnum';
@@ -26,42 +29,37 @@ export default class Events {
         this.messageEvents();
         this.reactionEvents();
         this.voiceChannelEvents();
-        this.memberEvents();
+        //void this.memberEvents();
     }
 
     async bootEvent(): Promise<void> {
-        Logging.info(`Current bot version: ${await Github.getCurrentRelease()}`);
+        try {
+            const botIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/bot.png`);
 
-        const botIcon = new AttachmentBuilder(
-            `${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/bot.png`
-        );
+            const currentRelease: string | null = await Github.getCurrentRelease();
 
-        const currentRelease: string | null = await Github.getCurrentRelease();
+            await new Promise<void>(resolve => {
+                const interval: Timer = setInterval((): void => {
+                    if (this.client.ws.ping >= 0) {
+                        clearInterval(interval);
+                        resolve();
+                    }
+                }, 500);
+            });
 
-        await new Promise<void>(resolve => {
-            const interval: Timer = setInterval((): void => {
-                if (this.client.ws.ping >= 0) {
-                    clearInterval(interval);
-                    resolve();
-                }
-            }, 500);
-        });
+            const bootEmbed: EmbedBuilder = new EmbedBuilder()
+                .setColor(Color.Green)
+                .setTitle('Ik ben opnieuw opgestart!')
+                .addFields(
+                    { name: 'Versie:', value: `${currentRelease ? currentRelease : 'Rate limited'}` },
+                    { name: 'Ping:', value: `${this.client.ws.ping}ms` }
+                )
+                .setThumbnail('attachment://bot.png');
 
-        const bootEmbed: EmbedBuilder = new EmbedBuilder()
-            .setTitle('Ik ben opnieuw opgestart!')
-            .setAuthor({
-                name: this.client.user?.displayName ?? 'Onbekend',
-                iconURL: this.client.user?.displayAvatarURL(),
-                url: this.client.user?.displayAvatarURL(),
-            })
-            .addFields(
-                { name: 'Versie:', value: `${currentRelease !== null ? currentRelease : 'Rate limited'}` },
-                { name: 'Ping:', value: `${this.client.ws.ping}ms` }
-            )
-            .setThumbnail('attachment://bot.png');
-
-        const logChannel = this.client.channels.cache.get(<string>getEnv('ALL_DAY_LOG')) as TextChannel;
-        await logChannel.send({ embeds: [bootEmbed], files: [botIcon] });
+            await this.logChannel.send({ embeds: [bootEmbed], files: [botIcon]});
+        } catch (error) {
+            Logging.error(`Error in bootEvent serverLogger: ${error}`);
+        }
     }
 
     /**
@@ -350,12 +348,59 @@ export default class Events {
         });
     }
 
-    memberEvents(): void {
-        this.client.on(discordEvents.GuildMemberUpdate, async (oldMember, newMember): Promise<void> => {
-            if (oldMember.displayName !== newMember.displayName || oldMember.nickname !== newMember.nickname) {
-                Logging.info('A user changed its nickname or display name!');
-            }
+    async memberEvents(): Promise<void> {
+        const memberEventEmbed: EmbedBuilder = new EmbedBuilder();
+        let icon: string = '';
+
+        this.client.on(discordEvents.GuildMemberAdd, async (member: GuildMember): Promise<void> => {
+            Logging.info('A user joined this Discord!');
+
+            memberEventEmbed.setColor(Color.Green);
+            memberEventEmbed.setTitle('Nieuw lid');
+            memberEventEmbed.setDescription(`Wie: <@${member.id}>`)
+            icon = 'group.png';
         });
+
+        this.client.on(discordEvents.GuildMemberRemove, async (member: GuildMember|PartialGuildMember): Promise<void> => {
+            Logging.info('A user left this Discord!');
+
+            memberEventEmbed.setColor(Color.Red);
+            memberEventEmbed.setTitle('Lid verlaten');
+            memberEventEmbed.setDescription(`Wie: <@${member.id}>`)
+            icon = 'group.png';
+        });
+
+        this.client.on(discordEvents.GuildBanAdd, async (ban: GuildBan): Promise<void> => {
+            Logging.info('A user was banned on this Discord!');
+
+            memberEventEmbed.setColor(Color.Red);
+            memberEventEmbed.setTitle('Lid gebanned');
+            memberEventEmbed.setDescription(`Wie: <@${ban.user.id}>`)
+            icon = 'moderator.png';
+        });
+
+        this.client.on(discordEvents.GuildBanRemove, async (ban: GuildBan): Promise<void> => {
+            Logging.info('A user was unbanned on this Discord!');
+
+            memberEventEmbed.setColor(Color.Orange);
+            memberEventEmbed.setTitle('Lid unbanned');
+            memberEventEmbed.setDescription(`Wie: <@${ban.user.id}>`)
+            icon = 'moderator.png';
+        });
+
+        this.client.on(discordEvents.GuildMemberUpdate, async (oldMember: GuildMember|PartialGuildMember, newMember: GuildMember): Promise<void> => {
+            Logging.info('A user was updated in this Discord!');
+
+            memberEventEmbed.setColor(Color.Green);
+            memberEventEmbed.setTitle('Lid update');
+            memberEventEmbed.setDescription(`Wie: <@${newMember.id}>`)
+            icon = 'group.png';
+        });
+
+        memberEventEmbed.setThumbnail(`attachment://${icon}`);
+        const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
+
+        await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
     }
 
     // message edit (done)
