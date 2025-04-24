@@ -69,7 +69,7 @@ export default class Events {
                 await ticket.send({
                     embeds: [this.fromDmToThreadEmbed(message, ticketDb)],
                     // @ts-ignore
-                    components: [this.adminSelectPriority(ticket), this.adminSelectTicketStatus(ticketDb)]
+                    components: [this.adminSelectPriority(ticketDb), this.adminSelectTicketStatus(ticketDb)]
                 });
                 return;
             }
@@ -125,25 +125,47 @@ export default class Events {
         this.client.on(discordEvents.InteractionCreate, async (interaction: any): Promise<void> => {
             if (!interaction.isSelectMenu()) return;
 
-            if (interaction.customId === 'priority') {
-                const ticket: any = await QueryBuilder
-                    .select('tickets')
-                    .where({thread_id: interaction.channel.id})
-                    .first();
+            await interaction.deferUpdate();
 
-                if (!ticket) return;
+            const ticket: any = await QueryBuilder
+                .select('tickets')
+                .where({thread_id: interaction.channel.id})
+                .first();
+
+            if (interaction.customId === 'priority') {
+
+                await QueryBuilder
+                    .update('tickets')
+                    .set({priority: interaction.values[0]})
+                    .where({thread_id: interaction.channel.id})
+                    .execute();
+
+                const user: User = await this.client.users.fetch(ticket.created_by_user_id);
+                const thread = await this.client.channels.fetch(`${ticket.thread_id}`);
+
+                let embedTitle: string = '';
+                let embedDescription: string = '';
+
+                if (interaction.values[0] === 'low') {
+                    embedTitle = 'Ticket is gewijzigd!';
+                    embedDescription = 'Ticket is gewijzigd naar laag prioriteit.';
+                }
+
+                if (interaction.values[0] === 'medium') {
+                    embedTitle = 'Ticket is gewijzigd!';
+                    embedDescription = 'Ticket is gewijzigd naar medium prioriteit.';
+                }
+
+                if (interaction.values[0] === 'high') {
+                    embedTitle = 'Ticket is gewijzigd!';
+                    embedDescription = 'Ticket is gewijzigd naar hoog prioriteit.';
+                }
+
+                await user.send({ embeds: [this.ticketStatusUpdateEmbed(embedTitle, embedDescription)] });
+                await thread?.send({ embeds: [this.ticketStatusUpdateEmbed(embedTitle, embedDescription)] });
             }
 
             if (interaction.customId === 'status') {
-                await interaction.deferUpdate();
-
-                const ticket: any = await QueryBuilder
-                    .select('tickets')
-                    .where({thread_id: interaction.channel.id})
-                    .first();
-
-                if (!ticket) return;
-
                 await QueryBuilder
                     .update('tickets')
                     .set({status: interaction.values[0]})
