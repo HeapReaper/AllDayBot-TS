@@ -5,11 +5,11 @@ import loadModules from '@utils/moduleLoader.ts';
 import { getEnv } from '@utils/env.ts';
 import { runMigrations } from '@utils/migrations.ts';
 
-// @ts-ignore
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.DirectMessages,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildVoiceStates,
