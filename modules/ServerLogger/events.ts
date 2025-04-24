@@ -8,7 +8,9 @@ import {
     VoiceState,
     GuildMember,
     PartialGuildMember,
-    GuildBan, OmitPartialGroupDMChannel, PartialMessage,
+    GuildBan,
+    OmitPartialGroupDMChannel,
+    PartialMessage,
 } from 'discord.js';
 import { Logging } from '@utils/logging.ts';
 import { Color } from '@enums/colorEnum';
