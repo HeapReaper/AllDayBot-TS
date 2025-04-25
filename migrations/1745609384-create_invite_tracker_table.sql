@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS invite_tracker (
     id INT AUTO_INCREMENT PRIMARY KEY,
     invite_name VARCHAR (255) NOT NULL,
-    inviter_id VARCHAR (20) NOT NULL,
+    inviter_id VARCHAR (22) NOT NULL,
     invite_code VARCHAR (255) NOT NULL,
-    added_by_user_id VARCHAR (20) NOT NULL,
+    added_by_user_id VARCHAR (22) NOT NULL,
     uses INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
