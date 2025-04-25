@@ -30,8 +30,6 @@ export const commands = [
 
 const commandsListenerFileWrite =
 `import { Client, Interaction, Events, MessageFlags} from 'discord.js';
-import Database from '@utils/database';
-import { Logging } from '@utils/logging';
 
 export default class CommandsListener {
 	private client: Client;
