@@ -5,4 +5,5 @@ export enum Color {
     Blue = '#0000ff',
     Orange = '#ffa500',
     Opacity50 = 'rgba(0, 0, 0, 0.5)',
+    AdtgPurple = '#5C0382',
 }
