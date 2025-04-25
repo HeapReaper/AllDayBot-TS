@@ -17,7 +17,7 @@ export default class ShowcaseEvents {
             if (message.channel.id !== getEnv('SHOWCASE')!) return;
             
             if (!message) return;
-            const showcaseChannel = await this.client.channels.fetch(getEnv('SHOWCASE')!) as TextChannel;
+            const showcaseChannel = await this.client.channels.fetch(<string>getEnv('SHOWCASE')!) as TextChannel;
             
             if (!showcaseChannel) {
                 Logging.error('Showcase channel not found in ShowcaseRemover events!');
