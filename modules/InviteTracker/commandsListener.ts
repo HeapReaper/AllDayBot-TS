@@ -50,7 +50,7 @@ export default class CommandsListener {
 				.get();
 
 			const inviteTrackerEmbed: EmbedBuilder = new EmbedBuilder()
-				.setColor(Color.Green)
+				.setColor(Color.AdtgPurple)
 				.setTitle('Invite tracker')
 				.setDescription(`Zie alle invite trackers`)
 
