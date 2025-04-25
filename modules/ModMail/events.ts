@@ -120,7 +120,6 @@ export default class Events {
 
             const ticketDb: any = await this.getTicketFromDb(interaction.author.id, 'open');
 
-            // Priority
             if (interaction.customId === 'priority') {
                 await this.updateTicketStatusDb(interaction.channel.id, interaction.values[0]);
 
