@@ -47,5 +47,11 @@ export const commands = [
                 .setDescription('Selecteer de gebruiker')
                 .setRequired(true)
             )
+            .addChannelOption(add =>
+                add
+                .setName('kanaal')
+                .setDescription('Selecteer het kanaal waarin de embed gestuurd moet worden')
+                .setRequired(true)
+            )
         )
 ].map(commands => commands.toJSON());
