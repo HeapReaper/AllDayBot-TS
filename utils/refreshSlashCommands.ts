@@ -8,10 +8,10 @@ import { getEnv } from '@utils/env.ts';
 async function commandsLoader() {
     const modulesPath: string = path.join(process.cwd(), 'modules');
     const modulesFolder: string[] = await fs.readdir(modulesPath);
-    const rest = new REST({ version: '10' }).setToken(getEnv('DISCORD_TOKEN')!);
+    const rest = new REST({ version: '10' }).setToken(<string>getEnv('DISCORD_TOKEN')!);
     
     /// Cleaning up old commands
-    await rest.put(Routes.applicationGuildCommands(getEnv('CLIENT_ID')!, getEnv('GUILD_ID')!), {
+    await rest.put(Routes.applicationGuildCommands(<string>getEnv('CLIENT_ID'), <string>getEnv('GUILD_ID')), {
         body: [],
     });
     
@@ -40,7 +40,7 @@ async function commandsLoader() {
     }
     
     try {
-        await rest.put(Routes.applicationGuildCommands(getEnv('CLIENT_ID')!, getEnv('GUILD_ID')!), {
+        await rest.put(Routes.applicationGuildCommands(<string>getEnv('CLIENT_ID')!, <string>getEnv('GUILD_ID')!), {
             body: allCommands,
         });
         
