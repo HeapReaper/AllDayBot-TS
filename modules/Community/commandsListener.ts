@@ -33,6 +33,7 @@ export default class CommandsListener {
 					break;
 				case 'kanaal':
 					Logging.info(`User ${interaction.user.username} used /community kanaal`);
+					// @ts-ignore
 					void this.sendEmbed(interaction, `Gelieve het juiste kanaal te gebruik, in dit geval is dat ${interaction.options.getChannel('kanaal')}.`);
 					break;
 				case 'vraag':
@@ -46,13 +47,14 @@ export default class CommandsListener {
 	async sendEmbed(interaction: Interaction, message: string): Promise<void> {
 		const channel: Channel|null = await this.client.channels.fetch(interaction.channel?.id ?? '');
 
-		if (!channel) return;
+		if (!channel || !interaction.isCommand() || !channel.partial) return;
 
 		await interaction.reply({
 			content: 'Ik heb het gestuurd!',
 			ephemeral: true,
 		});
 
+		// @ts-ignore
 		await channel.send(`${interaction.options.getUser('gebruiker')}\n${message}`);
 	}
 }
