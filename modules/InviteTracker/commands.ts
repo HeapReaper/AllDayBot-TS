@@ -21,7 +21,7 @@ export const commands = [
                         .setDescription('De naam van de invite tracker')
                         .setRequired(true)
                 )
-                .addStringOption(option =>
+                .addUserOption(option =>
                     option
                         .setName('invite_eigenaar')
                         .setDescription('De eigenaar van de invite link')
