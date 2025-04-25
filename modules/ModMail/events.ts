@@ -25,6 +25,7 @@ export default class Events {
         this.modMailChannel = this.client.channels.cache.get(<string>getEnv('MODMAIL')) as TextChannel;
         this.onMessageEvent();
         this.onSelectEvents();
+        this.onButtonsEvents();
     }
 
     // Event listeners
@@ -61,10 +62,7 @@ export default class Events {
                     })
                     .execute();
 
-                const ticketDb = await QueryBuilder
-                    .select('tickets')
-                    .where({created_by_user_id: message.author.id, status: 'open'})
-                    .first();
+                const ticketDb: any = await this.getTicketFromDb(message.author.id, 'open');
 
                 await ticket.send({
                     embeds: [this.fromDmToThreadEmbed(message, ticketDb)],
@@ -75,20 +73,15 @@ export default class Events {
             }
 
             // Add a message to an existing ticket
-            const ticket: any = await QueryBuilder
-                .select('tickets')
-                .where({created_by_user_id: message.author.id, status: 'open'})
-                .first();
-
-            Logging.debug(`Ticket ID: ${ticket.thread_id}`);
+            const ticketDb: any = await this.getTicketFromDb(message.author.id, 'open');
 
             try {
-                const thread = await this.client.channels.fetch(`${ticket.thread_id}`);
+                const thread = await this.client.channels.fetch(`${ticketDb.thread_id}`);
 
                 if (!thread || !thread.isThread()) return;
                 // @ts-ignore
                 await thread.send({
-                    embeds: [this.fromDmToThreadEmbed(message, ticket)],
+                    embeds: [this.fromDmToThreadEmbed(message, ticketDb)],
                     // @ts-ignore
                     components: [this.adminSelectTicketStatus(ticket)]
                 });
@@ -105,18 +98,16 @@ export default class Events {
 
             Logging.info(`Recieved a message in the modmail channel!`);
 
-            const ticket = await QueryBuilder
-                .select('tickets')
-                .where({thread_id: message.channel.id})
-                .first();
+            const ticketDb: any = await this.getTicketFromDb(message.author.id, 'open');
 
-            const user: User = await this.client.users.fetch(ticket.created_by_user_id);
+
+            const user: User = await this.client.users.fetch(ticketDb.created_by_user_id);
 
             // @ts-ignore
             await user.send({
-                embeds: [this.fromThreadToDmEmbed(message, ticket)],
+                embeds: [this.fromThreadToDmEmbed(message, ticketDb)],
                 // @ts-ignore
-                components: [this.userTicketButtons(ticket)]
+                components: [this.userTicketButtons(ticketDb)]
             });
         });
     }
@@ -127,21 +118,13 @@ export default class Events {
 
             await interaction.deferUpdate();
 
-            const ticket: any = await QueryBuilder
-                .select('tickets')
-                .where({thread_id: interaction.channel.id})
-                .first();
+            const ticketDb: any = await this.getTicketFromDb(interaction.author.id, 'open');
 
             if (interaction.customId === 'priority') {
+                await this.updateTicketStatusDb(interaction.channel.id, interaction.values[0]);
 
-                await QueryBuilder
-                    .update('tickets')
-                    .set({priority: interaction.values[0]})
-                    .where({thread_id: interaction.channel.id})
-                    .execute();
-
-                const user: User = await this.client.users.fetch(ticket.created_by_user_id);
-                const thread = await this.client.channels.fetch(`${ticket.thread_id}`);
+                const user: User = await this.client.users.fetch(ticketDb.created_by_user_id);
+                const thread = await this.client.channels.fetch(`${ticketDb.thread_id}`);
 
                 let embedTitle: string = '';
                 let embedDescription: string = '';
@@ -162,19 +145,16 @@ export default class Events {
                 }
 
                 await user.send({ embeds: [this.ticketStatusUpdateEmbed(embedTitle, embedDescription)] });
+                // @ts-ignore
                 await thread?.send({ embeds: [this.ticketStatusUpdateEmbed(embedTitle, embedDescription)] });
             }
 
             if (interaction.customId === 'status') {
-                await QueryBuilder
-                    .update('tickets')
-                    .set({status: interaction.values[0]})
-                    .where({thread_id: interaction.channel.id})
-                    .execute();
+                await this.updateTicketStatusDb(interaction.channel.id, interaction.values[0]);
 
                 // Send a message to user and thread
-                const user: User = await this.client.users.fetch(ticket.created_by_user_id);
-                const thread = await this.client.channels.fetch(`${ticket.thread_id}`);
+                const user: User = await this.client.users.fetch(ticketDb.created_by_user_id);
+                const thread = await this.client.channels.fetch(`${ticketDb.thread_id}`);
                 if (!thread?.isThread()) return;
 
                 let embedTitle: string = '';
@@ -183,27 +163,40 @@ export default class Events {
                 if (interaction.values[0] === 'closed') {
                     embedTitle = 'Ticket is gesloten!';
                     embedDescription = 'Ticket is gesloten door het bestuur.';
-
                     await thread.setArchived(true);
                 }
 
                 if (interaction.values[0] === 'on_hold') {
                     embedTitle = 'Ticket is on hold!';
-                    embedDescription = 'ticket is op on hold gezet door het bestuur. Je hoort nog van ons terug.';
+                    embedDescription = 'ticket is op on hold gezet door het bestuur.';
                 }
 
-                if (interaction.values[0] === 'in_progress') {
-                    embedTitle = 'Ticket is bezig!';
-                    embedDescription = 'Ticket is op bezig gezet door het bestuur. Je hoort van ons terug.';
-                }
-
-                await QueryBuilder.update('tickets')
-                    .set({status: interaction.values[0]})
-                    .where({thread_id: interaction.channel.id})
-                    .execute();
+                await this.updateTicketStatusDb(interaction.channel.id, interaction.values[0]);
 
                 await user.send({ embeds: [this.ticketStatusUpdateEmbed(embedTitle, embedDescription)] });
                 await thread.send({ embeds: [this.ticketStatusUpdateEmbed(embedTitle, embedDescription)] });
+            }
+        })
+    }
+
+    onButtonsEvents(): void {
+        this.client.on(discordEvents.InteractionCreate, async (interaction: any): Promise<void> => {
+            if (!interaction.isButton()) return;
+
+            await interaction.deferUpdate();
+
+            if (interaction.customId === 'closeTicketUser') {
+                const ticketDb = await this.getTicketFromDb(interaction.user.id, 'open');
+
+                await this.updateTicketStatusDb(interaction.channel.id, 'closed');
+
+                const user: User = await this.client.users.fetch(ticketDb.created_by_user_id);
+                const thread = await this.client.channels.fetch(`${ticketDb.thread_id}`);
+
+                if (!thread?.isThread()) return;
+
+                await user.send({ embeds: [this.ticketStatusUpdateEmbed('Ticket is gesloten!', 'Ticket is gesloten door het de gebruiker.')] });
+                await thread.send({ embeds: [this.ticketStatusUpdateEmbed('Ticket is gesloten!', 'Ticket is gesloten door het de gebruiker.')] });
             }
         })
     }
@@ -252,7 +245,6 @@ export default class Events {
                 .setPlaceholder('Status')
                 .addOptions([
                     { label: 'Status: Open', value: 'open', default: ticket.status == 'open' },
-                    { label: 'Status: Bezig', value: 'in_progress', default: ticket.status == 'in_progress' },
                     { label: 'Status: Gesloten', value: 'closed', default: ticket.status == 'closed' },
                     { label: 'Status: Pauze', value: 'on_hold', default: ticket.status == 'on_hold' }
                 ])
@@ -273,5 +265,19 @@ export default class Events {
             .setColor(Color.Red)
             .setTitle(title)
             .setDescription(description);
+    }
+
+    async getTicketFromDb(id: string, status: string): Promise<any> {
+        return await QueryBuilder
+            .select('tickets')
+            .where({created_by_user_id: id, status: status})
+            .first();
+    }
+
+    async updateTicketStatusDb(thread_id: string, status: string): Promise<void> {
+        await QueryBuilder.update('tickets')
+            .set({status: status})
+            .where({thread_id: thread_id})
+            .execute();
     }
 }
