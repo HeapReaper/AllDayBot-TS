@@ -39,20 +39,11 @@ export const commands = [
             subcommand
                 .setName('verwijder')
                 .setDescription('Verwijder een entry van de invite tracker per id, invite_code of invite naam')
-                .addIntegerOption(option =>
-                    option
-                        .setName('id')
-                        .setDescription('Invite ID')
-                )
-                .addStringOption(option =>
-                    option
-                        .setName('code')
-                        .setDescription('Invite code (url)')
-                )
                 .addStringOption(option =>
                     option
                         .setName('invite_naam')
                         .setDescription('Invite naam')
+                        .setRequired(true)
                 )
         ),
 ].map(command => command.toJSON());
