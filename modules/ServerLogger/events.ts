@@ -274,7 +274,6 @@ export default class Events {
                     { name: 'Bericht:', value: `${reaction.message.url}` }
                 );
 
-            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
             await this.logChannel.send({ embeds: [messageReactionAddEmbed], files: [this.reactionIcon] });
         });
     }
@@ -293,11 +292,11 @@ export default class Events {
                     .setTitle('Voice kanaal gejoined')
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
+                        // @ts-ignore
                         { name: 'Gebruiker:', value: `<@${newState.user.id}>` },
                         { name: 'Kanaal:', value: `${newState.channel.url}` },
                     );
 
-                const voiceChannelIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
                 await this.logChannel.send({ embeds: [voiceChannelEmbed], files: [this.voiceChatIcon] });
             }
 
@@ -310,11 +309,11 @@ export default class Events {
                     .setTitle('Voice kanaal verlaten')
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
+                        // @ts-ignore
                         { name: 'Gebruiker:', value: `<@${oldState.user.id}>` },
                         { name: 'Kanaal:', value: `${oldState.channel.url}` },
                     );
 
-                const voiceChannelIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
                 await this.logChannel.send({ embeds: [voiceChannelEmbed], files: [this.voiceChatIcon] });
             }
 
@@ -327,12 +326,12 @@ export default class Events {
                     .setTitle('Voice kanaal veranderd')
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
+                        // @ts-ignore
                         { name: 'Gebruiker:', value: `<@${oldState.user.id}>` },
                         { name: 'Oud:', value: `${oldState.channel.url}` },
                         { name: 'Nieuw:', value: `${newState.channel.url}` },
                     );
 
-                const voiceChannelIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
                 await this.logChannel.send({ embeds: [voiceChannelEmbed], files: [this.voiceChatIcon] });
             }
         });
