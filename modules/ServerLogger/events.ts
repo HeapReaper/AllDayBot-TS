@@ -1,24 +1,26 @@
 import {
-    Client,
-    Events as discordEvents,
-    Message,
-    EmbedBuilder,
-    TextChannel,
     AttachmentBuilder,
-    VoiceState,
-    GuildMember,
-    PartialGuildMember,
+    AuditLogEvent,
+    Client,
+    EmbedBuilder,
+    Events as discordEvents,
     GuildBan,
+    GuildMember,
+    Message,
     OmitPartialGroupDMChannel,
+    PartialGuildMember,
     PartialMessage,
+    TextChannel,
+    VoiceState,
+    User,
 } from 'discord.js';
-import { Logging } from '@utils/logging.ts';
-import { Color } from '@enums/colorEnum';
-import { getEnv } from '@utils/env.ts';
+import {Logging} from '@utils/logging.ts';
+import {Color} from '@enums/colorEnum';
+import {getEnv} from '@utils/env.ts';
 import S3OperationBuilder from '@utils/s3';
 import QueryBuilder from '@utils/database.ts';
 import path from 'path';
-import { Github } from '@utils/github';
+import {Github} from '@utils/github';
 
 export default class Events {
 
@@ -352,7 +354,7 @@ export default class Events {
                     { name: 'Gebruiker:', value: `<@${member.id}>` },
                     { name: 'Lid sinds:', value: `<t:${Math.floor(member.joinedTimestamp ?? 0 / 1000)}:F>` },
                     { name: 'Lid nummer:', value: `#${member.guild.memberCount}` },
-                )
+                );
 
             await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.userIcon] });
         });
@@ -368,7 +370,7 @@ export default class Events {
                 .addFields(
                     { name: 'Gebruiker:', value: `<@${member.id}>` },
                     { name: 'Lid sinds:', value: `<t:${Math.floor(member.joinedTimestamp ?? 0 / 1000)}:F>` },
-                )
+                );
 
             await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.userIcon] });
         });
@@ -376,23 +378,51 @@ export default class Events {
         this.client.on(discordEvents.GuildBanAdd, async (ban: GuildBan): Promise<void> => {
             Logging.info('A user was banned on this Discord!');
 
+            const fetchBan: GuildBan = await ban.guild.bans.fetch(ban.user.id);
+            const auditLogs = await ban.guild.fetchAuditLogs({
+                type: AuditLogEvent.MemberBanAdd,
+                limit: 1
+            });
+
+            const banLog = auditLogs.entries.find(
+                entry => entry.target?.id === ban.user.id)
+            ;
+            const executor: User|null|undefined = banLog?.executor;
+
             const memberEventEmbed = new EmbedBuilder()
                 .setColor(Color.Red)
                 .setTitle('Lid gebanned')
-                .setDescription(`Wie: <@${ban.user.id}>`)
-                .setThumbnail('attachment://moderation.png');
+                .setThumbnail('attachment://moderation.png')
+                .addFields(
+                    { name: 'Wie:', value: `<@${ban.user.id}>` },
+                    { name: 'Reden:', value: `${fetchBan.reason ?? 'Geen reden opgegeven'}` },
+                    { name: 'Door:', value: executor ? `${executor.username} (<@${executor.id}>)` : 'Onbekend' },
+                );
 
             await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.moderationIcon] });
         });
 
-        this.client.on(discordEvents.GuildBanRemove, async (ban: GuildBan): Promise<void> => {
+        this.client.on(discordEvents.GuildBanRemove, async (unBan: GuildBan): Promise<void> => {
             Logging.info('A user was unbanned on this Discord!');
+
+            const auditLogs = await unBan.guild.fetchAuditLogs({
+                type: AuditLogEvent.MemberBanAdd,
+                limit: 1
+            });
+
+            const unBanLog = auditLogs.entries.find(
+                entry => entry.target?.id === unBan.user.id)
+            ;
+            const executor: User|null|undefined = unBanLog?.executor;
 
             const memberEventEmbed = new EmbedBuilder()
                 .setColor(Color.Orange)
                 .setTitle('Lid unbanned')
-                .setDescription(`Wie: <@${ban.user.id}>`)
-                .setThumbnail('attachment://moderation.png');
+                .setThumbnail('attachment://moderation.png')
+                .addFields(
+                    { name: 'Wie:', value: `<@${unBan.user.id}>` },
+                    { name: 'Door:', value: executor ? `${executor.username} (<@${executor.id}>)` : 'Onbekend' },
+                )
 
             await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.moderationIcon] });
         });
