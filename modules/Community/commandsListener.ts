@@ -2,6 +2,7 @@ import { Client,
 	Interaction,
 	Events,
 	Channel,
+	MessageFlags,
 } from 'discord.js';
 import { Logging } from '@utils/logging';
 
@@ -51,7 +52,7 @@ export default class CommandsListener {
 
 		await interaction.reply({
 			content: 'Ik heb het gestuurd!',
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 
 		// @ts-ignore

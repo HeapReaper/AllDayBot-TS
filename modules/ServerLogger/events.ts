@@ -1,16 +1,18 @@
 import {
-    Client,
-    Events as discordEvents,
-    Message,
-    EmbedBuilder,
-    TextChannel,
     AttachmentBuilder,
-    VoiceState,
-    GuildMember,
-    PartialGuildMember,
+    AuditLogEvent,
+    Client,
+    EmbedBuilder,
+    Events as discordEvents,
     GuildBan,
+    GuildMember,
+    Message,
     OmitPartialGroupDMChannel,
+    PartialGuildMember,
     PartialMessage,
+    TextChannel,
+    VoiceState,
+    User,
 } from 'discord.js';
 import { Logging } from '@utils/logging.ts';
 import { Color } from '@enums/colorEnum';
@@ -23,10 +25,22 @@ import { Github } from '@utils/github';
 export default class Events {
     private client: Client;
     private logChannel: any;
+    private botIcon: AttachmentBuilder;
+    private chatIcon: AttachmentBuilder;
+    private voiceChatIcon: AttachmentBuilder;
+    private reactionIcon: AttachmentBuilder;
+    private userIcon: AttachmentBuilder;
+    private moderationIcon: AttachmentBuilder;
 
     constructor(client: Client) {
         this.client = client;
         this.logChannel = this.client.channels.cache.get(<string>getEnv('ALL_DAY_LOG')) as TextChannel;
+        this.botIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/bot.png`);
+        this.chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
+        this.voiceChatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
+        this.reactionIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/happy-face.png`);
+        this.userIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/user.png`);
+        this.moderationIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderation.png`);
         void this.bootEvent();
         this.messageEvents();
         this.reactionEvents();
@@ -36,8 +50,6 @@ export default class Events {
 
     async bootEvent(): Promise<void> {
         try {
-            const botIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/bot.png`);
-
             const currentRelease: string | null = await Github.getCurrentRelease();
 
             await new Promise<void>(resolve => {
@@ -50,15 +62,16 @@ export default class Events {
             });
 
             const bootEmbed: EmbedBuilder = new EmbedBuilder()
-                .setColor(Color.Green)
+                .setColor(Color.AdtgPurple)
                 .setTitle('Ik ben opnieuw opgestart!')
                 .addFields(
+                    { name: 'Gebruiker:', value: `<@${this.client.user?.id}>` },
                     { name: 'Versie:', value: `${currentRelease ? currentRelease : 'Rate limited'}` },
                     { name: 'Ping:', value: `${this.client.ws.ping}ms` }
                 )
                 .setThumbnail('attachment://bot.png');
 
-            await this.logChannel.send({ embeds: [bootEmbed], files: [botIcon]});
+            await this.logChannel.send({ embeds: [bootEmbed], files: [this.botIcon] });
         } catch (error) {
             Logging.error(`Error in bootEvent serverLogger: ${error}`);
         }
@@ -73,10 +86,8 @@ export default class Events {
      * @return void
      */
     messageEvents(): void {
-        const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
-
         this.client.on(discordEvents.MessageCreate, async (message: Message): Promise<void> => {
-            Logging.info('Caching message and media in server logger');
+            Logging.info('Caching message');
             if (message.author.bot) return;
 
             try {
@@ -136,14 +147,14 @@ export default class Events {
             const messageUpdateEmbed: any = new EmbedBuilder()
                 .setColor(Color.Orange)
                 .setTitle('Bericht bewerkt')
-                .setDescription(`Door: <@${oldMessage.author?.id}>`)
                 .setThumbnail('attachment://chat.png')
                 .addFields(
+                    { name: 'Gebruiker', value: `<@${oldMessage.author?.id}>`},
                     { name: 'Oud:', value: oldMessage.content ?? 'Er ging wat fout' },
                     { name: 'Nieuw:', value: newMessage.content ?? 'Er ging wat fout'}
                 );
 
-            this.logChannel.send({ embeds: [messageUpdateEmbed], files: [chatIcon] });
+            this.logChannel.send({ embeds: [messageUpdateEmbed], files: [this.chatIcon] });
         });
 
         // @ts-ignore
@@ -175,9 +186,9 @@ export default class Events {
             const messageDelete: any = new EmbedBuilder()
                 .setColor(Color.Red)
                 .setTitle('Bericht verwijderd')
-                .setDescription(`Door: <@${message.partial ? messageFromDbCache.author_id ?? 0o10101 : message.author.id}>`)
                 .setThumbnail('attachment://chat.png')
                 .addFields(
+                    { name: 'Gebruiker', value: `<@${message.partial ? messageFromDbCache.author_id ?? 0o10101 : message.author.id}>`},
                     { name: 'Bericht:', value: message.content },
                 );
 
@@ -194,7 +205,7 @@ export default class Events {
                 attachments.push(new AttachmentBuilder(buffer, { name: filename }));
             }
 
-            attachments.push(chatIcon);
+            attachments.push(this.chatIcon);
 
             await this.logChannel.send({ embeds: [messageDelete], files: attachments });
 
@@ -222,7 +233,7 @@ export default class Events {
                 .setThumbnail('attachment://chat.png')
                 .addFields(...deletedMessages);
 
-            await this.logChannel.send({ embeds: [bulkMessagesDeleted], files: [chatIcon]});
+            await this.logChannel.send({ embeds: [bulkMessagesDeleted], files: [this.chatIcon] });
         });
     }
 
@@ -232,38 +243,37 @@ export default class Events {
      * @return void
      */
     reactionEvents(): void {
-        const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
-
-        this.client.on(discordEvents.MessageReactionAdd, async (reaction, user) => {            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
+        this.client.on(discordEvents.MessageReactionAdd, async (reaction, user) => {
             Logging.info('Reaction added to message!');
 
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
                 .setColor(Color.Green)
                 .setTitle('Reactie toegevoegd')
                 .setDescription(`Door: <@${user.id}>`)
-                .setThumbnail('attachment://chat.png')
+                .setThumbnail('attachment://happy-face.png')
                 .addFields(
+                    { name: 'Gebruiker:', value: `<@${user.id}>` },
                     { name: 'Emoji:', value: `${reaction.emoji}` },
                     { name: 'Bericht:', value: `${reaction.message.url}` }
                 );
 
-            await this.logChannel.send({embeds: [messageReactionAddEmbed], files: [chatIcon]});
+            await this.logChannel.send({ embeds: [messageReactionAddEmbed], files: [this.reactionIcon] });
         });
 
-        this.client.on(discordEvents.MessageReactionRemove, async (reaction, user) => {            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
+        this.client.on(discordEvents.MessageReactionRemove, async (reaction, user) => {
             Logging.info('Reaction removed to message!');
 
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
                 .setColor(Color.Orange)
                 .setTitle('Reactie verwijderd')
-                .setDescription(`Door: <@${user.id}>`)
-                .setThumbnail('attachment://chat.png')
+                .setThumbnail('attachment://happy-face.png')
                 .addFields(
+                    { name: 'Gebruiker:', value: `<@${user.id}>` },
                     { name: 'Emoji:', value: `${reaction.emoji}` },
                     { name: 'Bericht:', value: `${reaction.message.url}` }
                 );
 
-            await this.logChannel.send({embeds: [messageReactionAddEmbed], files: [chatIcon]});
+            await this.logChannel.send({ embeds: [messageReactionAddEmbed], files: [this.reactionIcon] });
         });
     }
 
@@ -274,20 +284,19 @@ export default class Events {
      */
     voiceChannelEvents(): void {
         this.client.on(discordEvents.VoiceStateUpdate, async (oldState: VoiceState, newState: VoiceState) => {
-            const voiceChannelIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
-
             // If user joins voice channel
             if (!oldState.channel && newState.channel) {
                 const voiceChannelEmbed: EmbedBuilder = new EmbedBuilder()
                     .setColor(Color.Green)
                     .setTitle('Voice kanaal gejoined')
-                    .setDescription(`Door: <@${oldState.member?.id}>`)
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
+                        // @ts-ignore
+                        { name: 'Gebruiker:', value: `<@${newState.user.id}>` },
                         { name: 'Kanaal:', value: `${newState.channel.url}` },
                     );
 
-                await this.logChannel.send({embeds: [voiceChannelEmbed], files: [voiceChannelIcon]});
+                await this.logChannel.send({ embeds: [voiceChannelEmbed], files: [this.voiceChatIcon] });
             }
 
             // If user leaves voice channel
@@ -297,13 +306,14 @@ export default class Events {
                 const voiceChannelEmbed: EmbedBuilder = new EmbedBuilder()
                     .setColor(Color.Orange)
                     .setTitle('Voice kanaal verlaten')
-                    .setDescription(`Door: <@${oldState.member?.id}>`)
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
+                        // @ts-ignore
+                        { name: 'Gebruiker:', value: `<@${oldState.user.id}>` },
                         { name: 'Kanaal:', value: `${oldState.channel.url}` },
                     );
 
-                await this.logChannel.send({embeds: [voiceChannelEmbed], files: [voiceChannelIcon]});
+                await this.logChannel.send({ embeds: [voiceChannelEmbed], files: [this.voiceChatIcon] });
             }
 
             // If user changes voice channel
@@ -313,14 +323,15 @@ export default class Events {
                 const voiceChannelEmbed: EmbedBuilder = new EmbedBuilder()
                     .setColor(Color.Green)
                     .setTitle('Voice kanaal veranderd')
-                    .setDescription(`Door: <@${oldState.member?.id}>`)
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
+                        // @ts-ignore
+                        { name: 'Gebruiker:', value: `<@${oldState.user.id}>` },
                         { name: 'Oud:', value: `${oldState.channel.url}` },
                         { name: 'Nieuw:', value: `${newState.channel.url}` },
                     );
 
-                await this.logChannel.send({embeds: [voiceChannelEmbed], files: [voiceChannelIcon]});
+                await this.logChannel.send({ embeds: [voiceChannelEmbed], files: [this.voiceChatIcon] });
             }
         });
     }
@@ -332,18 +343,7 @@ export default class Events {
      * @return {Promise<void>} Resolves when the events are registered and handled properly.
      */
     async memberEvents(): Promise<void> {
-        this.client.on(discordEvents.GuildMemberAdd, async (member: GuildMember): Promise<void> => {
-            Logging.info('A user joined this Discord!');
-
-            const memberEventEmbed = new EmbedBuilder()
-                .setColor(Color.Green)
-                .setTitle('Nieuw lid')
-                .setDescription(`Wie: <@${member.id}>`)
-                .setThumbnail('attachment://group.png');
-
-            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
-            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
-        });
+        // On member join is handles by invite tracker
 
         this.client.on(discordEvents.GuildMemberRemove, async (member: GuildMember|PartialGuildMember): Promise<void> => {
             Logging.info('A user left this Discord!');
@@ -351,56 +351,84 @@ export default class Events {
             const memberEventEmbed = new EmbedBuilder()
                 .setColor(Color.Red)
                 .setTitle('Lid verlaten')
-                .setDescription(`Wie: <@${member.id}>`)
-                .setThumbnail('attachment://group.png');
+                .setThumbnail('attachment://user.png')
+                .addFields(
+                    { name: 'Gebruiker:', value: `<@${member.id}>` },
+                    { name: 'Lid sinds:', value: `<t:${Math.floor(member.joinedTimestamp ?? 0 / 1000)}:F>` },
+                );
 
-            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
-            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+            await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.userIcon] });
         });
 
         this.client.on(discordEvents.GuildBanAdd, async (ban: GuildBan): Promise<void> => {
             Logging.info('A user was banned on this Discord!');
 
+            const fetchBan: GuildBan = await ban.guild.bans.fetch(ban.user.id);
+            const auditLogs = await ban.guild.fetchAuditLogs({
+                type: AuditLogEvent.MemberBanAdd,
+                limit: 1
+            });
+
+            const banLog = auditLogs.entries.find(
+                entry => entry.target?.id === ban.user.id)
+            ;
+            const executor: User|null|undefined = banLog?.executor;
+
             const memberEventEmbed = new EmbedBuilder()
                 .setColor(Color.Red)
                 .setTitle('Lid gebanned')
-                .setDescription(`Wie: <@${ban.user.id}>`)
-                .setThumbnail('attachment://moderator.png');
+                .setThumbnail('attachment://moderation.png')
+                .addFields(
+                    { name: 'Gebruiker:', value: `<@${ban.user.id}>` },
+                    { name: 'Reden:', value: `${fetchBan.reason ?? 'Geen reden opgegeven'}` },
+                    { name: 'Door:', value: executor ? `${executor.username} (<@${executor.id}>)` : 'Onbekend' },
+                );
 
-            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderator.png`);
-            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+            await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.moderationIcon] });
         });
 
-        this.client.on(discordEvents.GuildBanRemove, async (ban: GuildBan): Promise<void> => {
+        this.client.on(discordEvents.GuildBanRemove, async (unBan: GuildBan): Promise<void> => {
             Logging.info('A user was unbanned on this Discord!');
+
+            const auditLogs = await unBan.guild.fetchAuditLogs({
+                type: AuditLogEvent.MemberBanAdd,
+                limit: 1
+            });
+
+            const unBanLog = auditLogs.entries.find(
+                entry => entry.target?.id === unBan.user.id)
+            ;
+            const executor: User|null|undefined = unBanLog?.executor;
 
             const memberEventEmbed = new EmbedBuilder()
                 .setColor(Color.Orange)
                 .setTitle('Lid unbanned')
-                .setDescription(`Wie: <@${ban.user.id}>`)
-                .setThumbnail('attachment://moderator.png');
+                .setThumbnail('attachment://moderation.png')
+                .addFields(
+                    { name: 'Gebruiker:', value: `<@${unBan.user.id}>` },
+                    { name: 'Door:', value: executor ? `${executor.username} (<@${executor.id}>)` : 'Onbekend' },
+                )
 
-            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderator.png`);
-            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+            await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.moderationIcon] });
         });
 
         this.client.on(discordEvents.GuildMemberUpdate, async (oldMember: GuildMember|PartialGuildMember, newMember: GuildMember): Promise<void> => {
+            if (oldMember.displayName === newMember.displayName) return;
+
             Logging.info('A user was updated in this Discord!');
 
-            if (oldMember.displayName === newMember.displayName) return;
 
             const memberEventEmbed = new EmbedBuilder()
                 .setColor(Color.Green)
                 .setTitle('Lid gebruikersnaam update')
-                .setDescription(`Wie: <@${newMember.id}>`)
-                .setThumbnail('attachment://group.png')
+                .setThumbnail('attachment://user.png')
                 .addFields(
+                    { name: 'Gebruiker:', value: `<@${newMember.user.id}>` },
                     { name: 'Oud:', value: `${oldMember.displayName ?? 'Niet gevonden'}` },
                     { name: 'Nieuw:', value: `${newMember.displayName ?? 'Niet gevonden'}` },
                 );
 
-            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
-            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+            await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.userIcon]});
         });
     }
 }
