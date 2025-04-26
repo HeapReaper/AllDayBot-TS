@@ -2,11 +2,6 @@ import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
 
 export const commands = [
     new SlashCommandBuilder()
-        .setName('welkomsbericht')
-        .setDescription('Bewerk het welkomsbericht!')
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
-
-    new SlashCommandBuilder()
         .setName('community')
         .setDescription('Alle community commands')
         .addSubcommand(add =>
