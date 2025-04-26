@@ -34,7 +34,7 @@ export default class CommandsListener {
 				case 'toevoegen':
 					await this.addInvite(interaction);
 					break;
-				case 'verwijderen':
+				case 'verwijder':
 					await this.deleteInvite(interaction);
 					break;
 			}
@@ -100,7 +100,7 @@ export default class CommandsListener {
 		try {
 			await QueryBuilder
 				.delete('invite_tracker')
-				.where({ invite_naam: `${interaction.options.getString('invite_naam')}`})
+				.where({ invite_name: `${interaction.options.getString('invite_naam')}`})
 				.execute();
 
 			await interaction.reply({
