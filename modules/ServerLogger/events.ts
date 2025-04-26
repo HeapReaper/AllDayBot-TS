@@ -23,7 +23,6 @@ import path from 'path';
 import { Github } from '@utils/github';
 
 export default class Events {
-
     private client: Client;
     private logChannel: any;
     private botIcon: AttachmentBuilder;
@@ -344,21 +343,7 @@ export default class Events {
      * @return {Promise<void>} Resolves when the events are registered and handled properly.
      */
     async memberEvents(): Promise<void> {
-        this.client.on(discordEvents.GuildMemberAdd, async (member: GuildMember): Promise<void> => {
-            Logging.info('A user joined this Discord!');
-
-            const memberEventEmbed = new EmbedBuilder()
-                .setColor(Color.Green)
-                .setTitle('Nieuw lid')
-                .setThumbnail('attachment://user.png')
-                .addFields(
-                    { name: 'Gebruiker:', value: `<@${member.id}>` },
-                    { name: 'Lid sinds:', value: `<t:${Math.floor(member.joinedTimestamp ?? 0 / 1000)}:F>` },
-                    { name: 'Lid nummer:', value: `#${member.guild.memberCount}` },
-                );
-
-            await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.userIcon] });
-        });
+        // On member join is handles by invite tracker
 
         this.client.on(discordEvents.GuildMemberRemove, async (member: GuildMember|PartialGuildMember): Promise<void> => {
             Logging.info('A user left this Discord!');
@@ -428,9 +413,10 @@ export default class Events {
         });
 
         this.client.on(discordEvents.GuildMemberUpdate, async (oldMember: GuildMember|PartialGuildMember, newMember: GuildMember): Promise<void> => {
+            if (oldMember.displayName === newMember.displayName) return;
+
             Logging.info('A user was updated in this Discord!');
 
-            if (oldMember.displayName === newMember.displayName) return;
 
             const memberEventEmbed = new EmbedBuilder()
                 .setColor(Color.Green)
