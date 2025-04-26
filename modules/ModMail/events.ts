@@ -114,7 +114,7 @@ export default class Events {
 
     onSelectEvents(): void {
         this.client.on(discordEvents.InteractionCreate, async (interaction: any): Promise<void> => {
-            if (!interaction.isSelectMenu()) return;
+            if (!interaction.isStringSelectMenu()) return;
 
             await interaction.deferUpdate();
 
