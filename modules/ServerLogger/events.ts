@@ -21,12 +21,25 @@ import path from 'path';
 import { Github } from '@utils/github';
 
 export default class Events {
+
     private client: Client;
     private logChannel: any;
+    private botIcon: AttachmentBuilder;
+    private chatIcon: AttachmentBuilder;
+    private voiceChatIcon: AttachmentBuilder;
+    private reactionIcon: AttachmentBuilder;
+    private userIcon: AttachmentBuilder;
+    private moderationIcon: AttachmentBuilder;
 
     constructor(client: Client) {
         this.client = client;
         this.logChannel = this.client.channels.cache.get(<string>getEnv('ALL_DAY_LOG')) as TextChannel;
+        this.botIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/bot.png`);
+        this.chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
+        this.voiceChatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
+        this.reactionIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/happy-face.png`);
+        this.userIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/user.png`);
+        this.moderationIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderation.png`);
         void this.bootEvent();
         this.messageEvents();
         this.reactionEvents();
@@ -36,8 +49,6 @@ export default class Events {
 
     async bootEvent(): Promise<void> {
         try {
-            const botIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/bot.png`);
-
             const currentRelease: string | null = await Github.getCurrentRelease();
 
             await new Promise<void>(resolve => {
@@ -58,7 +69,7 @@ export default class Events {
                 )
                 .setThumbnail('attachment://bot.png');
 
-            await this.logChannel.send({ embeds: [bootEmbed], files: [botIcon]});
+            await this.logChannel.send({ embeds: [bootEmbed], files: [this.botIcon] });
         } catch (error) {
             Logging.error(`Error in bootEvent serverLogger: ${error}`);
         }
@@ -73,10 +84,8 @@ export default class Events {
      * @return void
      */
     messageEvents(): void {
-        const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
-
         this.client.on(discordEvents.MessageCreate, async (message: Message): Promise<void> => {
-            Logging.info('Caching message and media in server logger');
+            Logging.info('Caching message');
             if (message.author.bot) return;
 
             try {
@@ -143,7 +152,7 @@ export default class Events {
                     { name: 'Nieuw:', value: newMessage.content ?? 'Er ging wat fout'}
                 );
 
-            this.logChannel.send({ embeds: [messageUpdateEmbed], files: [chatIcon] });
+            this.logChannel.send({ embeds: [messageUpdateEmbed], files: [this.chatIcon] });
         });
 
         // @ts-ignore
@@ -194,7 +203,7 @@ export default class Events {
                 attachments.push(new AttachmentBuilder(buffer, { name: filename }));
             }
 
-            attachments.push(chatIcon);
+            attachments.push(this.chatIcon);
 
             await this.logChannel.send({ embeds: [messageDelete], files: attachments });
 
@@ -222,7 +231,7 @@ export default class Events {
                 .setThumbnail('attachment://chat.png')
                 .addFields(...deletedMessages);
 
-            await this.logChannel.send({ embeds: [bulkMessagesDeleted], files: [chatIcon]});
+            await this.logChannel.send({ embeds: [bulkMessagesDeleted], files: [this.chatIcon] });
         });
     }
 
@@ -232,9 +241,7 @@ export default class Events {
      * @return void
      */
     reactionEvents(): void {
-
         this.client.on(discordEvents.MessageReactionAdd, async (reaction, user) => {
-            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
             Logging.info('Reaction added to message!');
 
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
@@ -247,11 +254,10 @@ export default class Events {
                     { name: 'Bericht:', value: `${reaction.message.url}` }
                 );
 
-            await this.logChannel.send({embeds: [messageReactionAddEmbed], files: [chatIcon]});
+            await this.logChannel.send({ embeds: [messageReactionAddEmbed], files: [this.chatIcon] });
         });
 
         this.client.on(discordEvents.MessageReactionRemove, async (reaction, user) => {
-            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
             Logging.info('Reaction removed to message!');
 
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
@@ -264,7 +270,8 @@ export default class Events {
                     { name: 'Bericht:', value: `${reaction.message.url}` }
                 );
 
-            await this.logChannel.send({embeds: [messageReactionAddEmbed], files: [chatIcon]});
+            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
+            await this.logChannel.send({ embeds: [messageReactionAddEmbed], files: [this.chatIcon] });
         });
     }
 
@@ -275,8 +282,6 @@ export default class Events {
      */
     voiceChannelEvents(): void {
         this.client.on(discordEvents.VoiceStateUpdate, async (oldState: VoiceState, newState: VoiceState) => {
-            const voiceChannelIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
-
             // If user joins voice channel
             if (!oldState.channel && newState.channel) {
                 const voiceChannelEmbed: EmbedBuilder = new EmbedBuilder()
@@ -288,7 +293,8 @@ export default class Events {
                         { name: 'Kanaal:', value: `${newState.channel.url}` },
                     );
 
-                await this.logChannel.send({embeds: [voiceChannelEmbed], files: [voiceChannelIcon]});
+                const voiceChannelIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
+                await this.logChannel.send({ embeds: [voiceChannelEmbed], files: [this.voiceChatIcon] });
             }
 
             // If user leaves voice channel
@@ -304,7 +310,8 @@ export default class Events {
                         { name: 'Kanaal:', value: `${oldState.channel.url}` },
                     );
 
-                await this.logChannel.send({embeds: [voiceChannelEmbed], files: [voiceChannelIcon]});
+                const voiceChannelIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
+                await this.logChannel.send({ embeds: [voiceChannelEmbed], files: [this.voiceChatIcon] });
             }
 
             // If user changes voice channel
@@ -321,7 +328,8 @@ export default class Events {
                         { name: 'Nieuw:', value: `${newState.channel.url}` },
                     );
 
-                await this.logChannel.send({embeds: [voiceChannelEmbed], files: [voiceChannelIcon]});
+                const voiceChannelIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
+                await this.logChannel.send({ embeds: [voiceChannelEmbed], files: [this.voiceChatIcon] });
             }
         });
     }
@@ -339,15 +347,14 @@ export default class Events {
             const memberEventEmbed = new EmbedBuilder()
                 .setColor(Color.Green)
                 .setTitle('Nieuw lid')
-                .setThumbnail('attachment://group.png')
+                .setThumbnail('attachment://user.png')
                 .addFields(
                     { name: 'Gebruiker:', value: `<@${member.id}>` },
                     { name: 'Lid sinds:', value: `<t:${Math.floor(member.joinedTimestamp ?? 0 / 1000)}:F>` },
                     { name: 'Lid nummer:', value: `#${member.guild.memberCount}` },
                 )
 
-            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
-            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+            await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.userIcon] });
         });
 
         this.client.on(discordEvents.GuildMemberRemove, async (member: GuildMember|PartialGuildMember): Promise<void> => {
@@ -357,14 +364,13 @@ export default class Events {
                 .setColor(Color.Red)
                 .setTitle('Lid verlaten')
                 .setDescription(`Wie: <@${member.id}>`)
-                .setThumbnail('attachment://group.png')
+                .setThumbnail('attachment://user.png')
                 .addFields(
                     { name: 'Gebruiker:', value: `<@${member.id}>` },
                     { name: 'Lid sinds:', value: `<t:${Math.floor(member.joinedTimestamp ?? 0 / 1000)}:F>` },
                 )
 
-            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
-            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+            await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.userIcon] });
         });
 
         this.client.on(discordEvents.GuildBanAdd, async (ban: GuildBan): Promise<void> => {
@@ -374,10 +380,9 @@ export default class Events {
                 .setColor(Color.Red)
                 .setTitle('Lid gebanned')
                 .setDescription(`Wie: <@${ban.user.id}>`)
-                .setThumbnail('attachment://moderator.png');
+                .setThumbnail('attachment://moderation.png');
 
-            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderator.png`);
-            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+            await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.moderationIcon] });
         });
 
         this.client.on(discordEvents.GuildBanRemove, async (ban: GuildBan): Promise<void> => {
@@ -387,10 +392,9 @@ export default class Events {
                 .setColor(Color.Orange)
                 .setTitle('Lid unbanned')
                 .setDescription(`Wie: <@${ban.user.id}>`)
-                .setThumbnail('attachment://moderator.png');
+                .setThumbnail('attachment://moderation.png');
 
-            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderator.png`);
-            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+            await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.moderationIcon] });
         });
 
         this.client.on(discordEvents.GuildMemberUpdate, async (oldMember: GuildMember|PartialGuildMember, newMember: GuildMember): Promise<void> => {
@@ -402,14 +406,13 @@ export default class Events {
                 .setColor(Color.Green)
                 .setTitle('Lid gebruikersnaam update')
                 .setDescription(`Wie: <@${newMember.id}>`)
-                .setThumbnail('attachment://group.png')
+                .setThumbnail('attachment://user.png')
                 .addFields(
                     { name: 'Oud:', value: `${oldMember.displayName ?? 'Niet gevonden'}` },
                     { name: 'Nieuw:', value: `${newMember.displayName ?? 'Niet gevonden'}` },
                 );
 
-            const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
-            await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
+            await this.logChannel.send({ embeds: [memberEventEmbed], files: [this.userIcon]});
         });
     }
 }
