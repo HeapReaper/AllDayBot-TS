@@ -61,7 +61,7 @@ export default class Events {
             });
 
             const bootEmbed: EmbedBuilder = new EmbedBuilder()
-                .setColor(Color.Green)
+                .setColor(Color.AdtgPurple)
                 .setTitle('Ik ben opnieuw opgestart!')
                 .addFields(
                     { name: 'Versie:', value: `${currentRelease ? currentRelease : 'Rate limited'}` },
