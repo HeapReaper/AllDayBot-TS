@@ -1,9 +1,10 @@
-import { SlashCommandBuilder } from 'discord.js';
+import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
 
 export const commands = [
     new SlashCommandBuilder()
         .setName('invites')
         .setDescription('De invite tracker')
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
         // List
         .addSubcommand(subcommand =>
             subcommand
