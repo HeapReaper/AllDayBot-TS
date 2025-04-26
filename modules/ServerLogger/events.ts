@@ -232,9 +232,9 @@ export default class Events {
      * @return void
      */
     reactionEvents(): void {
-        const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
 
-        this.client.on(discordEvents.MessageReactionAdd, async (reaction, user) => {            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
+        this.client.on(discordEvents.MessageReactionAdd, async (reaction, user) => {
+            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
             Logging.info('Reaction added to message!');
 
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
@@ -250,7 +250,8 @@ export default class Events {
             await this.logChannel.send({embeds: [messageReactionAddEmbed], files: [chatIcon]});
         });
 
-        this.client.on(discordEvents.MessageReactionRemove, async (reaction, user) => {            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
+        this.client.on(discordEvents.MessageReactionRemove, async (reaction, user) => {
+            const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
             Logging.info('Reaction removed to message!');
 
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
@@ -338,8 +339,12 @@ export default class Events {
             const memberEventEmbed = new EmbedBuilder()
                 .setColor(Color.Green)
                 .setTitle('Nieuw lid')
-                .setDescription(`Wie: <@${member.id}>`)
-                .setThumbnail('attachment://group.png');
+                .setThumbnail('attachment://group.png')
+                .addFields(
+                    { name: 'Gebruiker:', value: `<@${member.id}>` },
+                    { name: 'Lid sinds:', value: `<t:${Math.floor(member.joinedTimestamp ?? 0 / 1000)}:F>` },
+                    { name: 'Lid nummer:', value: `#${member.guild.memberCount}` },
+                )
 
             const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
             await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
@@ -352,7 +357,11 @@ export default class Events {
                 .setColor(Color.Red)
                 .setTitle('Lid verlaten')
                 .setDescription(`Wie: <@${member.id}>`)
-                .setThumbnail('attachment://group.png');
+                .setThumbnail('attachment://group.png')
+                .addFields(
+                    { name: 'Gebruiker:', value: `<@${member.id}>` },
+                    { name: 'Lid sinds:', value: `<t:${Math.floor(member.joinedTimestamp ?? 0 / 1000)}:F>` },
+                )
 
             const attachmentIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/group.png`);
             await this.logChannel.send({embeds: [memberEventEmbed], files: [attachmentIcon]});
