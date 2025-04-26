@@ -14,13 +14,13 @@ import {
     VoiceState,
     User,
 } from 'discord.js';
-import {Logging} from '@utils/logging.ts';
-import {Color} from '@enums/colorEnum';
-import {getEnv} from '@utils/env.ts';
+import { Logging } from '@utils/logging.ts';
+import { Color } from '@enums/colorEnum';
+import { getEnv } from '@utils/env.ts';
 import S3OperationBuilder from '@utils/s3';
 import QueryBuilder from '@utils/database.ts';
 import path from 'path';
-import {Github} from '@utils/github';
+import { Github } from '@utils/github';
 
 export default class Events {
 
@@ -66,6 +66,7 @@ export default class Events {
                 .setColor(Color.AdtgPurple)
                 .setTitle('Ik ben opnieuw opgestart!')
                 .addFields(
+                    { name: 'Gebruiker:', value: `<@${this.client.user?.id}>` },
                     { name: 'Versie:', value: `${currentRelease ? currentRelease : 'Rate limited'}` },
                     { name: 'Ping:', value: `${this.client.ws.ping}ms` }
                 )
@@ -147,9 +148,9 @@ export default class Events {
             const messageUpdateEmbed: any = new EmbedBuilder()
                 .setColor(Color.Orange)
                 .setTitle('Bericht bewerkt')
-                .setDescription(`Door: <@${oldMessage.author?.id}>`)
                 .setThumbnail('attachment://chat.png')
                 .addFields(
+                    { name: 'Gebruiker', value: `<@${oldMessage.author?.id}>`},
                     { name: 'Oud:', value: oldMessage.content ?? 'Er ging wat fout' },
                     { name: 'Nieuw:', value: newMessage.content ?? 'Er ging wat fout'}
                 );
@@ -186,9 +187,9 @@ export default class Events {
             const messageDelete: any = new EmbedBuilder()
                 .setColor(Color.Red)
                 .setTitle('Bericht verwijderd')
-                .setDescription(`Door: <@${message.partial ? messageFromDbCache.author_id ?? 0o10101 : message.author.id}>`)
                 .setThumbnail('attachment://chat.png')
                 .addFields(
+                    { name: 'Gebruiker', value: `<@${message.partial ? messageFromDbCache.author_id ?? 0o10101 : message.author.id}>`},
                     { name: 'Bericht:', value: message.content },
                 );
 
@@ -252,6 +253,7 @@ export default class Events {
                 .setDescription(`Door: <@${user.id}>`)
                 .setThumbnail('attachment://chat.png')
                 .addFields(
+                    { name: 'Gebruiker:', value: `<@${user.id}>` },
                     { name: 'Emoji:', value: `${reaction.emoji}` },
                     { name: 'Bericht:', value: `${reaction.message.url}` }
                 );
@@ -265,9 +267,9 @@ export default class Events {
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
                 .setColor(Color.Orange)
                 .setTitle('Reactie verwijderd')
-                .setDescription(`Door: <@${user.id}>`)
                 .setThumbnail('attachment://chat.png')
                 .addFields(
+                    { name: 'Gebruiker:', value: `<@${user.id}>` },
                     { name: 'Emoji:', value: `${reaction.emoji}` },
                     { name: 'Bericht:', value: `${reaction.message.url}` }
                 );
@@ -289,9 +291,9 @@ export default class Events {
                 const voiceChannelEmbed: EmbedBuilder = new EmbedBuilder()
                     .setColor(Color.Green)
                     .setTitle('Voice kanaal gejoined')
-                    .setDescription(`Door: <@${oldState.member?.id}>`)
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
+                        { name: 'Gebruiker:', value: `<@${newState.user.id}>` },
                         { name: 'Kanaal:', value: `${newState.channel.url}` },
                     );
 
@@ -306,9 +308,9 @@ export default class Events {
                 const voiceChannelEmbed: EmbedBuilder = new EmbedBuilder()
                     .setColor(Color.Orange)
                     .setTitle('Voice kanaal verlaten')
-                    .setDescription(`Door: <@${oldState.member?.id}>`)
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
+                        { name: 'Gebruiker:', value: `<@${oldState.user.id}>` },
                         { name: 'Kanaal:', value: `${oldState.channel.url}` },
                     );
 
@@ -323,9 +325,9 @@ export default class Events {
                 const voiceChannelEmbed: EmbedBuilder = new EmbedBuilder()
                     .setColor(Color.Green)
                     .setTitle('Voice kanaal veranderd')
-                    .setDescription(`Door: <@${oldState.member?.id}>`)
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
+                        { name: 'Gebruiker:', value: `<@${oldState.user.id}>` },
                         { name: 'Oud:', value: `${oldState.channel.url}` },
                         { name: 'Nieuw:', value: `${newState.channel.url}` },
                     );
@@ -365,7 +367,6 @@ export default class Events {
             const memberEventEmbed = new EmbedBuilder()
                 .setColor(Color.Red)
                 .setTitle('Lid verlaten')
-                .setDescription(`Wie: <@${member.id}>`)
                 .setThumbnail('attachment://user.png')
                 .addFields(
                     { name: 'Gebruiker:', value: `<@${member.id}>` },
@@ -394,7 +395,7 @@ export default class Events {
                 .setTitle('Lid gebanned')
                 .setThumbnail('attachment://moderation.png')
                 .addFields(
-                    { name: 'Wie:', value: `<@${ban.user.id}>` },
+                    { name: 'Gebruiker:', value: `<@${ban.user.id}>` },
                     { name: 'Reden:', value: `${fetchBan.reason ?? 'Geen reden opgegeven'}` },
                     { name: 'Door:', value: executor ? `${executor.username} (<@${executor.id}>)` : 'Onbekend' },
                 );
@@ -420,7 +421,7 @@ export default class Events {
                 .setTitle('Lid unbanned')
                 .setThumbnail('attachment://moderation.png')
                 .addFields(
-                    { name: 'Wie:', value: `<@${unBan.user.id}>` },
+                    { name: 'Gebruiker:', value: `<@${unBan.user.id}>` },
                     { name: 'Door:', value: executor ? `${executor.username} (<@${executor.id}>)` : 'Onbekend' },
                 )
 
@@ -435,9 +436,9 @@ export default class Events {
             const memberEventEmbed = new EmbedBuilder()
                 .setColor(Color.Green)
                 .setTitle('Lid gebruikersnaam update')
-                .setDescription(`Wie: <@${newMember.id}>`)
                 .setThumbnail('attachment://user.png')
                 .addFields(
+                    { name: 'Gebruiker:', value: `<@${newMember.user.id}>` },
                     { name: 'Oud:', value: `${oldMember.displayName ?? 'Niet gevonden'}` },
                     { name: 'Nieuw:', value: `${newMember.displayName ?? 'Niet gevonden'}` },
                 );
