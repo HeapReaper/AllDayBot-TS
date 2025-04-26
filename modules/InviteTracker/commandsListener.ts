@@ -86,7 +86,7 @@ export default class CommandsListener {
 			// @ts-ignore
 			await interaction.reply({
 				content: 'De invite is toegevoegd! Gebruik `/invites lijst` om ze te zien.',
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 		} catch (error) {
 			Logging.error(`Error adding invite tracker: ${error}`);
@@ -105,7 +105,7 @@ export default class CommandsListener {
 
 			await interaction.reply({
 				content: `Invite met de naam ${interaction.options.getString('invite_naam')} is verwijderd.`,
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 		} catch (error) {
 			Logging.error(`Error adding invite tracker: ${error}`);
