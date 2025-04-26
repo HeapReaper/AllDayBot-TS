@@ -1,4 +1,9 @@
-import { Client, Interaction, Events, MessageFlags} from 'discord.js';
+import {
+	Client,
+	Interaction,
+	Events,
+	MessageFlags
+} from 'discord.js';
 
 export default class CommandsListener {
 	private client: Client;
