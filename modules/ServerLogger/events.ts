@@ -251,14 +251,14 @@ export default class Events {
                 .setColor(Color.Green)
                 .setTitle('Reactie toegevoegd')
                 .setDescription(`Door: <@${user.id}>`)
-                .setThumbnail('attachment://chat.png')
+                .setThumbnail('attachment://happy-face.png')
                 .addFields(
                     { name: 'Gebruiker:', value: `<@${user.id}>` },
                     { name: 'Emoji:', value: `${reaction.emoji}` },
                     { name: 'Bericht:', value: `${reaction.message.url}` }
                 );
 
-            await this.logChannel.send({ embeds: [messageReactionAddEmbed], files: [this.chatIcon] });
+            await this.logChannel.send({ embeds: [messageReactionAddEmbed], files: [this.reactionIcon] });
         });
 
         this.client.on(discordEvents.MessageReactionRemove, async (reaction, user) => {
@@ -267,7 +267,7 @@ export default class Events {
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
                 .setColor(Color.Orange)
                 .setTitle('Reactie verwijderd')
-                .setThumbnail('attachment://chat.png')
+                .setThumbnail('attachment://happy-face.png')
                 .addFields(
                     { name: 'Gebruiker:', value: `<@${user.id}>` },
                     { name: 'Emoji:', value: `${reaction.emoji}` },
@@ -275,7 +275,7 @@ export default class Events {
                 );
 
             const chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
-            await this.logChannel.send({ embeds: [messageReactionAddEmbed], files: [this.chatIcon] });
+            await this.logChannel.send({ embeds: [messageReactionAddEmbed], files: [this.reactionIcon] });
         });
     }
 
