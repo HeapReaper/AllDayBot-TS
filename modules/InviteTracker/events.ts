@@ -79,7 +79,7 @@ export default class InviteTracker {
                 // TODO: uses++ not working
                 await QueryBuilder
                     .update('invite_tracker')
-                    .set({ uses: inviteTracker.uses++ })
+                    .set({ uses: inviteTracker.uses += 1 })
                     .where({ invite_code: usedInvite.code })
                     .execute();
 
