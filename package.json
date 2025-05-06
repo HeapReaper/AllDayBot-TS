@@ -14,12 +14,14 @@
     "minecraft-server-util": "^5.4.4",
     "minio": "^8.0.5",
     "mysql2": "^3.12.0",
+    "node-cron": "^3.0.3",
     "tsconfig-paths": "^4.2.0"
   },
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest",
     "@types/node": "^22.10.10",
+    "@types/node-cron": "^3.0.11",
     "@types/ws": "^8.5.14",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",

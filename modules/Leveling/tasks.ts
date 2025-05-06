@@ -1,17 +1,22 @@
+import {
+    Client,
+    ChannelType,
+    VoiceChannel,
+    Guild,
+} from 'discord.js';
 import { Logging } from '@utils/logging.ts';
 import LevelingEvents from './events.ts';
 import QueryBuilder from '@utils/database';
-import { Client, ChannelType, VoiceChannel, Guild } from 'discord.js';
+import Cron from 'node-cron';
 
 export default class LevelingTasks {
     private client: Client;
 
-    // @ts-ignore
     constructor(client: Client) {
         this.client = client;
-        setInterval(async () => {
+        Cron.schedule('* * * * *', async (): Promise<void> => {
             void this.addXpToMembersTask();
-        }, 60000);
+        });
     }
 
     async addXpToMembersTask(): Promise<void> {
