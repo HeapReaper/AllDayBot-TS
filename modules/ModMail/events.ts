@@ -37,8 +37,6 @@ export default class Events {
 
             Logging.info('Recieved a DM message!');
 
-            Logging.debug(`${await this.getActiveTicketsCountFromUser(message)}`)
-
             // Make a new ticket
             if (await this.getActiveTicketsCountFromUser(message) < 1) {
                 const ticket = await this.modMailChannel.threads.create({
@@ -46,6 +44,8 @@ export default class Events {
                     autoArchiveDuration: ThreadAutoArchiveDuration.ThreeDays,
                     reason: `Ticket van ${message.author.displayName}`,
                 })
+
+                if (!ticket) return;
 
                 await QueryBuilder
                     .insert('tickets')
@@ -86,7 +86,7 @@ export default class Events {
                     components: [this.adminSelectTicketStatus(ticket)]
                 });
             } catch (error) {
-                Logging.error(`Error inside onDmEvent: ${error}`);
+                Logging.error(`Error inside onMessageEvent: ${error}`);
             }
         });
 
@@ -118,7 +118,7 @@ export default class Events {
 
             await interaction.deferUpdate();
 
-            const ticketDb: any = await this.getTicketFromDb(interaction.author.id, 'open');
+            const ticketDb: any = await this.getTicketFromDb(interaction.channel.id, 'open');
 
             if (interaction.customId === 'priority') {
                 await this.updateTicketStatusDb(interaction.channel.id, interaction.values[0]);
