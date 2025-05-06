@@ -21,6 +21,7 @@ import S3OperationBuilder from '@utils/s3';
 import QueryBuilder from '@utils/database.ts';
 import path from 'path';
 import { Github } from '@utils/github';
+import { InfluxDB, Point} from '@influxdata/influxdb-client';
 
 export default class Events {
     private client: Client;
@@ -90,25 +91,35 @@ export default class Events {
             Logging.info('Caching message');
             if (message.author.bot) return;
 
+            // @ts-ignore
+            const token = <string>getEnv('INFLUXDB_TOKEN');
+            const org = <string>getEnv('INFLUXDB_ORG');
+            const bucket =  <string>getEnv('INFLUXDB_BUCKET');
+            const url = `http://${<string>getEnv('INFLUXDB_HOST')}:${<string>getEnv('INFLUXDB_PORT')}`;
+
+            const influxDB = new InfluxDB({ url, token })
+
             try {
-                await QueryBuilder.insert('messages')
-                    .values({
-                        id: message.id,
-                        channel_id: message.channel.id,
-                        guild_id: message.guild?.id,
-                        author_id: message.author.id,
-                        content: message.content,
-                        created_at: message.createdAt,
-                        attachments: JSON.stringify(
-                            message.attachments.map(attachment => ({
-                                url: attachment.url,
-                                name: attachment.name,
-                                contentType: attachment.contentType,
-                                s3Key: `serverLogger/${message.id}-${attachment.name}`,
-                            })),
-                        )
-                    })
-                    .execute();
+                let writeClient = influxDB.getWriteApi(org, bucket, 'ns');
+
+                writeClient.writePoint(
+                    new Point('messages')
+                        .tag('id', message.id)
+                        .tag('channel_id', message.channel.id)
+                        .tag('author_id', message.author.id)
+                        .stringField('content', message.content)
+                        .stringField('attachments', message.attachments)
+                        .timestamp(message.createdAt)
+                );
+
+                await writeClient
+                    .close()
+                    .then(() =>
+                        Logging.info('Message cached to InfluxDB!')
+                    )
+                    .catch((error) =>
+                        Logging.error(`Could not write message to InfluxDB: ${error}`)
+                    )
             } catch (error) {
                 Logging.error(`Error while trying to cache message inside server logger: ${error}`);
             }
