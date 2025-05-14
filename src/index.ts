@@ -31,7 +31,7 @@ client.on(discordEvents.ClientReady, async client => {
     await loadModules(client);
     await runMigrations();
 
-    cron.schedule('* * * * * *', async (): Promise<void> => {
+    cron.schedule('* * * * *', async (): Promise<void> => {
         Logging.debug('Running Cron select on DB to keep it active!');
 
         await QueryBuilder
