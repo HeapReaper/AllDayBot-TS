@@ -2,6 +2,7 @@ import { Logging } from '@utils/logging.ts';
 import LevelingEvents from './events.ts';
 import QueryBuilder from '@utils/database';
 import { Client, ChannelType, VoiceChannel, Guild } from 'discord.js';
+import cron from 'node-cron';
 
 export default class LevelingTasks {
     private client: Client;
@@ -9,14 +10,13 @@ export default class LevelingTasks {
     // @ts-ignore
     constructor(client: Client) {
         this.client = client;
-        setInterval(async () => {
+        cron.schedule('* * * * *', async (): Promise<void> => {
+            Logging.debug(`Running Cron "addXpToMembersTask"`);
             void this.addXpToMembersTask();
-        }, 60000);
+        });
     }
 
     async addXpToMembersTask(): Promise<void> {
-        Logging.debug(`Running task addXpToMembersTask()`);
-
         // Messaging
         for (const userId of LevelingEvents.getUserXpAddedFromMessages()) {
             try {
@@ -54,7 +54,6 @@ export default class LevelingTasks {
         }
 
         Logging.debug('Adding XP to members');
-
     }
 
     async addXpToMember(userId: String, xpToAdd: number) {
