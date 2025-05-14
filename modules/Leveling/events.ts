@@ -15,7 +15,7 @@ export default class LevelingEvents {
 
     setupOnMessageCreateEvent(): void {
         this.client.on(discordEvents.MessageCreate, (message: Message): void => {
-            if (message.author.bot) return;
+            if (message.author.id === this.client.user?.id) return;
 
             Logging.debug('New message received');
 

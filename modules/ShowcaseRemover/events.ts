@@ -12,12 +12,14 @@ export default class ShowcaseEvents {
     
     async onShowcaseMessage(): Promise<void> {
         this.client.on(Events.MessageCreate, async (message: Message): Promise<void> => {
+            if (message.author.id === this.client.user?.id) return;
+
             let messageByAuthor: Array<number> = [];
             
             if (message.channel.id !== getEnv('SHOWCASE')!) return;
             
             if (!message) return;
-            const showcaseChannel = await this.client.channels.fetch(<string>getEnv('SHOWCASE')!) as TextChannel;
+            const showcaseChannel = await this.client.channels.fetch(<string>getEnv('SHOWCASE')) as TextChannel;
             
             if (!showcaseChannel) {
                 Logging.error('Showcase channel not found in ShowcaseRemover events!');

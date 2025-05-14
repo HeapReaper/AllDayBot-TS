@@ -2461,3 +2461,1590 @@
 [14-05-2025 09:42:07] [DEBUG] Loaded tasks for module: BumpReminder
 [14-05-2025 09:42:07] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
 [14-05-2025 09:42:07] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:42:27] [DEBUG] Checking if server can be bumped again!
+[14-05-2025 09:42:31] [INFO]  Caching message
+[14-05-2025 09:42:39] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:42:39] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:42:39] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:42:39] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:42:39] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:42:39] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:42:39] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:42:39] [INFO]  Loading module: Leveling
+[14-05-2025 09:42:39] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:42:39] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:42:39] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:42:39] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:42:39] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:42:39] [INFO]  Loading module: Birthday
+[14-05-2025 09:42:39] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:42:39] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:42:39] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:42:39] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:42:39] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:42:39] [INFO]  Loading module: ModMail
+[14-05-2025 09:42:39] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:42:39] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:42:39] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:42:39] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:42:39] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:42:39] [INFO]  Loading module: Minecraft
+[14-05-2025 09:42:39] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:42:39] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:42:39] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:42:39] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:42:39] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:42:39] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:42:39] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:42:39] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:42:40] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:42:40] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:42:40] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:42:40] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:42:40] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:42:40] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:42:40] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:42:40] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:42:40] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:42:40] [INFO]  Loading module: Community
+[14-05-2025 09:42:40] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:42:40] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:42:40] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:42:40] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:42:40] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:42:40] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:42:40] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:42:40] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:42:40] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:42:40] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:42:40] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:42:40] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:43:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 09:43:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 09:43:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 09:43:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:43:00] [DEBUG] Checking if server can be bumped again!
+[14-05-2025 09:43:00] [DEBUG] Adding XP to members
+[14-05-2025 09:43:18] [INFO]  Caching message
+[14-05-2025 09:43:20] [DEBUG] Checking if server can be bumped again!
+[14-05-2025 09:43:40] [DEBUG] Checking if server can be bumped again!
+[14-05-2025 09:44:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 09:44:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 09:44:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 09:44:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:44:00] [DEBUG] Checking if server can be bumped again!
+[14-05-2025 09:44:00] [DEBUG] Adding XP to members
+[14-05-2025 09:44:20] [DEBUG] Checking if server can be bumped again!
+[14-05-2025 09:44:40] [DEBUG] Checking if server can be bumped again!
+[14-05-2025 09:45:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 09:45:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 09:45:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 09:45:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:45:00] [DEBUG] Checking if server can be bumped again!
+[14-05-2025 09:45:00] [DEBUG] Adding XP to members
+[14-05-2025 09:45:08] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:45:08] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:45:08] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:45:08] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:45:08] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:45:08] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:45:08] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:45:08] [INFO]  Loading module: Leveling
+[14-05-2025 09:45:08] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:45:08] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:45:08] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:45:08] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:45:08] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:45:08] [INFO]  Loading module: Birthday
+[14-05-2025 09:45:08] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:45:08] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:45:08] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:45:08] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:45:08] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:45:08] [INFO]  Loading module: ModMail
+[14-05-2025 09:45:08] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:45:08] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:45:08] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:45:08] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:45:08] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:45:08] [INFO]  Loading module: Minecraft
+[14-05-2025 09:45:08] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:45:08] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:45:08] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:45:08] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:45:08] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:45:08] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:45:08] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:45:08] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:45:08] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:45:08] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:45:08] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:45:08] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:45:08] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:45:08] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:45:08] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:45:08] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:45:08] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:45:08] [INFO]  Loading module: Community
+[14-05-2025 09:45:08] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:45:08] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:45:08] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:45:08] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:45:08] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:45:08] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:45:08] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:45:08] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:45:08] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:45:08] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:45:08] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:45:08] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:45:34] [INFO]  Caching message
+[14-05-2025 09:45:51] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:45:51] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:45:51] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:45:51] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:45:51] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:45:51] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:45:51] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:45:51] [INFO]  Loading module: Leveling
+[14-05-2025 09:45:51] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:45:51] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:45:51] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:45:51] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:45:51] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:45:51] [INFO]  Loading module: Birthday
+[14-05-2025 09:45:51] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:45:51] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:45:51] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:45:51] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:45:51] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:45:51] [INFO]  Loading module: ModMail
+[14-05-2025 09:45:51] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:45:51] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:45:51] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:45:51] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:45:51] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:45:51] [INFO]  Loading module: Minecraft
+[14-05-2025 09:45:51] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:45:51] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:45:51] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:45:51] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:45:51] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:45:51] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:45:51] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:45:51] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:45:51] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:45:51] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:45:51] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:45:51] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:45:51] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:45:51] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:45:51] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:45:51] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:45:51] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:45:51] [INFO]  Loading module: Community
+[14-05-2025 09:45:51] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:45:51] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:45:51] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:45:51] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:45:51] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:45:51] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:45:51] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:45:51] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:45:51] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:45:51] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:45:51] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:45:51] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:45:53] [INFO]  Caching message
+[14-05-2025 09:45:54] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:45:54] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:45:54] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:45:54] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:45:54] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:45:54] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:45:54] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:45:54] [INFO]  Loading module: Leveling
+[14-05-2025 09:45:54] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:45:54] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:45:54] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:45:54] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:45:54] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:45:54] [INFO]  Loading module: Birthday
+[14-05-2025 09:45:54] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:45:54] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:45:54] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:45:54] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:45:54] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:45:54] [INFO]  Loading module: ModMail
+[14-05-2025 09:45:54] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:45:54] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:45:54] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:45:54] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:45:54] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:45:54] [INFO]  Loading module: Minecraft
+[14-05-2025 09:45:54] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:45:54] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:45:54] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:45:54] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:45:54] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:45:54] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:45:54] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:45:54] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:45:54] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:45:54] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:45:54] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:45:54] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:45:54] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:45:54] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:45:54] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:45:54] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:45:54] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:45:54] [INFO]  Loading module: Community
+[14-05-2025 09:45:54] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:45:54] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:45:54] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:45:54] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:45:54] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:45:54] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:45:54] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:45:54] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:45:54] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:45:54] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:45:54] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:45:55] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:46:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 09:46:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 09:46:00] [DEBUG] Running Cron "RemindBump"
+[14-05-2025 09:46:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 09:46:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:46:00] [DEBUG] Adding XP to members
+[14-05-2025 09:46:03] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:46:03] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:46:03] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:46:03] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:46:03] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:46:03] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:46:03] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:46:03] [INFO]  Loading module: Leveling
+[14-05-2025 09:46:03] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:46:03] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:46:03] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:46:03] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:46:03] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:46:03] [INFO]  Loading module: Birthday
+[14-05-2025 09:46:03] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:46:03] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:46:03] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:46:03] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:46:03] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:46:03] [INFO]  Loading module: ModMail
+[14-05-2025 09:46:03] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:46:03] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:46:03] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:46:03] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:46:03] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:46:03] [INFO]  Loading module: Minecraft
+[14-05-2025 09:46:03] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:46:03] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:46:03] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:46:03] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:46:03] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:46:03] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:46:03] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:46:03] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:46:03] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:46:03] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:46:03] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:46:03] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:46:03] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:46:03] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:46:03] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:46:03] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:46:03] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:46:03] [INFO]  Loading module: Community
+[14-05-2025 09:46:03] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:46:03] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:46:03] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:46:03] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:46:03] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:46:03] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:46:03] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:46:03] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:46:03] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:46:03] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:46:03] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:46:03] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:46:30] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:46:30] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:46:30] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:46:30] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:46:30] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:46:30] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:46:30] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:46:30] [INFO]  Loading module: Leveling
+[14-05-2025 09:46:30] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:46:30] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:46:30] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:46:30] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:46:30] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:46:30] [INFO]  Loading module: Birthday
+[14-05-2025 09:46:30] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:46:30] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:46:30] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:46:30] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:46:30] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:46:30] [INFO]  Loading module: ModMail
+[14-05-2025 09:46:30] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:46:30] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:46:30] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:46:30] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:46:30] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:46:30] [INFO]  Loading module: Minecraft
+[14-05-2025 09:46:30] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:46:30] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:46:30] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:46:30] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:46:30] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:46:30] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:46:30] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:46:30] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:46:30] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:46:30] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:46:30] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:46:30] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:46:30] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:46:30] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:46:30] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:46:30] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:46:30] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:46:30] [INFO]  Loading module: Community
+[14-05-2025 09:46:30] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:46:30] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:46:30] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:46:30] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:46:30] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:46:30] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:46:30] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:46:30] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:46:30] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:46:30] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:46:30] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:46:30] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:46:32] [INFO]  Caching message
+[14-05-2025 09:46:48] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:46:48] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:46:48] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:46:48] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:46:48] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:46:48] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:46:48] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:46:48] [INFO]  Loading module: Leveling
+[14-05-2025 09:46:48] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:46:48] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:46:48] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:46:48] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:46:48] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:46:48] [INFO]  Loading module: Birthday
+[14-05-2025 09:46:48] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:46:48] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:46:48] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:46:48] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:46:48] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:46:48] [INFO]  Loading module: ModMail
+[14-05-2025 09:46:48] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:46:48] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:46:48] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:46:48] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:46:48] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:46:48] [INFO]  Loading module: Minecraft
+[14-05-2025 09:46:48] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:46:48] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:46:48] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:46:48] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:46:48] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:46:48] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:46:48] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:46:48] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:46:48] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:46:48] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:46:48] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:46:48] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:46:48] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:46:48] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:46:48] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:46:48] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:46:48] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:46:48] [INFO]  Loading module: Community
+[14-05-2025 09:46:48] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:46:48] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:46:48] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:46:48] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:46:48] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:46:48] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:46:48] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:46:48] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:46:48] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:46:48] [ERROR] Error loading tasks for module 'BumpReminder': AggregateError: 2 errors building "/home/aerobytes/WebstormProjects/AllDayBot-TS/modules/BumpReminder/tasks.ts"
+[14-05-2025 09:46:48] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:46:48] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:46:52] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:46:52] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:46:52] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:46:52] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:46:52] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:46:52] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:46:52] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:46:52] [INFO]  Loading module: Leveling
+[14-05-2025 09:46:52] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:46:52] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:46:52] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:46:52] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:46:52] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:46:52] [INFO]  Loading module: Birthday
+[14-05-2025 09:46:52] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:46:52] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:46:52] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:46:52] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:46:52] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:46:52] [INFO]  Loading module: ModMail
+[14-05-2025 09:46:52] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:46:52] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:46:52] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:46:52] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:46:52] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:46:52] [INFO]  Loading module: Minecraft
+[14-05-2025 09:46:52] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:46:52] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:46:52] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:46:52] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:46:52] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:46:52] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:46:52] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:46:52] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:46:52] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:46:52] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:46:52] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:46:52] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:46:52] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:46:52] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:46:52] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:46:52] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:46:52] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:46:52] [INFO]  Loading module: Community
+[14-05-2025 09:46:52] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:46:52] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:46:52] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:46:52] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:46:52] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:46:52] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:46:52] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:46:52] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:46:52] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:46:52] [ERROR] Error loading tasks for module 'BumpReminder': AggregateError: 2 errors building "/home/aerobytes/WebstormProjects/AllDayBot-TS/modules/BumpReminder/tasks.ts"
+[14-05-2025 09:46:52] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:46:52] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:47:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 09:47:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 09:47:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 09:47:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:47:00] [DEBUG] Adding XP to members
+[14-05-2025 09:47:06] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:47:06] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:47:06] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:47:06] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:47:06] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:47:06] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:47:06] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:47:06] [INFO]  Loading module: Leveling
+[14-05-2025 09:47:06] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:47:06] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:47:06] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:47:06] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:47:06] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:47:06] [INFO]  Loading module: Birthday
+[14-05-2025 09:47:06] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:47:06] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:47:06] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:47:06] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:47:06] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:47:06] [INFO]  Loading module: ModMail
+[14-05-2025 09:47:06] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:47:06] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:47:06] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:47:06] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:47:06] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:47:06] [INFO]  Loading module: Minecraft
+[14-05-2025 09:47:06] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:47:06] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:47:06] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:47:06] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:47:06] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:47:06] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:47:06] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:47:06] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:47:06] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:47:06] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:47:06] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:47:06] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:47:06] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:47:06] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:47:06] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:47:06] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:47:06] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:47:06] [INFO]  Loading module: Community
+[14-05-2025 09:47:06] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:47:06] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:47:06] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:47:06] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:47:06] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:47:06] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:47:06] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:47:06] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:47:06] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:47:06] [ERROR] Error loading tasks for module 'BumpReminder': AggregateError: 2 errors building "/home/aerobytes/WebstormProjects/AllDayBot-TS/modules/BumpReminder/tasks.ts"
+[14-05-2025 09:47:06] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:47:06] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:47:12] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:47:12] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:47:12] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:47:12] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:47:12] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:47:12] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:47:12] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:47:12] [INFO]  Loading module: Leveling
+[14-05-2025 09:47:12] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:47:12] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:47:12] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:47:12] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:47:12] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:47:12] [INFO]  Loading module: Birthday
+[14-05-2025 09:47:12] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:47:12] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:47:12] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:47:12] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:47:12] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:47:12] [INFO]  Loading module: ModMail
+[14-05-2025 09:47:12] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:47:12] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:47:12] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:47:12] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:47:12] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:47:12] [INFO]  Loading module: Minecraft
+[14-05-2025 09:47:12] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:47:12] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:47:12] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:47:12] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:47:12] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:47:12] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:47:12] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:47:12] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:47:12] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:47:12] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:47:12] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:47:12] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:47:12] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:47:12] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:47:12] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:47:12] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:47:12] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:47:12] [INFO]  Loading module: Community
+[14-05-2025 09:47:12] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:47:12] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:47:12] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:47:12] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:47:12] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:47:12] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:47:12] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:47:12] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:47:12] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:47:12] [ERROR] Error loading tasks for module 'BumpReminder': AggregateError: 2 errors building "/home/aerobytes/WebstormProjects/AllDayBot-TS/modules/BumpReminder/tasks.ts"
+[14-05-2025 09:47:12] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:47:12] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:47:28] [INFO]  Caching message
+[14-05-2025 09:47:42] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:47:42] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:47:42] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:47:42] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:47:42] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:47:42] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:47:42] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:47:42] [INFO]  Loading module: Leveling
+[14-05-2025 09:47:42] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:47:42] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:47:42] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:47:42] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:47:42] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:47:42] [INFO]  Loading module: Birthday
+[14-05-2025 09:47:42] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:47:42] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:47:42] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:47:42] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:47:42] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:47:42] [INFO]  Loading module: ModMail
+[14-05-2025 09:47:42] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:47:42] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:47:42] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:47:42] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:47:42] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:47:42] [INFO]  Loading module: Minecraft
+[14-05-2025 09:47:42] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:47:42] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:47:42] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:47:42] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:47:42] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:47:42] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:47:42] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:47:42] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:47:42] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:47:42] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:47:42] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:47:42] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:47:42] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:47:42] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:47:42] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:47:42] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:47:42] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:47:42] [INFO]  Loading module: Community
+[14-05-2025 09:47:42] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:47:42] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:47:42] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:47:42] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:47:42] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:47:42] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:47:42] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:47:42] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:47:42] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:47:42] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:47:42] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:47:42] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:47:45] [INFO]  Caching message
+[14-05-2025 09:47:49] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:47:49] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:47:49] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:47:49] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:47:49] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:47:49] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:47:49] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:47:49] [INFO]  Loading module: Leveling
+[14-05-2025 09:47:49] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:47:49] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:47:49] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:47:49] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:47:49] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:47:49] [INFO]  Loading module: Birthday
+[14-05-2025 09:47:49] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:47:49] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:47:49] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:47:49] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:47:49] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:47:49] [INFO]  Loading module: ModMail
+[14-05-2025 09:47:49] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:47:49] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:47:49] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:47:49] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:47:49] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:47:49] [INFO]  Loading module: Minecraft
+[14-05-2025 09:47:49] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:47:49] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:47:49] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:47:49] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:47:49] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:47:49] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:47:49] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:47:49] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:47:49] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:47:49] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:47:49] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:47:49] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:47:49] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:47:49] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:47:50] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:47:50] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:47:50] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:47:50] [INFO]  Loading module: Community
+[14-05-2025 09:47:50] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:47:50] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:47:50] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:47:50] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:47:50] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:47:50] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:47:50] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:47:50] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:47:50] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:47:50] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:47:50] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:47:50] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:48:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 09:48:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 09:48:00] [DEBUG] Running Cron "RemindBump"
+[14-05-2025 09:48:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 09:48:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:48:00] [DEBUG] Adding XP to members
+[14-05-2025 09:48:03] [INFO]  Caching message
+[14-05-2025 09:48:35] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:48:35] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:48:35] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:48:35] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:48:35] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:48:35] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:48:35] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:48:35] [INFO]  Loading module: Leveling
+[14-05-2025 09:48:35] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:48:35] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:48:35] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:48:35] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:48:35] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:48:35] [INFO]  Loading module: Birthday
+[14-05-2025 09:48:35] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:48:35] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:48:35] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:48:35] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:48:35] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:48:35] [INFO]  Loading module: ModMail
+[14-05-2025 09:48:35] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:48:35] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:48:35] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:48:35] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:48:35] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:48:35] [INFO]  Loading module: Minecraft
+[14-05-2025 09:48:35] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:48:35] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:48:35] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:48:35] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:48:35] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:48:35] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:48:35] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:48:35] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:48:35] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:48:35] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:48:35] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:48:35] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:48:35] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:48:35] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:48:35] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:48:35] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:48:35] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:48:35] [INFO]  Loading module: Community
+[14-05-2025 09:48:35] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:48:35] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:48:35] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:48:35] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:48:35] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:48:35] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:48:35] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:48:35] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:48:35] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:48:35] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:48:35] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:48:35] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:48:40] [INFO]  Caching message
+[14-05-2025 09:49:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 09:49:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 09:49:00] [DEBUG] Running Cron "RemindBump"
+[14-05-2025 09:49:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 09:49:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:49:01] [DEBUG] Adding XP to members
+[14-05-2025 09:49:13] [DEBUG] An message has been deleted!
+[14-05-2025 09:49:13] [DEBUG] S3 lists successful! Found 3 objects.
+[14-05-2025 09:49:13] [DEBUG] Selecting: SELECT * FROM messages WHERE id = ?
+[14-05-2025 09:49:13] [DEBUG] undefined
+[14-05-2025 09:49:13] [INFO]  Caching message
+[14-05-2025 09:49:14] [INFO]  Caching message
+[14-05-2025 09:50:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 09:50:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 09:50:00] [DEBUG] Running Cron "RemindBump"
+[14-05-2025 09:50:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 09:50:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:50:00] [DEBUG] Adding XP to members
+[14-05-2025 09:50:00] [INFO]  Caching message
+[14-05-2025 09:50:00] [DEBUG] Showcase message count per author: 1372118740115656700,1197220955282485500
+[14-05-2025 09:50:00] [DEBUG] An message has been deleted!
+[14-05-2025 09:50:00] [DEBUG] S3 lists successful! Found 3 objects.
+[14-05-2025 09:50:00] [DEBUG] Selecting: SELECT * FROM messages WHERE id = ?
+[14-05-2025 09:50:00] [DEBUG] undefined
+[14-05-2025 09:50:01] [INFO]  Caching message
+[14-05-2025 09:50:01] [DEBUG] Showcase message count per author: 1372118743060316200,1197220955282485500
+[14-05-2025 09:50:01] [DEBUG] An message has been deleted!
+[14-05-2025 09:50:01] [DEBUG] S3 lists successful! Found 3 objects.
+[14-05-2025 09:50:01] [DEBUG] Selecting: SELECT * FROM messages WHERE id = ?
+[14-05-2025 09:50:01] [DEBUG] undefined
+[14-05-2025 09:50:02] [INFO]  Caching message
+[14-05-2025 09:50:02] [INFO]  Caching message
+[14-05-2025 09:50:02] [DEBUG] Showcase message count per author: 1372118746444861400,1197220955282485500
+[14-05-2025 09:50:02] [DEBUG] An message has been deleted!
+[14-05-2025 09:50:02] [DEBUG] S3 lists successful! Found 3 objects.
+[14-05-2025 09:50:02] [DEBUG] Selecting: SELECT * FROM messages WHERE id = ?
+[14-05-2025 09:50:02] [DEBUG] undefined
+[14-05-2025 09:50:02] [INFO]  Caching message
+[14-05-2025 09:50:02] [INFO]  Caching message
+[14-05-2025 09:50:03] [DEBUG] Showcase message count per author: 1372118749938847700,1197220955282485500
+[14-05-2025 09:50:03] [DEBUG] An message has been deleted!
+[14-05-2025 09:50:03] [DEBUG] S3 lists successful! Found 3 objects.
+[14-05-2025 09:50:03] [DEBUG] Selecting: SELECT * FROM messages WHERE id = ?
+[14-05-2025 09:50:03] [DEBUG] undefined
+[14-05-2025 09:50:03] [INFO]  Caching message
+[14-05-2025 09:50:03] [INFO]  Caching message
+[14-05-2025 09:50:03] [INFO]  Caching message
+[14-05-2025 09:50:03] [DEBUG] Showcase message count per author: 1372118752925319200,1197220955282485500
+[14-05-2025 09:50:04] [DEBUG] An message has been deleted!
+[14-05-2025 09:50:04] [DEBUG] S3 lists successful! Found 3 objects.
+[14-05-2025 09:50:04] [DEBUG] Selecting: SELECT * FROM messages WHERE id = ?
+[14-05-2025 09:50:04] [DEBUG] undefined
+[14-05-2025 09:50:04] [INFO]  Caching message
+[14-05-2025 09:50:04] [INFO]  Caching message
+[14-05-2025 09:50:04] [DEBUG] Showcase message count per author: 1372118756506992600,1197220955282485500
+[14-05-2025 09:50:04] [INFO]  Caching message
+[14-05-2025 09:50:04] [DEBUG] An message has been deleted!
+[14-05-2025 09:50:04] [DEBUG] S3 lists successful! Found 3 objects.
+[14-05-2025 09:50:04] [DEBUG] Selecting: SELECT * FROM messages WHERE id = ?
+[14-05-2025 09:50:04] [DEBUG] undefined
+[14-05-2025 09:50:05] [INFO]  Caching message
+[14-05-2025 09:50:05] [DEBUG] Showcase message count per author: 1372118759803715600,1197220955282485500
+[14-05-2025 09:50:05] [DEBUG] An message has been deleted!
+[14-05-2025 09:50:05] [DEBUG] S3 lists successful! Found 3 objects.
+[14-05-2025 09:50:05] [DEBUG] Selecting: SELECT * FROM messages WHERE id = ?
+[14-05-2025 09:50:05] [DEBUG] undefined
+[14-05-2025 09:50:05] [INFO]  Caching message
+[14-05-2025 09:50:05] [INFO]  Caching message
+[14-05-2025 09:50:06] [DEBUG] Showcase message count per author: 1372118762752311300,1197220955282485500
+[14-05-2025 09:50:06] [INFO]  Caching message
+[14-05-2025 09:50:06] [DEBUG] An message has been deleted!
+[14-05-2025 09:50:06] [DEBUG] S3 lists successful! Found 3 objects.
+[14-05-2025 09:50:06] [DEBUG] Selecting: SELECT * FROM messages WHERE id = ?
+[14-05-2025 09:50:06] [DEBUG] undefined
+[14-05-2025 09:50:06] [INFO]  Caching message
+[14-05-2025 09:50:06] [DEBUG] Showcase message count per author: 1372118765587792000,1197220955282485500
+[14-05-2025 09:50:06] [DEBUG] An message has been deleted!
+[14-05-2025 09:50:06] [DEBUG] S3 lists successful! Found 3 objects.
+[14-05-2025 09:50:06] [DEBUG] Selecting: SELECT * FROM messages WHERE id = ?
+[14-05-2025 09:50:07] [DEBUG] undefined
+[14-05-2025 09:50:07] [INFO]  Caching message
+[14-05-2025 09:50:07] [DEBUG] Showcase message count per author: 1372118768410558500,1197220955282485500
+[14-05-2025 09:50:07] [DEBUG] An message has been deleted!
+[14-05-2025 09:50:07] [DEBUG] S3 lists successful! Found 3 objects.
+[14-05-2025 09:50:07] [DEBUG] Selecting: SELECT * FROM messages WHERE id = ?
+[14-05-2025 09:50:07] [DEBUG] undefined
+[14-05-2025 09:50:07] [INFO]  Caching message
+[14-05-2025 09:50:08] [DEBUG] Showcase message count per author: 1372118770696585200,1197220955282485500
+[14-05-2025 09:50:08] [DEBUG] An message has been deleted!
+[14-05-2025 09:50:08] [DEBUG] S3 lists successful! Found 3 objects.
+[14-05-2025 09:50:08] [DEBUG] Selecting: SELECT * FROM messages WHERE id = ?
+[14-05-2025 09:50:08] [DEBUG] undefined
+[14-05-2025 09:56:25] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:56:25] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:56:25] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:56:25] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:56:25] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:56:25] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:56:25] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:56:25] [INFO]  Loading module: Leveling
+[14-05-2025 09:56:25] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:56:25] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:56:25] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:56:25] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:56:25] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:56:25] [INFO]  Loading module: Birthday
+[14-05-2025 09:56:25] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:56:25] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:56:25] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:56:25] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:56:25] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:56:25] [INFO]  Loading module: ModMail
+[14-05-2025 09:56:25] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:56:25] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:56:25] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:56:25] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:56:25] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:56:25] [INFO]  Loading module: Minecraft
+[14-05-2025 09:56:25] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:56:25] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:56:25] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:56:25] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:56:25] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:56:25] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:56:25] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:56:25] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:56:25] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:56:25] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:56:25] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:56:25] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:56:25] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:56:25] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:56:25] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:56:25] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:56:25] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:56:25] [INFO]  Loading module: Community
+[14-05-2025 09:56:26] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:56:26] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:56:26] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:56:26] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:56:26] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:56:26] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:56:26] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:56:26] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:56:26] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:56:26] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:56:26] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:56:26] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:56:37] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:56:37] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:56:37] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:56:37] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:56:37] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:56:37] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:56:37] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:56:37] [INFO]  Loading module: Leveling
+[14-05-2025 09:56:37] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:56:37] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:56:37] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:56:37] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:56:37] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:56:37] [INFO]  Loading module: Birthday
+[14-05-2025 09:56:37] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:56:37] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:56:37] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:56:37] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:56:37] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:56:37] [INFO]  Loading module: ModMail
+[14-05-2025 09:56:37] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:56:37] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:56:37] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:56:37] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:56:37] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:56:37] [INFO]  Loading module: Minecraft
+[14-05-2025 09:56:37] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:56:37] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:56:37] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:56:37] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:56:37] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:56:37] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:56:37] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:56:37] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:56:37] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:56:37] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:56:37] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:56:37] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:56:37] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:56:37] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:56:37] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:56:37] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:56:37] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:56:37] [INFO]  Loading module: Community
+[14-05-2025 09:56:37] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:56:37] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:56:37] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:56:37] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:56:37] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:56:37] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:56:37] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:56:37] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:56:37] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:56:37] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:56:37] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:56:37] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:56:42] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:56:42] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:56:42] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:56:42] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:56:42] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:56:42] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:56:42] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:56:42] [INFO]  Loading module: Leveling
+[14-05-2025 09:56:42] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:56:42] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:56:42] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:56:42] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:56:42] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:56:42] [INFO]  Loading module: Birthday
+[14-05-2025 09:56:42] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:56:42] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:56:42] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:56:42] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:56:42] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:56:42] [INFO]  Loading module: ModMail
+[14-05-2025 09:56:42] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:56:42] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:56:42] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:56:42] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:56:42] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:56:42] [INFO]  Loading module: Minecraft
+[14-05-2025 09:56:42] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:56:42] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:56:42] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:56:42] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:56:42] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:56:42] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:56:42] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:56:42] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:56:42] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:56:42] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:56:42] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:56:42] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:56:42] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:56:42] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:56:42] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:56:42] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:56:42] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:56:42] [INFO]  Loading module: Community
+[14-05-2025 09:56:42] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:56:42] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:56:42] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:56:42] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:56:42] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:56:42] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:56:42] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:56:42] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:56:42] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:56:42] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:56:42] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:56:42] [ERROR] Error fetching repo in bootEvent: 403
+[14-05-2025 09:56:42] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:57:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 09:57:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 09:57:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 09:57:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:57:00] [DEBUG] Adding XP to members
+[14-05-2025 09:57:06] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:57:06] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:57:06] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:57:06] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:57:06] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:57:06] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:57:06] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:57:06] [INFO]  Loading module: Leveling
+[14-05-2025 09:57:06] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:57:06] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:57:06] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:57:06] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:57:06] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:57:06] [INFO]  Loading module: Birthday
+[14-05-2025 09:57:06] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:57:06] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:57:06] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:57:06] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:57:06] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:57:06] [INFO]  Loading module: ModMail
+[14-05-2025 09:57:06] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:57:06] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:57:06] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:57:06] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:57:06] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:57:06] [INFO]  Loading module: Minecraft
+[14-05-2025 09:57:06] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:57:06] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:57:06] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:57:06] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:57:06] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:57:06] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:57:06] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:57:06] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:57:06] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:57:06] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:57:06] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:57:06] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:57:06] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:57:06] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:57:06] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:57:06] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:57:06] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:57:06] [INFO]  Loading module: Community
+[14-05-2025 09:57:06] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:57:06] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:57:06] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:57:06] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:57:06] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:57:06] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:57:06] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:57:06] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:57:06] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:57:06] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:57:06] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:57:06] [ERROR] Error fetching repo in bootEvent: 403
+[14-05-2025 09:57:06] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:57:10] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:57:10] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:57:10] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:57:10] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:57:10] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:57:10] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:57:10] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:57:10] [INFO]  Loading module: Leveling
+[14-05-2025 09:57:10] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:57:10] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:57:10] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:57:10] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:57:10] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:57:10] [INFO]  Loading module: Birthday
+[14-05-2025 09:57:10] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:57:10] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:57:10] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:57:10] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:57:10] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:57:10] [INFO]  Loading module: ModMail
+[14-05-2025 09:57:10] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:57:10] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:57:10] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:57:10] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:57:10] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:57:10] [INFO]  Loading module: Minecraft
+[14-05-2025 09:57:10] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:57:10] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:57:10] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:57:10] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:57:10] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:57:10] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:57:10] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:57:10] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:57:10] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:57:10] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:57:10] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:57:10] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:57:10] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:57:10] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:57:10] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:57:10] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:57:10] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:57:10] [INFO]  Loading module: Community
+[14-05-2025 09:57:10] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:57:10] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:57:10] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:57:10] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:57:10] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:57:10] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:57:10] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:57:10] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:57:10] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:57:10] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:57:10] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:57:10] [ERROR] Error fetching repo in bootEvent: 403
+[14-05-2025 09:57:10] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:57:13] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:57:13] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:57:13] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:57:13] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:57:13] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:57:13] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:57:13] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:57:13] [INFO]  Loading module: Leveling
+[14-05-2025 09:57:13] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:57:13] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:57:13] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:57:13] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:57:13] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:57:13] [INFO]  Loading module: Birthday
+[14-05-2025 09:57:13] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:57:13] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:57:13] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:57:13] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:57:13] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:57:13] [INFO]  Loading module: ModMail
+[14-05-2025 09:57:13] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:57:13] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:57:13] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:57:13] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:57:13] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:57:13] [INFO]  Loading module: Minecraft
+[14-05-2025 09:57:13] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:57:13] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:57:13] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:57:13] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:57:13] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:57:13] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:57:13] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:57:13] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:57:13] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:57:13] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:57:13] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:57:13] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:57:13] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:57:13] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:57:13] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:57:13] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:57:13] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:57:13] [INFO]  Loading module: Community
+[14-05-2025 09:57:13] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:57:13] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:57:13] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:57:13] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:57:13] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:57:13] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:57:13] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:57:13] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:57:13] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:57:13] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:57:13] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:57:13] [ERROR] Error fetching repo in bootEvent: 403
+[14-05-2025 09:57:14] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:58:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 09:58:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 09:58:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 09:58:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:58:00] [DEBUG] Adding XP to members
+[14-05-2025 09:58:09] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:58:09] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:58:09] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:58:09] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:58:09] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:58:09] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:58:09] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:58:09] [INFO]  Loading module: Leveling
+[14-05-2025 09:58:09] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:58:09] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:58:09] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:58:09] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:58:09] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:58:09] [INFO]  Loading module: Birthday
+[14-05-2025 09:58:09] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:58:09] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:58:09] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:58:09] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:58:09] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:58:09] [INFO]  Loading module: ModMail
+[14-05-2025 09:58:09] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:58:09] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:58:09] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:58:09] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:58:09] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:58:09] [INFO]  Loading module: Minecraft
+[14-05-2025 09:58:09] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:58:09] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:58:09] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:58:09] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:58:09] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:58:09] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:58:09] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:58:09] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:58:09] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:58:09] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:58:09] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:58:09] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:58:09] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:58:09] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:58:09] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:58:09] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:58:09] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:58:09] [INFO]  Loading module: Community
+[14-05-2025 09:58:09] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:58:09] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:58:09] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:58:09] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:58:09] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:58:09] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:58:09] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:58:09] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:58:09] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:58:09] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:58:09] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:58:09] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:58:23] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 09:58:23] [INFO]  Loading module: InviteTracker
+[14-05-2025 09:58:23] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 09:58:23] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 09:58:23] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 09:58:23] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 09:58:23] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 09:58:23] [INFO]  Loading module: Leveling
+[14-05-2025 09:58:23] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 09:58:23] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 09:58:23] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 09:58:23] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 09:58:23] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 09:58:23] [INFO]  Loading module: Birthday
+[14-05-2025 09:58:23] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 09:58:23] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 09:58:23] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 09:58:23] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 09:58:23] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 09:58:23] [INFO]  Loading module: ModMail
+[14-05-2025 09:58:23] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 09:58:23] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 09:58:23] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 09:58:23] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 09:58:23] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 09:58:23] [INFO]  Loading module: Minecraft
+[14-05-2025 09:58:23] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 09:58:23] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 09:58:23] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 09:58:23] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 09:58:23] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 09:58:23] [INFO]  Loading module: ServerLogger
+[14-05-2025 09:58:23] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 09:58:23] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 09:58:23] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 09:58:23] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 09:58:23] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 09:58:23] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 09:58:23] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 09:58:23] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 09:58:23] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 09:58:23] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 09:58:23] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 09:58:23] [INFO]  Loading module: Community
+[14-05-2025 09:58:23] [DEBUG] Loaded commands for module: Community
+[14-05-2025 09:58:23] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 09:58:23] [DEBUG] Loaded events for module: Community
+[14-05-2025 09:58:23] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 09:58:23] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 09:58:23] [INFO]  Loading module: BumpReminder
+[14-05-2025 09:58:23] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 09:58:23] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 09:58:23] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 09:58:23] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 09:58:23] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 09:58:23] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:59:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 09:59:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 09:59:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 09:59:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 09:59:00] [DEBUG] Adding XP to members
+[14-05-2025 10:00:00] [DEBUG] Running Cron "checkBirthdays"
+[14-05-2025 10:00:00] [DEBUG] Selecting: SELECT * FROM birthdays
+[14-05-2025 10:00:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 10:00:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 10:00:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 10:00:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 10:00:00] [DEBUG] Running Cron "RemindBump"
+[14-05-2025 10:00:00] [DEBUG] Showcase message count per author: 1372121256849313800,1197220955282485500
+[14-05-2025 10:00:01] [DEBUG] Adding XP to members
+[14-05-2025 10:00:01] [DEBUG] Showcase message count per author: 1372121260707942400,1197220955282485500
+[14-05-2025 10:00:02] [DEBUG] Showcase message count per author: 1372121265233592300,1197220955282485500
+[14-05-2025 10:03:10] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 10:03:10] [INFO]  Loading module: InviteTracker
+[14-05-2025 10:03:10] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 10:03:10] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 10:03:10] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 10:03:10] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 10:03:10] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 10:03:10] [INFO]  Loading module: Leveling
+[14-05-2025 10:03:10] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 10:03:10] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 10:03:10] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 10:03:10] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 10:03:10] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 10:03:10] [INFO]  Loading module: Birthday
+[14-05-2025 10:03:10] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 10:03:10] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 10:03:10] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 10:03:10] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 10:03:10] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 10:03:10] [INFO]  Loading module: ModMail
+[14-05-2025 10:03:10] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 10:03:10] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 10:03:10] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 10:03:10] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 10:03:10] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 10:03:10] [INFO]  Loading module: Minecraft
+[14-05-2025 10:03:10] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 10:03:10] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 10:03:10] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 10:03:10] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 10:03:10] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 10:03:10] [INFO]  Loading module: ServerLogger
+[14-05-2025 10:03:10] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 10:03:10] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 10:03:10] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 10:03:10] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 10:03:10] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 10:03:10] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 10:03:10] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 10:03:10] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 10:03:10] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 10:03:10] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 10:03:10] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 10:03:10] [INFO]  Loading module: Community
+[14-05-2025 10:03:10] [DEBUG] Loaded commands for module: Community
+[14-05-2025 10:03:10] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 10:03:10] [DEBUG] Loaded events for module: Community
+[14-05-2025 10:03:10] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 10:03:10] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 10:03:10] [INFO]  Loading module: BumpReminder
+[14-05-2025 10:03:10] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 10:03:10] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 10:03:10] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 10:03:10] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 10:03:10] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 10:03:10] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 10:03:43] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 10:03:43] [INFO]  Loading module: InviteTracker
+[14-05-2025 10:03:43] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 10:03:43] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 10:03:43] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 10:03:43] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 10:03:43] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 10:03:43] [INFO]  Loading module: Leveling
+[14-05-2025 10:03:43] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 10:03:43] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 10:03:43] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 10:03:43] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 10:03:43] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 10:03:43] [INFO]  Loading module: Birthday
+[14-05-2025 10:03:43] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 10:03:43] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 10:03:43] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 10:03:43] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 10:03:43] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 10:03:43] [INFO]  Loading module: ModMail
+[14-05-2025 10:03:43] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 10:03:43] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 10:03:43] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 10:03:43] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 10:03:43] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 10:03:43] [INFO]  Loading module: Minecraft
+[14-05-2025 10:03:43] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 10:03:43] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 10:03:43] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 10:03:43] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 10:03:43] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 10:03:43] [INFO]  Loading module: ServerLogger
+[14-05-2025 10:03:43] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 10:03:43] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 10:03:43] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 10:03:43] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 10:03:43] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 10:03:43] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 10:03:43] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 10:03:43] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 10:03:43] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 10:03:43] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 10:03:43] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 10:03:43] [INFO]  Loading module: Community
+[14-05-2025 10:03:43] [DEBUG] Loaded commands for module: Community
+[14-05-2025 10:03:43] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 10:03:43] [DEBUG] Loaded events for module: Community
+[14-05-2025 10:03:43] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 10:03:43] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 10:03:43] [INFO]  Loading module: BumpReminder
+[14-05-2025 10:03:43] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 10:03:43] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 10:03:43] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 10:03:43] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 10:03:43] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 10:03:43] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 10:03:51] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 10:03:51] [INFO]  Loading module: InviteTracker
+[14-05-2025 10:03:51] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 10:03:51] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 10:03:51] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 10:03:51] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 10:03:51] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 10:03:51] [INFO]  Loading module: Leveling
+[14-05-2025 10:03:51] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 10:03:51] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 10:03:51] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 10:03:51] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 10:03:51] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 10:03:51] [INFO]  Loading module: Birthday
+[14-05-2025 10:03:51] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 10:03:51] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 10:03:51] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 10:03:51] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 10:03:51] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 10:03:51] [INFO]  Loading module: ModMail
+[14-05-2025 10:03:51] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 10:03:51] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 10:03:51] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 10:03:51] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 10:03:51] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 10:03:51] [INFO]  Loading module: Minecraft
+[14-05-2025 10:03:51] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 10:03:51] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 10:03:51] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 10:03:51] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 10:03:51] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 10:03:51] [INFO]  Loading module: ServerLogger
+[14-05-2025 10:03:51] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 10:03:51] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 10:03:51] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 10:03:51] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 10:03:51] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 10:03:51] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 10:03:51] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 10:03:51] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 10:03:51] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 10:03:51] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 10:03:51] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 10:03:51] [INFO]  Loading module: Community
+[14-05-2025 10:03:51] [DEBUG] Loaded commands for module: Community
+[14-05-2025 10:03:51] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 10:03:51] [DEBUG] Loaded events for module: Community
+[14-05-2025 10:03:51] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 10:03:51] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 10:03:51] [INFO]  Loading module: BumpReminder
+[14-05-2025 10:03:51] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 10:03:51] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 10:03:51] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 10:03:51] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 10:03:51] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 10:03:51] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 10:04:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 10:04:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 10:04:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 10:04:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 10:04:00] [DEBUG] Adding XP to members
+[14-05-2025 10:05:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 10:05:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 10:05:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 10:05:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 10:05:00] [DEBUG] Adding XP to members
+[14-05-2025 10:05:00] [DEBUG] Running Cron "remindBump"
+[14-05-2025 10:05:32] [INFO]  Logged in as AllDayDevBot#6811!
+[14-05-2025 10:05:32] [INFO]  Loading module: InviteTracker
+[14-05-2025 10:05:32] [DEBUG] Loaded commands for module: InviteTracker
+[14-05-2025 10:05:32] [DEBUG] Loaded commandsListener for module: InviteTracker
+[14-05-2025 10:05:32] [DEBUG] Loaded events for module: InviteTracker
+[14-05-2025 10:05:32] [DEBUG] Loaded tasks for module: InviteTracker
+[14-05-2025 10:05:32] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[14-05-2025 10:05:32] [INFO]  Loading module: Leveling
+[14-05-2025 10:05:32] [DEBUG] Loaded commands for module: Leveling
+[14-05-2025 10:05:32] [DEBUG] Loaded commandsListener for module: Leveling
+[14-05-2025 10:05:32] [DEBUG] Loaded events for module: Leveling
+[14-05-2025 10:05:32] [DEBUG] Loaded tasks for module: Leveling
+[14-05-2025 10:05:32] [INFO]  Loaded module 'Leveling': modules/Leveling
+[14-05-2025 10:05:32] [INFO]  Loading module: Birthday
+[14-05-2025 10:05:32] [DEBUG] Loaded commands for module: Birthday
+[14-05-2025 10:05:32] [DEBUG] Loaded commandsListener for module: Birthday
+[14-05-2025 10:05:32] [DEBUG] Loaded events for module: Birthday
+[14-05-2025 10:05:32] [DEBUG] Loaded tasks for module: Birthday
+[14-05-2025 10:05:32] [INFO]  Loaded module 'Birthday': modules/Birthday
+[14-05-2025 10:05:32] [INFO]  Loading module: ModMail
+[14-05-2025 10:05:32] [DEBUG] Loaded commands for module: ModMail
+[14-05-2025 10:05:32] [DEBUG] Loaded commandsListener for module: ModMail
+[14-05-2025 10:05:32] [DEBUG] Loaded events for module: ModMail
+[14-05-2025 10:05:32] [DEBUG] Loaded tasks for module: ModMail
+[14-05-2025 10:05:32] [INFO]  Loaded module 'ModMail': modules/ModMail
+[14-05-2025 10:05:32] [INFO]  Loading module: Minecraft
+[14-05-2025 10:05:32] [DEBUG] Loaded commands for module: Minecraft
+[14-05-2025 10:05:32] [DEBUG] Loaded commandsListener for module: Minecraft
+[14-05-2025 10:05:32] [DEBUG] Loaded events for module: Minecraft
+[14-05-2025 10:05:32] [DEBUG] Loaded tasks for module: Minecraft
+[14-05-2025 10:05:32] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[14-05-2025 10:05:32] [INFO]  Loading module: ServerLogger
+[14-05-2025 10:05:32] [ERROR] Module ServerLogger commands.ts does not have 'commands' export
+[14-05-2025 10:05:32] [DEBUG] Loaded commandsListener for module: ServerLogger
+[14-05-2025 10:05:32] [DEBUG] Loaded events for module: ServerLogger
+[14-05-2025 10:05:32] [DEBUG] Loaded tasks for module: ServerLogger
+[14-05-2025 10:05:32] [INFO]  Loaded module 'ServerLogger': modules/ServerLogger
+[14-05-2025 10:05:32] [INFO]  Loading module: ShowcaseRemover
+[14-05-2025 10:05:32] [DEBUG] Loaded commands for module: ShowcaseRemover
+[14-05-2025 10:05:32] [ERROR] Error loading commandsListener for module 'ShowcaseRemover': TypeError: this.commandsListener is not a function. (In 'this.commandsListener()', 'this.commandsListener' is undefined)
+[14-05-2025 10:05:32] [DEBUG] Loaded events for module: ShowcaseRemover
+[14-05-2025 10:05:32] [DEBUG] Loaded tasks for module: ShowcaseRemover
+[14-05-2025 10:05:32] [INFO]  Loaded module 'ShowcaseRemover': modules/ShowcaseRemover
+[14-05-2025 10:05:32] [INFO]  Loading module: Community
+[14-05-2025 10:05:32] [DEBUG] Loaded commands for module: Community
+[14-05-2025 10:05:32] [DEBUG] Loaded commandsListener for module: Community
+[14-05-2025 10:05:32] [DEBUG] Loaded events for module: Community
+[14-05-2025 10:05:32] [DEBUG] Loaded tasks for module: Community
+[14-05-2025 10:05:32] [INFO]  Loaded module 'Community': modules/Community
+[14-05-2025 10:05:32] [INFO]  Loading module: BumpReminder
+[14-05-2025 10:05:32] [ERROR] Module BumpReminder commands.ts does not have 'commands' export
+[14-05-2025 10:05:32] [DEBUG] Loaded commandsListener for module: BumpReminder
+[14-05-2025 10:05:32] [DEBUG] Loaded events for module: BumpReminder
+[14-05-2025 10:05:32] [DEBUG] Loaded tasks for module: BumpReminder
+[14-05-2025 10:05:32] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
+[14-05-2025 10:05:32] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 10:06:00] [DEBUG] Running Cron "addXpToMembersTask"
+[14-05-2025 10:06:00] [DEBUG] Looking into voice channels to add XP
+[14-05-2025 10:06:00] [DEBUG] Running Cron select on DB to keep it active!
+[14-05-2025 10:06:00] [DEBUG] Selecting: SELECT name FROM migrations
+[14-05-2025 10:06:00] [DEBUG] Adding XP to members

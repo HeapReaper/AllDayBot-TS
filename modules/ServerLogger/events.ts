@@ -249,7 +249,7 @@ export default class Events {
      */
     reactionEvents(): void {
         this.client.on(discordEvents.MessageReactionAdd, async (reaction, user) => {
-            if (user.author.id === this.client.user?.id) return;
+            if (user.id === this.client.user?.id) return;
 
             Logging.info('Reaction added to message!');
 
@@ -268,7 +268,7 @@ export default class Events {
         });
 
         this.client.on(discordEvents.MessageReactionRemove, async (reaction, user) => {
-            if (user.author.id === this.client.user?.id) return;
+            if (user.id === this.client.user?.id) return;
 
             Logging.info('Reaction removed to message!');
 
