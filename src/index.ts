@@ -5,6 +5,7 @@ import loadModules from '@utils/moduleLoader.ts';
 import { getEnv } from '@utils/env.ts';
 import { runMigrations } from '@utils/migrations.ts';
 import QueryBuilder from '@utils/database.ts';
+import cron from 'node-cron';
 
 const client = new Client({
     intents: [
@@ -30,14 +31,14 @@ client.on(discordEvents.ClientReady, async client => {
     await loadModules(client);
     await runMigrations();
 
-    setInterval(async (): Promise<void> => {
-        Logging.debug('Running select on DB to keep it active!');
+    cron.schedule('* * * * *', async (): Promise<void> => {
+        Logging.debug('Running Cron select on DB to keep it active!');
 
         await QueryBuilder
             .select('migrations')
             .columns(['name'])
             .get()
-    }, 60000);
+    });
 
     if (getEnv('ENVIRONMENT') !== 'prod') return;
     Sentry.init({

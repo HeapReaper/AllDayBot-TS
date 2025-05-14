@@ -87,8 +87,9 @@ export default class Events {
      */
     messageEvents(): void {
         this.client.on(discordEvents.MessageCreate, async (message: Message): Promise<void> => {
+            if (message.author.id === this.client.user?.id) return;
+
             Logging.info('Caching message');
-            if (message.author.bot) return;
 
             try {
                 await QueryBuilder.insert('messages')
@@ -140,8 +141,10 @@ export default class Events {
         });
 
         this.client.on(discordEvents.MessageUpdate, async (
-            oldMessage: OmitPartialGroupDMChannel<Message<boolean> | PartialMessage>,
-            newMessage: OmitPartialGroupDMChannel<Message<boolean>>): Promise<void> => {
+                oldMessage: OmitPartialGroupDMChannel<Message<boolean> | PartialMessage>,
+                newMessage: OmitPartialGroupDMChannel<Message<boolean>>): Promise<void> => {
+            if (newMessage.author.id === this.client.user?.id) return;
+
             Logging.debug('An message has been edited!');
 
             const messageUpdateEmbed: any = new EmbedBuilder()
@@ -159,6 +162,8 @@ export default class Events {
 
         // @ts-ignore
         this.client.on(discordEvents.MessageDelete, async (message: Message): Promise<void> => {
+            if (message.author.id === this.client.user?.id) return;
+
             Logging.debug('An message has been deleted!');
 
             const allS3Files = await S3OperationBuilder
@@ -244,6 +249,8 @@ export default class Events {
      */
     reactionEvents(): void {
         this.client.on(discordEvents.MessageReactionAdd, async (reaction, user) => {
+            if (user.id === this.client.user?.id) return;
+
             Logging.info('Reaction added to message!');
 
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
@@ -261,6 +268,8 @@ export default class Events {
         });
 
         this.client.on(discordEvents.MessageReactionRemove, async (reaction, user) => {
+            if (user.id === this.client.user?.id) return;
+
             Logging.info('Reaction removed to message!');
 
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()

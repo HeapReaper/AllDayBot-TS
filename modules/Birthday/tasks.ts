@@ -2,47 +2,38 @@ import { Client, TextChannel } from 'discord.js';
 import { Logging } from '@utils/logging';
 import QueryBuilder from '@utils/database';
 import { getEnv } from '@utils/env.ts';
+import cron from 'node-cron';
 
 export default class Tasks {
 	private client: Client;
-	private counter: number;
-	
+
     constructor(client: Client) {
 		this.client = client;
-		this.counter = 0;
-		void this.checkBirthdays();
+		cron.schedule('0 10 * * *', async (): Promise<void> => {
+			Logging.debug('Running Cron "checkBirthdays"');
+			void this.checkBirthdays();
+		});
 	}
 	
 	async checkBirthdays(): Promise<void> {
-		
-		setInterval(async (): Promise<void> => {
-			Logging.debug('Checking for birthdays...');
-			
-			const now = new Date();
-			
-			if (now.getHours() == 10 && now.getMinutes() == 0o0) {
-				// To prevent spamming
-				this.counter = 1;
-				
-				const birthdays: any[] = await QueryBuilder.select('birthdays').get();
-				
-				for (const birthday of birthdays) {
-					const paredBirthday = new Date(Date.parse(birthday.birthdate));
-					if ((paredBirthday.getMonth() + 1) !== (now.getMonth() + 1) && paredBirthday.getDate() !== now.getDate()) {
-						continue;
-					}
-					
-					const channel = this.client.channels.cache.get(getEnv('GENERAL')!);
-					if (!channel) {
-						Logging.error('General channel not found in birthday tasks.');
-						return;
-					}
-					
-					// Send birthday message to channel
-				}
+		const now = new Date();
+
+		const birthdays: any[] = await QueryBuilder.select('birthdays').get();
+
+		for (const birthday of birthdays) {
+			const paredBirthday = new Date(Date.parse(birthday.birthdate));
+
+			if ((paredBirthday.getMonth() + 1) !== (now.getMonth() + 1) && paredBirthday.getDate() !== now.getDate()) {
+				continue;
 			}
-			
-			if (now.getHours() == 10 && now.getMinutes() == 10) this.counter = 0;
-		}, 10000);
+
+			const channel = this.client.channels.cache.get(<string>getEnv('GENERAL')!);
+			if (!channel) {
+				Logging.error('General channel not found in birthday tasks.');
+				return;
+			}
+
+			// TODO: Send birthday message to channel
+		}
 	}
 }
