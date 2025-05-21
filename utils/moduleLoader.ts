@@ -28,12 +28,10 @@ async function loadModules(client: any) {
             const commandsURL = pathToFileURL(commandsFile).href;
             const commandsModule = await import(commandsURL);
 
-            if (!commandsModule.commands) {
-                Logging.error(`Module ${moduleFolder} commands.ts does not have 'commands' export`);
-            } else {
-                Logging.debug(`Loaded commands for module: ${moduleFolder}`);
-                moduleLoaded = true;
-            }
+            if (!commandsModule.commands) return;
+
+            Logging.debug(`Loaded commands for module: ${moduleFolder}`);
+            moduleLoaded = true;
         } catch (error) {
             if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
                 Logging.error(`Error loading commands for module '${moduleFolder}': ${error}`);
