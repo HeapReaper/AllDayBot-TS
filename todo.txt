@@ -1,0 +1,16 @@
+Add support command
+Add support reminder
+Add support auto closer
+
+Add ModLog
+Add logging kick/mute/ban to channel
+Add logging kick/mute/ban to DB
+Add kick/mute/ban message
+
+Fix UserInfo
+
+Add option to enable error/warn logging to guild
+
+Add if database connection lost or not found, make new connection
+
+add a log parser command
