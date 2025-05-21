@@ -1,7 +1,11 @@
-import { Logging } from '@utils/logging.ts';
-import { Client, Message, Events as discordEvents, GuildMember } from 'discord.js';
-import Database from "@utils/database.ts";
-import QueryBuilder from "@utils/database.ts";
+import { Logging } from '@utils/logging';
+import {
+    Client,
+    Message,
+    Events as discordEvents,
+    GuildMember
+} from 'discord.js';
+import QueryBuilder from '@utils/database';
 
 export default class LevelingEvents {
     static usersXpAddedFromMessage: Array<any> = [];
@@ -15,9 +19,7 @@ export default class LevelingEvents {
 
     setupOnMessageCreateEvent(): void {
         this.client.on(discordEvents.MessageCreate, (message: Message): void => {
-            if (message.author.id === this.client.user?.id) return;
-
-            Logging.debug('New message received');
+            if (message.author.id === this.client.user?.id || message.author.bot) return;
 
             if (LevelingEvents.usersXpAddedFromMessage.includes(message.author.id)) return;
 

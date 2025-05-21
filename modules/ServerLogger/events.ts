@@ -87,7 +87,7 @@ export default class Events {
      */
     messageEvents(): void {
         this.client.on(discordEvents.MessageCreate, async (message: Message): Promise<void> => {
-            if (message.author.id === this.client.user?.id) return;
+            if (message.author.id === this.client.user?.id || message.author.bot) return;
 
             Logging.info('Caching message');
 
