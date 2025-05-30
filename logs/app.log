@@ -5404,3 +5404,68 @@
 [30-05-2025 20:20:00] [DEBUG] Running Cron select on DB to keep it active!
 [30-05-2025 20:20:00] [DEBUG] Selecting: SELECT name FROM migrations
 [30-05-2025 20:20:00] [DEBUG] Adding XP to members
+[30-05-2025 20:21:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:21:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:21:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:21:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:21:00] [DEBUG] Adding XP to members
+[30-05-2025 20:22:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:22:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:22:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:22:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:22:00] [DEBUG] Adding XP to members
+[30-05-2025 20:23:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:23:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:23:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:23:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:23:00] [DEBUG] Adding XP to members
+[30-05-2025 20:24:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:24:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:24:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:24:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:24:00] [DEBUG] Adding XP to members
+[30-05-2025 20:25:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:25:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:25:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:25:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:25:00] [DEBUG] Adding XP to members
+[30-05-2025 20:26:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:26:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:26:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:26:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:26:00] [DEBUG] Adding XP to members
+[30-05-2025 20:27:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:27:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:27:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:27:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:27:00] [DEBUG] Adding XP to members
+[30-05-2025 20:28:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:28:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:28:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:28:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:28:00] [DEBUG] Adding XP to members
+[30-05-2025 20:29:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:29:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:29:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:29:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:29:00] [DEBUG] Adding XP to members
+[30-05-2025 20:30:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:30:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:30:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:30:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:30:00] [DEBUG] Adding XP to members
+[30-05-2025 20:31:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:31:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:31:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:31:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:31:00] [DEBUG] Adding XP to members
+[30-05-2025 20:32:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:32:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:32:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:32:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:32:00] [DEBUG] Adding XP to members
+[30-05-2025 20:33:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:33:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:33:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:33:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:33:00] [DEBUG] Adding XP to members
