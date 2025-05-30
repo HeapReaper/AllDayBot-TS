@@ -4843,3 +4843,554 @@
 [21-05-2025 10:28:07] [DEBUG] Loaded tasks for module: BumpReminder
 [21-05-2025 10:28:07] [INFO]  Loaded module 'BumpReminder': modules/BumpReminder
 [21-05-2025 10:28:07] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:34:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:34:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:34:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:34:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:34:00] [DEBUG] Adding XP to members
+[21-05-2025 14:35:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:35:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:35:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:35:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:35:00] [DEBUG] Adding XP to members
+[21-05-2025 14:36:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:36:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:36:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:36:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:36:00] [DEBUG] Adding XP to members
+[21-05-2025 14:37:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:37:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:37:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:37:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:37:00] [DEBUG] Adding XP to members
+[21-05-2025 14:38:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:38:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:38:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:38:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:38:00] [DEBUG] Adding XP to members
+[21-05-2025 14:39:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:39:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:39:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:39:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:39:00] [DEBUG] Adding XP to members
+[21-05-2025 14:40:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:40:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:40:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:40:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:40:00] [DEBUG] Adding XP to members
+[21-05-2025 14:41:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:41:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:41:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:41:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:41:00] [DEBUG] Adding XP to members
+[21-05-2025 14:42:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:42:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:42:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:42:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:42:00] [DEBUG] Adding XP to members
+[21-05-2025 14:43:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:43:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:43:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:43:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:43:00] [DEBUG] Adding XP to members
+[21-05-2025 14:44:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:44:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:44:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:44:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:44:00] [DEBUG] Adding XP to members
+[21-05-2025 14:45:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:45:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:45:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:45:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:45:00] [DEBUG] Adding XP to members
+[21-05-2025 14:46:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:46:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:46:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:46:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:46:00] [DEBUG] Adding XP to members
+[21-05-2025 14:47:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:47:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:47:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:47:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:47:00] [DEBUG] Adding XP to members
+[21-05-2025 14:48:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:48:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:48:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:48:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:48:00] [DEBUG] Adding XP to members
+[21-05-2025 14:49:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:49:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:49:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:49:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:49:00] [DEBUG] Adding XP to members
+[21-05-2025 14:50:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:50:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:50:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:50:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:50:00] [DEBUG] Adding XP to members
+[21-05-2025 14:51:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:51:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:51:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:51:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:51:00] [DEBUG] Adding XP to members
+[21-05-2025 14:52:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:52:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:52:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:52:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:52:00] [DEBUG] Adding XP to members
+[21-05-2025 14:53:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:53:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:53:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:53:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:53:00] [DEBUG] Adding XP to members
+[21-05-2025 14:54:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:54:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:54:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:54:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:54:00] [DEBUG] Adding XP to members
+[21-05-2025 14:55:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:55:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:55:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:55:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:55:00] [DEBUG] Adding XP to members
+[21-05-2025 14:56:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:56:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:56:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:56:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:56:00] [DEBUG] Adding XP to members
+[21-05-2025 14:57:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:57:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:57:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:57:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:57:00] [DEBUG] Adding XP to members
+[21-05-2025 14:58:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:58:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:58:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:58:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:58:00] [DEBUG] Adding XP to members
+[21-05-2025 14:59:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 14:59:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 14:59:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 14:59:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 14:59:00] [DEBUG] Adding XP to members
+[21-05-2025 15:00:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:00:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:00:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:00:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:00:00] [DEBUG] Adding XP to members
+[21-05-2025 15:01:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:01:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:01:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:01:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:01:00] [DEBUG] Adding XP to members
+[21-05-2025 15:02:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:02:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:02:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:02:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:02:00] [DEBUG] Adding XP to members
+[21-05-2025 15:03:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:03:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:03:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:03:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:03:00] [DEBUG] Adding XP to members
+[21-05-2025 15:04:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:04:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:04:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:04:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:04:00] [DEBUG] Adding XP to members
+[21-05-2025 15:05:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:05:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:05:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:05:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:05:01] [DEBUG] Adding XP to members
+[21-05-2025 15:06:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:06:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:06:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:06:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:06:00] [DEBUG] Adding XP to members
+[21-05-2025 15:07:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:07:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:07:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:07:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:07:00] [DEBUG] Adding XP to members
+[21-05-2025 15:08:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:08:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:08:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:08:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:08:00] [DEBUG] Adding XP to members
+[21-05-2025 15:09:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:09:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:09:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:09:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:09:00] [DEBUG] Adding XP to members
+[21-05-2025 15:10:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:10:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:10:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:10:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:10:00] [DEBUG] Adding XP to members
+[21-05-2025 15:11:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:11:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:11:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:11:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:11:00] [DEBUG] Adding XP to members
+[21-05-2025 15:12:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:12:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:12:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:12:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:12:00] [DEBUG] Adding XP to members
+[21-05-2025 15:13:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:13:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:13:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:13:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:13:00] [DEBUG] Adding XP to members
+[21-05-2025 15:14:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:14:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:14:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:14:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:14:00] [DEBUG] Adding XP to members
+[21-05-2025 15:15:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:15:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:15:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:15:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:15:00] [DEBUG] Adding XP to members
+[21-05-2025 15:16:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:16:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:16:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:16:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:16:00] [DEBUG] Adding XP to members
+[21-05-2025 15:17:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:17:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:17:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:17:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:17:00] [DEBUG] Adding XP to members
+[21-05-2025 15:18:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 15:18:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 15:18:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 15:18:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 15:18:00] [DEBUG] Adding XP to members
+[21-05-2025 18:57:58] [INFO]  Logged in as AllDayDevBot#6811!
+[21-05-2025 18:57:58] [INFO]  Loading module: InviteTracker
+[21-05-2025 18:57:58] [DEBUG] Loaded commands for module: InviteTracker
+[21-05-2025 18:57:58] [DEBUG] Loaded commandsListener for module: InviteTracker
+[21-05-2025 18:57:58] [DEBUG] Loaded events for module: InviteTracker
+[21-05-2025 18:57:58] [DEBUG] Loaded tasks for module: InviteTracker
+[21-05-2025 18:57:58] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[21-05-2025 18:57:58] [INFO]  Loading module: Leveling
+[21-05-2025 18:57:58] [DEBUG] Loaded commands for module: Leveling
+[21-05-2025 18:57:58] [DEBUG] Loaded commandsListener for module: Leveling
+[21-05-2025 18:57:58] [DEBUG] Loaded events for module: Leveling
+[21-05-2025 18:57:58] [DEBUG] Loaded tasks for module: Leveling
+[21-05-2025 18:57:58] [INFO]  Loaded module 'Leveling': modules/Leveling
+[21-05-2025 18:57:58] [INFO]  Loading module: Birthday
+[21-05-2025 18:57:58] [DEBUG] Loaded commands for module: Birthday
+[21-05-2025 18:57:58] [DEBUG] Loaded commandsListener for module: Birthday
+[21-05-2025 18:57:58] [DEBUG] Loaded events for module: Birthday
+[21-05-2025 18:57:58] [DEBUG] Loaded tasks for module: Birthday
+[21-05-2025 18:57:58] [INFO]  Loaded module 'Birthday': modules/Birthday
+[21-05-2025 18:57:58] [INFO]  Loading module: ModMail
+[21-05-2025 18:57:58] [DEBUG] Loaded commands for module: ModMail
+[21-05-2025 18:57:58] [DEBUG] Loaded commandsListener for module: ModMail
+[21-05-2025 18:57:58] [DEBUG] Loaded events for module: ModMail
+[21-05-2025 18:57:58] [DEBUG] Loaded tasks for module: ModMail
+[21-05-2025 18:57:58] [INFO]  Loaded module 'ModMail': modules/ModMail
+[21-05-2025 18:57:58] [INFO]  Loading module: Minecraft
+[21-05-2025 18:57:58] [DEBUG] Loaded commands for module: Minecraft
+[21-05-2025 18:57:58] [DEBUG] Loaded commandsListener for module: Minecraft
+[21-05-2025 18:57:58] [DEBUG] Loaded events for module: Minecraft
+[21-05-2025 18:57:58] [DEBUG] Loaded tasks for module: Minecraft
+[21-05-2025 18:57:58] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[21-05-2025 18:57:58] [INFO]  Loading module: ServerLogger
+[21-05-2025 18:57:59] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 18:58:00] [DEBUG] Running Cron "addXpToMembersTask"
+[21-05-2025 18:58:00] [DEBUG] Looking into voice channels to add XP
+[21-05-2025 18:58:00] [DEBUG] Running Cron select on DB to keep it active!
+[21-05-2025 18:58:00] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 18:58:00] [DEBUG] Adding XP to members
+[21-05-2025 18:58:10] [INFO]  Logged in as AllDayDevBot#6811!
+[21-05-2025 18:58:10] [INFO]  Loading module: InviteTracker
+[21-05-2025 18:58:10] [DEBUG] Loaded commands for module: InviteTracker
+[21-05-2025 18:58:10] [DEBUG] Loaded commandsListener for module: InviteTracker
+[21-05-2025 18:58:10] [DEBUG] Loaded events for module: InviteTracker
+[21-05-2025 18:58:10] [DEBUG] Loaded tasks for module: InviteTracker
+[21-05-2025 18:58:10] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[21-05-2025 18:58:10] [INFO]  Loading module: Leveling
+[21-05-2025 18:58:10] [DEBUG] Loaded commands for module: Leveling
+[21-05-2025 18:58:10] [DEBUG] Loaded commandsListener for module: Leveling
+[21-05-2025 18:58:10] [DEBUG] Loaded events for module: Leveling
+[21-05-2025 18:58:10] [DEBUG] Loaded tasks for module: Leveling
+[21-05-2025 18:58:10] [INFO]  Loaded module 'Leveling': modules/Leveling
+[21-05-2025 18:58:10] [INFO]  Loading module: Birthday
+[21-05-2025 18:58:10] [DEBUG] Loaded commands for module: Birthday
+[21-05-2025 18:58:10] [DEBUG] Loaded commandsListener for module: Birthday
+[21-05-2025 18:58:10] [DEBUG] Loaded events for module: Birthday
+[21-05-2025 18:58:10] [DEBUG] Loaded tasks for module: Birthday
+[21-05-2025 18:58:10] [INFO]  Loaded module 'Birthday': modules/Birthday
+[21-05-2025 18:58:10] [INFO]  Loading module: ModMail
+[21-05-2025 18:58:10] [DEBUG] Loaded commands for module: ModMail
+[21-05-2025 18:58:10] [DEBUG] Loaded commandsListener for module: ModMail
+[21-05-2025 18:58:10] [DEBUG] Loaded events for module: ModMail
+[21-05-2025 18:58:10] [DEBUG] Loaded tasks for module: ModMail
+[21-05-2025 18:58:10] [INFO]  Loaded module 'ModMail': modules/ModMail
+[21-05-2025 18:58:10] [INFO]  Loading module: Minecraft
+[21-05-2025 18:58:10] [DEBUG] Loaded commands for module: Minecraft
+[21-05-2025 18:58:10] [DEBUG] Loaded commandsListener for module: Minecraft
+[21-05-2025 18:58:10] [DEBUG] Loaded events for module: Minecraft
+[21-05-2025 18:58:10] [DEBUG] Loaded tasks for module: Minecraft
+[21-05-2025 18:58:10] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[21-05-2025 18:58:10] [INFO]  Loading module: ServerLogger
+[21-05-2025 18:58:10] [DEBUG] Selecting: SELECT name FROM migrations
+[21-05-2025 18:58:15] [INFO]  Logged in as AllDayDevBot#6811!
+[21-05-2025 18:58:15] [INFO]  Loading module: InviteTracker
+[21-05-2025 18:58:15] [DEBUG] Loaded commands for module: InviteTracker
+[21-05-2025 18:58:15] [DEBUG] Loaded commandsListener for module: InviteTracker
+[21-05-2025 18:58:15] [DEBUG] Loaded events for module: InviteTracker
+[21-05-2025 18:58:15] [DEBUG] Loaded tasks for module: InviteTracker
+[21-05-2025 18:58:15] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[21-05-2025 18:58:15] [INFO]  Loading module: Leveling
+[21-05-2025 18:58:15] [DEBUG] Loaded commands for module: Leveling
+[21-05-2025 18:58:15] [DEBUG] Loaded commandsListener for module: Leveling
+[21-05-2025 18:58:15] [DEBUG] Loaded events for module: Leveling
+[21-05-2025 18:58:15] [DEBUG] Loaded tasks for module: Leveling
+[21-05-2025 18:58:15] [INFO]  Loaded module 'Leveling': modules/Leveling
+[21-05-2025 18:58:15] [INFO]  Loading module: Birthday
+[21-05-2025 18:58:15] [DEBUG] Loaded commands for module: Birthday
+[21-05-2025 18:58:15] [DEBUG] Loaded commandsListener for module: Birthday
+[21-05-2025 18:58:15] [DEBUG] Loaded events for module: Birthday
+[21-05-2025 18:58:15] [DEBUG] Loaded tasks for module: Birthday
+[21-05-2025 18:58:15] [INFO]  Loaded module 'Birthday': modules/Birthday
+[21-05-2025 18:58:15] [INFO]  Loading module: ModMail
+[21-05-2025 18:58:15] [DEBUG] Loaded commands for module: ModMail
+[21-05-2025 18:58:15] [DEBUG] Loaded commandsListener for module: ModMail
+[21-05-2025 18:58:15] [DEBUG] Loaded events for module: ModMail
+[21-05-2025 18:58:15] [DEBUG] Loaded tasks for module: ModMail
+[21-05-2025 18:58:15] [INFO]  Loaded module 'ModMail': modules/ModMail
+[21-05-2025 18:58:15] [INFO]  Loading module: Minecraft
+[21-05-2025 18:58:15] [DEBUG] Loaded commands for module: Minecraft
+[21-05-2025 18:58:15] [DEBUG] Loaded commandsListener for module: Minecraft
+[21-05-2025 18:58:15] [DEBUG] Loaded events for module: Minecraft
+[21-05-2025 18:58:15] [DEBUG] Loaded tasks for module: Minecraft
+[21-05-2025 18:58:15] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[21-05-2025 18:58:15] [INFO]  Loading module: ServerLogger
+[21-05-2025 18:58:15] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:06:06] [INFO]  Logged in as AllDayDevBot#6811!
+[30-05-2025 20:06:06] [INFO]  Loading module: InviteTracker
+[30-05-2025 20:06:06] [DEBUG] Loaded commands for module: InviteTracker
+[30-05-2025 20:06:06] [DEBUG] Loaded commandsListener for module: InviteTracker
+[30-05-2025 20:06:06] [DEBUG] Loaded events for module: InviteTracker
+[30-05-2025 20:06:06] [DEBUG] Loaded tasks for module: InviteTracker
+[30-05-2025 20:06:06] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[30-05-2025 20:06:06] [INFO]  Loading module: Leveling
+[30-05-2025 20:06:06] [DEBUG] Loaded commands for module: Leveling
+[30-05-2025 20:06:06] [DEBUG] Loaded commandsListener for module: Leveling
+[30-05-2025 20:06:06] [DEBUG] Loaded events for module: Leveling
+[30-05-2025 20:06:06] [DEBUG] Loaded tasks for module: Leveling
+[30-05-2025 20:06:06] [INFO]  Loaded module 'Leveling': modules/Leveling
+[30-05-2025 20:06:06] [INFO]  Loading module: Birthday
+[30-05-2025 20:06:06] [DEBUG] Loaded commands for module: Birthday
+[30-05-2025 20:06:06] [DEBUG] Loaded commandsListener for module: Birthday
+[30-05-2025 20:06:06] [DEBUG] Loaded events for module: Birthday
+[30-05-2025 20:06:06] [DEBUG] Loaded tasks for module: Birthday
+[30-05-2025 20:06:06] [INFO]  Loaded module 'Birthday': modules/Birthday
+[30-05-2025 20:06:06] [INFO]  Loading module: ModMail
+[30-05-2025 20:06:06] [DEBUG] Loaded commands for module: ModMail
+[30-05-2025 20:06:06] [DEBUG] Loaded commandsListener for module: ModMail
+[30-05-2025 20:06:06] [DEBUG] Loaded events for module: ModMail
+[30-05-2025 20:06:06] [DEBUG] Loaded tasks for module: ModMail
+[30-05-2025 20:06:06] [INFO]  Loaded module 'ModMail': modules/ModMail
+[30-05-2025 20:06:06] [INFO]  Loading module: Minecraft
+[30-05-2025 20:06:06] [DEBUG] Loaded commands for module: Minecraft
+[30-05-2025 20:06:06] [DEBUG] Loaded commandsListener for module: Minecraft
+[30-05-2025 20:06:06] [DEBUG] Loaded events for module: Minecraft
+[30-05-2025 20:06:06] [DEBUG] Loaded tasks for module: Minecraft
+[30-05-2025 20:06:06] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[30-05-2025 20:06:06] [INFO]  Loading module: ServerLogger
+[30-05-2025 20:06:06] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:07:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:07:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:07:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:07:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:07:00] [DEBUG] Adding XP to members
+[30-05-2025 20:08:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:08:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:08:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:08:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:08:00] [DEBUG] Adding XP to members
+[30-05-2025 20:09:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:09:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:09:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:09:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:09:00] [DEBUG] Adding XP to members
+[30-05-2025 20:09:11] [INFO]  Logged in as AllDayDevBot#6811!
+[30-05-2025 20:09:11] [INFO]  Loading module: InviteTracker
+[30-05-2025 20:09:11] [DEBUG] Loaded commands for module: InviteTracker
+[30-05-2025 20:09:11] [DEBUG] Loaded commandsListener for module: InviteTracker
+[30-05-2025 20:09:11] [DEBUG] Loaded events for module: InviteTracker
+[30-05-2025 20:09:11] [DEBUG] Loaded tasks for module: InviteTracker
+[30-05-2025 20:09:11] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[30-05-2025 20:09:11] [INFO]  Loading module: Leveling
+[30-05-2025 20:09:11] [DEBUG] Loaded commands for module: Leveling
+[30-05-2025 20:09:11] [DEBUG] Loaded commandsListener for module: Leveling
+[30-05-2025 20:09:11] [DEBUG] Loaded events for module: Leveling
+[30-05-2025 20:09:11] [DEBUG] Loaded tasks for module: Leveling
+[30-05-2025 20:09:11] [INFO]  Loaded module 'Leveling': modules/Leveling
+[30-05-2025 20:09:11] [INFO]  Loading module: Birthday
+[30-05-2025 20:09:11] [DEBUG] Loaded commands for module: Birthday
+[30-05-2025 20:09:11] [DEBUG] Loaded commandsListener for module: Birthday
+[30-05-2025 20:09:11] [DEBUG] Loaded events for module: Birthday
+[30-05-2025 20:09:11] [DEBUG] Loaded tasks for module: Birthday
+[30-05-2025 20:09:11] [INFO]  Loaded module 'Birthday': modules/Birthday
+[30-05-2025 20:09:11] [INFO]  Loading module: ModMail
+[30-05-2025 20:09:11] [DEBUG] Loaded commands for module: ModMail
+[30-05-2025 20:09:11] [DEBUG] Loaded commandsListener for module: ModMail
+[30-05-2025 20:09:11] [DEBUG] Loaded events for module: ModMail
+[30-05-2025 20:09:11] [DEBUG] Loaded tasks for module: ModMail
+[30-05-2025 20:09:11] [INFO]  Loaded module 'ModMail': modules/ModMail
+[30-05-2025 20:09:11] [INFO]  Loading module: Minecraft
+[30-05-2025 20:09:11] [DEBUG] Loaded commands for module: Minecraft
+[30-05-2025 20:09:11] [DEBUG] Loaded commandsListener for module: Minecraft
+[30-05-2025 20:09:11] [DEBUG] Loaded events for module: Minecraft
+[30-05-2025 20:09:11] [DEBUG] Loaded tasks for module: Minecraft
+[30-05-2025 20:09:11] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[30-05-2025 20:09:11] [INFO]  Loading module: ServerLogger
+[30-05-2025 20:09:11] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:09:36] [INFO]  Logged in as AllDayDevBot#6811!
+[30-05-2025 20:09:36] [INFO]  Loading module: InviteTracker
+[30-05-2025 20:09:36] [DEBUG] Loaded commands for module: InviteTracker
+[30-05-2025 20:09:36] [DEBUG] Loaded commandsListener for module: InviteTracker
+[30-05-2025 20:09:36] [DEBUG] Loaded events for module: InviteTracker
+[30-05-2025 20:09:36] [DEBUG] Loaded tasks for module: InviteTracker
+[30-05-2025 20:09:36] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[30-05-2025 20:09:36] [INFO]  Loading module: Leveling
+[30-05-2025 20:09:36] [DEBUG] Loaded commands for module: Leveling
+[30-05-2025 20:09:36] [DEBUG] Loaded commandsListener for module: Leveling
+[30-05-2025 20:09:36] [DEBUG] Loaded events for module: Leveling
+[30-05-2025 20:09:36] [DEBUG] Loaded tasks for module: Leveling
+[30-05-2025 20:09:36] [INFO]  Loaded module 'Leveling': modules/Leveling
+[30-05-2025 20:09:36] [INFO]  Loading module: Birthday
+[30-05-2025 20:09:36] [DEBUG] Loaded commands for module: Birthday
+[30-05-2025 20:09:36] [DEBUG] Loaded commandsListener for module: Birthday
+[30-05-2025 20:09:36] [DEBUG] Loaded events for module: Birthday
+[30-05-2025 20:09:36] [DEBUG] Loaded tasks for module: Birthday
+[30-05-2025 20:09:36] [INFO]  Loaded module 'Birthday': modules/Birthday
+[30-05-2025 20:09:36] [INFO]  Loading module: ModMail
+[30-05-2025 20:09:36] [DEBUG] Loaded commands for module: ModMail
+[30-05-2025 20:09:36] [DEBUG] Loaded commandsListener for module: ModMail
+[30-05-2025 20:09:36] [DEBUG] Loaded events for module: ModMail
+[30-05-2025 20:09:36] [DEBUG] Loaded tasks for module: ModMail
+[30-05-2025 20:09:36] [INFO]  Loaded module 'ModMail': modules/ModMail
+[30-05-2025 20:09:36] [INFO]  Loading module: Minecraft
+[30-05-2025 20:09:36] [DEBUG] Loaded commands for module: Minecraft
+[30-05-2025 20:09:36] [DEBUG] Loaded commandsListener for module: Minecraft
+[30-05-2025 20:09:36] [DEBUG] Loaded events for module: Minecraft
+[30-05-2025 20:09:36] [DEBUG] Loaded tasks for module: Minecraft
+[30-05-2025 20:09:36] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[30-05-2025 20:09:36] [INFO]  Loading module: ServerLogger
+[30-05-2025 20:09:36] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:09:40] [INFO]  Logged in as AllDayDevBot#6811!
+[30-05-2025 20:09:40] [INFO]  Loading module: InviteTracker
+[30-05-2025 20:09:40] [DEBUG] Loaded commands for module: InviteTracker
+[30-05-2025 20:09:40] [DEBUG] Loaded commandsListener for module: InviteTracker
+[30-05-2025 20:09:40] [DEBUG] Loaded events for module: InviteTracker
+[30-05-2025 20:09:40] [DEBUG] Loaded tasks for module: InviteTracker
+[30-05-2025 20:09:40] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[30-05-2025 20:09:40] [INFO]  Loading module: Leveling
+[30-05-2025 20:09:40] [DEBUG] Loaded commands for module: Leveling
+[30-05-2025 20:09:40] [DEBUG] Loaded commandsListener for module: Leveling
+[30-05-2025 20:09:40] [DEBUG] Loaded events for module: Leveling
+[30-05-2025 20:09:40] [DEBUG] Loaded tasks for module: Leveling
+[30-05-2025 20:09:40] [INFO]  Loaded module 'Leveling': modules/Leveling
+[30-05-2025 20:09:40] [INFO]  Loading module: Birthday
+[30-05-2025 20:09:40] [DEBUG] Loaded commands for module: Birthday
+[30-05-2025 20:09:40] [DEBUG] Loaded commandsListener for module: Birthday
+[30-05-2025 20:09:40] [DEBUG] Loaded events for module: Birthday
+[30-05-2025 20:09:40] [DEBUG] Loaded tasks for module: Birthday
+[30-05-2025 20:09:40] [INFO]  Loaded module 'Birthday': modules/Birthday
+[30-05-2025 20:09:40] [INFO]  Loading module: ModMail
+[30-05-2025 20:09:40] [DEBUG] Loaded commands for module: ModMail
+[30-05-2025 20:09:40] [DEBUG] Loaded commandsListener for module: ModMail
+[30-05-2025 20:09:40] [DEBUG] Loaded events for module: ModMail
+[30-05-2025 20:09:40] [DEBUG] Loaded tasks for module: ModMail
+[30-05-2025 20:09:40] [INFO]  Loaded module 'ModMail': modules/ModMail
+[30-05-2025 20:09:40] [INFO]  Loading module: Minecraft
+[30-05-2025 20:09:40] [DEBUG] Loaded commands for module: Minecraft
+[30-05-2025 20:09:40] [DEBUG] Loaded commandsListener for module: Minecraft
+[30-05-2025 20:09:40] [DEBUG] Loaded events for module: Minecraft
+[30-05-2025 20:09:40] [DEBUG] Loaded tasks for module: Minecraft
+[30-05-2025 20:09:40] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[30-05-2025 20:09:40] [INFO]  Loading module: ServerLogger
+[30-05-2025 20:09:40] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:09:52] [DEBUG] Selecting: SELECT * FROM leveling
+[30-05-2025 20:09:52] [ERROR] Something went wrong getting leveling scoreboard: DiscordAPIError[10013]: Unknown User
+[30-05-2025 20:10:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:10:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:10:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:10:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:10:00] [DEBUG] Adding XP to members
+[30-05-2025 20:11:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:11:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:11:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:11:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:11:00] [DEBUG] Adding XP to members
+[30-05-2025 20:12:16] [INFO]  Logged in as AllDayDevBot#6811!
+[30-05-2025 20:12:16] [INFO]  Loading module: InviteTracker
+[30-05-2025 20:12:16] [DEBUG] Loaded commands for module: InviteTracker
+[30-05-2025 20:12:16] [DEBUG] Loaded commandsListener for module: InviteTracker
+[30-05-2025 20:12:16] [DEBUG] Loaded events for module: InviteTracker
+[30-05-2025 20:12:16] [DEBUG] Loaded tasks for module: InviteTracker
+[30-05-2025 20:12:16] [INFO]  Loaded module 'InviteTracker': modules/InviteTracker
+[30-05-2025 20:12:16] [INFO]  Loading module: Leveling
+[30-05-2025 20:12:16] [DEBUG] Loaded commands for module: Leveling
+[30-05-2025 20:12:16] [DEBUG] Loaded commandsListener for module: Leveling
+[30-05-2025 20:12:16] [DEBUG] Loaded events for module: Leveling
+[30-05-2025 20:12:16] [DEBUG] Loaded tasks for module: Leveling
+[30-05-2025 20:12:16] [INFO]  Loaded module 'Leveling': modules/Leveling
+[30-05-2025 20:12:16] [INFO]  Loading module: Birthday
+[30-05-2025 20:12:16] [DEBUG] Loaded commands for module: Birthday
+[30-05-2025 20:12:16] [DEBUG] Loaded commandsListener for module: Birthday
+[30-05-2025 20:12:16] [DEBUG] Loaded events for module: Birthday
+[30-05-2025 20:12:16] [DEBUG] Loaded tasks for module: Birthday
+[30-05-2025 20:12:16] [INFO]  Loaded module 'Birthday': modules/Birthday
+[30-05-2025 20:12:16] [INFO]  Loading module: ModMail
+[30-05-2025 20:12:16] [DEBUG] Loaded commands for module: ModMail
+[30-05-2025 20:12:16] [DEBUG] Loaded commandsListener for module: ModMail
+[30-05-2025 20:12:16] [DEBUG] Loaded events for module: ModMail
+[30-05-2025 20:12:16] [DEBUG] Loaded tasks for module: ModMail
+[30-05-2025 20:12:16] [INFO]  Loaded module 'ModMail': modules/ModMail
+[30-05-2025 20:12:16] [INFO]  Loading module: Minecraft
+[30-05-2025 20:12:16] [DEBUG] Loaded commands for module: Minecraft
+[30-05-2025 20:12:16] [DEBUG] Loaded commandsListener for module: Minecraft
+[30-05-2025 20:12:16] [DEBUG] Loaded events for module: Minecraft
+[30-05-2025 20:12:16] [DEBUG] Loaded tasks for module: Minecraft
+[30-05-2025 20:12:16] [INFO]  Loaded module 'Minecraft': modules/Minecraft
+[30-05-2025 20:12:16] [INFO]  Loading module: ServerLogger
+[30-05-2025 20:12:16] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:13:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:13:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:13:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:13:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:13:00] [DEBUG] Adding XP to members
+[30-05-2025 20:14:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:14:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:14:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:14:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:14:00] [DEBUG] Adding XP to members
+[30-05-2025 20:15:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:15:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:15:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:15:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:15:00] [DEBUG] Adding XP to members
+[30-05-2025 20:16:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:16:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:16:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:16:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:16:00] [DEBUG] Adding XP to members
+[30-05-2025 20:17:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:17:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:17:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:17:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:17:00] [DEBUG] Adding XP to members
+[30-05-2025 20:18:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:18:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:18:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:18:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:18:00] [DEBUG] Adding XP to members
