@@ -31,7 +31,12 @@ export const commands = [
 `;
 
 const commandsListenerFileWrite =
-`import { Client, Interaction, Events, MessageFlags} from 'discord.js';
+`import {
+	Client,
+	Interaction,
+	Events as discordEvents,
+	MessageFlags
+} from 'discord.js';
 
 export default class CommandsListener {
 	private client: Client;

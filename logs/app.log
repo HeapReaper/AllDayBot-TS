@@ -5469,3 +5469,13 @@
 [30-05-2025 20:33:00] [DEBUG] Running Cron select on DB to keep it active!
 [30-05-2025 20:33:00] [DEBUG] Selecting: SELECT name FROM migrations
 [30-05-2025 20:33:00] [DEBUG] Adding XP to members
+[30-05-2025 20:34:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:34:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:34:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:34:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:34:00] [DEBUG] Adding XP to members
+[30-05-2025 20:35:00] [DEBUG] Running Cron "addXpToMembersTask"
+[30-05-2025 20:35:00] [DEBUG] Looking into voice channels to add XP
+[30-05-2025 20:35:00] [DEBUG] Running Cron select on DB to keep it active!
+[30-05-2025 20:35:00] [DEBUG] Selecting: SELECT name FROM migrations
+[30-05-2025 20:35:00] [DEBUG] Adding XP to members
