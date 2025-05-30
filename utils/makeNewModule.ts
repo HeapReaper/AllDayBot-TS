@@ -9,8 +9,9 @@ if (process.argv.slice(2).length == 0) {
 	process.exit();
 }
 
-const modulesDir = `./modules`;
-const moduleNameToCreate = process.argv.slice(2)[0];
+const modulesDir: string = `./modules`;
+const moduleName: string = process.argv.slice(2)[0];
+const moduleNameToCreate = moduleName.charAt(0).toUpperCase() + moduleName.slice(1);
 
 console.log(`Making module named ${moduleNameToCreate} inside ${modulesDir}/`);
 
@@ -82,4 +83,4 @@ writeFileSync(`${modulesDir}/${moduleNameToCreate}/commandsListener.ts`, command
 writeFileSync(`${modulesDir}/${moduleNameToCreate}/events.ts`, eventsFileWrite);
 writeFileSync(`${modulesDir}/${moduleNameToCreate}/tasks.ts`, tasksFileWrite);
 
-console.log('I created the module!');
+console.log(`Module with the name ${moduleNameToCreate} has been created!`);
