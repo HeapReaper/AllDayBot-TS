@@ -1,8 +1,13 @@
-import {ChatInputCommandInteraction, Client, Interaction} from 'discord.js';
+import {
+    ChatInputCommandInteraction,
+    Client,
+    Interaction,
+    Events as discordEvents,
+    Guild
+} from 'discord.js';
 import { Logging } from '@utils/logging.ts';
 import QueryBuilder from '@utils/database';
 import { CanvasBuilder } from '@utils/canvasBuilder';
-import path from 'path';
 import {getEnv} from "@utils/env.ts";
 
 export default class CommandsListener {
@@ -14,7 +19,7 @@ export default class CommandsListener {
     }
 
     async commandListener(): Promise<void> {
-        this.client.on('interactionCreate', async (interaction: Interaction): Promise<void> => {
+        this.client.on(discordEvents.InteractionCreate, async (interaction: Interaction): Promise<void> => {
             if (!interaction.isCommand()) return;
 
             const { commandName } = interaction;
