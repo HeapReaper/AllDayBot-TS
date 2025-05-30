@@ -71,6 +71,8 @@ export default class Events {
                 )
                 .setThumbnail('attachment://bot.png');
 
+            Logging.info('Sending bootEvent')
+
             await this.logChannel.send({ embeds: [bootEmbed], files: [this.botIcon] });
         } catch (error) {
             Logging.error(`Error in bootEvent serverLogger: ${error}`);
