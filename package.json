@@ -8,7 +8,7 @@
     "canvas": "^3.1.0",
     "chalk": "^5.4.1",
     "discord-api-types": "^0.37.117",
-    "discord.js": "^14.17.3",
+    "discord.js": "^14.19.3",
     "dotenv": "^16.4.7",
     "minecraft-server-util": "^5.4.4",
     "minio": "^8.0.5",
