@@ -6,7 +6,6 @@ import { getEnv } from '@utils/env.ts';
 import { runMigrations } from '@utils/migrations.ts';
 import QueryBuilder from '@utils/database.ts';
 import cron from 'node-cron';
-import express from 'express';
 
 const client = new Client({
     intents: [
@@ -25,10 +24,6 @@ const client = new Client({
         Partials.Reaction
     ],
 });
-
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 client.on(discordEvents.ClientReady, async client => {
     Logging.info(`Logged in as ${client.user.tag}!`);
@@ -53,7 +48,3 @@ client.on(discordEvents.ClientReady, async client => {
 });
 
 void client.login(<string>getEnv('DISCORD_TOKEN'));
-
-app.listen(4069, () => {
-    Logging.info(`Web configurator running at http://localhost:4069`);
-});
