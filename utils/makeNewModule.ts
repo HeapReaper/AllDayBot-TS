@@ -1,9 +1,12 @@
-import { mkdirSync, existsSync, writeFileSync } from 'fs';
+import {
+	mkdirSync,
+	existsSync,
+	writeFileSync
+} from 'fs';
 import { join } from 'path';
 import * as process from 'node:process';
 
 // TODO: Add cron to tasks
-
 if (process.argv.slice(2).length == 0) {
 	console.error('Please specify the module name you weirdo!');
 	process.exit();
@@ -67,6 +70,7 @@ export default class Events {
 
 const tasksFileWrite =
 `import { Client, TextChannel } from 'discord.js';
+import cron from 'node-cron';
 
 export default class Tasks {
 	private client: Client;

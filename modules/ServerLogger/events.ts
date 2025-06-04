@@ -54,6 +54,7 @@ export default class Events {
 
             await new Promise<void>(resolve => {
                 const interval: Timer = setInterval((): void => {
+                    console.log('1')
                     if (this.client.ws.ping >= 0) {
                         clearInterval(interval);
                         resolve();
