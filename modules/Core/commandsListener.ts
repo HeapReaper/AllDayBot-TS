@@ -14,6 +14,7 @@ import QueryBuilder from '@utils/database';
 import { JsonHelper } from '@utils/json';
 import path from 'path';
 import { Logging } from '@utils/logging';
+import * as process from "node:process";
 
 export default class CommandsListener {
 	private client: Client;
@@ -42,6 +43,16 @@ export default class CommandsListener {
     }
 
     async handleStatus(interaction: ChatInputCommandInteraction): Promise<void> {
+        const os = await import('node:os');
+        const usage = process.resourceUsage();
+        const uptimeInSeconds = process.uptime();
+        const memory = process.memoryUsage();
+        const cpu = process.cpuUsage();
+
+        const [load1, load5, load15] = os.loadavg();
+        const cpuCount: number = os.cpus().length;
+        const toPercent = (load: number) => ((load / cpuCount) * 100).toFixed(2);
+
         try {
             const s3Status = await S3OperationBuilder
                 .setBucket(<string>getEnv('S3_BUCKET_NAME'))
@@ -61,22 +72,49 @@ export default class CommandsListener {
             const currentRelease: string | null = await Github.getCurrentRelease();
 
             const embed: EmbedBuilder = new EmbedBuilder()
-                .setTitle('Mijn status (en die van mijn services)')
-                .setDescription('WIP')
+                .setTitle('Mijn status')
+                .setDescription('En die van mijn services')
                 .setColor(Color.AdtgPurple)
                 .addFields(
-                    { name: 'Discord' , value: `Ping: ${this.client.ws.ping}ms`},
-                    { name: 'Database', value: `Status: ${dbStatus.up ? 'Online' : 'Offline'} | Latency: ${dbStatus.latency}ms`, inline: true},
-                    { name: 'S3', value: `Status: ${s3Status.up ? 'Online' : 'Offline'} | Latency: ${s3Status.latency}ms`, inline: true},
+                    {
+                        name: 'CPU',
+                        value: ` \`\`\`1m: ${toPercent(load1)}%, 5m: ${toPercent(load5)}%, 15m: ${toPercent(load15)}%\`\`\` `
+                    },
+                    {
+                        name:'RAM',
+                        value: ` \`\`\`Allocated: ${(memory.rss / 1024 / 1024).toFixed(2)}MB \nHeap total: ${(memory.heapTotal / 1024 / 1024).toFixed(2)}MB\nHeap used: ${(memory.heapUsed / 1024 / 1024).toFixed(2)}MB\`\`\` `
+                    },
+                    {
+                        name: 'Discord',
+                        value: `Ping: \`${this.client.ws.ping}ms\``
+                    },
+                    {
+                        name: 'Database',
+                        value: `Status: ${dbStatus.up ? '✅' : '❌'} | Latency: \`${dbStatus.latency}ms\``, inline: true
+                    },
+                    {
+                        name: 'S3',
+                        value: `Status: ${s3Status.up ? '✅' : '❌'} | Latency: \`${s3Status.latency}ms\``, inline: true
+                    },
                     //{ name: 'Coolify', value: `wip`},
-                    { name: 'Geladen modules:', value: `${loadedModulesStr}`},
-                    { name: 'Huidige omgeving:', value: `${<string>getEnv('ENVIRONMENT')}`, inline: true},
-                    { name: 'Huidige versie:', value: `${currentRelease ? currentRelease : 'Rate limited'}`, inline: true}
+                    {
+                        name: 'Geladen modules:',
+                        value: `${loadedModulesStr}`
+                    },
+                    {
+                        name: 'Huidige omgeving:',
+                        value: `${<string>getEnv('ENVIRONMENT')}`, inline: true
+                    },
+                    {
+                        name: 'Huidige versie:',
+                        value: `${currentRelease ? currentRelease : 'Rate limited'}`, inline: true
+                    }
                 )
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            await interaction.reply({content: 'Er ging wat mis!'});
+            console.log(error);
+            await interaction.reply({ content: 'Er ging wat mis!' });
         }
     }
 }
