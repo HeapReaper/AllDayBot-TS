@@ -1,10 +1,17 @@
 import fs from 'fs/promises';
 
+// TODO: Put JSON read and parse in own function
+// TODO: Improve error handling (Because there is none atm LOL)
 export class JsonHelper {
     private constructor(private filePath: string) {}
 
     static file(filePath: string): JsonHelper {
         return new JsonHelper(filePath);
+    }
+
+    async get(key: string): Promise<any> {
+        const data = await fs.readFile(this.filePath, 'utf8');
+        return (JSON.parse(data))[key];
     }
 
     async read(): Promise<object> {
@@ -62,3 +69,8 @@ export class JsonHelper {
         console.log('Item removed!');
     }
 }
+
+// Example usages:
+// await JsonHelper.file('modules.json').get('Leveling');
+// await JsonHelper.file('modules.json').read();
+// await JsonHelper.file('modules.json').append({ 'New': true});
