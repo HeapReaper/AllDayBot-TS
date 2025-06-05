@@ -3,6 +3,7 @@ import path from 'path';
 import { pathToFileURL } from 'url';
 import { Logging } from '@utils/logging';
 import { getEnv } from '@utils/env';
+import { JsonHelper } from '@utils/json';
 
 async function loadModules(client: any) {
     let modulesPath: string;
@@ -17,6 +18,17 @@ async function loadModules(client: any) {
     }
 
     for (const moduleFolder of moduleFolders) {
+        const moduleJson = await JsonHelper
+            .file(path.join(<string>getEnv('MODULES_BASE_PATH'), 'modules.json'))
+            .get(moduleFolder);
+
+        if (moduleJson === undefined) {
+            Logging.error(`I did not found module ${moduleFolder} inside modules.json! Please add it`);
+            continue;
+        }
+
+        if (moduleJson !== true) continue;
+
         let moduleLoaded = false;
         Logging.info('Loading module: ' + moduleFolder);
         const modulePath = path.join(modulesPath, moduleFolder);

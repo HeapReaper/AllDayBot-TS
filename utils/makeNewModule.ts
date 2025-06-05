@@ -3,27 +3,34 @@ import {
 	existsSync,
 	writeFileSync
 } from 'fs';
-import { join } from 'path';
 import * as process from 'node:process';
+import { JsonHelper } from '@utils/json';
+// @ts-ignore
+import modulesConfig from '../modules.json';
+import { getEnv } from '@utils/env';
+import path from "path";
 
-// TODO: Add cron to tasks
+if (!modulesConfig) {
+	console.error('Missing modules config file! Place add modules.json in the root directory.');
+	process.exit();
+}
+
 if (process.argv.slice(2).length == 0) {
 	console.error('Please specify the module name you weirdo!');
 	process.exit();
 }
 
-const modulesDir: string = `./modules`;
+const modulesDir: string = './modules';
 const moduleName: string = process.argv.slice(2)[0];
 const moduleNameToCreate = moduleName.charAt(0).toUpperCase() + moduleName.slice(1);
 
 console.log(`Making module named ${moduleNameToCreate} inside ${modulesDir}/`);
 
 if (existsSync(`${modulesDir}/${moduleNameToCreate}`)) {
-	console.error(`Module named ${moduleNameToCreate} already exists!`);
+	console.log(`Module named ${moduleNameToCreate} already exists!`);
 	process.exit();
 }
 
-// Making modules folder
 mkdirSync(`${modulesDir}/${moduleNameToCreate}`);
 
 const commandsFileWrite =
@@ -81,10 +88,16 @@ export default class Tasks {
 }
 `;
 
-// Making and writing module files
 writeFileSync(`${modulesDir}/${moduleNameToCreate}/commands.ts`, commandsFileWrite);
 writeFileSync(`${modulesDir}/${moduleNameToCreate}/commandsListener.ts`, commandsListenerFileWrite);
 writeFileSync(`${modulesDir}/${moduleNameToCreate}/events.ts`, eventsFileWrite);
 writeFileSync(`${modulesDir}/${moduleNameToCreate}/tasks.ts`, tasksFileWrite);
+
+async function makeNewModule(): Promise<void> {
+	// @ts-ignore
+	await JsonHelper.file(path.join(<string>getEnv('MODULES_BASE_PATH'), 'modules.json')).append({ [moduleNameToCreate]: true})
+}
+
+void makeNewModule();
 
 console.log(`Module with the name ${moduleNameToCreate} has been created!`);
