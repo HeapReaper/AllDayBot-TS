@@ -3,45 +3,31 @@ import chalk from 'chalk';
 import { appendFileSync } from 'fs';
 
 export class Logging {
-    static info(message: string|number): void {
-        const now = new Date();
+    private static now(): Date {
+        return new Date;
+    }
 
-        console.log(`[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [${chalk.green('INFO')}]  ${message}`);
+    static info(message: string | number): void {
+        console.log(`[${this.formatDate(this.now())}] [${chalk.green('INFO')}]  ${message}`);
 
-        if (getEnv('LOG_LEVEL') == 'info' || getEnv('LOG_LEVEL') == 'all') {
-            appendFileSync(
-                `${<string>getEnv('MODULES_BASE_PATH')}logs/app.log`,
-                `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [INFO]  ${message}\n`,
-                'utf-8'
-            );
+        if (getEnv('LOG_LEVEL') === 'info' || getEnv('LOG_LEVEL') === 'all') {
+            this.writeToLogFile('INFO', message, this.now());
         }
     }
 
-    static warn(message: string|number): void {
-        const now = new Date();
+    static warn(message: string | number): void {
+        console.log(`[${this.formatDate(this.now())}] [${chalk.yellow('WARN')}]  ${message}`);
 
-        console.log(`[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [${chalk.yellow('WARN')}]  ${message}`);
-
-        if (getEnv('LOG_LEVEL') == 'warn' || getEnv('LOG_LEVEL') == 'all') {
-            appendFileSync(
-                `${<string>getEnv('MODULES_BASE_PATH')}logs/app.log`,
-                `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [WARN]  ${message}\n`,
-                'utf-8'
-            );
+        if (getEnv('LOG_LEVEL') === 'warn' || getEnv('LOG_LEVEL') === 'all') {
+            this.writeToLogFile('WARN', message, this.now());
         }
     }
 
-    static error(message: string|number): void {
-        const now = new Date();
+    static error(message: string | number): void {
+        console.log(`[${this.formatDate(this.now())}] [${chalk.red('ERROR')}] ${message}`);
 
-        console.log(`[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [${chalk.red('ERROR')}] ${message}`);
-
-        if (getEnv('LOG_LEVEL') == 'error' || getEnv('LOG_LEVEL') == 'all') {
-            appendFileSync(
-                `${<string>getEnv('MODULES_BASE_PATH')}logs/app.log`,
-                `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [ERROR] ${message}\n`,
-                'utf-8'
-            );
+        if (getEnv('LOG_LEVEL') === 'error' || getEnv('LOG_LEVEL') === 'all') {
+            this.writeToLogFile('ERROR', message, this.now());
         }
 
         if (getEnv('LOG_DISCORD')) {
@@ -49,23 +35,32 @@ export class Logging {
         }
     }
 
-    static debug(message: string|number): void {
-        const now = new Date();
-
+    static debug(message: string | number): void {
         if (getEnv('ENVIRONMENT') !== 'debug') return;
 
-        console.log(`[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [${chalk.blue('DEBUG')}] ${message}`);
+        console.log(`[${this.formatDate(this.now())}] [${chalk.blue('DEBUG')}] ${message}`);
 
-        if (getEnv('LOG_LEVEL') == 'debug' || getEnv('LOG_LEVEL') == 'all') {
-            appendFileSync(
-                `${<string>getEnv('MODULES_BASE_PATH')}logs/app.log`,
-                `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [DEBUG] ${message}\n`,
-                'utf-8'
-            );
+        if (getEnv('LOG_LEVEL') === 'debug' || getEnv('LOG_LEVEL') === 'all') {
+            this.writeToLogFile('DEBUG', message, this.now());
         }
     }
 
-    private static async sendLogToDiscord(error: string|number): Promise<void> {
+    static trace(message: string | number): void {
+        if (getEnv('ENVIRONMENT') !== 'trace') return;
+
+        console.log(`[${this.formatDate(this.now())}] [${chalk.grey('TRACE')}] ${message}`);
+
+        if (getEnv('LOG_LEVEL') === 'trace' || getEnv('LOG_LEVEL') === 'all') {
+            this.writeToLogFile('TRACE', message, this.now());
+        }
+    }
+
+    private static writeToLogFile(level: string, message: string | number, now: Date): void {
+        const logLine = `[${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}] [${level.toUpperCase()}] ${message}\n`;
+        appendFileSync(`${<string>getEnv('MODULES_BASE_PATH')}logs/app.log`, logLine, 'utf-8');
+    }
+
+    private static async sendLogToDiscord(error: string | number): Promise<void> {
         const webhookURL: string = <string>getEnv('LOG_DISCORD_WEBHOOK');
 
         if (!webhookURL) {
@@ -85,4 +80,9 @@ export class Logging {
             Logging.error(error);
         }
     }
+
+    private static formatDate(now: Date): string {
+        return `${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}`;
+    }
 }
+
