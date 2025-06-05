@@ -25,8 +25,7 @@ export default class ShowcaseEvents {
                 Logging.error('Showcase channel not found in ShowcaseRemover events!');
                 return;
             }
-            
-            // @ts-ignore
+
             const allMessages = await showcaseChannel.messages.fetch({limit: 100});
             for (const [messageId, messageObject] of allMessages) {
                 if (messageObject.author.id !== message.author.id) {

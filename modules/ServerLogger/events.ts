@@ -13,6 +13,8 @@ import {
     TextChannel,
     VoiceState,
     User,
+    Collection,
+    Snowflake,
 } from 'discord.js';
 import { Logging } from '@utils/logging.ts';
 import { Color } from '@enums/colorEnum';
@@ -33,6 +35,7 @@ export default class Events {
     private moderationIcon: AttachmentBuilder;
 
     constructor(client: Client) {
+        console.log('serverlogger')
         this.client = client;
         this.logChannel = this.client.channels.cache.get(<string>getEnv('ALL_DAY_LOG')) as TextChannel;
         this.botIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/bot.png`);
@@ -41,11 +44,11 @@ export default class Events {
         this.reactionIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/happy-face.png`);
         this.userIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/user.png`);
         this.moderationIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderation.png`);
-        void this.bootEvent();
+        void this.bootEvent()
         this.messageEvents();
         this.reactionEvents();
         this.voiceChannelEvents();
-        void this.memberEvents();
+        void this.memberEvents()
     }
 
     async bootEvent(): Promise<void> {
@@ -162,9 +165,8 @@ export default class Events {
             this.logChannel.send({ embeds: [messageUpdateEmbed], files: [this.chatIcon] });
         });
 
-        // @ts-ignore
-        this.client.on(discordEvents.MessageDelete, async (message: Message): Promise<void> => {
-            if (message.author.id === this.client.user?.id) return;
+        this.client.on(discordEvents.MessageDelete, async (message: Message<boolean> | PartialMessage): Promise<void> => {
+            if (message.author?.id === this.client.user?.id) return;
 
             Logging.debug('An message has been deleted!');
 
@@ -195,8 +197,14 @@ export default class Events {
                 .setTitle('Bericht verwijderd')
                 .setThumbnail('attachment://chat.png')
                 .addFields(
-                    { name: 'Gebruiker', value: `<@${message.partial ? messageFromDbCache.author_id ?? 0o10101 : message.author.id}>`},
-                    { name: 'Bericht:', value: message.content },
+                    {
+                        name: 'Gebruiker',
+                        value: `<@${message.partial ? messageFromDbCache.author_id ?? '10101' : message.author?.id ?? 'Onbekend'}>`
+                    },
+                    {
+                        name: 'Bericht:',
+                        value: message.content ?? 'Er ging wat fout'
+                    }
                 );
 
             for (const file of filesToAttach) {
@@ -221,8 +229,7 @@ export default class Events {
             await this.logChannel.send({ files: attachments });
         });
 
-        // @ts-ignore
-        this.client.on(discordEvents.MessageBulkDelete, async (messages: Collection<string, Message>): Promise<void> => {
+        this.client.on('messageBulkDelete', async (messages: Collection<Snowflake, Message | PartialMessage>): Promise<void> => {
             Logging.debug('Bulk messages have been deleted!');
 
             const deletedMessages: any[] = [];
@@ -302,8 +309,7 @@ export default class Events {
                     .setTitle('Voice kanaal gejoined')
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
-                        // @ts-ignore
-                        { name: 'Gebruiker:', value: `<@${newState.user.id}>` },
+                        { name: 'Gebruiker:', value: `<@${newState.member?.user.id}>` },
                         { name: 'Kanaal:', value: `${newState.channel.url}` },
                     );
 
@@ -319,8 +325,7 @@ export default class Events {
                     .setTitle('Voice kanaal verlaten')
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
-                        // @ts-ignore
-                        { name: 'Gebruiker:', value: `<@${oldState.user.id}>` },
+                        { name: 'Gebruiker:', value: `<@${oldState.member?.user.id}>` },
                         { name: 'Kanaal:', value: `${oldState.channel.url}` },
                     );
 
@@ -336,8 +341,7 @@ export default class Events {
                     .setTitle('Voice kanaal veranderd')
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
-                        // @ts-ignore
-                        { name: 'Gebruiker:', value: `<@${oldState.user.id}>` },
+                        { name: 'Gebruiker:', value: `<@${oldState.member?.user.id}>` },
                         { name: 'Oud:', value: `${oldState.channel.url}` },
                         { name: 'Nieuw:', value: `${newState.channel.url}` },
                     );

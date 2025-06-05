@@ -1,0 +1,13 @@
+{
+  "Birthday": true,
+  "BumpReminder": true,
+  "Community": true,
+  "Core": true,
+  "InviteTracker": true,
+  "Leveling": true,
+  "Minecraft": true,
+  "ModMail": true,
+  "ServerLogger": true,
+  "ShowcaseRemover": true,
+  "moduleNameToCreate": true
+}

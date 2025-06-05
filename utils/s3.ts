@@ -98,4 +98,26 @@ export default class S3OperationBuilder {
             return { success: false, error: error };
         }
     }
+
+    async status(): Promise<{ up: boolean; latency: number | null; error?: any }> {
+        const start = Date.now();
+
+        try {
+            await S3OperationBuilder.minioClient.bucketExists(this.bucketName);
+
+            const end = Date.now();
+            return {
+                up: true,
+                latency: end - start,
+            };
+        } catch (error) {
+            Logging.error(`S3 status check failed: ${error}`);
+            return {
+                up: false,
+                latency: null,
+                error,
+            };
+        }
+    }
+
 }
