@@ -73,18 +73,10 @@ export default class CommandsListener {
                     { name: 'Huidige versie:', value: `${currentRelease ? currentRelease : 'Rate limited'}`, inline: true}
                 )
 
-            // It needs to show:
-            // Discord API status
-            // DB status
-            // S3 status
-            // Coolify status
-            // Loaded modules
-            // Current enviroment
             await interaction.reply({embeds: [embed]});
         } catch (error) {
             console.error(error);
             await interaction.reply({content: 'Er ging wat mis!'});
         }
-
     }
 }
