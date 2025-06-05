@@ -8,11 +8,5 @@ export default class Tasks {
     // @ts-ignore
     constructor(client: Client) {
         this.client = client;
-        setInterval(async () => {
-            void this.cleanUpCache();
-        }, 60000);
-    }
-
-    async cleanUpCache() {
     }
 }

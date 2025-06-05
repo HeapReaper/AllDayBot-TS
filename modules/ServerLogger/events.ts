@@ -33,6 +33,7 @@ export default class Events {
     private moderationIcon: AttachmentBuilder;
 
     constructor(client: Client) {
+        console.log('serverlogger')
         this.client = client;
         this.logChannel = this.client.channels.cache.get(<string>getEnv('ALL_DAY_LOG')) as TextChannel;
         this.botIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/bot.png`);
@@ -41,11 +42,11 @@ export default class Events {
         this.reactionIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/happy-face.png`);
         this.userIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/user.png`);
         this.moderationIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderation.png`);
-        void this.bootEvent();
+        void this.bootEvent()
         this.messageEvents();
         this.reactionEvents();
         this.voiceChannelEvents();
-        void this.memberEvents();
+        void this.memberEvents()
     }
 
     async bootEvent(): Promise<void> {
@@ -54,7 +55,6 @@ export default class Events {
 
             await new Promise<void>(resolve => {
                 const interval: Timer = setInterval((): void => {
-                    console.log('1')
                     if (this.client.ws.ping >= 0) {
                         clearInterval(interval);
                         resolve();
@@ -304,7 +304,7 @@ export default class Events {
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
                         // @ts-ignore
-                        { name: 'Gebruiker:', value: `<@${newState.user.id}>` },
+                        { name: 'Gebruiker:', value: `<@${newState.member.user.id}>` },
                         { name: 'Kanaal:', value: `${newState.channel.url}` },
                     );
 
@@ -321,7 +321,7 @@ export default class Events {
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
                         // @ts-ignore
-                        { name: 'Gebruiker:', value: `<@${oldState.user.id}>` },
+                        { name: 'Gebruiker:', value: `<@${oldState.member.user.id}>` },
                         { name: 'Kanaal:', value: `${oldState.channel.url}` },
                     );
 
