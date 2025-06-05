@@ -286,6 +286,27 @@ class QueryBuilder {
         })
     }
 
+    static async status(): Promise<{ up: boolean; latency: number | null; error?: any }> {
+        try {
+            if (!QueryBuilder.connection) QueryBuilder.connect();
+
+            const start = Date.now();
+
+            const result = await new Promise((resolve, reject) => {
+                QueryBuilder.connection.query('SELECT 1', (err, res) => {
+                    if (err) return reject(err);
+                    resolve(res);
+                });
+            });
+
+            const latency = Date.now() - start;
+            return { up: true, latency };
+        } catch (error) {
+            Logging.error(`Database status check failed: ${error}`);
+            return { up: false, latency: null, error };
+        }
+    }
+
     async first(): Promise<any> {
         this.firstMode = true;
         return await this.executeSelect();
