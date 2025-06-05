@@ -51,6 +51,13 @@ export default class CommandsListener {
     }
 
     async handleStatus(interaction: ChatInputCommandInteraction): Promise<void> {
+        if (!interaction.memberPermissions?.has('Administrator')) {
+            await interaction.reply({
+                content: 'Geen toegang.',
+                flags: MessageFlags.Ephemeral,
+            });
+            return;
+        }
         const os = await import('node:os');
         const usage = process.resourceUsage();
         const uptimeInSeconds = process.uptime();
@@ -155,6 +162,14 @@ export default class CommandsListener {
             return;
         }
 
+        if (!interaction.memberPermissions?.has('Administrator')) {
+            await interaction.reply({
+                content: 'Geen toegang.',
+                flags: MessageFlags.Ephemeral,
+            });
+            return;
+        }
+
         await interaction.reply({
             content: 'Ik ga de bot herstarten...',
             flags: MessageFlags.Ephemeral,
@@ -167,6 +182,14 @@ export default class CommandsListener {
         if (!interaction.options.getBoolean('bevestig', true)) {
             await interaction.reply({
                 content: 'Je moet het command bevestigen!',
+                flags: MessageFlags.Ephemeral,
+            });
+            return;
+        }
+
+        if (!interaction.memberPermissions?.has('Administrator')) {
+            await interaction.reply({
+                content: 'Geen toegang.',
                 flags: MessageFlags.Ephemeral,
             });
             return;
