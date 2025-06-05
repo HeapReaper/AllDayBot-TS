@@ -46,7 +46,7 @@ export class Logging {
     }
 
     static trace(message: string | number): void {
-        if (getEnv('ENVIRONMENT') !== 'trace') return;
+        if (getEnv('ENVIRONMENT') !== 'trace' && getEnv('ENVIRONMENT') !== 'debug') return;
 
         console.log(`[${this.formatDate(this.now())}] [${chalk.grey('TRACE')}] ${message}`);
 

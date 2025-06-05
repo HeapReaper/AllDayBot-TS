@@ -13,12 +13,13 @@ import S3OperationBuilder from '@utils/s3';
 import QueryBuilder from '@utils/database';
 import { JsonHelper } from '@utils/json';
 import path from 'path';
+import { Logging } from '@utils/logging';
 
 export default class CommandsListener {
 	private client: Client;
 
 	constructor(client: Client) {
-		this.client = client;
+        this.client = client;
 		void this.commandsListener();
 	}
 	
@@ -73,9 +74,8 @@ export default class CommandsListener {
                     { name: 'Huidige versie:', value: `${currentRelease ? currentRelease : 'Rate limited'}`, inline: true}
                 )
 
-            await interaction.reply({embeds: [embed]});
+            await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            console.error(error);
             await interaction.reply({content: 'Er ging wat mis!'});
         }
     }

@@ -13,7 +13,6 @@ export default async function loadModules(client: any) {
         modulesPath = path.join(<string>getEnv('MODULES_BASE_PATH'), 'modules');
         Logging.debug(`Modules base path resolved to: ${modulesPath}`);
         moduleFolders = await fs.readdir(modulesPath);
-        Logging.debug(`Found module folders: ${JSON.stringify(moduleFolders)}`);
     } catch (error) {
         Logging.error(`Error loading modules in moduleLoader: ${error}`);
         return;
@@ -44,22 +43,19 @@ export default async function loadModules(client: any) {
         let moduleLoaded = false;
         Logging.info('Loading module: ' + moduleFolder);
         const modulePath = path.join(modulesPath, moduleFolder);
-        Logging.debug(`Resolved module path: ${modulePath}`);
 
         // Load commands.ts
         const commandsFile = path.join(modulePath, 'commands.ts');
-        Logging.debug(`Checking for commands file at: ${commandsFile}`);
+        Logging.trace(`Checking for commands file at: ${commandsFile}`);
         try {
             await fs.access(commandsFile);
-            Logging.debug(`commands.ts exists for module: ${moduleFolder}`);
             const commandsURL = pathToFileURL(commandsFile).href;
-            Logging.debug(`commands.ts URL: ${commandsURL}`);
             const commandsModule = await import(commandsURL);
 
             if (!commandsModule.commands) {
                 Logging.warn(`commands.ts for module ${moduleFolder} does not export 'commands'`);
             } else {
-                Logging.debug(`commands.ts loaded successfully for module: ${moduleFolder}`);
+                Logging.trace(`commands.ts loaded successfully for module: ${moduleFolder}`);
                 moduleLoaded = true;
             }
         } catch (error) {
@@ -68,19 +64,17 @@ export default async function loadModules(client: any) {
 
         // Load commandsListener.ts
         const commandsListenerFile = path.join(modulePath, 'commandsListener.ts');
-        Logging.debug(`Checking for commandsListener file at: ${commandsListenerFile}`);
+        Logging.trace(`Checking for commandsListener file at: ${commandsListenerFile}`);
         try {
             await fs.access(commandsListenerFile);
-            Logging.debug(`commandsListener.ts exists for module: ${moduleFolder}`);
             const commandsListenerURL = pathToFileURL(commandsListenerFile).href;
-            Logging.debug(`commandsListener.ts URL: ${commandsListenerURL}`);
             const commandsListeners = await import(commandsListenerURL);
 
             if (!commandsListeners.default) {
                 Logging.error(`Module ${moduleFolder} commandsListener.ts does not have a default export`);
             } else {
                 new commandsListeners.default(client);
-                Logging.debug(`commandsListener.ts initialized for module: ${moduleFolder}`);
+                Logging.trace(`commandsListener.ts initialized for module: ${moduleFolder}`);
                 moduleLoaded = true;
             }
         } catch (error) {
@@ -89,19 +83,17 @@ export default async function loadModules(client: any) {
 
         // Load events.ts
         const eventsFile = path.join(modulePath, 'events.ts');
-        Logging.debug(`Checking for events file at: ${eventsFile}`);
+        Logging.trace(`Checking for events file at: ${eventsFile}`);
         try {
             await fs.access(eventsFile);
-            Logging.debug(`events.ts exists for module: ${moduleFolder}`);
             const eventsURL = pathToFileURL(eventsFile).href;
-            Logging.debug(`events.ts URL: ${eventsURL}`);
             const events = await import(eventsURL);
 
             if (!events.default) {
                 Logging.error(`Module ${moduleFolder} events.ts does not have a default export`);
             } else {
                 new events.default(client);
-                Logging.debug(`events.ts initialized for module: ${moduleFolder}`);
+                Logging.trace(`events.ts initialized for module: ${moduleFolder}`);
                 moduleLoaded = true;
             }
         } catch (error) {
@@ -110,19 +102,17 @@ export default async function loadModules(client: any) {
 
         // Load tasks.ts
         const tasksFile = path.join(modulePath, 'tasks.ts');
-        Logging.debug(`Checking for tasks file at: ${tasksFile}`);
+        Logging.trace(`Checking for tasks file at: ${tasksFile}`);
         try {
             await fs.access(tasksFile);
-            Logging.debug(`tasks.ts exists for module: ${moduleFolder}`);
             const tasksURL = pathToFileURL(tasksFile).href;
-            Logging.debug(`tasks.ts URL: ${tasksURL}`);
             const tasks = await import(tasksURL);
 
             if (!tasks.default) {
                 Logging.error(`Module ${moduleFolder} tasks.ts does not have a default export`);
             } else {
                 new tasks.default(client);
-                Logging.debug(`tasks.ts initialized for module: ${moduleFolder}`);
+                Logging.trace(`tasks.ts initialized for module: ${moduleFolder}`);
                 moduleLoaded = true;
             }
         } catch (error) {
