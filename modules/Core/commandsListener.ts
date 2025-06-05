@@ -1,20 +1,22 @@
 import {
-    Client,
-    Interaction,
-    Events as discordEvents,
     ChatInputCommandInteraction,
+    Client,
     CommandInteractionOptionResolver,
     EmbedBuilder,
+    Events as discordEvents,
+    Interaction,
+    MessageFlags,
 } from 'discord.js';
-import { Color } from '@enums/colorEnum';
-import { getEnv } from '@utils/env';
-import { Github } from '@utils/github';
+import {Color} from '@enums/colorEnum';
+import {getEnv} from '@utils/env';
+import {Github} from '@utils/github';
 import S3OperationBuilder from '@utils/s3';
 import QueryBuilder from '@utils/database';
-import { JsonHelper } from '@utils/json';
+import {JsonHelper} from '@utils/json';
 import path from 'path';
-import { Logging } from '@utils/logging';
-import * as process from "node:process";
+import * as process from 'node:process';
+import {commandsLoader} from '@utils/refreshSlashCommands';
+import {Logging} from "@utils/logging.ts";
 
 export default class CommandsListener {
 	private client: Client;
@@ -37,6 +39,12 @@ export default class CommandsListener {
             switch (subcommand) {
                 case 'status':
                     await this.handleStatus(interaction as ChatInputCommandInteraction);
+                    break;
+                case 'restart':
+                    await this.handleRestart(interaction as ChatInputCommandInteraction);
+                    break;
+                case 'slash_refresh':
+                    await this.handleSlashRefresh(interaction as ChatInputCommandInteraction);
                     break;
             }
         });
@@ -135,6 +143,46 @@ export default class CommandsListener {
         } catch (error) {
             console.log(error);
             await interaction.reply({ content: 'Er ging wat mis!' });
+        }
+    }
+
+    async handleRestart(interaction: ChatInputCommandInteraction): Promise<void> {
+        if (!interaction.options.getBoolean('bevestig', true)) {
+            await interaction.reply({
+                content: 'Je moet het command bevestigen!',
+                flags: MessageFlags.Ephemeral,
+            });
+            return;
+        }
+
+        await interaction.reply({
+            content: 'Ik ga de bot herstarten...',
+            flags: MessageFlags.Ephemeral,
+        })
+
+        process.exit(0)
+    }
+
+    async handleSlashRefresh(interaction: ChatInputCommandInteraction): Promise<void> {
+        if (!interaction.options.getBoolean('bevestig', true)) {
+            await interaction.reply({
+                content: 'Je moet het command bevestigen!',
+                flags: MessageFlags.Ephemeral,
+            });
+            return;
+        }
+
+        try {
+            await interaction.reply({
+                content: 'Slash commands vernieuwd!',
+            });
+            await commandsLoader();
+        } catch (error: any) {
+            Logging.error(error);
+
+            await interaction.reply({
+                content: 'Er ging iets mis!',
+            });
         }
     }
 }
