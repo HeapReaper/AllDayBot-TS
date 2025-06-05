@@ -71,6 +71,13 @@ export default class CommandsListener {
 
             const currentRelease: string | null = await Github.getCurrentRelease();
 
+            const lastRanMigration = await QueryBuilder
+                .select('migrations')
+                .columns(['name'])
+                .orderBy('name', 'DESC')
+                .limit(1)
+                .first();
+
             const embed: EmbedBuilder = new EmbedBuilder()
                 .setTitle('Mijn status')
                 .setDescription('En die van mijn services')
@@ -85,29 +92,37 @@ export default class CommandsListener {
                         value: ` \`\`\`Allocated: ${(memory.rss / 1024 / 1024).toFixed(2)}MB \nHeap total: ${(memory.heapTotal / 1024 / 1024).toFixed(2)}MB\nHeap used: ${(memory.heapUsed / 1024 / 1024).toFixed(2)}MB\`\`\` `
                     },
                     {
+                        name: 'Geladen modules:',
+                        value: ` \`\`\`${loadedModulesStr}\`\`\` `
+                    },
+                    {
                         name: 'Discord',
                         value: `Ping: \`${this.client.ws.ping}ms\``
                     },
                     {
                         name: 'Database',
-                        value: `Status: ${dbStatus.up ? '✅' : '❌'} | Latency: \`${dbStatus.latency}ms\``, inline: true
+                        value: `Status: ${dbStatus.up ? '✅' : '❌'} | Ping: \`${dbStatus.latency}ms\``,
+                        inline: true
+                    },
+                    {
+                        name: 'Laaste migratie',
+                        value: `${lastRanMigration['name']}`,
+                        inline: true
                     },
                     {
                         name: 'S3',
-                        value: `Status: ${s3Status.up ? '✅' : '❌'} | Latency: \`${s3Status.latency}ms\``, inline: true
-                    },
-                    //{ name: 'Coolify', value: `wip`},
-                    {
-                        name: 'Geladen modules:',
-                        value: `${loadedModulesStr}`
+                        value: `Status: ${s3Status.up ? '✅' : '❌'} | Ping: \`${s3Status.latency}ms\``,
+                        inline: false
                     },
                     {
                         name: 'Huidige omgeving:',
-                        value: `${<string>getEnv('ENVIRONMENT')}`, inline: true
+                        value: `${<string>getEnv('ENVIRONMENT')}`,
+                        inline: true
                     },
                     {
                         name: 'Huidige versie:',
-                        value: `${currentRelease ? currentRelease : 'Rate limited'}`, inline: true
+                        value: `${currentRelease ? currentRelease : 'Rate limited'}`,
+                        inline: true
                     }
                 )
 
