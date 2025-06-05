@@ -105,8 +105,8 @@ export default class CommandsListener {
                         inline: true
                     },
                     {
-                        name: 'Laaste migratie',
-                        value: `${lastRanMigration['name']}`,
+                        name: 'Laatste migratie',
+                        value: ` \`${lastRanMigration['name']}\` `,
                         inline: true
                     },
                     {
@@ -115,13 +115,18 @@ export default class CommandsListener {
                         inline: false
                     },
                     {
-                        name: 'Huidige omgeving:',
-                        value: `${<string>getEnv('ENVIRONMENT')}`,
+                        name: 'Huidige omgeving',
+                        value: ` \`${<string>getEnv('ENVIRONMENT')}\` `,
                         inline: true
                     },
                     {
-                        name: 'Huidige versie:',
-                        value: `${currentRelease ? currentRelease : 'Rate limited'}`,
+                        name: 'Bot versie',
+                        value: ` \`${currentRelease ? currentRelease : 'Rate limited'}\` `,
+                        inline: true
+                    },
+                    {
+                        name: 'Bun versie',
+                        value: ` \`${Bun.version}\` `,
                         inline: true
                     }
                 )
