@@ -159,7 +159,7 @@ class QueryBuilder {
 
         const sql = `SELECT ${countString}${columnClause} FROM ${this.tableName}${whereString}${orderByString}${limitString}`;
 
-        Logging.debug(`Selecting: ${sql}`);
+        Logging.trace(`Running select query: ${sql}`);
 
         const startTime: number = Date.now();
 
@@ -200,7 +200,7 @@ class QueryBuilder {
 
         const sql = `UPDATE ${this.tableName}${updateString}${whereString}`;
 
-        Logging.debug(`Updating: ${sql}`);
+        Logging.trace(`Running update query: ${sql}`);
 
         const startTime: number = Date.now();
 
@@ -231,7 +231,7 @@ class QueryBuilder {
 
         const sql = `DELETE FROM ${this.tableName}${whereString}`;
 
-        Logging.debug(`Deleting: ${sql}`);
+        Logging.trace(`Running delete query: ${sql}`);
 
         const startTime: number = Date.now();
 
@@ -255,7 +255,7 @@ class QueryBuilder {
 
         const sql = `INSERT INTO ${this.tableName} (${columns}) VALUES (${placeholders})`;
 
-        Logging.debug(`Inserting: ${sql}`);
+        Logging.trace(`Running insert query: ${sql}`);
 
         const startTime: number = Date.now();
 
@@ -275,6 +275,8 @@ class QueryBuilder {
 
         const startTime: number = Date.now();
 
+        Logging.trace(`Running raw query: ${this.rawQuery}`);
+
         return new Promise<any>((resolve, reject) => {
             QueryBuilder.connection.query(this.rawQuery, (err, res) => {
                 if (this.loggingEnabled) Logging.info(`Raw query duration: ${Date.now() - startTime}ms`);
@@ -289,6 +291,8 @@ class QueryBuilder {
     static async status(): Promise<{ up: boolean; latency: number | null; error?: any }> {
         try {
             if (!QueryBuilder.connection) QueryBuilder.connect();
+
+            Logging.trace(`Running status query`);
 
             const start = Date.now();
 

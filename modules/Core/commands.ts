@@ -35,4 +35,31 @@ export const commands = [
                 .setRequired(true)
             )
         )
+        .addSubcommand(add =>
+            add
+            .setName('modules')
+            .setDescription('Zet modules aan of uit')
+            .addStringOption(option =>
+                option
+                .setName('module')
+                .setDescription('Welke module?')
+                .addChoices( // TODO: Make dynamic
+                    { name: 'Birthday', value: 'Birthday'},
+                    { name: 'BumpReminder', value: 'BumpReminder'},
+                    { name: 'Community', value: 'Community'},
+                    { name: 'Core', value: 'Core'},
+                    { name: 'InviteTracker', value: 'InviteTracker'},
+                    { name: 'Leveling', value: 'Leveling'},
+                    { name: 'Minecraft', value: 'Minecraft'},
+                    { name: 'ModMail', value: 'ModMail'},
+                    { name: 'ServerLogger', value: 'ServerLogger'},
+                    { name: 'ShowcaseRemover', value: 'ShowcasRemover'},
+                )
+            )
+            .addBooleanOption(option =>
+                option
+                .setName('aan_uit')
+                .setDescription('Zet module aan of uit')
+            )
+        )
 ].map(commands => commands.toJSON());

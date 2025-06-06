@@ -11,7 +11,7 @@ export default async function loadModules(client: any) {
 
     try {
         modulesPath = path.join(<string>getEnv('MODULES_BASE_PATH'), 'modules');
-        Logging.debug(`Modules base path resolved to: ${modulesPath}`);
+        Logging.trace(`Modules base path resolved to: ${modulesPath}`);
         moduleFolders = await fs.readdir(modulesPath);
     } catch (error) {
         Logging.error(`Error loading modules in moduleLoader: ${error}`);
@@ -19,16 +19,16 @@ export default async function loadModules(client: any) {
     }
 
     for (const moduleFolder of moduleFolders) {
-        Logging.debug(`Processing module folder: ${moduleFolder}`);
+        Logging.trace(`Processing module folder: ${moduleFolder}`);
 
         const jsonFilePath = path.join(<string>getEnv('MODULES_BASE_PATH'), 'modules.json');
-        Logging.debug(`Loading modules.json from: ${jsonFilePath}`);
+        Logging.trace(`Loading modules.json from: ${jsonFilePath}`);
 
         const moduleJson = await JsonHelper
             .file(jsonFilePath)
             .get(moduleFolder);
 
-        Logging.debug(`moduleJson for ${moduleFolder}: ${JSON.stringify(moduleJson)}`);
+        Logging.trace(`moduleJson for ${moduleFolder}: ${JSON.stringify(moduleJson)}`);
 
         if (moduleJson === undefined) {
             Logging.error(`I did not find module ${moduleFolder} inside modules.json! Please add it.`);
@@ -122,7 +122,7 @@ export default async function loadModules(client: any) {
         if (moduleLoaded) {
             Logging.info(`Loaded module '${moduleFolder}' successfully`);
         } else {
-            Logging.warn(`⚠Module '${moduleFolder}' did not load any components`);
+            Logging.warn(`Module '${moduleFolder}' did not load any components`);
         }
     }
 }
