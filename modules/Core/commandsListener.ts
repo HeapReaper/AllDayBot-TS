@@ -7,16 +7,16 @@ import {
     Interaction,
     MessageFlags,
 } from 'discord.js';
-import {Color} from '@enums/colorEnum';
-import {getEnv} from '@utils/env';
-import {Github} from '@utils/github';
+import { Color } from '@enums/colorEnum';
+import { getEnv } from '@utils/env';
+import { Github } from '@utils/github';
 import S3OperationBuilder from '@utils/s3';
 import QueryBuilder from '@utils/database';
-import {JsonHelper} from '@utils/json';
+import { JsonHelper } from '@utils/json';
 import path from 'path';
 import * as process from 'node:process';
-import {commandsLoader} from '@utils/refreshSlashCommands';
-import {Logging} from "@utils/logging.ts";
+import { commandsLoader } from '@utils/refreshSlashCommands';
+import { Logging } from "@utils/logging.ts";
 
 export default class CommandsListener {
 	private client: Client;
@@ -45,6 +45,9 @@ export default class CommandsListener {
                     break;
                 case 'slash_refresh':
                     await this.handleSlashRefresh(interaction as ChatInputCommandInteraction);
+                    break;
+                case 'modules':
+                    await this.handleModule(interaction as ChatInputCommandInteraction);
                     break;
             }
         });
@@ -207,5 +210,29 @@ export default class CommandsListener {
                 content: 'Er ging iets mis!',
             });
         }
+    }
+
+    async handleModule(interaction: ChatInputCommandInteraction): Promise<void> {
+        const module: string | null = interaction.options.getString('module', false);
+        const enabled: boolean | null = interaction.options.getBoolean('aan_uit', false);
+
+        if (module == null && enabled == null) {
+            await interaction.reply({
+                content: 'Ik laat de modules zien die aan/uit staan!',
+            });
+            return;
+        }
+
+        if (module == null || enabled == null) {
+            await interaction.reply({
+                content: 'Als je een module kiest dan moet je ook true of false kiezen! (aan/uit)',
+                flags: MessageFlags.Ephemeral,
+            })
+            return;
+        }
+
+        await interaction.reply({
+            content: 'Ik zet module aan/uit,'
+        })
     }
 }
