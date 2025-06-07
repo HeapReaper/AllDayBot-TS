@@ -3,12 +3,13 @@ import {
     Client,
     Interaction,
     Events as discordEvents,
-    Guild
+    Guild,
+    User
 } from 'discord.js';
 import { Logging } from '@utils/logging.ts';
 import QueryBuilder from '@utils/database';
 import { CanvasBuilder } from '@utils/canvasBuilder';
-import {getEnv} from "@utils/env.ts";
+import { getEnv } from "@utils/env.ts";
 
 export default class CommandsListener {
     private client: Client;
@@ -20,10 +21,8 @@ export default class CommandsListener {
 
     async commandListener(): Promise<void> {
         this.client.on(discordEvents.InteractionCreate, async (interaction: Interaction): Promise<void> => {
-            if (!interaction.isCommand()) return;
+            if (!interaction.isChatInputCommand()) return;
 
-            const { commandName } = interaction;
-            // @ts-ignore
             const subCommandName: any = interaction.options.getSubcommand();
 
             switch (subCommandName) {
@@ -42,8 +41,12 @@ export default class CommandsListener {
 
     async handleScoreBoard(interaction: ChatInputCommandInteraction): Promise<void> {
         try {
+            const page = interaction.options.getInteger('pagina') as number ?? 1;
+
             const users: any[] = await QueryBuilder
                 .select('leveling')
+                .limit(10)
+                .offset((page - 1) * 10)
                 .execute();
 
             let canvasHeight: number = 150;
@@ -69,18 +72,20 @@ export default class CommandsListener {
             const smallDescriptionFont = '14px sans-serif';
 
             builder.drawText('XP scorebord', 20, 30, titleFont, textColor);
-            builder.drawText('Pagina 1 van de 10', 20, 50, smallDescriptionFont, textColor);
+            builder.drawText(`Pagina ${page}`, 20, 50, smallDescriptionFont, textColor);
 
             let userY: number = 80;
             let loopIndex: number = 1;
             for (const user of users) {
                 try {
-                    const userObject = await this.client.users.fetch(user.user_id);
-
+                    const userObject: User | null = await this.client.users.fetch(user.user_id);
                     builder.drawText(`#${loopIndex} - ${userObject.displayName}`, 20, userY, userNameFont, textColor);
                 } catch (error) {
-                    builder.drawText(`#1 - Onbekend`, 20, userY, userNameFont, textColor);
+                    console.warn(`User with ID ${user.user_id} could not be fetched.`);
+                    builder.drawText(`#${loopIndex} - Onbekend`, 20, userY, userNameFont, textColor);
                 }
+
+
 
                 builder.drawText(`Level: ${user.level}`, 20, userY + 20, smallDescriptionFont, textColor);
                 builder.drawText(`XP:     ${user.xp}`, 20, userY + 35, smallDescriptionFont, textColor);
@@ -92,7 +97,6 @@ export default class CommandsListener {
             await interaction.reply({files: [builder.getBuffer()]})
         } catch (error) {
             Logging.error(`Something went wrong getting leveling scoreboard: ${error}`);
-            // @ts-ignore
             await interaction.reply('Er ging iets mis! Het probleem is gerapporteerd aan de developer.');
         }
     }

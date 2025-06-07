@@ -37,13 +37,13 @@ export default class Events {
     constructor(client: Client) {
         console.log('serverlogger')
         this.client = client;
-        this.logChannel = this.client.channels.cache.get(<string>getEnv('ALL_DAY_LOG')) as TextChannel;
-        this.botIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/bot.png`);
-        this.chatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/chat.png`);
-        this.voiceChatIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/microphone.png`);
-        this.reactionIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/happy-face.png`);
-        this.userIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/user.png`);
-        this.moderationIcon = new AttachmentBuilder(`${<string>getEnv('MODULES_BASE_PATH')}src/media/icons/moderation.png`);
+        this.logChannel = this.client.channels.cache.get(getEnv('ALL_DAY_LOG') as string) as TextChannel;
+        this.botIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/bot.png`);
+        this.chatIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/chat.png`);
+        this.voiceChatIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/microphone.png`);
+        this.reactionIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/happy-face.png`);
+        this.userIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/user.png`);
+        this.moderationIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/moderation.png`);
         void this.bootEvent()
         this.messageEvents();
         this.reactionEvents();
