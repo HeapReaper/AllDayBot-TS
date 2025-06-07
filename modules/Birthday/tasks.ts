@@ -18,7 +18,7 @@ export default class Tasks {
 	async checkBirthdays(): Promise<void> {
 		const now = new Date();
 
-		const birthdays: any[] = await QueryBuilder.select('birthdays').get();
+		const birthdays: any[] = await QueryBuilder.select('birthday').get();
 
 		for (const birthday of birthdays) {
 			const paredBirthday = new Date(Date.parse(birthday.birthdate));
