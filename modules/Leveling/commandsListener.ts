@@ -9,7 +9,7 @@ import {
 import { Logging } from '@utils/logging.ts';
 import QueryBuilder from '@utils/database';
 import { CanvasBuilder } from '@utils/canvasBuilder';
-import { getEnv } from "@utils/env.ts";
+import { getEnv } from '@utils/env';
 
 export default class CommandsListener {
     private client: Client;

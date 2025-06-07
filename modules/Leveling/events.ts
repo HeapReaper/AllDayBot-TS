@@ -3,9 +3,10 @@ import {
     Client,
     Message,
     Events as discordEvents,
-    GuildMember
+    GuildMember, PartialGuildMember
 } from 'discord.js';
 import QueryBuilder from '@utils/database';
+import { Faker } from '@utils/faker';
 
 export default class LevelingEvents {
     static usersXpAddedFromMessage: Array<any> = [];
@@ -28,17 +29,18 @@ export default class LevelingEvents {
     }
 
     onMemberLeaveEvent(): void {
-        // @ts-ignore
-        this.client.on(discordEvents.GuildMemberRemove, async (member: GuildMember): Promise<void> => {
+        this.client.on(discordEvents.GuildMemberRemove, async (member: GuildMember|PartialGuildMember): Promise<void> => {
+            Logging.info('Someone left the guild, cleaning up DB...');
+
             try {
                 await QueryBuilder
                     .delete('leveling')
-                    .where({user_id: member.user.id})
+                    .where({ user_id: member.user.id })
                     .execute();
 
                 await QueryBuilder
                     .delete('birthday')
-                    .where({user_id: member.user.id})
+                    .where({ user_id: member.user.id })
                     .execute();
             } catch (error) {
                 Logging.error(`Error in leveling events onMemberLeaveEvent: ${error}`);
