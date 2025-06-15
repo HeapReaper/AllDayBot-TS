@@ -16,7 +16,7 @@ export class Github {
         );
 
         if (!response.ok) {
-            Logging.error(`Error fetching repo in bootEvent: ${response.status}`)
+            Logging.warn(`Error fetching repo in bootEvent: ${response.status}`)
             return null;
         }
 
