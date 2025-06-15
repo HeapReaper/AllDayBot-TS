@@ -7,7 +7,6 @@ import cron from 'node-cron';
 export default class LevelingTasks {
     private client: Client;
 
-    // @ts-ignore
     constructor(client: Client) {
         this.client = client;
         cron.schedule('* * * * *', async (): Promise<void> => {
@@ -17,18 +16,16 @@ export default class LevelingTasks {
     }
 
     async addXpToMembersTask(): Promise<void> {
-        // Messaging
         for (const userId of LevelingEvents.getUserXpAddedFromMessages()) {
             try {
                 await this.addXpToMember(userId, this.generateRandomNumber(15, 25));
             } catch (error: any) {
-                console.error(`Error processing user ${userId} in Leveling tasks: `, error);
+                Logging.error(`Error processing user ${userId} in Leveling "addXpToMembersTask": ${error}`);
             }
         }
 
         LevelingEvents.purgeUserXpAddedFromMessages();
 
-        // Voice
         try {
             Logging.debug('Looking into voice channels to add XP');
             const guild = await this.client.guilds.fetch('1093873145313767495') as Guild;
@@ -85,6 +82,7 @@ export default class LevelingTasks {
             .set({xp: newXp, level: user.level + 1})
             .where({user_id: userId})
             .execute();
+        // TODO: send message to channel
     }
 
     generateRandomNumber(min: number, max: number): number {
