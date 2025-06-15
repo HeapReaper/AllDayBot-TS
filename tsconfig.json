@@ -5,7 +5,7 @@
       "@utils/*": ["./utils/*"],
       "@enums/*": ["./enums/*"],
       "@src/*": ["./src/*"],
-      "@media/*": ["./src/media/*"],
+      "@media/*": ["./src/media/*"]
     },
     "sourceMap": true,
     "module": "commonjs",
@@ -17,6 +17,12 @@
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
     "noEmit": true,
-    "ResolveJsonModule": true,
-  }
+    "resolveJsonModule": true
+  },
+  "include": [
+    "modules",
+    "utils",
+    "src",
+    "enums"
+  ]
 }
