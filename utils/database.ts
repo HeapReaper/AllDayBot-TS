@@ -5,20 +5,9 @@ import {Logging} from '@utils/logging';
 
 /**
  * Database abstraction.
- * @method connect - not needed.
- * @method close - not needed.
- * @method select - table name string.
- * @method update - table name string.
- * @method delete - table name string.
- * @method insert - table name string.
- * @method columns - ['column_name']
- * @method where - {key: value}
- * @method limit - integer
- * @method execute -
- * @returns - wop
  */
 class QueryBuilder {
-    static  connection: Connection;
+    static connection: Connection;
     private _tableName: string | undefined;
     private _columnsArray: string[] = ['*'];
     private _whereClause: {} = {};
