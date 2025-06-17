@@ -1,3 +1,11 @@
+/**
+ * @enum {string} - Color hex code
+ * Commonly used color values for consistent UI styling across the bot.
+ * Each member represents a hexadecimal or RGBA color code.
+ * @example
+ * import { Color } from '@enums/colorEnum';
+ * Color.White
+ */
 export enum Color {
     White = '#ECF0F1',
     Red = '#ff0000',

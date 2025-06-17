@@ -19,6 +19,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "@heapreaper/discordfaker": "^1.0.4",
     "@types/bun": "latest",
     "@types/express": "^5.0.2",
     "@types/node": "^22.10.10",

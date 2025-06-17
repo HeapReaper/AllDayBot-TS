@@ -7,6 +7,9 @@ import { runMigrations } from '@utils/migrations.ts';
 import QueryBuilder from '@utils/database.ts';
 import cron from 'node-cron';
 
+/**
+ * Discord client instance with required intents and partials.
+ */
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -25,12 +28,28 @@ const client = new Client({
     ],
 });
 
+/**
+ * Event listener that gets triggered once the Discord client is ready/
+ * @event ClientReady
+ * @param Client client
+ */
 client.on(discordEvents.ClientReady, async client => {
     Logging.info(`Logged in as ${client.user.tag}!`);
 
+    /**
+     * Load all dynamic modules into the bot
+     */
     await loadModules(client);
+
+    /**
+     * Runs all pending migrations
+     */
     await runMigrations();
 
+    /**
+     * Keep the database connection alive by running a dummy select every minute.*
+     * @schedule Every minute
+     */
     cron.schedule('* * * * *', async (): Promise<void> => {
         Logging.debug('Running Cron select on DB to keep it active!');
 

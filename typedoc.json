@@ -2,7 +2,8 @@
   "entryPoints": [
     "modules",
     "src",
-    "utils"
+    "utils",
+    "enums"
   ],
   "entryPointStrategy": "expand",
   "out": "docs",
