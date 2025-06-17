@@ -1,69 +1,112 @@
-import { SlashCommandBuilder } from 'discord.js';
+import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
 
 /**
- * Subcommand to add a birthday
+ * Subcommand to show status
  * @example
- * /verjaardag toevoegen dag:12 maand:6 jaar:1999
- * @param integer dag - The day of your birthday
- * @param integer maand - The month of your birthday
- * @param integer jaar - Your birth year
+ * /core status
  */
-export const verjaardagToevoegenCommand = new SlashCommandBuilder()
-    .setName('toevoegen')
-    .setDescription('Voeg je verjaardag toe!')
-    .addIntegerOption(option =>
+export const coreStatusCommand = new SlashCommandBuilder()
+    .setName('status')
+    .setDescription('Zie alle info en statussen');
+
+/**
+ * Subcommand to restart the bot
+ * @param boolean bevestig - Confirm action
+ * @example
+ * /core restart bevestig:true
+ */
+export const coreRestartCommand = new SlashCommandBuilder()
+    .setName('restart')
+    .setDescription('Herstart de Discord bot')
+    .addBooleanOption(option =>
         option
-            .setName('dag')
-            .setDescription('Kies de dag van je verjaardag.')
-            .setRequired(true)
-            .setMinValue(1)
-            .setMaxValue(31)
-    )
-    .addIntegerOption(option =>
-        option
-            .setName('maand')
-            .setDescription('Kies de maand van je verjaardag.')
-            .setRequired(true)
-            .setMinValue(1)
-            .setMaxValue(12)
-    )
-    .addIntegerOption(option =>
-        option
-            .setName('jaar')
-            .setDescription('Vul je geboortejaar in (zoals 2001 of 1992).')
+            .setName('bevestig')
+            .setDescription('Bevestig')
             .setRequired(true)
     );
 
 /**
- * Subcommand to remove a birthday
+ * Subcommand to refresh slash commands
+ * @param boolean bevestig - Confirm action
  * @example
- * /verjaardag verwijderen
+ * /core slash_refresh bevestig:true
  */
-export const verjaardagVerwijderenCommand = new SlashCommandBuilder()
-    .setName('verwijderen')
-    .setDescription('Verwijder je verjaardag!');
-
-/**
- * Main verjaardag command with subcommands.
- */
-export const verjaardagCommand = new SlashCommandBuilder()
-    .setName('verjaardag')
-    .setDescription('Beheer je verjaardag!')
-    .addSubcommand(sub =>
-        sub
-            .setName(verjaardagToevoegenCommand.name)
-            .setDescription(verjaardagToevoegenCommand.description!)
-            .addIntegerOption(o => Object.assign(o, verjaardagToevoegenCommand.options[0]))
-            .addIntegerOption(o => Object.assign(o, verjaardagToevoegenCommand.options[1]))
-            .addIntegerOption(o => Object.assign(o, verjaardagToevoegenCommand.options[2]))
-    )
-    .addSubcommand(sub =>
-        sub
-            .setName(verjaardagVerwijderenCommand.name)
-            .setDescription(verjaardagVerwijderenCommand.description!)
+export const coreSlashRefreshCommand = new SlashCommandBuilder()
+    .setName('slash_refresh')
+    .setDescription('Ververs de slash commands')
+    .addBooleanOption(option =>
+        option
+            .setName('bevestig')
+            .setDescription('Bevestig')
+            .setRequired(true)
     );
 
 /**
- * Slash commands for the Verjaardag module.
+ * Subcommand to toggle modules
+ * @param string module - The module to toggle
+ * @param boolean aan_uit - Turning it on/off
+ * @example
+ * /core modules module:Birthday aan_uit:true
  */
-export const commands = [verjaardagCommand.toJSON()];
+export const coreModulesCommand = new SlashCommandBuilder()
+    .setName('modules')
+    .setDescription('Zet modules aan of uit')
+    .addStringOption(option =>
+        option
+            .setName('module')
+            .setDescription('Welke module?')
+            .addChoices(
+                { name: 'Birthday', value: 'Birthday' },
+                { name: 'BumpReminder', value: 'BumpReminder' },
+                { name: 'Community', value: 'Community' },
+                { name: 'Core', value: 'Core' },
+                { name: 'InviteTracker', value: 'InviteTracker' },
+                { name: 'Leveling', value: 'Leveling' },
+                { name: 'Minecraft', value: 'Minecraft' },
+                { name: 'ModMail', value: 'ModMail' },
+                { name: 'ServerLogger', value: 'ServerLogger' },
+                { name: 'ShowcaseRemover', value: 'ShowcaseRemover' }
+            )
+    )
+    .addBooleanOption(option =>
+        option
+            .setName('aan_uit')
+            .setDescription('Zet module aan of uit')
+    );
+
+/**
+ * Main core command with subcommands.
+ */
+export const coreCommand = new SlashCommandBuilder()
+    .setName('core')
+    .setDescription('Beheer de bot')
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+    .addSubcommand(sub =>
+        sub
+            .setName(coreStatusCommand.name)
+            .setDescription(coreStatusCommand.description!)
+    )
+    .addSubcommand(sub =>
+        sub
+            .setName(coreRestartCommand.name)
+            .setDescription(coreRestartCommand.description!)
+            .addBooleanOption(o => Object.assign(o, coreRestartCommand.options[0]))
+    )
+    .addSubcommand(sub =>
+        sub
+            .setName(coreSlashRefreshCommand.name)
+            .setDescription(coreSlashRefreshCommand.description!)
+            .addBooleanOption(o => Object.assign(o, coreSlashRefreshCommand.options[0]))
+    )
+    .addSubcommand(sub =>
+        sub
+            .setName(coreModulesCommand.name)
+            .setDescription(coreModulesCommand.description!)
+            .addStringOption(o => Object.assign(o, coreModulesCommand.options[0]))
+            .addBooleanOption(o => Object.assign(o, coreModulesCommand.options[1]))
+    );
+
+/**
+ * Slash commands for the Core module.
+ */
+export const commands = [coreCommand.toJSON()];
