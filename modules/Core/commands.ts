@@ -1,4 +1,8 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
+import { loadLocale, setLocale, __ } from '@utils/i18n';
+
+loadLocale('nl');
+setLocale('nl');
 
 /**
  * Subcommand to show status
@@ -7,7 +11,7 @@ import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
  */
 export const coreStatusCommand = new SlashCommandBuilder()
     .setName('status')
-    .setDescription('Zie alle info en statussen');
+    .setDescription(__('Restart the Discord bot'));
 
 /**
  * Subcommand to restart the bot
@@ -17,11 +21,11 @@ export const coreStatusCommand = new SlashCommandBuilder()
  */
 export const coreRestartCommand = new SlashCommandBuilder()
     .setName('restart')
-    .setDescription('Herstart de Discord bot')
+    .setDescription(__('core.restart.description'))
     .addBooleanOption(option =>
         option
-            .setName('bevestig')
-            .setDescription('Bevestig')
+            .setName(__('Confirm').toLowerCase())
+            .setDescription(__('Confirm this action'))
             .setRequired(true)
     );
 
@@ -33,11 +37,11 @@ export const coreRestartCommand = new SlashCommandBuilder()
  */
 export const coreSlashRefreshCommand = new SlashCommandBuilder()
     .setName('slash_refresh')
-    .setDescription('Ververs de slash commands')
+    .setDescription(__('Refresh the slash commands'))
     .addBooleanOption(option =>
         option
-            .setName('bevestig')
-            .setDescription('Bevestig')
+            .setName(__('Confirm').toLowerCase())
+            .setDescription(__('Confirm this action'))
             .setRequired(true)
     );
 

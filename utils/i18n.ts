@@ -32,4 +32,4 @@ export const setLocale = (locale: string) => {
     gt.textdomain('messages');
 };
 
-export const getText = (msgid: string) => gt.gettext(msgid);
+export const __ = (msgid: string) => gt.gettext(msgid);

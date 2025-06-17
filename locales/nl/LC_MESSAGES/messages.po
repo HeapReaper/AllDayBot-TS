@@ -1,0 +1,16 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: nl\n"
+
+msgid "Restart the Discord bot"
+msgstr "Herstart de Discord bot"
+
+msgid "Confirm"
+msgstr "Bevestig"
+
+msgid "Confirm this action"
+msgstr "Bevestig deze actie"
+
+msgid "Refresh the slash commands"
+msgstr "Ververs de slash commands"
