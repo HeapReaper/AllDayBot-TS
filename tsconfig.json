@@ -23,6 +23,7 @@
     "modules",
     "utils",
     "src",
-    "enums"
+    "enums",
+    "utils/typedoc-plugin-schedule.ts"
   ]
 }
