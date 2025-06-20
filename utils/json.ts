@@ -1,7 +1,5 @@
 import fs from 'fs/promises';
 
-// TODO: Put JSON read and parse in own function
-// TODO: Improve error handling (Because there is none atm LOL)
 export class JsonHelper {
     private constructor(private filePath: string) {}
 
@@ -10,13 +8,11 @@ export class JsonHelper {
     }
 
     async get(key: string): Promise<any> {
-        const data = await fs.readFile(this.filePath, 'utf8');
-        return (JSON.parse(data))[key];
+        return (JSON.parse(await this.readJsonFile()))[key];
     }
 
     async read(): Promise<object> {
-        const data = await fs.readFile(this.filePath, 'utf8');
-        return JSON.parse(data);
+        return JSON.parse(await this.readJsonFile());
     }
 
     async write(json: object): Promise<void> {
@@ -28,9 +24,10 @@ export class JsonHelper {
         let data: any = [];
 
         try {
-            const file = await fs.readFile(this.filePath, 'utf8');
+            const file = await this.readJsonFile();
             data = JSON.parse(file);
-        } catch (e) {
+        } catch (error) {
+            console.error(error);
             data = [];
         }
 
@@ -48,9 +45,9 @@ export class JsonHelper {
         let data: any;
 
         try {
-            const file = await fs.readFile(this.filePath, 'utf8');
+            const file = await this.readJsonFile();
             data = JSON.parse(file);
-        } catch {
+        } catch (error) {
             console.warn('File not found or empty.');
             return;
         }
@@ -67,6 +64,10 @@ export class JsonHelper {
 
         await this.write(data);
         console.log('Item removed!');
+    }
+
+    async readJsonFile(): Promise<string> {
+        return await fs.readFile(this.filePath, 'utf8');
     }
 }
 
