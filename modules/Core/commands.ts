@@ -1,8 +1,5 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
-import { loadLocale, setLocale, __ } from '@utils/i18n';
-
-loadLocale('nl');
-setLocale('nl');
+import { __ } from '@utils/i18n';
 
 /**
  * Subcommand to show status

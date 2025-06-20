@@ -6,6 +6,10 @@ import { getEnv } from '@utils/env.ts';
 import { runMigrations } from '@utils/migrations.ts';
 import QueryBuilder from '@utils/database.ts';
 import cron from 'node-cron';
+import { loadLocale, setLocale } from '@utils/i18n';
+
+loadLocale('nl');
+setLocale('nl');
 
 /**
  * Discord client instance with required intents and partials.
