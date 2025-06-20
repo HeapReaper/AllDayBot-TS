@@ -23,6 +23,7 @@ import S3OperationBuilder from '@utils/s3';
 import QueryBuilder from '@utils/database.ts';
 import path from 'path';
 import { Github } from '@utils/github';
+import { __ } from '@utils/i18n';
 
 export default class Events {
     private client: Client;
@@ -35,7 +36,6 @@ export default class Events {
     private moderationIcon: AttachmentBuilder;
 
     constructor(client: Client) {
-        console.log('serverlogger')
         this.client = client;
         this.logChannel = this.client.channels.cache.get(getEnv('ALL_DAY_LOG') as string) as TextChannel;
         this.botIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/bot.png`);
@@ -68,9 +68,9 @@ export default class Events {
                 .setColor(Color.AdtgPurple)
                 .setTitle('Ik ben opnieuw opgestart!')
                 .addFields(
-                    { name: 'Gebruiker:', value: `<@${this.client.user?.id}>` },
-                    { name: 'Versie:', value: `${currentRelease ? currentRelease : 'Rate limited'}` },
-                    { name: 'Ping:', value: `${this.client.ws.ping}ms` }
+                    { name: __('User'), value: `<@${this.client.user?.id}>` },
+                    { name: __('Version'), value: `${currentRelease ? currentRelease : 'Rate limited'}` },
+                    { name: __('Ping'), value: `${this.client.ws.ping}ms` }
                 )
                 .setThumbnail('attachment://bot.png');
 
@@ -157,9 +157,9 @@ export default class Events {
                 .setTitle('Bericht bewerkt')
                 .setThumbnail('attachment://chat.png')
                 .addFields(
-                    { name: 'Gebruiker', value: `<@${oldMessage.author?.id}>`},
-                    { name: 'Oud:', value: oldMessage.content ?? 'Er ging wat fout' },
-                    { name: 'Nieuw:', value: newMessage.content ?? 'Er ging wat fout'}
+                    { name: __('User'), value: `<@${oldMessage.author?.id}>`},
+                    { name: __('Old'), value: oldMessage.content ?? 'Er ging wat fout' },
+                    { name: __('New'), value: newMessage.content ?? 'Er ging wat fout'}
                 );
 
             this.logChannel.send({ embeds: [messageUpdateEmbed], files: [this.chatIcon] });
@@ -198,18 +198,18 @@ export default class Events {
                 .setThumbnail('attachment://chat.png')
                 .addFields(
                     {
-                        name: 'Gebruiker',
+                        name: __('User'),
                         value: `<@${message.partial ? messageFromDbCache.author_id ?? '10101' : message.author?.id ?? 'Onbekend'}>`
                     },
                     {
-                        name: 'Bericht:',
+                        name: __('Message'),
                         value: message.content ?? 'Er ging wat fout'
                     }
                 );
 
             for (const file of filesToAttach) {
                 const url = await S3OperationBuilder
-                    .setBucket('alldaybot')
+                    .setBucket('alldaybot') //TODO: in env file
                     .getObjectUrl(file.name);
 
                 const response = await fetch(url);
@@ -237,13 +237,13 @@ export default class Events {
             for (const message of messages.values()) {
                 deletedMessages.push({
                     name: `Van: ${message.member?.displayName || message.author?.tag || 'Niet bekend'}`,
-                    value: message.content || 'Geen inhoud',
+                    value: message.content || __('No content'),
                 });
             }
 
             const bulkMessagesDeleted: EmbedBuilder = new EmbedBuilder()
                 .setColor(Color.Red)
-                .setTitle('Bulk berichten verwijderd')
+                .setTitle(__('Bulk messages deleted'))
                 .setThumbnail('attachment://chat.png')
                 .addFields(...deletedMessages);
 
@@ -264,13 +264,13 @@ export default class Events {
 
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
                 .setColor(Color.Green)
-                .setTitle('Reactie toegevoegd')
-                .setDescription(`Door: <@${user.id}>`)
+                .setTitle(__('Reaction added'))
+                .setDescription(`<placehold>`)
                 .setThumbnail('attachment://happy-face.png')
                 .addFields(
-                    { name: 'Gebruiker:', value: `<@${user.id}>` },
-                    { name: 'Emoji:', value: `${reaction.emoji}` },
-                    { name: 'Bericht:', value: `${reaction.message.url}` }
+                    { name: __('User'), value: `<@${user.id}>` },
+                    { name: __('Emoji'), value: `${reaction.emoji}` },
+                    { name: __('Message'), value: `${reaction.message.url}` }
                 );
 
             await this.logChannel.send({ embeds: [messageReactionAddEmbed], files: [this.reactionIcon] });
@@ -283,12 +283,12 @@ export default class Events {
 
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
                 .setColor(Color.Orange)
-                .setTitle('Reactie verwijderd')
+                .setTitle(__('Reaction removed'))
                 .setThumbnail('attachment://happy-face.png')
                 .addFields(
-                    { name: 'Gebruiker:', value: `<@${user.id}>` },
-                    { name: 'Emoji:', value: `${reaction.emoji}` },
-                    { name: 'Bericht:', value: `${reaction.message.url}` }
+                    { name: __('User'), value: `<@${user.id}>` },
+                    { name: __('Emoji'), value: `${reaction.emoji}` },
+                    { name: __('Message'), value: `${reaction.message.url}` }
                 );
 
             await this.logChannel.send({ embeds: [messageReactionAddEmbed], files: [this.reactionIcon] });
@@ -309,8 +309,8 @@ export default class Events {
                     .setTitle('Voice kanaal gejoined')
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
-                        { name: 'Gebruiker:', value: `<@${newState.member?.user.id}>` },
-                        { name: 'Kanaal:', value: `${newState.channel.url}` },
+                        { name: __('User'), value: `<@${newState.member?.user.id}>` },
+                        { name: __('User'), value: `${newState.channel.url}` },
                     );
 
                 await this.logChannel.send({ embeds: [voiceChannelEmbed], files: [this.voiceChatIcon] });
@@ -325,8 +325,8 @@ export default class Events {
                     .setTitle('Voice kanaal verlaten')
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
-                        { name: 'Gebruiker:', value: `<@${oldState.member?.user.id}>` },
-                        { name: 'Kanaal:', value: `${oldState.channel.url}` },
+                        { name: __('User'), value: `<@${oldState.member?.user.id}>` },
+                        { name: __('Channel'), value: `${oldState.channel.url}` },
                     );
 
                 await this.logChannel.send({ embeds: [voiceChannelEmbed], files: [this.voiceChatIcon] });
@@ -341,7 +341,7 @@ export default class Events {
                     .setTitle('Voice kanaal veranderd')
                     .setThumbnail('attachment://microphone.png')
                     .addFields(
-                        { name: 'Gebruiker:', value: `<@${oldState.member?.user.id}>` },
+                        { name: __('User'), value: `<@${oldState.member?.user.id}>` },
                         { name: 'Oud:', value: `${oldState.channel.url}` },
                         { name: 'Nieuw:', value: `${newState.channel.url}` },
                     );
@@ -368,7 +368,7 @@ export default class Events {
                 .setTitle('Lid verlaten')
                 .setThumbnail('attachment://user.png')
                 .addFields(
-                    { name: 'Gebruiker:', value: `<@${member.id}>` },
+                    { name: __('User'), value: `<@${member.id}>` },
                     { name: 'Lid sinds:', value: `<t:${Math.floor(member.joinedTimestamp ?? 0 / 1000)}:F>` },
                 );
 
@@ -394,7 +394,7 @@ export default class Events {
                 .setTitle('Lid gebanned')
                 .setThumbnail('attachment://moderation.png')
                 .addFields(
-                    { name: 'Gebruiker:', value: `<@${ban.user.id}>` },
+                    { name: __('User'), value: `<@${ban.user.id}>` },
                     { name: 'Reden:', value: `${fetchBan.reason ?? 'Geen reden opgegeven'}` },
                     { name: 'Door:', value: executor ? `${executor.username} (<@${executor.id}>)` : 'Onbekend' },
                 );
@@ -420,7 +420,7 @@ export default class Events {
                 .setTitle('Lid unbanned')
                 .setThumbnail('attachment://moderation.png')
                 .addFields(
-                    { name: 'Gebruiker:', value: `<@${unBan.user.id}>` },
+                    { name: __('User'), value: `<@${unBan.user.id}>` },
                     { name: 'Door:', value: executor ? `${executor.username} (<@${executor.id}>)` : 'Onbekend' },
                 )
 
@@ -438,7 +438,7 @@ export default class Events {
                 .setTitle('Lid gebruikersnaam update')
                 .setThumbnail('attachment://user.png')
                 .addFields(
-                    { name: 'Gebruiker:', value: `<@${newMember.user.id}>` },
+                    { name: __('User'), value: `<@${newMember.user.id}>` },
                     { name: 'Oud:', value: `${oldMember.displayName ?? 'Niet gevonden'}` },
                     { name: 'Nieuw:', value: `${newMember.displayName ?? 'Niet gevonden'}` },
                 );

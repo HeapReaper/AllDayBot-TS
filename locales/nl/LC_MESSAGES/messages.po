@@ -1,0 +1,61 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: nl\n"
+
+msgid "Restart the Discord bot"
+msgstr "Herstart de Discord bot"
+
+msgid "Confirm"
+msgstr "Bevestig"
+
+msgid "Confirm this action"
+msgstr "Bevestig deze actie"
+
+msgid "Refresh the slash commands"
+msgstr "Ververs de slash commands"
+
+msgid "User:"
+msgstr "Gebruiker:"
+
+msgid "User"
+msgstr "Gebruiker"
+
+msgid "Version:"
+msgstr "Versie:"
+
+msgid "Version"
+msgstr "Versie"
+
+msgid "Ping:"
+msgstr "Ping:"
+
+msgid "Ping"
+msgstr "Ping"
+
+msgid "Message"
+msgstr "Bericht"
+
+msgid "No content"
+msgstr "Geen inhoud"
+
+msgid "Bulk messages deleted"
+msgstr "Bulk berichten verwijderd"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Reaction added"
+msgstr "Reactie toegevoegd"
+
+msgid "Reaction removed"
+msgstr "Reactie verwijderd"
+
+msgid "Channel"
+msgstr "Kanaal"
+
+msgid "Old"
+msgstr "Oud"
+
+msgid "New"
+msgstr "Nieuw"
