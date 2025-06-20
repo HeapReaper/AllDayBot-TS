@@ -1,6 +1,5 @@
 import fs from 'fs/promises';
 
-// TODO: Put JSON read and parse in own function
 export class JsonHelper {
     private constructor(private filePath: string) {}
 
