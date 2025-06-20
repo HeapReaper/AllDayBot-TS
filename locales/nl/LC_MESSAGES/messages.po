@@ -53,3 +53,9 @@ msgstr "Reactie verwijderd"
 
 msgid "Channel"
 msgstr "Kanaal"
+
+msgid "Old"
+msgstr "Oud"
+
+msgid "New"
+msgstr "Nieuw"

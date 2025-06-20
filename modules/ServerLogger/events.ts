@@ -157,9 +157,9 @@ export default class Events {
                 .setTitle('Bericht bewerkt')
                 .setThumbnail('attachment://chat.png')
                 .addFields(
-                    { name: 'Gebruiker', value: `<@${oldMessage.author?.id}>`},
-                    { name: 'Oud:', value: oldMessage.content ?? 'Er ging wat fout' },
-                    { name: 'Nieuw:', value: newMessage.content ?? 'Er ging wat fout'}
+                    { name: __('User'), value: `<@${oldMessage.author?.id}>`},
+                    { name: __('Old'), value: oldMessage.content ?? 'Er ging wat fout' },
+                    { name: __('New'), value: newMessage.content ?? 'Er ging wat fout'}
                 );
 
             this.logChannel.send({ embeds: [messageUpdateEmbed], files: [this.chatIcon] });
