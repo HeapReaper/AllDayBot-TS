@@ -135,7 +135,7 @@ export default class Events {
                     Logging.info('Caching a image/video to S3');
 
                     await S3OperationBuilder
-                        .setBucket('alldaybot')
+                        .setBucket(getEnv('S3_BUCKET_NAME') as string)
                         .uploadFileFromBuffer(`serverLogger/${fileName}`, buffer, {
                             'Content-Type': attachment.contentType,
                         });
@@ -171,7 +171,7 @@ export default class Events {
             Logging.debug('An message has been deleted!');
 
             const allS3Files = await S3OperationBuilder
-                .setBucket('alldaybot')
+                .setBucket(getEnv('S3_BUCKET_NAME') as string)
                 .listObjects();
 
             const messageFromDbCache = await QueryBuilder
@@ -209,7 +209,7 @@ export default class Events {
 
             for (const file of filesToAttach) {
                 const url = await S3OperationBuilder
-                    .setBucket('alldaybot') //TODO: in env file
+                    .setBucket(getEnv('S3_BUCKET_NAME') as string)
                     .getObjectUrl(file.name);
 
                 const response = await fetch(url);
