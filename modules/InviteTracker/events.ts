@@ -76,7 +76,6 @@ export default class InviteTracker {
                     .where({ invite_code: usedInvite.code })
                     .first();
 
-                // TODO: uses++ not working
                 await QueryBuilder
                     .update('invite_tracker')
                     .set({ uses: inviteTracker.uses += 1 })
