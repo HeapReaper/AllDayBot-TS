@@ -4,6 +4,7 @@ import QueryBuilder from '@utils/database';
 import { getEnv } from '@utils/env';
 import { Logging } from '@utils/logging';
 
+// TODO: Fix migrations not running
 export async function runMigrations(): Promise<void> {
     await QueryBuilder
         .raw(fs.readFileSync(`${<string>getEnv('MODULES_BASE_PATH')}migrations/1745074005-create_migrations_table.sql`, 'utf-8'))

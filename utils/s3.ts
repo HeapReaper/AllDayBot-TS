@@ -9,13 +9,29 @@ export default class S3OperationBuilder {
     static init(): void {
         if (S3OperationBuilder.minioClient) return;
 
-        S3OperationBuilder.minioClient = new Minio.Client({
-            endPoint: <string>getEnv('S3_ENDPOINT'),
-            port: <number>getEnv('S3_PORT'),
-            useSSL: false,
-            accessKey: <string>getEnv('S3_ACCESS_KEY'),
-            secretKey: <string>getEnv('S3_SECRET_KEY'),
-        });
+        try {
+            const endpoint = getEnv('S3_ENDPOINT')?.replace(/^https?:\/\//, '');
+            const port = Number(getEnv('S3_PORT')) || 443;
+            const accessKey = getEnv('S3_ACCESS_KEY');
+            const secretKey = getEnv('S3_SECRET_KEY');
+
+            if (!endpoint || !accessKey || !secretKey) {
+                throw new Error('Missing S3 configuration (endpoint/accessKey/secretKey)');
+            }
+
+            S3OperationBuilder.minioClient = new Minio.Client({
+                endPoint: endpoint,
+                port,
+                useSSL: true,
+                accessKey,
+                secretKey,
+            });
+
+            Logging.debug('MinIO client initialized successfully');
+        } catch (error) {
+            Logging.error(`Failed to initialize MinIO client: ${error}`);
+            S3OperationBuilder.minioClient = null;
+        }
     }
 
     static setBucket(bucketName: string): S3OperationBuilder {

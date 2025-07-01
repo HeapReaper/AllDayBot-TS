@@ -24,6 +24,7 @@ import QueryBuilder from '@utils/database.ts';
 import path from 'path';
 import { Github } from '@utils/github';
 import { __ } from '@utils/i18n';
+import { Faker } from '@heapreaper/discordfaker';
 
 export default class Events {
     private client: Client;
@@ -48,7 +49,7 @@ export default class Events {
         this.messageEvents();
         this.reactionEvents();
         this.voiceChannelEvents();
-        void this.memberEvents()
+        void this.memberEvents();
     }
 
     async bootEvent(): Promise<void> {

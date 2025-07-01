@@ -41,14 +41,14 @@ client.on(discordEvents.ClientReady, async client => {
     Logging.info(`Logged in as ${client.user.tag}!`);
 
     /**
-     * Load all dynamic modules into the bot
-     */
-    await loadModules(client);
-
-    /**
      * Runs all pending migrations
      */
     await runMigrations();
+
+    /**
+     * Load all dynamic modules into the bot
+     */
+    await loadModules(client);
 
     /**
      * Keep the database connection alive by running a dummy select every minute.*
