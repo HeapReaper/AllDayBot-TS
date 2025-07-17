@@ -17,7 +17,7 @@ export default class S3OperationBuilder {
 
       S3OperationBuilder.minioClient = new Minio.Client({
         endPoint: endpoint,
-        port,
+        port: 433,
         useSSL: true,
         accessKey,
         secretKey,
