@@ -67,6 +67,8 @@ export default class CommandsListener {
         const memory = process.memoryUsage();
         const cpu = process.cpuUsage();
 
+        console.log(uptimeInSeconds)
+
         const [load1, load5, load15] = os.loadavg();
         const cpuCount: number = os.cpus().length;
         const toPercent = (load: number) => ((load / cpuCount) * 100).toFixed(2);
