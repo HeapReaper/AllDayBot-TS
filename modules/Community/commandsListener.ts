@@ -19,7 +19,7 @@ export default class CommandsListener {
 			if (!interaction.isCommand()) return;
 
 			// @ts-ignore
-			const subcommand = interaction.options.getSubcommand();
+			const subcommand = interaction.options.getSubcommand(false);
 
 			if (!subcommand) return;
 

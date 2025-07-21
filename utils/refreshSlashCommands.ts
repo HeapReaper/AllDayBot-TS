@@ -25,7 +25,7 @@ export async function commandsLoader() {
             const commandsFromModule: any = await import(path.resolve(modulePath));
             
             if (!commandsFromModule.commands) {
-                Logging.error(`No commands exported from ${modulePath}`);
+                Logging.warn(`No commands exported from ${modulePath}`);
                 continue;
             }
             
@@ -49,3 +49,6 @@ export async function commandsLoader() {
         Logging.error(`Failed to register all commands: ${error}`);
     }
 }
+
+void commandsLoader()
+

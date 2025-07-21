@@ -25,8 +25,8 @@ export default class CommandsListener {
 			
 			const { commandName } = interaction;
 			// @ts-ignore
-			const subCommandName: any = interaction.options.getSubcommand();
-			
+			const subcommand = interaction.options.getSubcommand(false);
+
 			if (commandName !== 'minecraft') return;
 			
 			switch (subCommandName) {

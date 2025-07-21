@@ -16,8 +16,8 @@ export default class CommandsListener {
 			
 			const { commandName } = interaction;
 			// @ts-ignore
-			const subCommandName: any = interaction.options.getSubcommand();
-			
+			const subCommandName: string | null = interaction.options.getSubcommand(false); // `false` = required = false
+
 			if (commandName !== 'verjaardag') return;
 			
 			switch (subCommandName) {

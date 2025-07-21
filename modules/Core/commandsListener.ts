@@ -34,6 +34,7 @@ export default class CommandsListener {
 
             if (commandName !== 'core') return;
 
+            // @ts-ignore
             const subcommand = (interaction.options as CommandInteractionOptionResolver).getSubcommand();
 
             switch (subcommand) {
