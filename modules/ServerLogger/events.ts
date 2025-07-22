@@ -24,7 +24,6 @@ import QueryBuilder from '@utils/database.ts';
 import path from 'path';
 import { Github } from '@utils/github';
 import { __ } from '@utils/i18n';
-import { Faker } from '@heapreaper/discordfaker';
 
 export default class Events {
     private client: Client;
@@ -42,7 +41,7 @@ export default class Events {
         this.botIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/bot.png`);
         this.chatIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/chat.png`);
         this.voiceChatIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/microphone.png`);
-        this.reactionIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/happy-face.png`);
+        this.reactionIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/happy-face-blue.png`);
         this.userIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/user.png`);
         this.moderationIcon = new AttachmentBuilder(`${getEnv('MODULES_BASE_PATH') as string}src/media/icons/moderation.png`);
         void this.bootEvent()
@@ -267,7 +266,7 @@ export default class Events {
                 .setColor(Color.Green)
                 .setTitle(__('Reaction added'))
                 .setDescription(`<placehold>`)
-                .setThumbnail('attachment://happy-face.png')
+                .setThumbnail('attachment://happy-face-blue.png')
                 .addFields(
                     { name: __('User'), value: `<@${user.id}>` },
                     { name: __('Emoji'), value: `${reaction.emoji}` },
@@ -285,7 +284,7 @@ export default class Events {
             const messageReactionAddEmbed: EmbedBuilder = new EmbedBuilder()
                 .setColor(Color.Orange)
                 .setTitle(__('Reaction removed'))
-                .setThumbnail('attachment://happy-face.png')
+                .setThumbnail('attachment://happy-face-blue.png')
                 .addFields(
                     { name: __('User'), value: `<@${user.id}>` },
                     { name: __('Emoji'), value: `${reaction.emoji}` },
@@ -388,6 +387,7 @@ export default class Events {
             const banLog = auditLogs.entries.find(
                 entry => entry.target?.id === ban.user.id)
             ;
+            // @ts-ignore
             const executor: User|null|undefined = banLog?.executor;
 
             const memberEventEmbed = new EmbedBuilder()
@@ -414,6 +414,7 @@ export default class Events {
             const unBanLog = auditLogs.entries.find(
                 entry => entry.target?.id === unBan.user.id)
             ;
+            // @ts-ignore
             const executor: User|null|undefined = unBanLog?.executor;
 
             const memberEventEmbed = new EmbedBuilder()
